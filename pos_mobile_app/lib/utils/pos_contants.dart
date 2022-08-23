@@ -1,0 +1,2 @@
+const String AUTH_TOKEN_KEY = "AUTH_TOKEN_KEY";
+const String IS_FIRST_TIME_USER = "IS_FIRST_TIME_USER";
