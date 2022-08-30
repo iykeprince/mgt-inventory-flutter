@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pos_mobile_app/app/app.locator.dart';
 import 'package:pos_mobile_app/app/app.router.dart';
+import 'package:pos_mobile_ui_package/utils/colors.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 void main() {
@@ -19,7 +20,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       navigatorKey: StackedService.navigatorKey,
       onGenerateRoute: StackedRouter().onGenerateRoute,
-      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'U8'),
+      theme: ThemeData(colorScheme: ColorScheme.fromSwatch().copyWith(
+        primary: kPrimaryColor,
+      ), fontFamily: 'U8',),
     );
   }
 }

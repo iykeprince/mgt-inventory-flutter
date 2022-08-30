@@ -4,21 +4,25 @@
 // StackedRouterGenerator
 // **************************************************************************
 
-// ignore_for_file: public_member_api_docs
+// ignore_for_file: public_member_api_docs, unused_import, non_constant_identifier_names
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked/stacked_annotations.dart';
+import 'package:stacked_services/stacked_services.dart';
 
+import '../ui/auth/auth_view.dart';
 import '../ui/onboarding/onboarding_view.dart';
 import '../ui/splash/splash_view.dart';
 
 class Routes {
   static const String splashView = '/';
   static const String onboardView = '/onboard-view';
+  static const String authView = '/auth-view';
   static const all = <String>{
     splashView,
     onboardView,
+    authView,
   };
 }
 
@@ -28,6 +32,7 @@ class StackedRouter extends RouterBase {
   final _routes = <RouteDef>[
     RouteDef(Routes.splashView, page: SplashView),
     RouteDef(Routes.onboardView, page: OnboardView),
+    RouteDef(Routes.authView, page: AuthView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -47,6 +52,12 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    AuthView: (data) {
+      return CupertinoPageRoute<dynamic>(
+        builder: (context) => const AuthView(),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -58,4 +69,60 @@ class StackedRouter extends RouterBase {
 class OnboardViewArguments {
   final Key? key;
   OnboardViewArguments({this.key});
+}
+
+/// ************************************************************************
+/// Extension for strongly typed navigation
+/// *************************************************************************
+
+extension NavigatorStateExtension on NavigationService {
+  Future<dynamic> navigateToSplashView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.splashView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToOnboardView({
+    Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.onboardView,
+      arguments: OnboardViewArguments(key: key),
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToAuthView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.authView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
 }

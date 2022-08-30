@@ -32,7 +32,7 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   stacked: ^2.3.3
-  stacked_services: ^0.8.22+1
+  stacked_services:
   json_serializable: ^6.3.1
   dio: ^4.0.6
   shared_preferences: ^2.0.15
