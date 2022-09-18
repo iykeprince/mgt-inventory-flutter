@@ -48,6 +48,7 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   build_runner:
   stacked_generator:
+  widgetbook:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
