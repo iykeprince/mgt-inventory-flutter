@@ -20,9 +20,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       navigatorKey: StackedService.navigatorKey,
       onGenerateRoute: StackedRouter().onGenerateRoute,
-      theme: ThemeData(colorScheme: ColorScheme.fromSwatch().copyWith(
-        primary: kPrimaryColor,
-      ), fontFamily: 'U8',),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: ColorManager.kPrimaryColor,
+        ),
+        fontFamily: 'U8',
+      ),
     );
   }
 }

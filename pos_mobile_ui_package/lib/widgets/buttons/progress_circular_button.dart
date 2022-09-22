@@ -21,10 +21,10 @@ class ProgressCircularButton extends StatelessWidget {
           width: 64,
           height: 64,
           child: CircularProgressIndicator(
-            color: kSecondaryColor,
+            color: ColorManager.kSecondaryColor,
             value: progressValue,
             strokeWidth: 8,
-            backgroundColor: Color(0xffDCEBE3),
+            backgroundColor: ColorManager.kLightGreen,
           ),
         ),
         InkWell(
@@ -32,15 +32,15 @@ class ProgressCircularButton extends StatelessWidget {
           child: Container(
             width: 62.0,
             height: 62.0,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: kPrimaryColor,
+              color: ColorManager.kPrimaryColor,
             ),
             child: Center(
               child: Icon(
                 icon,
                 size: 24,
-                color: Colors.white,
+                color: ColorManager.kWhiteColor,
               ),
             ),
           ),

@@ -1,42 +1,88 @@
 import 'package:flutter/material.dart';
 import 'package:pos_mobile_ui_package/utils/colors.dart';
+// : super(key: key) this.buttonBgColor??= ColorManager.kPrimaryColor, this.buttonTextColor ??= ColorManager.kWhiteColor this.leadingIconColor ??= ColorManager.kPrimaryColor  this.trailingIconColor??=ColorManager.kPrimaryColor ;
+
+enum ButtonType { fill, outline, text }
 
 class PosButton extends StatelessWidget {
-  PosButton({
-    Key? key,
-    this.borderRadius = 8.0,
-    this.fontSize = 16.0,
-    this.fontWeight = FontWeight.w500,
-    required this.onPressed,
-    this.buttonBgColor = kPrimaryColor,
-    this.buttonTextColor = kWhiteColor,
-    required this.title,
-    this.leadingIcon,
-    this.trailingIcon,
-    this.leadingIconColor = kPrimaryColor,
-    this.trailingIconColor = kPrimaryColor,
-    this.busy = false,
-  }) : super(key: key);
-
   final double borderRadius;
   final double fontSize;
-
   final String title;
   final bool? busy;
+  final Border? border;
   // final bool fullwidth;
   Function() onPressed;
-
   final Color buttonBgColor;
-  final Color buttonTextColor;
+  final Color? buttonTextColor;
   final Color? leadingIconColor;
   final Color? trailingIconColor;
   final FontWeight fontWeight;
-
+  final ButtonType? buttonType;
   final IconData? leadingIcon;
   final IconData? trailingIcon;
+  PosButton({
+    Key? key,
+    this.borderRadius = 8.0,
+    this.border,
+    this.fontSize = 16.0,
+    this.fontWeight = FontWeight.w500,
+    required this.onPressed,
+    this.buttonBgColor = ColorManager.kPrimaryColor,
+    this.buttonTextColor = ColorManager.kWhiteColor,
+    required this.title,
+    this.leadingIcon,
+    this.trailingIcon,
+    this.leadingIconColor = ColorManager.kPrimaryColor,
+    this.trailingIconColor = ColorManager.kPrimaryColor,
+    this.busy = false,
+    this.buttonType = ButtonType.fill,
+  });
+
+  Color getBackgroundColor() {
+    if (buttonType == ButtonType.outline) {
+      return buttonTextColor != null
+          ? buttonTextColor!
+          : ColorManager.kWhiteColor;
+    } else if (buttonType == ButtonType.fill) {
+      return buttonBgColor;
+    } else {
+      return Colors.transparent;
+    }
+  }
+
+  Color getColor() {
+    if (buttonType == ButtonType.fill) {
+      return buttonTextColor != null
+          ? buttonTextColor!
+          : ColorManager.kWhiteColor;
+    } else if (buttonType == ButtonType.outline) {
+      return buttonBgColor;
+    } else {
+      return buttonTextColor != null ? buttonTextColor! : buttonBgColor;
+    }
+  }
+
+  Border constructBorder() {
+    if (border != null) {
+      return border!;
+    }
+    if (buttonType == ButtonType.outline) {
+      return Border.all(
+        color: getColor(),
+        width: 1,
+      );
+    } else {
+      return Border.all(
+        color: Colors.transparent,
+        width: 0,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final _color = getColor();
+    final _bgColor = getBackgroundColor();
     return InkWell(
       onTap: onPressed,
       child: Container(
@@ -46,7 +92,8 @@ class PosButton extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(borderRadius),
-          color: buttonBgColor,
+          color: _bgColor,
+          border: constructBorder(),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -60,9 +107,7 @@ class PosButton extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                  color: buttonTextColor,
-                  fontSize: fontSize,
-                  fontWeight: fontWeight),
+                  color: _color, fontSize: fontSize, fontWeight: fontWeight),
             ),
             if (trailingIcon != null)
               Icon(

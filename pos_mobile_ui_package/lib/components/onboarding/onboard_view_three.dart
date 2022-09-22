@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
+import 'package:pos_mobile_ui_package/utils/font_styles.dart';
+import 'package:pos_mobile_ui_package/utils/string_manager.dart';
 
 class OnboardingViewThree extends StatelessWidget {
   OnboardingViewThree({
@@ -17,7 +19,7 @@ class OnboardingViewThree extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 8),
-      decoration: const BoxDecoration(color: Colors.white),
+      decoration: BoxDecoration(color: ColorManager.kWhiteColor),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,24 +30,24 @@ class OnboardingViewThree extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: onSkipPressed,
-                child: const Text(
-                  'Skip',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                  ),
+                child: Text(
+                  AppString.skip,
+                  style: getBoldStyle(
+                      color: ColorManager.kDarkCharcoal,
+                      fontSize: FontSize.s16),
                 ),
               )
             ],
           ),
           const SizedBox(height: 24),
+          Image.asset('assets/images/auth/phoone_dash.svg'),
           Expanded(
             child: Container(
               height: 200,
               decoration: BoxDecoration(
                 border: Border.all(
                   width: 1,
-                  color: Colors.grey,
+                  color: ColorManager.kGrey,
                 ),
               ),
             ),
@@ -57,22 +59,15 @@ class OnboardingViewThree extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
-                  'Manage',
-                  style: TextStyle(
-                    color: kPrimaryColor,
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
+                Text(AppString.manage,
+                    style: getBoldStyle(
+                        color: ColorManager.kPrimaryColor,
+                        fontSize: FontSize.s24)),
                 const SizedBox(height: 10),
-                const Text(
-                  'Create, revoke, and manage moderator accounts; automatically own a copy of weekly, monthly, quarterly or yearly transaction reports. ',
-                  style: TextStyle(
-                    color: Color(0xff555555),
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w500,
-                  ),
+                Text(
+                  AppString.onBoardSub3,
+                  style: getMediumStyle(
+                      color: ColorManager.kGrey1, fontSize: FontSize.s16),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(
