@@ -33,6 +33,14 @@ class AppString {
   static const String otpCodeText = "OTP Code";
   static const String otpCodeExpireText =
       "The code will expire in 5 minutes...";
+  static const String iAgreeText = "I agree to the ";
+  static const String termsAndUseText = "Terms of Use";
+  static const String haveReadText = ",and have read the";
+  static const String privacyPolicyText = "Privacy Policy.";
   static const String verifyCodeText = "Verify Code";
   static const String changeEmailAddressText = "Change email address";
+  static const String successEmailVerficationText =
+      "Email Verified Successfully!";
+  static const String successEmailVerficationCaption =
+      "Your email has been successfully verified. You can now proceed to the final steps of your account creation.";
 }
