@@ -19,7 +19,7 @@ class SplashViewViewModel extends BaseViewModel {
   runSplash() {
     print('navigate to onboard');
     Future.delayed(const Duration(seconds: 2), () {
-      _navigationService.navigateTo(Routes.onboardView);
+      _navigationService.replaceWith(Routes.onboardView);
     });
   }
 

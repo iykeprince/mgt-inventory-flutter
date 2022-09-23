@@ -14,6 +14,7 @@ class AppString {
   static const String pos = "POS.";
   static const String registerQuestion = "What would you like to do?";
   static const String registerMerchant = "Register merchant account";
+  static const String createAdminAccountText = "Create an admin account";
   static const String createAdmin = "Create an admin account";
   static const String loginToExisting = "Log in to an existing account";
   static const String enterYourLoginDetails = "Enter your login details";

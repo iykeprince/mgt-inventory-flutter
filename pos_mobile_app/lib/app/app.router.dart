@@ -14,23 +14,26 @@ import 'package:stacked_services/stacked_services.dart';
 import '../ui/auth/auth_view.dart';
 import '../ui/auth/createAdmin/create_admin_view.dart';
 import '../ui/auth/login/login_view.dart';
+import '../ui/auth/registerMerchant/register_merchant_view.dart';
 import '../ui/auth/verifyAdmin/verify_admin_view.dart';
 import '../ui/onboarding/onboarding_view.dart';
 import '../ui/splash/splash_view.dart';
 
 class Routes {
-  static const String splashView = '/splash-view';
+  static const String splashView = '/';
   static const String onboardView = '/onboard-view';
   static const String authView = '/auth-view';
   static const String loginView = '/login-view';
   static const String createAdminView = '/create-admin-view';
-  static const String verifyAdminView = '/';
+  static const String registerMerchantView = '/register-merchant-view';
+  static const String verifyAdminView = '/verify-admin-view';
   static const all = <String>{
     splashView,
     onboardView,
     authView,
     loginView,
     createAdminView,
+    registerMerchantView,
     verifyAdminView,
   };
 }
@@ -44,6 +47,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.authView, page: AuthView),
     RouteDef(Routes.loginView, page: LoginView),
     RouteDef(Routes.createAdminView, page: CreateAdminView),
+    RouteDef(Routes.registerMerchantView, page: RegisterMerchantView),
     RouteDef(Routes.verifyAdminView, page: VerifyAdminView),
   ];
   @override
@@ -79,6 +83,12 @@ class StackedRouter extends RouterBase {
     CreateAdminView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const CreateAdminView(),
+        settings: data,
+      );
+    },
+    RegisterMerchantView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const RegisterMerchantView(),
         settings: data,
       );
     },
@@ -181,6 +191,22 @@ extension NavigatorStateExtension on NavigationService {
   }) async {
     return navigateTo(
       Routes.createAdminView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToRegisterMerchantView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.registerMerchantView,
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,

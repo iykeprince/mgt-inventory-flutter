@@ -38,7 +38,7 @@ class LoginView extends StatelessWidget {
                     right: AppSize.s8,
                     child: Navbar(
                       title: AppString.login,
-                      onTap: () {},
+                      onTap: model.navigateBack,
                       iconThemeColor: ColorManager.kWhiteColor,
                       textColor: ColorManager.kWhiteColor,
                     )),
@@ -90,7 +90,9 @@ class LoginView extends StatelessWidget {
                           ),
                           const SizedBox(height: AppSize.s20),
                           PosButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              print('TODO: LOGIN');
+                            },
                             title: AppString.login,
                             // buttonBgColor: ColorManager.kLightGreen1,
                             // buttonTextColor: ColorManager.kDarkCharcoal,
@@ -103,7 +105,7 @@ class LoginView extends StatelessWidget {
                           ),
                           const SizedBox(height: AppSize.s20),
                           PosButton(
-                            onPressed: () {},
+                            onPressed: model.navigateToRegisterNow,
                             title: AppString.dontHaveAnAccountRegisterNow,
                             buttonType: ButtonType.text,
                             buttonTextColor: ColorManager.kButtonTextNavyBlue,

@@ -73,7 +73,7 @@ class AuthView extends StatelessWidget {
                     ),
                     const SizedBox(height: AppSize.s32),
                     PosButton(
-                      onPressed: () {},
+                      onPressed: model.navigateToRegisterMerchant,
                       title: AppString.registerMerchant,
                       fontSize: FontSize.s16,
                       fontWeight: FontWeightManager.medium,
@@ -85,8 +85,8 @@ class AuthView extends StatelessWidget {
                     ),
                     const SizedBox(height: AppSize.s12),
                     PosButton(
-                      onPressed: () {},
-                      title: AppString.registerMerchant,
+                      onPressed: model.navigateToCreateAdmin,
+                      title: AppString.createAdminAccountText,
                       // buttonBgColor: ColorManager.kLightGreen1,
                       // buttonTextColor: ColorManager.kDarkCharcoal,
                       fontSize: FontSize.s16,
@@ -97,7 +97,7 @@ class AuthView extends StatelessWidget {
                     ),
                     const SizedBox(height: AppSize.s20),
                     PosButton(
-                      onPressed: () {},
+                      onPressed: model.navigateToLogin,
                       title: AppString.loginToExisting,
                       buttonType: ButtonType.text,
                       buttonTextColor: ColorManager.kButtonTextNavyBlue,
