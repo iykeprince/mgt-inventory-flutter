@@ -3,11 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pos_mobile_app/ui/auth/auth_view_model.dart';
 import 'package:pos_mobile_app/utils/colors.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
-import 'package:pos_mobile_ui_package/utils/colors.dart';
-import 'package:pos_mobile_ui_package/utils/font_styles.dart';
-import 'package:pos_mobile_ui_package/utils/string_manager.dart';
-import 'package:pos_mobile_ui_package/utils/text_styles.dart';
-import 'package:pos_mobile_ui_package/utils/values_manager.dart';
 import 'package:stacked/stacked.dart';
 
 class AuthView extends StatelessWidget {
@@ -30,7 +25,7 @@ class AuthView extends StatelessWidget {
           child: Stack(
             children: [
               Container(
-                margin: const EdgeInsets.only(top: 80.0),
+                margin: const EdgeInsets.only(top: AppMargin.m80),
                 child: Column(
                   children: [
                     Text(
@@ -69,14 +64,14 @@ class AuthView extends StatelessWidget {
                           topLeft: Radius.circular(AppSize.s16),
                           topRight: Radius.circular(AppSize.s16))),
                   child: Column(children: [
-                    const SizedBox(height: AppSize.s64),
+                    const SizedBox(height: AppSize.s32),
                     Text(
                       AppString.registerQuestion,
                       style: getMediumStyle(
                           color: ColorManager.kDarkBlue,
                           fontSize: FontSize.s20),
                     ),
-                    const SizedBox(height: AppSize.s64),
+                    const SizedBox(height: AppSize.s32),
                     PosButton(
                       onPressed: () {},
                       title: AppString.registerMerchant,
@@ -88,7 +83,7 @@ class AuthView extends StatelessWidget {
                           color: ColorManager.kBorderLightGreen, width: 1),
                       borderRadius: AppSize.s8,
                     ),
-                    const SizedBox(height: AppSize.s24),
+                    const SizedBox(height: AppSize.s12),
                     PosButton(
                       onPressed: () {},
                       title: AppString.registerMerchant,
@@ -100,7 +95,7 @@ class AuthView extends StatelessWidget {
                           color: ColorManager.kBorderLightGreen, width: 1),
                       borderRadius: AppSize.s8,
                     ),
-                    const SizedBox(height: AppSize.s40),
+                    const SizedBox(height: AppSize.s20),
                     PosButton(
                       onPressed: () {},
                       title: AppString.loginToExisting,
