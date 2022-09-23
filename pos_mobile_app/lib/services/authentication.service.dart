@@ -43,6 +43,15 @@ class AuthenticationService with ReactiveServiceMixin {
     return auth;
   }
 
+  Future<Map<String, dynamic>> register(Map<String, dynamic> formData) async {
+    final preferences = await SharedPreferences.getInstance();
+    var response = await dioClient.post(
+      '/auth/signup-with-email',
+      data: formData,
+    );
+    return response.data;
+  }
+
   Future<User> getCurrentBaseUser() async {
     var response = await dioClient.get(
       '/user/me',
@@ -70,16 +79,12 @@ class AuthenticationService with ReactiveServiceMixin {
     return authUser;
   }
 
-  // Future<SuperAdmin> getCurrentUser() async {
-  //   try {
-  //     var response = await dioClient.dio.get(
-  //       '/user/me',
-  //     );
-  //     AuthUser authUser = AuthUser.fromJson(response.data);
-  //     setCurrentUser(authUser);
-  //     return authUser;
-  //   } on DioError catch (err) {
-  //     throw err;
-  //   }
-  // }
+  Future<Map> forgotPassword(Map<String, dynamic> formData) async {
+    final preferences = await SharedPreferences.getInstance();
+    var response = await dioClient.post(
+      '/auth/forgot-password',
+      data: formData,
+    );
+    return response.data;
+  }
 }

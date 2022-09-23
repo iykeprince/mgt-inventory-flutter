@@ -7,15 +7,15 @@ import 'package:pos_mobile_app/utils/colors.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 
-import 'create_admin_view_model.dart';
+import 'register_merchant_view_model.dart';
 
-class CreateAdminView extends StatelessWidget {
-  const CreateAdminView({Key? key}) : super(key: key);
+class RegisterMerchantView extends StatelessWidget {
+  const RegisterMerchantView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CreateAdminViewModel>.nonReactive(
-      viewModelBuilder: () => CreateAdminViewModel(),
+    return ViewModelBuilder<RegisterMerchantViewModel>.nonReactive(
+      viewModelBuilder: () => RegisterMerchantViewModel(),
       builder: (context, model, child) => Scaffold(
         body: GestureDetector(
           onTap: () {
@@ -36,15 +36,16 @@ class CreateAdminView extends StatelessWidget {
             child: Stack(
               children: [
                 Positioned(
-                    top: AppSize.s8,
-                    left: AppSize.s8,
-                    right: AppSize.s8,
-                    child: Navbar(
-                      title: AppString.createAdmin,
-                      onTap: model.navigateBack,
-                      iconThemeColor: ColorManager.kWhiteColor,
-                      textColor: ColorManager.kWhiteColor,
-                    )),
+                  top: AppSize.s8,
+                  left: AppSize.s8,
+                  right: AppSize.s8,
+                  child: Navbar(
+                    title: AppString.registerMerchant,
+                    onTap: model.navigateBack,
+                    iconThemeColor: ColorManager.kWhiteColor,
+                    textColor: ColorManager.kWhiteColor,
+                  ),
+                ),
                 Container(
                   margin: const EdgeInsets.only(top: AppMargin.m120),
                   child: Column(

@@ -6,5 +6,5 @@ import 'package:stacked_services/stacked_services.dart';
 class OnboardingViewModel extends BaseViewModel {
   final navigator = locator<NavigationService>();
 
-  navigateToAuth() => navigator.navigateTo(Routes.authView);
+  navigateToAuth() => navigator.replaceWith(Routes.authView);
 }
