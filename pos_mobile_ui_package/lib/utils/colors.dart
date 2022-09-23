@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class ColorManager {
   static const Color kPrimaryColor = Color(0xff145C53);
+  static const Color kPrimaryDarkColor = Color(0xff0E3A35);
   static const Color kSecondaryColor = Color(0xff184172);
   static const Color kErrorBgColor = Color(0xffFFE3E3);
   static const Color kErrorTextColor = Color(0xffC80000);
@@ -17,4 +18,6 @@ class ColorManager {
   static const Color kLightGreen1 = Color(0xffE8FFFC);
   static const Color kBorderLightGreen = Color(0xffB8D7C7);
   static const Color kButtonTextNavyBlue = Color(0xff1B4672);
+  static const Color kInputBgColor = Color(0xffF9F9F9);
+  static const Color kTurquoiseDarkColor = Color(0xff374846);
 }

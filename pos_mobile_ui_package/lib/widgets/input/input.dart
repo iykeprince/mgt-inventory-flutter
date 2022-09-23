@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:pos_mobile_ui_package/utils/colors.dart';
 import 'package:pos_mobile_ui_package/utils/font_styles.dart';
 import 'package:pos_mobile_ui_package/utils/text_styles.dart';
+import 'package:pos_mobile_ui_package/utils/values_manager.dart';
 
 class InputField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
@@ -68,9 +69,16 @@ class InputField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(label,
-              style: getRegularStyle(
-                  color: ColorManager.kDarkCharcoal, fontSize: FontSize.s14)),
+          Text(
+            label,
+            style: getRegularStyle(
+              color: ColorManager.kDarkCharcoal,
+              fontSize: FontSize.s14,
+            ),
+          ),
+          const SizedBox(
+            height: AppSize.s4,
+          ),
           TextFormField(
             showCursor: showCursor,
             readOnly: readOnly,
@@ -84,7 +92,7 @@ class InputField extends StatelessWidget {
             decoration: InputDecoration(
               counterText: '',
               // labelStyle: getRegularStyle(
-              //     color: ColorManager.kDarkCharcoal, fontSize: FontSize.s14),
+              // color: ColorManager.kDarkCharcoal, fontSize: FontSize.s14),
               hintStyle: getRegularStyle(
                   color: ColorManager.kGrey2, fontSize: FontSize.s16),
               border: border ??
@@ -95,7 +103,7 @@ class InputField extends StatelessWidget {
               enabledBorder: enabledBorder ??
                   OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: ColorManager.kGreyOpacity),
+                    borderSide: BorderSide(color: ColorManager.kTransparent),
                   ),
               focusedBorder: focusedBorder,
               // alignLabelWithHint: true,
@@ -107,11 +115,14 @@ class InputField extends StatelessWidget {
                   const EdgeInsets.only(left: 16, top: 18, bottom: 16),
               suffixIcon: suffixIcon,
               prefixIcon: prefixIcon,
-              fillColor: fillColor ?? ColorManager.kWhiteColor,
+              fillColor: fillColor ?? ColorManager.kInputBgColor,
+              filled: true,
             ),
             textAlign: textAlign ?? TextAlign.start,
             style: getRegularStyle(
-                color: ColorManager.kGrey2, fontSize: FontSize.s16),
+              color: ColorManager.kGrey2,
+              fontSize: FontSize.s16,
+            ),
             inputFormatters: inputFormatters,
             validator: validationCallback,
             keyboardType: keyBoardType,
