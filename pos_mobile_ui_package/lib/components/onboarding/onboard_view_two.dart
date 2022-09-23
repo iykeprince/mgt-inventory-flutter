@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
+import 'package:pos_mobile_ui_package/utils/font_styles.dart';
+import 'package:pos_mobile_ui_package/utils/string_manager.dart';
 
 class OnboardingViewTwo extends StatelessWidget {
   OnboardingViewTwo({
@@ -17,7 +19,7 @@ class OnboardingViewTwo extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 8),
-      decoration: const BoxDecoration(color: Colors.white),
+      decoration: BoxDecoration(color: ColorManager.kWhiteColor),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,12 +30,11 @@ class OnboardingViewTwo extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: onSkipPressed,
-                child: const Text(
-                  'Skip',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                  ),
+                child: Text(
+                  AppString.skip,
+                  style: getBoldStyle(
+                      color: ColorManager.kDarkCharcoal,
+                      fontSize: FontSize.s16),
                 ),
               )
             ],
@@ -45,7 +46,7 @@ class OnboardingViewTwo extends StatelessWidget {
               decoration: BoxDecoration(
                 border: Border.all(
                   width: 1,
-                  color: Colors.grey,
+                  color: ColorManager.kGrey,
                 ),
               ),
             ),
@@ -57,22 +58,17 @@ class OnboardingViewTwo extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
-                  'Track',
-                  style: TextStyle(
-                    color: kPrimaryColor,
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.w700,
-                  ),
+                Text(
+                  AppString.track,
+                  style: getBoldStyle(
+                      color: ColorManager.kPrimaryColor,
+                      fontSize: FontSize.s24),
                 ),
                 const SizedBox(height: 10),
-                const Text(
-                  'Track the growth of past and current transactions, expenses recorded by your registered moderators.',
-                  style: TextStyle(
-                    color: Color(0xff555555),
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w500,
-                  ),
+                Text(
+                  AppString.onBoardSub2,
+                  style: getMediumStyle(
+                      color: ColorManager.kGrey1, fontSize: FontSize.s16),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(

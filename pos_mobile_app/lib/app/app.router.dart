@@ -12,17 +12,26 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../ui/auth/auth_view.dart';
+import '../ui/auth/createAdmin/create_admin_view.dart';
+import '../ui/auth/login/login_view.dart';
+import '../ui/auth/verifyAdmin/verify_admin_view.dart';
 import '../ui/onboarding/onboarding_view.dart';
 import '../ui/splash/splash_view.dart';
 
 class Routes {
-  static const String splashView = '/';
+  static const String splashView = '/splash-view';
   static const String onboardView = '/onboard-view';
   static const String authView = '/auth-view';
+  static const String loginView = '/login-view';
+  static const String createAdminView = '/create-admin-view';
+  static const String verifyAdminView = '/';
   static const all = <String>{
     splashView,
     onboardView,
     authView,
+    loginView,
+    createAdminView,
+    verifyAdminView,
   };
 }
 
@@ -33,6 +42,9 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.splashView, page: SplashView),
     RouteDef(Routes.onboardView, page: OnboardView),
     RouteDef(Routes.authView, page: AuthView),
+    RouteDef(Routes.loginView, page: LoginView),
+    RouteDef(Routes.createAdminView, page: CreateAdminView),
+    RouteDef(Routes.verifyAdminView, page: VerifyAdminView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -55,6 +67,24 @@ class StackedRouter extends RouterBase {
     AuthView: (data) {
       return CupertinoPageRoute<dynamic>(
         builder: (context) => const AuthView(),
+        settings: data,
+      );
+    },
+    LoginView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const LoginView(),
+        settings: data,
+      );
+    },
+    CreateAdminView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const CreateAdminView(),
+        settings: data,
+      );
+    },
+    VerifyAdminView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const VerifyAdminView(),
         settings: data,
       );
     },
@@ -119,6 +149,54 @@ extension NavigatorStateExtension on NavigationService {
   }) async {
     return navigateTo(
       Routes.authView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToLoginView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.loginView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToCreateAdminView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.createAdminView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToVerifyAdminView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.verifyAdminView,
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,
