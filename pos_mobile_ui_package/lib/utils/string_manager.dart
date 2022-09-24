@@ -15,7 +15,7 @@ class AppString {
   static const String registerQuestion = "What would you like to do?";
   static const String registerMerchant = "Register merchant account";
   static const String createAdminAccountText = "Create an admin account";
-  static const String createAdmin = "Create an admin account";
+  static const String createAdmin = "Create Admin Account";
   static const String loginToExisting = "Log in to an existing account";
   static const String enterYourLoginDetails = "Enter your login details";
   static const String usernameOrEmailAddress = "Username or Email Address";
@@ -44,4 +44,16 @@ class AppString {
       "Email Verified Successfully!";
   static const String successEmailVerficationCaption =
       "Your email has been successfully verified. You can now proceed to the final steps of your account creation.";
+  static const String businessDetailsText = "Business Details";
+  static const String businessNameText = "Business Name";
+  static const String numOfBranchText = "Number of branches";
+  static const String createAccountText = "Create Account";
+  static const String businessNamePlaceholder = "John Doe Technologies";
+  static const String numOfBranchPlaceholder = "1";
+  static const String welcomeToPosCaption = "Welcome to your POS account";
+  static const String welcomeToPosCaptionSubtitle =
+      "Your account has been created successfully. Let’s start by adding branch details, in order to register your merchants for each branch";
+  static const String determineOfBranchText =
+      "Determines the number of your merchant accounts";
+  static const String addBranchDetailsText = "Add Branch Details";
 }

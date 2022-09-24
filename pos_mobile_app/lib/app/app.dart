@@ -1,7 +1,9 @@
 import 'package:pos_mobile_app/client/dio_client.dart';
 import 'package:pos_mobile_app/services/authentication.service.dart';
 import 'package:pos_mobile_app/ui/auth/auth_view.dart';
+import 'package:pos_mobile_app/ui/auth/createAccountSuccess/create_account_success_view.dart';
 import 'package:pos_mobile_app/ui/auth/createAdmin/create_admin_view.dart';
+import 'package:pos_mobile_app/ui/auth/createAdminBusiness/create_admin_business.dart';
 import 'package:pos_mobile_app/ui/auth/login/login_view.dart';
 import 'package:pos_mobile_app/ui/auth/registerMerchant/register_merchant_view.dart';
 import 'package:pos_mobile_app/ui/auth/verifyAdmin/verify_admin_view.dart';
@@ -20,6 +22,8 @@ import 'package:stacked_services/stacked_services.dart';
     MaterialRoute(page: CreateAdminView),
     MaterialRoute(page: RegisterMerchantView),
     MaterialRoute(page: VerifyAdminView),
+    MaterialRoute(page: CreateAdminBusinessView),
+    MaterialRoute(page: CreateAccountSuccessView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

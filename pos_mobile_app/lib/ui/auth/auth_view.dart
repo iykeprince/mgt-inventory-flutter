@@ -55,7 +55,6 @@ class AuthView extends StatelessWidget {
                 left: 0,
                 right: 0,
                 child: Container(
-                  // height: 300,
                   padding:
                       const EdgeInsets.symmetric(horizontal: AppPadding.p24),
                   decoration: const BoxDecoration(

@@ -40,7 +40,7 @@ class OnboardingViewThree extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 24),
-          Image.asset('assets/images/auth/phoone_dash.svg'),
+          Image.asset('assets/images/auth/phone_dash.svg'),
           Expanded(
             child: Container(
               height: 200,
