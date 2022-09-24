@@ -21,11 +21,13 @@ class Alert {
       child: Row(children: [
         Icon(Icons.warning_rounded, color: iconColor, size: AppSize.s12),
         const SizedBox(width: AppSize.s12),
-        Text(
-          text,
-          style: getRegularStyle(
-            color: textColor,
-            fontSize: FontSize.s14,
+        Flexible(
+          child: Text(
+            text,
+            style: getRegularStyle(
+              color: textColor,
+              fontSize: FontSize.s14,
+            ),
           ),
         )
       ]),
