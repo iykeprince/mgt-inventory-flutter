@@ -10,6 +10,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
   final Color? color;
   final Color? textColor;
   final Color? iconThemeColor;
+  final bool automaticallyImplyLeading;
 
   const Navbar({
     Key? key,
@@ -19,6 +20,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
     this.fontsize = FontSize.s20,
     this.textColor,
     this.iconThemeColor,
+    this.automaticallyImplyLeading = true,
   }) : super(key: key);
 
   @override
@@ -33,18 +35,21 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
             fontSize: fontsize,
           )),
       centerTitle: true,
-      leading: GestureDetector(
-        onTap: onTap,
-        child: Icon(
-          Icons.arrow_back_ios,
-          color: iconThemeColor ?? ColorManager.kDarkCharcoal,
-        ),
-      ),
+      leading: automaticallyImplyLeading
+          ? GestureDetector(
+              onTap: onTap,
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: iconThemeColor ?? ColorManager.kDarkCharcoal,
+              ),
+            )
+          : null,
       elevation: 0,
       backgroundColor: color ?? Colors.transparent,
       iconTheme: const IconThemeData(
         color: ColorManager.kDarkCharcoal,
       ),
+      automaticallyImplyLeading: automaticallyImplyLeading,
     );
   }
 }
