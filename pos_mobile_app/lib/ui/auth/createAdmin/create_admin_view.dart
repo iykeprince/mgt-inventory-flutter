@@ -55,98 +55,117 @@ class CreateAdminView extends StatelessWidget {
                     ],
                   ),
                 ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    // height: 300,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: AppPadding.p24),
-                    decoration: const BoxDecoration(
-                        color: ColorManager.kWhiteColor,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(AppSize.s16),
-                            topRight: Radius.circular(AppSize.s16))),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: AppSize.s40),
-                          Text(
-                            AppString.enterYourEmailAddress,
-                            style: getMediumStyle(
-                                color: ColorManager.kDarkCharcoal,
-                                fontSize: FontSize.s20),
-                          ),
-                          const SizedBox(height: AppSize.s40),
-                          const InputField(
-                            label: AppString.emailAddress,
-                            hintText: AppString.emailAddressPlaceholder,
-                            border: InputBorder.none,
-                          ),
-                          const SizedBox(height: AppSize.s6),
-                          PosCheckBox(
-                              value: false,
-                              richText: Expanded(
-                                child: RichText(
-                                  textAlign: TextAlign.start,
-                                  text: TextSpan(
-                                      text: AppString.iAgreeText,
-                                      style: getRegularStyle(
-                                        color: ColorManager.kTurquoiseDarkColor,
-                                        fontSize: FontSize.s14,
-                                      ),
-                                      children: [
-                                        TextSpan(
-                                          text: AppString.termsAndUseText,
-                                          style: getRegularStyle(
-                                            color: ColorManager
-                                                .kButtonTextNavyBlue,
-                                            fontSize: FontSize.s14,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                            text: AppString.haveReadText,
-                                            style: getRegularStyle(
-                                              color: ColorManager
-                                                  .kTurquoiseDarkColor,
-                                              fontSize: FontSize.s14,
-                                            )),
-                                        TextSpan(
-                                            text: AppString.privacyPolicyText,
-                                            style: getMediumStyle(
-                                              color: ColorManager
-                                                  .kButtonTextNavyBlue,
-                                              fontSize: FontSize.s14,
-                                            ),
-                                            recognizer: TapGestureRecognizer()
-                                              ..onTap = (() {
-                                                print('Hello barrest dev in');
-                                              })),
-                                      ]),
-                                ),
-                              )),
-                          const SizedBox(height: AppSize.s12),
-                          PosButton(
-                            onPressed: () {},
-                            title: AppString.continueText,
-                            trailingIcon: Icons.arrow_forward,
-                            trailingIconColor: ColorManager.kWhiteColor,
-                            trailingIconSpace: AppSize.s28,
-                            // buttonBgColor: ColorManager.kLightGreen1,
-                            // buttonTextColor: ColorManager.kDarkCharcoal,
-                            fontSize: FontSize.s16,
-                            fontWeight: FontWeightManager.bold,
-                            borderRadius: AppSize.s8,
-                          ),
-                          const SizedBox(height: AppSize.s28),
-                        ]),
-                  ),
-                )
+                const CreateAdminFormView(),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class CreateAdminFormView extends ViewModelWidget<CreateAdminViewModel> {
+  const CreateAdminFormView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, CreateAdminViewModel model) {
+    return Positioned(
+      bottom: 0,
+      left: 0,
+      right: 0,
+      child: Container(
+        // height: 300,
+        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p24),
+        decoration: const BoxDecoration(
+            color: ColorManager.kWhiteColor,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(AppSize.s16),
+                topRight: Radius.circular(AppSize.s16))),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          const SizedBox(height: AppSize.s40),
+          Text(
+            AppString.enterYourEmailAddress,
+            style: getMediumStyle(
+                color: ColorManager.kDarkCharcoal, fontSize: FontSize.s20),
+          ),
+          const SizedBox(height: AppSize.s40),
+          InputField(
+            label: AppString.emailAddress,
+            hintText: AppString.emailAddressPlaceholder,
+            border: InputBorder.none,
+            onChanged: model.setEmail,
+          ),
+          if (model.hasError && model.modelError == EMAIL_VALIDATOR)
+            Text(AppString.emailErrorText,
+                style: getRegularStyle(color: Colors.red)),
+          const SizedBox(height: AppSize.s24),
+          PosCheckBox(
+            value: model.tos!,
+            onChanged: (value) => model.changeTos(value!),
+            richText: Expanded(
+              child: RichText(
+                textAlign: TextAlign.start,
+                text: TextSpan(
+                    text: AppString.iAgreeText,
+                    style: getRegularStyle(
+                      color: ColorManager.kTurquoiseDarkColor,
+                      fontSize: FontSize.s14,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: AppString.termsAndUseText,
+                        style: getRegularStyle(
+                          color: ColorManager.kButtonTextNavyBlue,
+                          fontSize: FontSize.s14,
+                        ),
+                      ),
+                      TextSpan(
+                          text: AppString.haveReadText,
+                          style: getRegularStyle(
+                            color: ColorManager.kTurquoiseDarkColor,
+                            fontSize: FontSize.s14,
+                          )),
+                      TextSpan(
+                          text: AppString.privacyPolicyText,
+                          style: getMediumStyle(
+                            color: ColorManager.kButtonTextNavyBlue,
+                            fontSize: FontSize.s14,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = (() {
+                              print('Hello barrest dev in');
+                            })),
+                    ]),
+              ),
+            ),
+          ),
+          if (model.hasError && model.modelError == TERM_OF_USE_VALIDATOR)
+            Text(AppString.pleaseAcceptTermsAndCondition,
+                style: getRegularStyle(color: Colors.red)),
+          const SizedBox(height: AppSize.s24),
+          PosButton(
+            onPressed: model.signUpWithEmail,
+            busy: model.isBusy,
+            title: AppString.continueText,
+            trailingIcon: Icons.arrow_forward,
+            trailingIconColor: ColorManager.kWhiteColor,
+            trailingIconSpace: AppSize.s28,
+            // buttonBgColor: ColorManager.kLightGreen1,
+            // buttonTextColor: ColorManager.kDarkCharcoal,
+            fontSize: FontSize.s16,
+            fontWeight: FontWeightManager.bold,
+            borderRadius: AppSize.s8,
+          ),
+          if (model.hasErrorForKey(SIGN_UP_WITH_EMAIL_OBJECT_KEY))
+            Text(
+              '${model.error(SIGN_UP_WITH_EMAIL_OBJECT_KEY)}',
+              style: getRegularStyle(
+                color: Colors.red,
+              ),
+            ),
+          const SizedBox(height: AppSize.s28),
+        ]),
       ),
     );
   }
