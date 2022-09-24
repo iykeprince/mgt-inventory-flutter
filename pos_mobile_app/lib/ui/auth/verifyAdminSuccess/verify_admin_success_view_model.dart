@@ -30,7 +30,7 @@ class VerifyAdminSuccessView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/images/POS.png',
+                  'assets/images/auth/cone.png',
                   fit: BoxFit.contain,
                 ),
                 const SizedBox(

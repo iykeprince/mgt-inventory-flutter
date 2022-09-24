@@ -128,7 +128,7 @@ class CreateAdminView extends StatelessWidget {
                               )),
                           const SizedBox(height: AppSize.s12),
                           PosButton(
-                            onPressed: () {},
+                            onPressed: model.navigateToCreateAdminBusiness,
                             title: AppString.continueText,
                             trailingIcon: Icons.arrow_forward,
                             trailingIconColor: ColorManager.kWhiteColor,

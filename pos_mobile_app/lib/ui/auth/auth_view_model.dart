@@ -10,7 +10,7 @@ class AuthViewModel extends BaseViewModel {
   navigateToCreateAdmin() =>
       _navigationService.navigateTo(Routes.createAdminView);
   navigateToRegisterMerchant() =>
-      _navigationService.navigateTo(Routes.createAdminView);
+      _navigationService.navigateTo(Routes.registerMerchantView);
 
   navigateToLogin() => _navigationService.navigateTo(Routes.loginView);
 }
