@@ -5,6 +5,7 @@ import 'package:pos_mobile_ui_package/utils/colors.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
   runApp(const MyApp());
 }

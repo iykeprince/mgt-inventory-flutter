@@ -19,7 +19,10 @@ class OnboardingViewOne extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 8),
+      padding: const EdgeInsets.symmetric(
+        vertical: AppSize.s40,
+        horizontal: AppPadding.p8,
+      ),
       decoration: const BoxDecoration(color: ColorManager.kWhiteColor),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,

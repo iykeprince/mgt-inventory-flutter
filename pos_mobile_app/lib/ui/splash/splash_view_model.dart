@@ -16,8 +16,12 @@ class SplashViewViewModel extends BaseViewModel {
       locator<AuthenticationService>();
   final NavigationService _navigationService = locator<NavigationService>();
 
-  runSplash() {
-    print('navigate to onboard');
+  runSplash() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    final bool? isFirstTimeUser = preferences.getBool(IS_FIRST_TIME_USER);
+    if (isFirstTimeUser != null && !isFirstTimeUser) {
+      return _navigationService.replaceWith(Routes.authView);
+    }
     Future.delayed(const Duration(seconds: 2), () {
       _navigationService.replaceWith(Routes.onboardView);
     });
