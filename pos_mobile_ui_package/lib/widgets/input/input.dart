@@ -23,7 +23,7 @@ class InputField extends StatelessWidget {
   final bool? obscureText;
   final Function()? clearForm;
   final Function()? onTap;
-  final Function(String)? onChange;
+  final Function(String)? onChanged;
   final int? maxLength;
   final bool? enabled;
   final InputBorder? border;
@@ -50,7 +50,7 @@ class InputField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.obscureText,
-    this.onChange,
+    this.onChanged,
     this.onTap,
     this.maxLength,
     this.enabled = true,
@@ -126,14 +126,15 @@ class InputField extends StatelessWidget {
             inputFormatters: inputFormatters,
             validator: validationCallback,
             keyboardType: keyBoardType,
-            onChanged: (val) {
-              if (clearForm != null) {
-                clearForm!();
-              }
-              if (onChange != null) {
-                onChange!(val);
-              }
-            },
+            // onChanged: (val) {
+            //   if (clearForm != null) {
+            //     clearForm!();
+            //   }
+            //   if (onChange != null) {
+            //     onChange!(val);
+            //   }
+            // },
+            onChanged: onChanged,
             onEditingComplete: onEdittingComplete,
             obscureText: obscureText ?? false,
           ),

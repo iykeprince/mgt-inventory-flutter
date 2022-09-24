@@ -44,4 +44,9 @@ class AppString {
       "Email Verified Successfully!";
   static const String successEmailVerficationCaption =
       "Your email has been successfully verified. You can now proceed to the final steps of your account creation.";
+
+  static String pleaseAcceptTermsAndCondition =
+      "Please accept the terms and condition!";
+
+  static String emailErrorText = "Email address is required!";
 }
