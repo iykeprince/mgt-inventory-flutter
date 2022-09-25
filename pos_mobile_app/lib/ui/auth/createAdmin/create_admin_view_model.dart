@@ -51,14 +51,11 @@ class CreateAdminViewModel extends BaseViewModel {
       "password": "password123"
     };
     try {
-      print('hello');
       var response = await _authenticationService.register(formData);
-      print('response: $response');
       _navigationService.navigateTo(Routes.verifyAdminView);
       // setMessage(response)
-
+      return response;
     } on DioError catch (error) {
-      print('Error: ${error.response?.data["message"]}');
       throw Exception(error.response?.data);
     } finally {
       setBusy(false);
