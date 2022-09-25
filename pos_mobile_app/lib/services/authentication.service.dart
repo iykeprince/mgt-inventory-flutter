@@ -3,6 +3,7 @@ import 'package:pos_mobile_app/app/app.locator.dart';
 import 'package:pos_mobile_app/client/dio_client.dart';
 import 'package:pos_mobile_app/models/admin.model.dart';
 import 'package:pos_mobile_app/models/auth.model.dart';
+import 'package:pos_mobile_app/models/default_response.model.dart';
 import 'package:pos_mobile_app/models/merchant.model.dart';
 import 'package:pos_mobile_app/models/user.model.dart';
 import 'package:pos_mobile_app/utils/pos_contants.dart';
@@ -50,6 +51,18 @@ class AuthenticationService with ReactiveServiceMixin {
       data: formData,
     );
     return response.data;
+  }
+
+  Future<DefaultResponse> verifyOtp(Map<String, String?> formData) async {
+    final preferences = await SharedPreferences.getInstance();
+    var response = await dioClient.post(
+      '/auth/verify-user-email',
+      data: formData,
+    );
+    print('default response: ${response.data}');
+    DefaultResponse res = DefaultResponse.fromJson(response.data);
+    preferences.setString(AUTH_TOKEN_KEY, res.token!);
+    return res;
   }
 
   Future<User> getCurrentBaseUser() async {

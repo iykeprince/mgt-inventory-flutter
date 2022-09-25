@@ -29,8 +29,8 @@ class AppString {
   static const String iAgreeToTersOfUse =
       "I agree to the Terms of Use, and have read the Privacy Policy.";
   static const String verifyEmailText = "Verify your email address";
-  static const String verifyEmailSubText =
-      "We sent a six-digit code to your email address (johndoe@samplemail.com) for verification.";
+  static String verifyEmailSubText(String email) =>
+      "We sent a six-digit code to your email address ($email) for verification.";
   static const String otpCodeText = "OTP Code";
   static const String otpCodeExpireText =
       "The code will expire in 5 minutes...";
@@ -61,4 +61,12 @@ class AppString {
   static const String determineOfBranchText =
       "Determines the number of your merchant accounts";
   static const String addBranchDetailsText = "Add Branch Details";
+
+  static var passwordValidatorText = "Password is required";
+
+  static var numOfBranchValidatorText = "Number of branches required";
+
+  static var emailValidatorText = "Email address is required";
+
+  static var businessNameValidatorText = "Business name is empty!";
 }

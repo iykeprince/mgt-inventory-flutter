@@ -96,9 +96,9 @@ class CreateAdminFormView extends ViewModelWidget<CreateAdminViewModel> {
             border: InputBorder.none,
             onChanged: model.setEmail,
           ),
-          if (model.hasError && model.modelError == EMAIL_VALIDATOR)
-            Text(AppString.emailErrorText,
-                style: getRegularStyle(color: Colors.red)),
+          // if (model.hasError && model.modelError == EMAIL_VALIDATOR)
+          // Text(AppString.emailErrorText,
+          //     style: getRegularStyle(color: Colors.red)),
           const SizedBox(height: AppSize.s24),
           PosCheckBox(
             value: model.tos!,

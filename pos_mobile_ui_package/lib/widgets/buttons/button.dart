@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:pos_mobile_ui_package/utils/colors.dart';
 // : super(key: key) this.buttonBgColor??= ColorManager.kPrimaryColor, this.buttonTextColor ??= ColorManager.kWhiteColor this.leadingIconColor ??= ColorManager.kPrimaryColor  this.trailingIconColor??=ColorManager.kPrimaryColor ;
 
@@ -8,7 +9,7 @@ class PosButton extends StatelessWidget {
   final double borderRadius;
   final double fontSize;
   final String title;
-  final bool? busy;
+  final bool busy;
   final Border? border;
   // final bool fullwidth;
   Function() onPressed;
@@ -97,28 +98,36 @@ class PosButton extends StatelessWidget {
           color: _bgColor,
           border: constructBorder(),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            if (leadingIcon != null)
-              Icon(
-                leadingIcon,
-                color: leadingIconColor,
+        child: busy
+            ? const SizedBox(
+                width: AppSize.s16,
+                height: AppSize.s16,
+                child: PosCircularProgress(),
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  if (leadingIcon != null)
+                    Icon(
+                      leadingIcon,
+                      color: leadingIconColor,
+                    ),
+                  Text(
+                    title,
+                    style: TextStyle(
+                        color: _color,
+                        fontSize: fontSize,
+                        fontWeight: fontWeight),
+                  ),
+                  if (trailingIcon != null) SizedBox(width: trailingIconSpace),
+                  if (trailingIcon != null)
+                    Icon(
+                      trailingIcon,
+                      color: trailingIconColor,
+                    ),
+                ],
               ),
-            Text(
-              title,
-              style: TextStyle(
-                  color: _color, fontSize: fontSize, fontWeight: fontWeight),
-            ),
-            if (trailingIcon != null) SizedBox(width: trailingIconSpace),
-            if (trailingIcon != null)
-              Icon(
-                trailingIcon,
-                color: trailingIconColor,
-              ),
-          ],
-        ),
       ),
     );
   }

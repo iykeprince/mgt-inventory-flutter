@@ -8,8 +8,6 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../../../app/app.locator.dart';
 
-const String BUSINESS_NAME_VALIDATOR = 'BUSINESS_NAME_VALIDATOR';
-const String EMAIL_VALIDATOR = 'EMAIL_VALIDATOR';
 const String TERM_OF_USE_VALIDATOR = 'TERM_OF_USE_VALIDATOR';
 const String SIGN_UP_WITH_EMAIL_OBJECT_KEY = 'sign-up-with-email-object-key';
 
@@ -35,7 +33,7 @@ class CreateAdminViewModel extends BaseViewModel {
 
   Future asyncSignUpWithEmail() async {
     if (email == null || email!.isEmpty) {
-      return setError(EMAIL_VALIDATOR);
+      return "setError(EMAIL_VALIDATOR)";
     }
     // if (businessName == null || businessName!.isEmpty) {
     //   return setError(BUSINESS_NAME_VALIDATOR);
