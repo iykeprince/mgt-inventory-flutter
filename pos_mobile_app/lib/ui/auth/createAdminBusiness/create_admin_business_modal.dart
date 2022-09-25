@@ -37,7 +37,6 @@ class CreateAdminBusinessViewModel extends BaseViewModel {
 
   void togglePasswordVisibility() {
     _obscurePassword = !_obscurePassword;
-    print('obscure: $obscurePassword');
     notifyListeners();
   }
 
@@ -91,7 +90,6 @@ class CreateAdminBusinessViewModel extends BaseViewModel {
     };
     try {
       var response = await _authenticationService.register(formData);
-      print('response: $response');
       _navigationService.navigateTo(
         Routes.verifyAdminView,
         arguments: VerifyAdminViewArguments(email: emailAddress!),

@@ -59,7 +59,7 @@ class AuthenticationService with ReactiveServiceMixin {
       '/auth/verify-user-email',
       data: formData,
     );
-    print('default response: ${response.data}');
+
     DefaultResponse res = DefaultResponse.fromJson(response.data);
     preferences.setString(AUTH_TOKEN_KEY, res.token!);
     return res;

@@ -20,7 +20,6 @@ class VerifyAdminViewModel extends BaseViewModel {
   }
 
   Future<void> verifyOTP() async {
-    print('hello');
     await runBusyFuture(runOtpTask());
   }
 
