@@ -7,6 +7,7 @@ import 'package:pos_mobile_app/ui/auth/createAdminBusiness/create_admin_business
 import 'package:pos_mobile_app/ui/auth/login/login_view.dart';
 import 'package:pos_mobile_app/ui/auth/registerMerchant/register_merchant_view.dart';
 import 'package:pos_mobile_app/ui/auth/verifyAdmin/verify_admin_view.dart';
+import 'package:pos_mobile_app/ui/auth/verifyAdminSuccess/verify_admin_success_view_model.dart';
 import 'package:pos_mobile_app/ui/onboarding/onboarding_view.dart';
 import 'package:pos_mobile_app/ui/splash/splash_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,6 +23,7 @@ import 'package:stacked_services/stacked_services.dart';
     MaterialRoute(page: CreateAdminView),
     MaterialRoute(page: RegisterMerchantView),
     MaterialRoute(page: VerifyAdminView),
+    MaterialRoute(page: VerifyAdminSuccessView),
     MaterialRoute(page: CreateAdminBusinessView),
     MaterialRoute(page: CreateAccountSuccessView),
   ],

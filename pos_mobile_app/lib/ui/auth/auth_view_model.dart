@@ -8,7 +8,7 @@ class AuthViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
 
   navigateToCreateAdmin() =>
-      _navigationService.navigateTo(Routes.createAdminView);
+      _navigationService.navigateTo(Routes.createAdminBusinessView);
   navigateToRegisterMerchant() =>
       _navigationService.navigateTo(Routes.registerMerchantView);
 

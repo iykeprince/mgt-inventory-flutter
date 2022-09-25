@@ -18,6 +18,7 @@ import '../ui/auth/createAdminBusiness/create_admin_business.dart';
 import '../ui/auth/login/login_view.dart';
 import '../ui/auth/registerMerchant/register_merchant_view.dart';
 import '../ui/auth/verifyAdmin/verify_admin_view.dart';
+import '../ui/auth/verifyAdminSuccess/verify_admin_success_view_model.dart';
 import '../ui/onboarding/onboarding_view.dart';
 import '../ui/splash/splash_view.dart';
 
@@ -29,6 +30,7 @@ class Routes {
   static const String createAdminView = '/create-admin-view';
   static const String registerMerchantView = '/register-merchant-view';
   static const String verifyAdminView = '/verify-admin-view';
+  static const String verifyAdminSuccessView = '/verify-admin-success-view';
   static const String createAdminBusinessView = '/create-admin-business-view';
   static const String createAccountSuccessView = '/create-account-success-view';
   static const all = <String>{
@@ -39,6 +41,7 @@ class Routes {
     createAdminView,
     registerMerchantView,
     verifyAdminView,
+    verifyAdminSuccessView,
     createAdminBusinessView,
     createAccountSuccessView,
   };
@@ -55,6 +58,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.createAdminView, page: CreateAdminView),
     RouteDef(Routes.registerMerchantView, page: RegisterMerchantView),
     RouteDef(Routes.verifyAdminView, page: VerifyAdminView),
+    RouteDef(Routes.verifyAdminSuccessView, page: VerifyAdminSuccessView),
     RouteDef(Routes.createAdminBusinessView, page: CreateAdminBusinessView),
     RouteDef(Routes.createAccountSuccessView, page: CreateAccountSuccessView),
   ];
@@ -101,8 +105,18 @@ class StackedRouter extends RouterBase {
       );
     },
     VerifyAdminView: (data) {
+      var args = data.getArgs<VerifyAdminViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const VerifyAdminView(),
+        builder: (context) => VerifyAdminView(
+          key: args.key,
+          email: args.email,
+        ),
+        settings: data,
+      );
+    },
+    VerifyAdminSuccessView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const VerifyAdminSuccessView(),
         settings: data,
       );
     },
@@ -129,6 +143,13 @@ class StackedRouter extends RouterBase {
 class OnboardViewArguments {
   final Key? key;
   OnboardViewArguments({this.key});
+}
+
+/// VerifyAdminView arguments holder class
+class VerifyAdminViewArguments {
+  final Key? key;
+  final String email;
+  VerifyAdminViewArguments({this.key, required this.email});
 }
 
 /// ************************************************************************
@@ -235,6 +256,8 @@ extension NavigatorStateExtension on NavigationService {
   }
 
   Future<dynamic> navigateToVerifyAdminView({
+    Key? key,
+    required String email,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -243,6 +266,23 @@ extension NavigatorStateExtension on NavigationService {
   }) async {
     return navigateTo(
       Routes.verifyAdminView,
+      arguments: VerifyAdminViewArguments(key: key, email: email),
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToVerifyAdminSuccessView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.verifyAdminSuccessView,
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,

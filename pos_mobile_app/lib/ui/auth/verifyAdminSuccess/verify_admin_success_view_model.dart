@@ -26,39 +26,43 @@ class VerifyAdminSuccessView extends StatelessWidget {
                 end: Alignment.bottomCenter,
               ),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/images/auth/cone.png',
-                  fit: BoxFit.contain,
-                ),
-                const SizedBox(
-                  height: AppSize.s20,
-                ),
-                Text(AppString.successEmailVerficationText,
-                    style: getBoldStyle(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p12),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/auth/cone.png',
+                    fit: BoxFit.contain,
+                  ),
+                  const SizedBox(
+                    height: AppSize.s20,
+                  ),
+                  Text(AppString.successEmailVerficationText,
+                      style: getBoldStyle(
+                          color: ColorManager.kWhiteColor,
+                          fontSize: FontSize.s28)),
+                  const SizedBox(
+                    height: AppSize.s12,
+                  ),
+                  Text(
+                    AppString.successEmailVerficationCaption,
+                    style: getMediumStyle(
                         color: ColorManager.kWhiteColor,
-                        fontSize: FontSize.s28)),
-                const SizedBox(
-                  height: AppSize.s12,
-                ),
-                Text(
-                  AppString.successEmailVerficationCaption,
-                  style: getMediumStyle(
-                      color: ColorManager.kWhiteColor, fontSize: FontSize.s16),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: AppSize.s20,
-                ),
-                PosButton(
-                  onPressed: () {},
-                  title: AppString.continueText,
-                  buttonBgColor: ColorManager.kLightGreen,
-                  buttonTextColor: ColorManager.kDarkBlue,
-                )
-              ],
+                        fontSize: FontSize.s16),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(
+                    height: AppSize.s20,
+                  ),
+                  PosButton(
+                    onPressed: viewModel.navigateToCreateAdminSuccess,
+                    title: AppString.continueText,
+                    buttonBgColor: ColorManager.kLightGreen,
+                    buttonTextColor: ColorManager.kDarkBlue,
+                  )
+                ],
+              ),
             ),
           ),
         );
