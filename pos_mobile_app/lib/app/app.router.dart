@@ -12,6 +12,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../ui/auth/auth_view.dart';
+import '../ui/auth/compeleteMerchantRegistration/compelete_merchant_register.dart';
 import '../ui/auth/createAccountSuccess/create_account_success_view.dart';
 import '../ui/auth/createAdmin/create_admin_view.dart';
 import '../ui/auth/createAdminBusiness/create_admin_business.dart';
@@ -19,6 +20,9 @@ import '../ui/auth/login/login_view.dart';
 import '../ui/auth/registerMerchant/register_merchant_view.dart';
 import '../ui/auth/verifyAdmin/verify_admin_view.dart';
 import '../ui/auth/verifyAdminSuccess/verify_admin_success_view_model.dart';
+import '../ui/auth/verifyMerchant/verify_merchant_view.dart';
+import '../ui/auth/verifyMerchantSuccess/verify_merchant_success_view_model.dart';
+import '../ui/home/home_view.dart';
 import '../ui/onboarding/onboarding_view.dart';
 import '../ui/splash/splash_view.dart';
 
@@ -33,6 +37,12 @@ class Routes {
   static const String verifyAdminSuccessView = '/verify-admin-success-view';
   static const String createAdminBusinessView = '/create-admin-business-view';
   static const String createAccountSuccessView = '/create-account-success-view';
+  static const String verifyMerchantView = '/verify-merchant-view';
+  static const String verifyMerchantSuccessView =
+      '/verify-merchant-success-view';
+  static const String compeleteMerchantRegister =
+      '/compelete-merchant-register';
+  static const String homeView = '/home-view';
   static const all = <String>{
     splashView,
     onboardView,
@@ -44,6 +54,10 @@ class Routes {
     verifyAdminSuccessView,
     createAdminBusinessView,
     createAccountSuccessView,
+    verifyMerchantView,
+    verifyMerchantSuccessView,
+    compeleteMerchantRegister,
+    homeView,
   };
 }
 
@@ -61,6 +75,10 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.verifyAdminSuccessView, page: VerifyAdminSuccessView),
     RouteDef(Routes.createAdminBusinessView, page: CreateAdminBusinessView),
     RouteDef(Routes.createAccountSuccessView, page: CreateAccountSuccessView),
+    RouteDef(Routes.verifyMerchantView, page: VerifyMerchantView),
+    RouteDef(Routes.verifyMerchantSuccessView, page: VerifyMerchantSuccessView),
+    RouteDef(Routes.compeleteMerchantRegister, page: CompeleteMerchantRegister),
+    RouteDef(Routes.homeView, page: HomeView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -129,6 +147,30 @@ class StackedRouter extends RouterBase {
     CreateAccountSuccessView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const CreateAccountSuccessView(),
+        settings: data,
+      );
+    },
+    VerifyMerchantView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const VerifyMerchantView(),
+        settings: data,
+      );
+    },
+    VerifyMerchantSuccessView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const VerifyMerchantSuccessView(),
+        settings: data,
+      );
+    },
+    CompeleteMerchantRegister: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const CompeleteMerchantRegister(),
+        settings: data,
+      );
+    },
+    HomeView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const HomeView(),
         settings: data,
       );
     },
@@ -315,6 +357,70 @@ extension NavigatorStateExtension on NavigationService {
   }) async {
     return navigateTo(
       Routes.createAccountSuccessView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToVerifyMerchantView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.verifyMerchantView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToVerifyMerchantSuccessView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.verifyMerchantSuccessView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToCompeleteMerchantRegister({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.compeleteMerchantRegister,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToHomeView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.homeView,
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,
