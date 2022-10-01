@@ -30,6 +30,7 @@ class InputField extends StatelessWidget {
   final InputBorder? enabledBorder;
   final InputBorder? focusedBorder;
   final Color? fillColor;
+  final Color? hintColor;
   final bool? showCursor;
   final bool readOnly;
 
@@ -58,6 +59,7 @@ class InputField extends StatelessWidget {
     this.enabledBorder,
     this.focusedBorder,
     this.fillColor,
+    this.hintColor,
     this.showCursor,
     this.readOnly = false,
   });
@@ -94,7 +96,8 @@ class InputField extends StatelessWidget {
               // labelStyle: getRegularStyle(
               // color: ColorManager.kDarkCharcoal, fontSize: FontSize.s14),
               hintStyle: getRegularStyle(
-                  color: ColorManager.kGrey2, fontSize: FontSize.s16),
+                  color: hintColor ?? ColorManager.kGrey2,
+                  fontSize: FontSize.s16),
               border: border ??
                   OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),

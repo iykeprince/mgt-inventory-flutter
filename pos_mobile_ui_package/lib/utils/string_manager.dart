@@ -13,7 +13,8 @@ class AppString {
   static const String welcomeTo = "Welcome to";
   static const String pos = "POS.";
   static const String registerQuestion = "What would you like to do?";
-  static const String registerMerchant = "Register merchant account";
+  static const String registerMerchant = "Register Merchant Account";
+  static const String completeProfile = "Complete your profile";
   static const String createAdminAccountText = "Create an admin account";
   static const String createAdmin = "Create Admin Account";
   static const String loginToExisting = "Log in to an existing account";
@@ -61,12 +62,16 @@ class AppString {
   static const String determineOfBranchText =
       "Determines the number of your merchant accounts";
   static const String addBranchDetailsText = "Add Branch Details";
-
-  static var passwordValidatorText = "Password is required";
-
-  static var numOfBranchValidatorText = "Number of branches required";
-
-  static var emailValidatorText = "Email address is required";
-
-  static var businessNameValidatorText = "Business name is empty!";
+  static const String passwordValidatorText = "Password is required";
+  static const String contactValidatorText = "Phone number is required";
+  static const String numOfBranchValidatorText = "Number of branches required";
+  static const String emailValidatorText = "Email address is required";
+  static const String businessNameValidatorText = "Business name is empty!";
+  static const String fullNameText = "Full Name";
+  static const String usernameText = "Username";
+  static const String contactNumberText = "Contact Number";
+  static const String branchNameText = "Branch Name";
+  static const String samplebranchNameText = "Ire-Akari Branch";
+  static const String sampleUsernameText = "@taiwokehinde";
+  static const String samplePhoneText = "0901 234 5678";
 }
