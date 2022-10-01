@@ -17,13 +17,7 @@ class CreateAdminBusinessView extends StatelessWidget {
     return ViewModelBuilder<CreateAdminBusinessViewModel>.nonReactive(
       viewModelBuilder: () => CreateAdminBusinessViewModel(),
       builder: (context, model, child) => Scaffold(
-        body: GestureDetector(
-          onTap: () {
-            FocusScopeNode currentFocus = FocusScope.of(context);
-            if (!currentFocus.hasPrimaryFocus) {
-              currentFocus.unfocus();
-            }
-          },
+        body: KeyboardAware(
           child: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(

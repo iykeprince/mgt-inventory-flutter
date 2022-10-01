@@ -11,6 +11,7 @@ class ColorManager {
   static const Color kGrey1 = Color(0xff555555);
   static const Color kGrey2 = Color(0xff888888);
   static const Color kGreyOpacity = Color.fromRGBO(55, 72, 70, 0.5);
+  static const Color kGreyOpacity2 = Color.fromRGBO(170, 170, 170, 0.6);
   static const Color kTransparent = Color.fromRGBO(255, 255, 255, 0.1);
   static const Color kDarkCharcoal = Color(0xff333333);
   static const Color kLightGreen = Color(0xffDCEBE3);
@@ -20,4 +21,5 @@ class ColorManager {
   static const Color kButtonTextNavyBlue = Color(0xff1B4672);
   static const Color kInputBgColor = Color(0xffF9F9F9);
   static const Color kTurquoiseDarkColor = Color(0xff374846);
+  static const Color kNavDarkColor = Color(0xff050F1A);
 }

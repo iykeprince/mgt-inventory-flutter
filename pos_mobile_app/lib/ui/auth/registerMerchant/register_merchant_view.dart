@@ -1,12 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:pos_mobile_app/ui/auth/auth_view_model.dart';
-import 'package:pos_mobile_app/ui/auth/login/login_view_model.dart';
 import 'package:pos_mobile_app/utils/colors.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
-
 import 'register_merchant_view_model.dart';
 
 class RegisterMerchantView extends StatelessWidget {
@@ -17,13 +13,7 @@ class RegisterMerchantView extends StatelessWidget {
     return ViewModelBuilder<RegisterMerchantViewModel>.nonReactive(
       viewModelBuilder: () => RegisterMerchantViewModel(),
       builder: (context, model, child) => Scaffold(
-        body: GestureDetector(
-          onTap: () {
-            FocusScopeNode currentFocus = FocusScope.of(context);
-            if (!currentFocus.hasPrimaryFocus) {
-              currentFocus.unfocus();
-            }
-          },
+        body: KeyboardAware(
           child: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -61,7 +51,6 @@ class RegisterMerchantView extends StatelessWidget {
                   left: 0,
                   right: 0,
                   child: Container(
-                    // height: 300,
                     padding:
                         const EdgeInsets.symmetric(horizontal: AppPadding.p24),
                     decoration: const BoxDecoration(
@@ -129,13 +118,13 @@ class RegisterMerchantView extends StatelessWidget {
                               )),
                           const SizedBox(height: AppSize.s12),
                           PosButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              model.navigateToVerfiyMerchant();
+                            },
                             title: AppString.continueText,
                             trailingIcon: Icons.arrow_forward,
                             trailingIconColor: ColorManager.kWhiteColor,
                             trailingIconSpace: AppSize.s28,
-                            // buttonBgColor: ColorManager.kLightGreen1,
-                            // buttonTextColor: ColorManager.kDarkCharcoal,
                             fontSize: FontSize.s16,
                             fontWeight: FontWeightManager.bold,
                             borderRadius: AppSize.s8,

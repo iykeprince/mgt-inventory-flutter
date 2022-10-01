@@ -13,6 +13,7 @@ export 'widgets/buttons/progress_circular_button.dart';
 export 'widgets/checkbox/checkbox.dart';
 export 'widgets/alert/alert.dart';
 export 'widgets/progress/pos_circular_progress.dart';
+export 'widgets/keyboardAware/keyboard_aware.dart';
 //export the utils
 export './utils/colors.dart';
 export './utils/text_styles.dart';
