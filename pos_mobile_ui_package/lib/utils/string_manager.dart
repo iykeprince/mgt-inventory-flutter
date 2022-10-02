@@ -4,6 +4,7 @@ class AppString {
   static const String track = "Track";
   static const String record = "Record";
   static const String login = "Log In";
+  static const String forgotPassword = "Forgot Password?";
   static const String onBoardSub1 =
       "Seamlessly and efficiently record up-to-date point-of-sale transactions from the comfort of your home or workplace.";
   static const String onBoardSub2 =
