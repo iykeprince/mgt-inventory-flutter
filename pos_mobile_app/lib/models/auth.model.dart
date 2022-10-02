@@ -4,6 +4,7 @@ part 'auth.model.g.dart';
 
 @JsonSerializable()
 class Auth {
+  @JsonKey(name: "access_token")
   final String accessToken;
 
   Auth({

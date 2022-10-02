@@ -8,9 +8,9 @@ import 'package:pos_mobile_app/ui/auth/createAdminBusiness/create_admin_business
 import 'package:pos_mobile_app/ui/auth/login/login_view.dart';
 import 'package:pos_mobile_app/ui/auth/registerMerchant/register_merchant_view.dart';
 import 'package:pos_mobile_app/ui/auth/verifyAdmin/verify_admin_view.dart';
-import 'package:pos_mobile_app/ui/auth/verifyAdminSuccess/verify_admin_success_view_model.dart';
+import 'package:pos_mobile_app/ui/auth/verifyAdminSuccess/verify_admin_success_view.dart';
 import 'package:pos_mobile_app/ui/auth/verifyMerchant/verify_merchant_view.dart';
-import 'package:pos_mobile_app/ui/auth/verifyMerchantSuccess/verify_merchant_success_view_model.dart';
+import 'package:pos_mobile_app/ui/auth/verifyMerchantSuccess/verify_merchant_success_view.dart';
 import 'package:pos_mobile_app/ui/home/home_view.dart';
 import 'package:pos_mobile_app/ui/onboarding/onboarding_view.dart';
 import 'package:pos_mobile_app/ui/splash/splash_view.dart';

@@ -11,11 +11,18 @@ import 'package:stacked/stacked.dart';
 import 'verify_merchant_view_model.dart';
 
 class VerifyMerchantView extends StatelessWidget {
-  const VerifyMerchantView({Key? key}) : super(key: key);
+  const VerifyMerchantView({
+    Key? key,
+    required this.emailAddress,
+  }) : super(key: key);
+
+  final String emailAddress;
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<VerifyMerchantViewModel>.nonReactive(
       viewModelBuilder: () => VerifyMerchantViewModel(),
+      onModelReady: (model) => model.setEmailAddress(emailAddress),
       builder: (context, model, child) => Scaffold(
         body: GestureDetector(
           onTap: () {
@@ -95,33 +102,38 @@ class VerifyAdminFormView extends ViewModelWidget<VerifyMerchantViewModel> {
             ),
             const SizedBox(height: AppSize.s4),
             Text(
-              AppString.verifyEmailSubText(''),
+              AppString.verifyEmailSubText(model.email),
               style: getRegularStyle(
                 color: ColorManager.kDarkCharcoal,
                 fontSize: FontSize.s14,
               ),
             ),
             const SizedBox(height: AppSize.s20),
-            const InputField(
+            InputField(
               label: AppString.otpCodeText,
               hintText: AppString.otpCodeText,
               border: InputBorder.none,
               obscureText: true,
-              // onChanged: model.setOTP,
+              onChanged: model.setOTP,
               keyBoardType: TextInputType.number,
             ),
-            Alert.primary(text: AppString.otpCodeExpireText),
-            const SizedBox(height: AppSize.s40),
+            // Alert.primary(text: AppString.otpCodeExpireText),
+            const SizedBox(height: AppSize.s20),
+            if (model.hasErrorForKey(VERIFY_MERCHANT_TASK_OBJECT))
+              Alert.primary(
+                  text: '${model.error(VERIFY_MERCHANT_TASK_OBJECT)}'),
+            const SizedBox(height: AppSize.s20),
             PosButton(
               onPressed: () {
                 dismissKeyboard(context);
-                // model.verifyOTP();
-                model.navigateToVerifySuccess();
+                model.verifyOTP();
+                // model.navigateToVerifySuccess();
               },
               title: AppString.verifyCodeText,
               fontSize: FontSize.s16,
               fontWeight: FontWeightManager.bold,
               borderRadius: AppSize.s8,
+              busy: model.isBusy,
             ),
             const SizedBox(height: AppSize.s20),
             // if (model.hasError) Alert.primary(text: '${model.modelError}'),

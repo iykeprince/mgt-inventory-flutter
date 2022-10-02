@@ -39,7 +39,7 @@ class CompeleteMerchantRegister extends StatelessWidget {
                     automaticallyImplyLeading: false,
                   ),
                 ),
-                CompleteMerchantFormView(),
+                const CompleteMerchantFormView(),
               ],
             ),
           ),
@@ -77,44 +77,50 @@ class CompleteMerchantFormView
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: AppSize.s40),
-            const InputField(
+            InputField(
               label: AppString.fullNameText,
               hintText: AppString.businessNamePlaceholder,
               border: InputBorder.none,
-              // onChanged: model.setBusinessName,
+              validationCallback: model.fullNameValidation,
+              onChanged: model.setFullName,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
             ),
-            // if (model.hasErrorForKey(BUSINESS_NAME_VALIDATOR))
-            Alert.primary(text: AppString.businessNameValidatorText),
+            if (model.hasErrorForKey(FULLNAME_VALIDATOR))
+              Alert.primary(text: AppString.fullNameValidatorText),
             const SizedBox(height: AppSize.s12),
-            const InputField(
-              label: AppString.usernameText,
-              hintText: AppString.sampleUsernameText,
+            InputField(
+              label: AppString.emailAddress,
+              hintText: AppString.emailAddressPlaceholder,
               border: InputBorder.none,
-              // onChanged: model.setEmailAddress,
-              keyBoardType: TextInputType.text,
+              keyBoardType: TextInputType.emailAddress,
+              onChanged: model.setEmailAddress,
+              validationCallback: model.emailValidation,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
             ),
             // if (model.hasErrorForKey(EMAIL_VALIDATOR))
-            Alert.primary(text: AppString.emailValidatorText),
+            // Alert.primary(text: AppString.emailValidatorText),
             const SizedBox(height: AppSize.s12),
-            const InputField(
+            InputField(
               label: AppString.contactNumberText,
               hintText: AppString.samplePhoneText,
               border: InputBorder.none,
-              // onChanged: model.setNumOfBranches,
-              keyBoardType: TextInputType.number,
+              keyBoardType: TextInputType.phone,
+              onChanged: model.setContactPhone,
+              validationCallback: model.phoneValidation,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
             ),
             // if (model.hasErrorForKey(NUM_OF_BRANCH_VALIDATOR))
-            Alert.primary(text: AppString.contactValidatorText),
-            const SizedBox(height: AppSize.s12),
-            const InputField(
-              label: AppString.branchNameText,
-              hintText: AppString.samplebranchNameText,
-              border: InputBorder.none,
-              readOnly: true,
-              fillColor: ColorManager.kGreyOpacity2,
-              hintColor: ColorManager.kDarkCharcoal,
-              keyBoardType: TextInputType.number,
-            ),
+            // Alert.primary(text: AppString.contactValidatorText),
+            // const SizedBox(height: AppSize.s12),
+            // const InputField(
+            //   label: AppString.branchNameText,
+            //   hintText: AppString.samplebranchNameText,
+            //   border: InputBorder.none,
+            //   readOnly: true,
+            //   fillColor: ColorManager.kGreyOpacity2,
+            //   hintColor: ColorManager.kDarkCharcoal,
+            //   keyBoardType: TextInputType.number,
+            // ),
 
             const SizedBox(height: AppSize.s12),
             InputField(
@@ -122,7 +128,9 @@ class CompleteMerchantFormView
               hintText: AppString.password,
               border: InputBorder.none,
               obscureText: model.obscurePassword,
-              // onChanged: model.setPassword,
+              onChanged: model.setPassword,
+              validationCallback: model.passwordValidation,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               suffixIcon: InkWell(
                 onTap: model.togglePasswordVisibility,
                 child: Padding(
@@ -138,7 +146,7 @@ class CompleteMerchantFormView
               ),
             ),
             // if (model.hasErrorForKey(PASSWORD_VALIDATOR))
-            Alert.primary(text: AppString.passwordValidatorText),
+            // Alert.primary(text: AppString.passwordValidatorText),
             const SizedBox(height: AppSize.s20),
             if (model.hasError)
               Alert.primary(
@@ -148,7 +156,7 @@ class CompleteMerchantFormView
             PosButton(
               onPressed: () {
                 dismissKeyboard(context);
-                model.navigateToHome();
+                model.updateMerchantProfile();
                 // model.createAdmin();
               },
               title: AppString.createAccountText,

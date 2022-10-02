@@ -19,9 +19,9 @@ import '../ui/auth/createAdminBusiness/create_admin_business.dart';
 import '../ui/auth/login/login_view.dart';
 import '../ui/auth/registerMerchant/register_merchant_view.dart';
 import '../ui/auth/verifyAdmin/verify_admin_view.dart';
-import '../ui/auth/verifyAdminSuccess/verify_admin_success_view_model.dart';
+import '../ui/auth/verifyAdminSuccess/verify_admin_success_view.dart';
 import '../ui/auth/verifyMerchant/verify_merchant_view.dart';
-import '../ui/auth/verifyMerchantSuccess/verify_merchant_success_view_model.dart';
+import '../ui/auth/verifyMerchantSuccess/verify_merchant_success_view.dart';
 import '../ui/home/home_view.dart';
 import '../ui/onboarding/onboarding_view.dart';
 import '../ui/splash/splash_view.dart';
@@ -151,8 +151,12 @@ class StackedRouter extends RouterBase {
       );
     },
     VerifyMerchantView: (data) {
+      var args = data.getArgs<VerifyMerchantViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const VerifyMerchantView(),
+        builder: (context) => VerifyMerchantView(
+          key: args.key,
+          emailAddress: args.emailAddress,
+        ),
         settings: data,
       );
     },
@@ -192,6 +196,13 @@ class VerifyAdminViewArguments {
   final Key? key;
   final String email;
   VerifyAdminViewArguments({this.key, required this.email});
+}
+
+/// VerifyMerchantView arguments holder class
+class VerifyMerchantViewArguments {
+  final Key? key;
+  final String emailAddress;
+  VerifyMerchantViewArguments({this.key, required this.emailAddress});
 }
 
 /// ************************************************************************
@@ -365,6 +376,8 @@ extension NavigatorStateExtension on NavigationService {
   }
 
   Future<dynamic> navigateToVerifyMerchantView({
+    Key? key,
+    required String emailAddress,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -373,6 +386,8 @@ extension NavigatorStateExtension on NavigationService {
   }) async {
     return navigateTo(
       Routes.verifyMerchantView,
+      arguments:
+          VerifyMerchantViewArguments(key: key, emailAddress: emailAddress),
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,

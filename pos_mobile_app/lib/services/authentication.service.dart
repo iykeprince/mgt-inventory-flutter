@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:pos_mobile_app/app/app.locator.dart';
 import 'package:pos_mobile_app/client/dio_client.dart';
@@ -34,13 +36,14 @@ class AuthenticationService with ReactiveServiceMixin {
 
   Future<Auth> login(Map<String, dynamic> formData) async {
     final preferences = await SharedPreferences.getInstance();
+
     var response = await dioClient.post(
       '/auth/signin',
       data: formData,
     );
     Auth auth = Auth.fromJson(response.data);
-    /**Persist the access token into a shared preference */
-    await preferences.setString(AUTH_TOKEN_KEY, auth.accessToken.toString());
+
+    preferences.setString(AUTH_TOKEN_KEY, auth.accessToken);
     return auth;
   }
 
@@ -99,5 +102,26 @@ class AuthenticationService with ReactiveServiceMixin {
       data: formData,
     );
     return response.data;
+  }
+
+  Future<Auth> updateMerchantProfile(Map<String, dynamic> formData) async {
+    final preferences = await SharedPreferences.getInstance();
+    var response = await dioClient.post(
+      "/auth/update",
+      data: formData,
+    );
+
+    Auth auth = Auth.fromJson(response.data);
+
+    preferences.setString(AUTH_TOKEN_KEY, auth.accessToken);
+    return auth;
+  }
+
+  Future<User> checkEmail(Map<String, dynamic> formData) async {
+    var response = await dioClient.post(
+      "/auth/check-email",
+      data: formData,
+    );
+    return User.fromJson(response.data);
   }
 }
