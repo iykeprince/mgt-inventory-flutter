@@ -82,12 +82,18 @@ class LoginView extends StatelessWidget {
                             border: InputBorder.none,
                           ),
                           const SizedBox(height: AppSize.s12),
-                          const InputField(
-                            label: AppString.password,
-                            hintText: AppString.password,
-                            border: InputBorder.none,
-                            obscureText: true,
-                          ),
+                          InputField(
+                              label: AppString.password,
+                              hintText: AppString.password,
+                              border: InputBorder.none,
+                              obscureText: true,
+                              labelRightItem: TextButton(
+                                onPressed: () {},
+                                child: Text(AppString.forgotPassword,
+                                    style: getRegularStyle(
+                                        color: ColorManager.kSecondaryColor,
+                                        fontSize: FontSize.s14)),
+                              )),
                           const SizedBox(height: AppSize.s20),
                           PosButton(
                             onPressed: () {

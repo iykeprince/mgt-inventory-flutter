@@ -33,6 +33,7 @@ class InputField extends StatelessWidget {
   final Color? hintColor;
   final bool? showCursor;
   final bool readOnly;
+  final Widget? labelRightItem;
 
   const InputField({
     this.autovalidateMode,
@@ -62,6 +63,7 @@ class InputField extends StatelessWidget {
     this.hintColor,
     this.showCursor,
     this.readOnly = false,
+    this.labelRightItem,
   });
 
   @override
@@ -71,12 +73,18 @@ class InputField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            label,
-            style: getRegularStyle(
-              color: ColorManager.kDarkCharcoal,
-              fontSize: FontSize.s14,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                label,
+                style: getRegularStyle(
+                  color: ColorManager.kDarkCharcoal,
+                  fontSize: FontSize.s14,
+                ),
+              ),
+              if (labelRightItem != null) labelRightItem!
+            ],
           ),
           const SizedBox(
             height: AppSize.s4,

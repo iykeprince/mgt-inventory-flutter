@@ -10,6 +10,7 @@ class ColorManager {
   static const Color kGrey = Colors.grey;
   static const Color kGrey1 = Color(0xff555555);
   static const Color kGrey2 = Color(0xff888888);
+  static const Color kNavNonActiveColor = Color(0xff777777);
   static const Color kGreyOpacity = Color.fromRGBO(55, 72, 70, 0.5);
   static const Color kGreyOpacity2 = Color.fromRGBO(170, 170, 170, 0.6);
   static const Color kTransparent = Color.fromRGBO(255, 255, 255, 0.1);
