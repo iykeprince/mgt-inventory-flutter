@@ -76,7 +76,8 @@ class RegisterMerchantView extends StatelessWidget {
                           ),
                           const SizedBox(height: AppSize.s6),
                           PosCheckBox(
-                              value: false,
+                              value: model.tos ?? false,
+                              onChanged: (value) => model.setTos(value),
                               richText: Expanded(
                                 child: RichText(
                                   textAlign: TextAlign.start,
