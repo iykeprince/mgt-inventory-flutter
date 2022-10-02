@@ -6,13 +6,13 @@ class PosCheckBox extends StatefulWidget {
   const PosCheckBox({
     Key? key,
     required this.value,
-    this.onChanged,
+    required this.onChanged,
     required this.richText,
     this.checkColor = ColorManager.kWhiteColor,
     this.activeColor = ColorManager.kPrimaryColor,
   }) : super(key: key);
 
-  final Function(bool?)? onChanged;
+  final Function(bool) onChanged;
   final bool value;
   final Widget richText;
   final Color checkColor;
@@ -23,7 +23,7 @@ class PosCheckBox extends StatefulWidget {
 }
 
 class _PosCheckBoxState extends State<PosCheckBox> {
-  bool? _value = false;
+  bool _value = false;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -34,14 +34,15 @@ class _PosCheckBoxState extends State<PosCheckBox> {
           width: 20,
           height: 20,
           child: Checkbox(
-            value: widget.value,
+            value: _value,
             checkColor: widget.checkColor,
             activeColor: widget.activeColor,
             onChanged: (value) {
               setState(() {
-                _value = !_value!;
+                _value = !_value;
               });
-              widget.onChanged!(_value);
+
+              widget.onChanged(_value);
             },
           ),
         ),
