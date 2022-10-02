@@ -68,7 +68,9 @@ class AppString {
   static const String numOfBranchValidatorText = "Number of branches required";
   static const String emailValidatorText = "Email address is required";
   static const String businessNameValidatorText = "Business name is empty!";
+  static const String fullNameValidatorText = "Fullname is empty!";
   static const String fullNameText = "Full Name";
+  static const String fullnamePlaceholderText = "John Doe";
   static const String usernameText = "Username";
   static const String contactNumberText = "Contact Number";
   static const String branchNameText = "Branch Name";
