@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:pos_mobile_app/ui/auth/createAdminBusiness/create_admin_business_modal.dart';
+import 'package:pos_mobile_app/ui/auth/createAdminBusiness/create_admin_business_view_model.dart';
 import 'package:pos_mobile_app/utils/colors.dart';
 import 'package:pos_mobile_app/utils/helpers.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';

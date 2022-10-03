@@ -9,6 +9,8 @@ import 'package:stacked/stacked.dart';
 
 import 'create_admin_view_model.dart';
 
+//TO BE REMOVED / DELETED
+
 class CreateAdminView extends StatelessWidget {
   const CreateAdminView({Key? key}) : super(key: key);
 
@@ -101,8 +103,8 @@ class CreateAdminFormView extends ViewModelWidget<CreateAdminViewModel> {
           //     style: getRegularStyle(color: Colors.red)),
           const SizedBox(height: AppSize.s24),
           PosCheckBox(
-            value: model.tos!,
-            onChanged: (value) => model.changeTos(value!),
+            value: model.tos ?? false,
+            onChanged: (value) => model.changeTos(value),
             richText: Expanded(
               child: RichText(
                 textAlign: TextAlign.start,

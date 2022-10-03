@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pos_mobile_app/ui/auth/auth_view_model.dart';
 import 'package:pos_mobile_app/ui/auth/login/login_view_model.dart';
 import 'package:pos_mobile_app/utils/colors.dart';
+import 'package:pos_mobile_app/utils/helpers.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 
@@ -52,78 +53,93 @@ class LoginView extends StatelessWidget {
                     ],
                   ),
                 ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    // height: 300,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: AppPadding.p24),
-                    decoration: const BoxDecoration(
-                        color: ColorManager.kWhiteColor,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(AppSize.s16),
-                            topRight: Radius.circular(AppSize.s16))),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: AppSize.s40),
-                          Text(
-                            AppString.enterYourLoginDetails,
-                            style: getMediumStyle(
-                                color: ColorManager.kDarkCharcoal,
-                                fontSize: FontSize.s20),
-                          ),
-                          const SizedBox(height: AppSize.s40),
-                          const InputField(
-                            label: AppString.usernameOrEmailAddress,
-                            hintText: AppString.emailAddressPlaceholder,
-                            border: InputBorder.none,
-                          ),
-                          const SizedBox(height: AppSize.s12),
-                          InputField(
-                              label: AppString.password,
-                              hintText: AppString.password,
-                              border: InputBorder.none,
-                              obscureText: true,
-                              labelRightItem: TextButton(
-                                onPressed: () {},
-                                child: Text(AppString.forgotPassword,
-                                    style: getRegularStyle(
-                                        color: ColorManager.kSecondaryColor,
-                                        fontSize: FontSize.s14)),
-                              )),
-                          const SizedBox(height: AppSize.s20),
-                          PosButton(
-                            onPressed: () {
-                              print('TODO: LOGIN');
-                            },
-                            title: AppString.login,
-                            // buttonBgColor: ColorManager.kLightGreen1,
-                            // buttonTextColor: ColorManager.kDarkCharcoal,
-                            fontSize: FontSize.s16,
-                            fontWeight: FontWeightManager.bold,
-                            border: Border.all(
-                                color: ColorManager.kBorderLightGreen,
-                                width: 1),
-                            borderRadius: AppSize.s8,
-                          ),
-                          const SizedBox(height: AppSize.s20),
-                          PosButton(
-                            onPressed: model.navigateToRegisterNow,
-                            title: AppString.dontHaveAnAccountRegisterNow,
-                            buttonType: ButtonType.text,
-                            buttonTextColor: ColorManager.kButtonTextNavyBlue,
-                          ),
-                          const SizedBox(height: AppSize.s20),
-                        ]),
-                  ),
-                )
+                const LoginFormView()
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class LoginFormView extends ViewModelWidget<LoginViewModel> {
+  const LoginFormView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, LoginViewModel model) {
+    return Positioned(
+      bottom: 0,
+      left: 0,
+      right: 0,
+      child: Container(
+        // height: 300,
+        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p24),
+        decoration: const BoxDecoration(
+            color: ColorManager.kWhiteColor,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(AppSize.s16),
+                topRight: Radius.circular(AppSize.s16))),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          const SizedBox(height: AppSize.s40),
+          Text(
+            AppString.enterYourLoginDetails,
+            style: getMediumStyle(
+                color: ColorManager.kDarkCharcoal, fontSize: FontSize.s20),
+          ),
+          const SizedBox(height: AppSize.s40),
+          InputField(
+            label: AppString.usernameOrEmailAddress,
+            hintText: AppString.emailAddressPlaceholder,
+            border: InputBorder.none,
+            onChanged: model.setEmailAddress,
+          ),
+          if (model.hasErrorForKey(EMAIL_VALIDATOR))
+            Alert.primary(text: AppString.emailValidatorText),
+          const SizedBox(height: AppSize.s12),
+          InputField(
+            label: AppString.password,
+            hintText: AppString.password,
+            border: InputBorder.none,
+            obscureText: true,
+            labelRightItem: TextButton(
+              onPressed: () {},
+              child: Text(AppString.forgotPassword,
+                  style: getRegularStyle(
+                      color: ColorManager.kSecondaryColor,
+                      fontSize: FontSize.s14)),
+            ),
+            onChanged: model.setPassword,
+          ),
+          if (model.hasErrorForKey(PASSWORD_VALIDATOR))
+            Alert.primary(text: AppString.passwordValidatorText),
+          const SizedBox(height: AppSize.s20),
+          if (model.hasErrorForKey(LOGIN_TASK_OBJECT))
+            Alert.primary(text: '${model.error(LOGIN_TASK_OBJECT)}'),
+          const SizedBox(height: AppSize.s20),
+          PosButton(
+            onPressed: () => model.login(),
+            title: AppString.login,
+            // buttonBgColor: ColorManager.kLightGreen1,
+            // buttonTextColor: ColorManager.kDarkCharcoal,
+            fontSize: FontSize.s16,
+            fontWeight: FontWeightManager.bold,
+            border: Border.all(
+              color: ColorManager.kBorderLightGreen,
+              width: 1,
+            ),
+            borderRadius: AppSize.s8,
+            busy: model.isBusy,
+          ),
+          const SizedBox(height: AppSize.s20),
+          PosButton(
+            onPressed: model.navigateToRegisterNow,
+            title: AppString.dontHaveAnAccountRegisterNow,
+            buttonType: ButtonType.text,
+            buttonTextColor: ColorManager.kButtonTextNavyBlue,
+          ),
+          const SizedBox(height: AppSize.s20),
+        ]),
       ),
     );
   }
