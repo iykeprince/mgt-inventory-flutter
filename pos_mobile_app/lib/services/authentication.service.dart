@@ -124,4 +124,13 @@ class AuthenticationService with ReactiveServiceMixin {
     );
     return User.fromJson(response.data);
   }
+
+  Future<DefaultResponse> requestOTP(Map<String, dynamic> formData) async {
+    var response = await dioClient.post(
+      "/auth/request-otp",
+      data: formData,
+    );
+
+    return DefaultResponse.fromJson(response.data);
+  }
 }

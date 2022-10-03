@@ -76,7 +76,7 @@ class CompeleteMerchantRegisterModel extends BaseViewModel {
   }
 
   navigateBack() => _navigationService.back();
-  navigateToHome() => _navigationService.navigateTo(Routes.homeView);
+  navigateToHome() => _navigationService.navigateTo(Routes.merchantHomeView);
 
   void togglePasswordVisibility() {
     _obscurePassword = !_obscurePassword;
@@ -121,7 +121,7 @@ class CompeleteMerchantRegisterModel extends BaseViewModel {
           await _authenticationService.updateMerchantProfile(formData);
       print('repsonse: ${response.accessToken}');
       _navigationService.navigateTo(
-        Routes.homeView,
+        Routes.merchantHomeView,
       );
       return response;
     } on DioError catch (error) {

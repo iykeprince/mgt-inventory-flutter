@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:pos_mobile_app/services/authentication.service.dart';
+import 'package:pos_mobile_app/utils/pos_contants.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -54,9 +55,14 @@ class LoginViewModel extends BaseViewModel {
     try {
       var response = await _authenticationService.login(formData);
       User user = await _authenticationService.getCurrentBaseUser();
-
-      if (user.role! == ADMIN) {
-        _navigationService.pushNamedAndRemoveUntil(Routes.homeView);
+      switch (user.role!) {
+        case ADMIN:
+          _navigationService.pushNamedAndRemoveUntil(Routes.adminHomeView);
+          break;
+        case MERCHANT:
+        default:
+          _navigationService.pushNamedAndRemoveUntil(Routes.merchantHomeView);
+          break;
       }
       return response;
     } on DioError catch (error) {

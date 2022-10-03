@@ -7,5 +7,5 @@ import '../../../app/app.router.dart';
 class CreateAccountSuccessViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
 
-  navigateToHome() => _navigationService.navigateTo(Routes.homeView);
+  navigateToHome() => _navigationService.navigateTo(Routes.adminHomeView);
 }

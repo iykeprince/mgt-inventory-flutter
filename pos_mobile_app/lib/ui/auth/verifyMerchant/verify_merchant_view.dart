@@ -139,7 +139,7 @@ class VerifyAdminFormView extends ViewModelWidget<VerifyMerchantViewModel> {
             // if (model.hasError) Alert.primary(text: '${model.modelError}'),
             // if (model.hasError) const SizedBox(height: AppSize.s20),
             PosButton(
-              onPressed: () {},
+              onPressed: model.navigateBack,
               title: AppString.changeEmailAddressText,
               buttonType: ButtonType.text,
               buttonTextColor: ColorManager.kButtonTextNavyBlue,

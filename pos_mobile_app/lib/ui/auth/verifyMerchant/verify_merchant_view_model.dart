@@ -47,4 +47,6 @@ class VerifyMerchantViewModel extends BaseViewModel {
 
   navigateToVerifySuccess() =>
       _navigationService.navigateTo(Routes.verifyMerchantSuccessView);
+
+  navigateBack() => _navigationService.back();
 }

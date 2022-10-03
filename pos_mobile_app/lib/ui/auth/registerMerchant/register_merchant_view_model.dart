@@ -51,6 +51,7 @@ class RegisterMerchantViewModel extends BaseViewModel {
         throw Exception(
             "Operation not allowed. Only merchant email address needed");
       }
+      await _authenticationService.requestOTP(formData);
       _navigationService.navigateTo(
         Routes.verifyMerchantView,
         arguments: VerifyMerchantViewArguments(emailAddress: emailAddress!),

@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:pos_mobile_app/ui/dashboard/dashboard_view.dart';
-import 'package:pos_mobile_app/ui/history/history_view.dart';
-import 'package:pos_mobile_app/ui/home/home_view_model.dart';
-import 'package:pos_mobile_app/ui/profile/profile_view.dart';
-import 'package:pos_mobile_app/ui/report/report_view.dart';
+
 import 'package:pos_mobile_app/utils/colors.dart';
 import 'package:pos_mobile_app/utils/custom_notch.dart';
 import 'package:pos_mobile_ui_package/utils/colors.dart';
 import 'package:stacked/stacked.dart';
 
-class HomeView extends StatelessWidget {
-  const HomeView({Key? key}) : super(key: key);
+import 'admin_home_view_model.dart';
+
+class AdminHomeView extends StatelessWidget {
+  const AdminHomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<HomeViewModel>.reactive(
-      viewModelBuilder: () => HomeViewModel(),
+    return ViewModelBuilder<AdminHomeViewModel>.reactive(
+      viewModelBuilder: () => AdminHomeViewModel(),
       builder: (context, model, child) => Scaffold(
         extendBody: true,
         body: getViewForIndex(model.currentIndex),
@@ -106,18 +104,23 @@ class HomeView extends StatelessWidget {
     );
   }
 
+/**
+ * Temi G. don't mind me o
+ * just update the view
+ * 
+ */
   Widget getViewForIndex(int index) {
     switch (index) {
       case 0:
-        return DashboardView();
+        return const Center(child: Text('Admin Dashboard'));
       case 1:
-        return HistoryView();
+        return const Center(child: Text('Admin Analytics'));
       case 3:
-        return ReportView();
+        return const Center(child: Text('Admin Reports'));
       case 4:
-        return ProfileView();
+        return const Center(child: Text('Admin Settings'));
       default:
-        return DashboardView();
+        return const Center(child: Text('Admin Dashboard'));
     }
   }
 }
