@@ -64,7 +64,7 @@ class CreateAccountSuccessView extends StatelessWidget {
                     trailingIconSpace: AppSize.s28,
                   ),
                   PosButton(
-                    onPressed: () {},
+                    onPressed: viewModel.navigateToHome,
                     title: AppString.skip,
                     buttonType: ButtonType.text,
                     buttonTextColor: ColorManager.kWhiteColor,
