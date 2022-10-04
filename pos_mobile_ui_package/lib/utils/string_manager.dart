@@ -38,7 +38,7 @@ class AppString {
       "The code will expire in 5 minutes...";
   static const String iAgreeText = "I agree to the ";
   static const String termsAndUseText = "Terms of Use";
-  static const String haveReadText = ",and have read the";
+  static const String haveReadText = ",and have read the ";
   static const String privacyPolicyText = "Privacy Policy.";
   static const String verifyCodeText = "Verify Code";
   static const String changeEmailAddressText = "Change email address";
