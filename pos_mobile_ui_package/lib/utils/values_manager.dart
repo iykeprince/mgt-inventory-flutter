@@ -16,6 +16,8 @@ class AppPadding {
   static const double p20 = 20.0;
   static const double p24 = 24.0;
   static const double p28 = 28.0;
+  static const double p30 = 30.0;
+  static const double p40 = 40.0;
 }
 
 class AppSize {
@@ -40,5 +42,10 @@ class AppSize {
   static const double s100 = 100.0;
   static const double s110 = 110.0;
   static const double s120 = 120.0;
+  static const double s184 = 184.0;
   static const double s220 = 220.0;
+  static const double s320 = 320.0;
 }
+
+// ignore: constant_identifier_names
+const ScreenHorizontalSize = 24.0;

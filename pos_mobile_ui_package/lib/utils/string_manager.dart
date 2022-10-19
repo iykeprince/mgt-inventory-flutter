@@ -4,6 +4,9 @@ class AppString {
   static const String track = "Track";
   static const String record = "Record";
   static const String login = "Log In";
+  static const String logout = "Logout";
+  static const String merchant = "Merchant";
+  static const String overview = "Overview";
   static const String forgotPassword = "Forgot Password?";
   static const String onBoardSub1 =
       "Seamlessly and efficiently record up-to-date point-of-sale transactions from the comfort of your home or workplace.";
@@ -38,7 +41,7 @@ class AppString {
       "The code will expire in 5 minutes...";
   static const String iAgreeText = "I agree to the ";
   static const String termsAndUseText = "Terms of Use";
-  static const String haveReadText = ",and have read the";
+  static const String haveReadText = ",and have read the ";
   static const String privacyPolicyText = "Privacy Policy.";
   static const String verifyCodeText = "Verify Code";
   static const String changeEmailAddressText = "Change email address";
@@ -77,4 +80,15 @@ class AppString {
   static const String samplebranchNameText = "Ire-Akari Branch";
   static const String sampleUsernameText = "@taiwokehinde";
   static const String samplePhoneText = "0901 234 5678";
+  static const String changePasswordText = "Change Password";
+  static const String howItWorksText = "How It Works";
+  static const String needHelpText = "Need help? Contact support";
+  static const String editProfileDetailsText = "Edit Profile Details";
+  static const String updateDetailsText = "Update Details";
+  static const String enterOpeningBalanceText = "Enter opening balance";
+  static const String openingBalanceText = "Opening Balance";
+  static const String totalProfitMadeText = "Total Profit Made";
+  static const String totalWithdrawalText = "Total Withdrawal";
+  static const String balCashAtHandText = "Bal. Cash at Hand";
+  static const String accountSettingsText = "Account Settings";
 }

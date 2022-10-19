@@ -24,6 +24,7 @@ import '../ui/auth/verifyAdminSuccess/verify_admin_success_view.dart';
 import '../ui/auth/verifyMerchant/verify_merchant_view.dart';
 import '../ui/auth/verifyMerchantSuccess/verify_merchant_success_view.dart';
 import '../ui/merchant/merchant_home_view.dart';
+import '../ui/merchant/profile/editprofile/edit_profile_view.dart';
 import '../ui/onboarding/onboarding_view.dart';
 import '../ui/splash/splash_view.dart';
 
@@ -45,6 +46,7 @@ class Routes {
       '/compelete-merchant-register';
   static const String adminHomeView = '/admin-home-view';
   static const String merchantHomeView = '/merchant-home-view';
+  static const String editProfileView = '/edit-profile-view';
   static const all = <String>{
     splashView,
     onboardView,
@@ -61,6 +63,7 @@ class Routes {
     compeleteMerchantRegister,
     adminHomeView,
     merchantHomeView,
+    editProfileView,
   };
 }
 
@@ -83,6 +86,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.compeleteMerchantRegister, page: CompeleteMerchantRegister),
     RouteDef(Routes.adminHomeView, page: AdminHomeView),
     RouteDef(Routes.merchantHomeView, page: MerchantHomeView),
+    RouteDef(Routes.editProfileView, page: EditProfileView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -185,6 +189,12 @@ class StackedRouter extends RouterBase {
     MerchantHomeView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const MerchantHomeView(),
+        settings: data,
+      );
+    },
+    EditProfileView: (data) {
+      return CupertinoPageRoute<dynamic>(
+        builder: (context) => const EditProfileView(),
         settings: data,
       );
     },
@@ -462,6 +472,22 @@ extension NavigatorStateExtension on NavigationService {
   }) async {
     return navigateTo(
       Routes.merchantHomeView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToEditProfileView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.editProfileView,
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,
