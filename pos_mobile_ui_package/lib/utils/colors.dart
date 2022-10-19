@@ -23,4 +23,8 @@ class ColorManager {
   static const Color kInputBgColor = Color(0xffF9F9F9);
   static const Color kTurquoiseDarkColor = Color(0xff374846);
   static const Color kNavDarkColor = Color(0xff050F1A);
+  static const Color kDarkColor = Color(0xff43514F);
+  static const Color kBackgroundolor = Color(0xffF0F1FD);
+  static const Color kGreyBtn = Color(0xffE5E5E5);
+  static const Color kRed = Color(0xffD10000);
 }

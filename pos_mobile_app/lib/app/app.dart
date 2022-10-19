@@ -13,6 +13,7 @@ import 'package:pos_mobile_app/ui/auth/verifyAdminSuccess/verify_admin_success_v
 import 'package:pos_mobile_app/ui/auth/verifyMerchant/verify_merchant_view.dart';
 import 'package:pos_mobile_app/ui/auth/verifyMerchantSuccess/verify_merchant_success_view.dart';
 import 'package:pos_mobile_app/ui/merchant/merchant_home_view.dart';
+import 'package:pos_mobile_app/ui/merchant/profile/editprofile/edit_profile_view.dart';
 import 'package:pos_mobile_app/ui/onboarding/onboarding_view.dart';
 import 'package:pos_mobile_app/ui/splash/splash_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -36,6 +37,7 @@ import 'package:stacked_services/stacked_services.dart';
     MaterialRoute(page: CompeleteMerchantRegister),
     MaterialRoute(page: AdminHomeView),
     MaterialRoute(page: MerchantHomeView),
+    CupertinoRoute(page: EditProfileView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

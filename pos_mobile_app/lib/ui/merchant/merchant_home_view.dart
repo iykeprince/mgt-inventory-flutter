@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pos_mobile_ui_package/utils/values_manager.dart';
 import './dashboard/dashboard_view.dart';
 import './history/history_view.dart';
 import './profile/profile_view.dart';
