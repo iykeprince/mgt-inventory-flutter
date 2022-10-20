@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pos_mobile_app/ui/merchant/profile/editprofile/edit_profile_view_model.dart';
+import 'package:pos_mobile_app/utils/helpers.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 
@@ -10,6 +11,14 @@ class EditProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<EditProfileViewModel>.nonReactive(
       viewModelBuilder: () => EditProfileViewModel(),
+      onModelReady: (model) {
+        model.fullnameController.text = model.merchant?.name ?? "";
+        model.emailController.text = model.merchant?.user?.email ?? "";
+        model.addressController.text = model.merchant?.address ?? "";
+        model.phoneController.text = model.merchant?.contactPhone ?? "";
+
+        print('merchnat profile: ${model.merchant?.toJson()}');
+      },
       builder: (context, model, child) => Scaffold(
         backgroundColor: ColorManager.kWhiteColor,
         appBar: Navbar(
@@ -26,7 +35,7 @@ class EditProfileView extends StatelessWidget {
                 height: AppSize.s24,
               ),
               AvatarWidget(
-                text: 'FK',
+                text: getInitials(model.merchant?.name ?? ''),
                 isEdit: true,
                 color: ColorManager.kPrimaryColor,
                 onClicked: () {},
@@ -34,7 +43,7 @@ class EditProfileView extends StatelessWidget {
               const SizedBox(
                 height: AppSize.s12,
               ),
-              EditProfileFormView()
+              const EditProfileFormView()
             ],
           )),
         ),
@@ -58,8 +67,7 @@ class EditProfileFormView extends ViewModelWidget<EditProfileViewModel> {
           border: InputBorder.none,
           labelStyle: getBoldStyle(
               color: ColorManager.kDarkCharcoal, fontSize: FontSize.s16),
-
-          // onChanged: ,
+          controller: model.fullnameController,
         ),
         const SizedBox(height: AppSize.s16),
         InputField(
@@ -68,17 +76,18 @@ class EditProfileFormView extends ViewModelWidget<EditProfileViewModel> {
           border: InputBorder.none,
           labelStyle: getBoldStyle(
               color: ColorManager.kDarkCharcoal, fontSize: FontSize.s16),
-          // onChanged: ,
+          controller: model.emailController,
         ),
         const SizedBox(height: AppSize.s16),
         InputField(
-          label: AppString.usernameText,
-          hintText: AppString.sampleUsernameText,
+          label: AppString.addressText,
+          hintText: AppString.sampleAddressText,
           border: InputBorder.none,
           labelStyle: getBoldStyle(
-              color: ColorManager.kDarkCharcoal, fontSize: FontSize.s16),
-
-          // onChanged: ,
+            color: ColorManager.kDarkCharcoal,
+            fontSize: FontSize.s16,
+          ),
+          controller: model.addressController,
         ),
         const SizedBox(height: AppSize.s16),
         InputField(
@@ -87,13 +96,13 @@ class EditProfileFormView extends ViewModelWidget<EditProfileViewModel> {
           border: InputBorder.none,
           labelStyle: getBoldStyle(
               color: ColorManager.kDarkCharcoal, fontSize: FontSize.s16),
-
-          // onChanged: ,
+          controller: model.phoneController,
         ),
         const SizedBox(height: AppSize.s16),
         InputField(
           label: AppString.branchNameText,
-          hintText: AppString.samplebranchNameText,
+          hintText:
+              model.merchant?.branch?.name ?? AppString.samplebranchNameText,
           border: InputBorder.none,
           readOnly: true,
           fillColor: ColorManager.kGreyOpacity2,
@@ -104,8 +113,13 @@ class EditProfileFormView extends ViewModelWidget<EditProfileViewModel> {
           // onChanged: ,
         ),
         const SizedBox(height: AppSize.s32),
+        if (model.hasError)
+          Alert.primary(
+            text: '${model.modelError}',
+          ),
+        if (model.hasError) const SizedBox(height: AppSize.s20),
         PosButton(
-          onPressed: () {},
+          onPressed: model.updateMerchant,
           title: AppString.updateDetailsText,
           // buttonBgColor: ColorManager.kLightGreen1,
           // buttonTextColor: ColorManager.kDarkCharcoal,

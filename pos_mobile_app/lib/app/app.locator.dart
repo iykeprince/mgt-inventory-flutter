@@ -11,6 +11,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../client/dio_client.dart';
 import '../services/authentication.service.dart';
+import '../services/merchant.service.dart';
 
 final locator = StackedLocator.instance;
 
@@ -27,4 +28,5 @@ Future<void> setupLocator(
   locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton(() => DioClient());
   locator.registerLazySingleton(() => AuthenticationService());
+  locator.registerLazySingleton(() => MerchantService());
 }

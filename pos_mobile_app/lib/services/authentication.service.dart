@@ -74,6 +74,7 @@ class AuthenticationService with ReactiveServiceMixin {
     );
     User authUser = User.fromJson(response.data);
     _currentBaseUser.value = authUser;
+    // Todo: add to shared preferences...
     return authUser;
   }
 
@@ -83,6 +84,7 @@ class AuthenticationService with ReactiveServiceMixin {
     );
     Merchant merchant = Merchant.fromJson(response.data);
     _currentMerchantUser.value = merchant;
+    //Todo: shared preferences..
     return merchant;
   }
 

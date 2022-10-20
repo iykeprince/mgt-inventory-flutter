@@ -1,6 +1,8 @@
 import 'package:pos_mobile_app/models/user.model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'branch.model.dart';
+
 part 'merchant.model.g.dart';
 
 @JsonSerializable()
@@ -16,6 +18,7 @@ class Merchant {
   String? branchId;
   String? adminId;
   User? user;
+  Branch? branch;
 
   Merchant({
     this.id,
@@ -29,6 +32,7 @@ class Merchant {
     this.branchId,
     this.adminId,
     this.user,
+    this.branch,
   });
 
   factory Merchant.fromJson(Map<String, dynamic> json) =>

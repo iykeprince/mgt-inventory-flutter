@@ -20,6 +20,9 @@ Merchant _$MerchantFromJson(Map<String, dynamic> json) => Merchant(
       user: json['user'] == null
           ? null
           : User.fromJson(json['user'] as Map<String, dynamic>),
+      branch: json['branch'] == null
+          ? null
+          : Branch.fromJson(json['branch'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$MerchantToJson(Merchant instance) => <String, dynamic>{
@@ -34,4 +37,5 @@ Map<String, dynamic> _$MerchantToJson(Merchant instance) => <String, dynamic>{
       'branchId': instance.branchId,
       'adminId': instance.adminId,
       'user': instance.user,
+      'branch': instance.branch,
     };
