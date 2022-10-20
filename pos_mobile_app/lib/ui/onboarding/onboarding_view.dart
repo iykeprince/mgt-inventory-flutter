@@ -61,7 +61,10 @@ class _OnboardViewState extends State<OnboardView> {
                         curve: Curves.easeIn,
                       );
                     },
-                    onSkipPressed: () => model.navigateToAuth(),
+                    onSkipPressed: () {
+                      print('hello skip');
+                      model.navigateToAuth();
+                    },
                   ),
                   OnboardingViewTwo(
                     onNextPressed: () {

@@ -76,9 +76,11 @@ class AppString {
   static const String fullnamePlaceholderText = "John Doe";
   static const String usernameText = "Username";
   static const String contactNumberText = "Contact Number";
+  static const String addressText = "Address";
   static const String branchNameText = "Branch Name";
   static const String samplebranchNameText = "Ire-Akari Branch";
   static const String sampleUsernameText = "@taiwokehinde";
+  static const String sampleAddressText = "2332 Kilimanjaro Estate";
   static const String samplePhoneText = "0901 234 5678";
   static const String changePasswordText = "Change Password";
   static const String howItWorksText = "How It Works";

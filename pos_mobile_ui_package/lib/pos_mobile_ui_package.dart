@@ -27,3 +27,6 @@ export './utils/values_manager.dart';
 export './utils/string_manager.dart';
 export './utils/font_styles.dart';
 export './utils/app_layout.dart';
+
+//export sheet container
+export './widgets/bottom_sheet/bottom_sheet_container.dart';

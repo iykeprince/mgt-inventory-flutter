@@ -20,6 +20,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../services/merchant.service.dart';
+
 @StackedApp(
   routes: [
     MaterialRoute(page: SplashView, initial: true),
@@ -46,6 +48,7 @@ import 'package:stacked_services/stacked_services.dart';
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: DioClient),
     LazySingleton(classType: AuthenticationService),
+    LazySingleton(classType: MerchantService)
   ],
   logger: StackedLogger(),
 )

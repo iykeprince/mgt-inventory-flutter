@@ -20,6 +20,7 @@ class MerchantHomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<MerchantHomeViewModel>.reactive(
       viewModelBuilder: () => MerchantHomeViewModel(),
+      onModelReady: (model) => model.getCurrentUser(),
       builder: (context, model, child) => Scaffold(
         extendBody: true,
         body: getViewForIndex(model.currentIndex),

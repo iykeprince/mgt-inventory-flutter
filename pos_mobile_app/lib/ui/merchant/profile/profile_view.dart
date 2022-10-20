@@ -3,6 +3,8 @@ import 'package:pos_mobile_app/ui/merchant/profile/profile_view_model.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../utils/helpers.dart';
+
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
 
@@ -10,6 +12,9 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProfileViewModel>.nonReactive(
         viewModelBuilder: () => ProfileViewModel(),
+        onModelReady: (model) {
+          print('Merchant profile: ${model.merchant?.toJson() ?? Null}');
+        },
         builder: (context, model, child) => Container(
               color: Colors.white,
               width: double.infinity,
@@ -20,8 +25,7 @@ class ProfileView extends StatelessWidget {
                     const TabHeader(
                       title: AppString.accountSettingsText,
                       margin: EdgeInsets.only(
-                        bottom: 10,
-                      ),
+                          bottom: AppMargin.m10, top: AppMargin.m10),
                     ),
                     const SizedBox(
                       height: AppSize.s8,
@@ -35,7 +39,7 @@ class ProfileView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           AvatarWidget(
-                            text: 'FK',
+                            text: getInitials(model.merchant?.name ?? ''),
                             isEdit: false,
                             color: ColorManager.kPrimaryColor,
                             onClicked: () {},
@@ -44,7 +48,7 @@ class ProfileView extends StatelessWidget {
                             height: AppSize.s12,
                           ),
                           Text(
-                            'Taiwo Kehinde',
+                            model.merchant?.name ?? '',
                             style: getThickStyle(
                                 color: ColorManager.kDarkCharcoal,
                                 fontSize: FontSize.s20),
@@ -53,7 +57,7 @@ class ProfileView extends StatelessWidget {
                             height: AppSize.s4,
                           ),
                           Text(
-                            'taiwokehinde@gmail.com',
+                            model.merchant?.user?.email ?? '',
                             style: getMediumStyle(
                                 color: ColorManager.kGrey1,
                                 fontSize: FontSize.s16),
