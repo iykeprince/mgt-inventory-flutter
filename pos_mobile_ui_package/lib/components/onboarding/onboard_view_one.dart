@@ -58,7 +58,7 @@ class OnboardingViewOne extends StatelessWidget {
           const SizedBox(height: 24),
           Container(
             padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(),
+            decoration: const BoxDecoration(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
