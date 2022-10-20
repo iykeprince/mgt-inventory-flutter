@@ -15,6 +15,7 @@ class RegisterMerchantView extends StatelessWidget {
     return ViewModelBuilder<RegisterMerchantViewModel>.nonReactive(
       viewModelBuilder: () => RegisterMerchantViewModel(),
       builder: (context, model, child) => Scaffold(
+        // resizeToAvoidBottomInset: false,
         body: KeyboardAware(
           child: Container(
             decoration: BoxDecoration(
@@ -68,97 +69,102 @@ class RegisterMerchantFormView
       bottom: 0,
       left: 0,
       right: 0,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p24),
-        decoration: const BoxDecoration(
-            color: ColorManager.kWhiteColor,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(AppSize.s16),
-                topRight: Radius.circular(AppSize.s16))),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const SizedBox(height: AppSize.s40),
-          Text(
-            AppString.enterYourEmailAddress,
-            style: getMediumStyle(
-                color: ColorManager.kDarkCharcoal, fontSize: FontSize.s20),
-          ),
-          const SizedBox(height: AppSize.s40),
-          InputField(
-            label: AppString.emailAddress,
-            hintText: AppString.emailAddressPlaceholder,
-            border: InputBorder.none,
-            onChanged: model.setEmailAddress,
-          ),
-          if (model.hasErrorForKey(EMAIL_ADDRESS_VALIDATOR))
-            Alert.primary(
-              text: model.error(EMAIL_ADDRESS_VALIDATOR),
+      child: SingleChildScrollView(
+        reverse: true,
+        physics: BouncingScrollPhysics(),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: AppPadding.p24),
+          decoration: const BoxDecoration(
+              color: ColorManager.kWhiteColor,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(AppSize.s16),
+                  topRight: Radius.circular(AppSize.s16))),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            const SizedBox(height: AppSize.s40),
+            Text(
+              AppString.enterYourEmailAddress,
+              style: getMediumStyle(
+                  color: ColorManager.kDarkCharcoal, fontSize: FontSize.s20),
             ),
-          const SizedBox(height: AppSize.s6),
-          PosCheckBox(
-              value: model.tos ?? false,
-              onChanged: (value) => model.setTos(value),
-              richText: Expanded(
-                child: RichText(
-                  textAlign: TextAlign.start,
-                  text: TextSpan(
-                      text: AppString.iAgreeText,
-                      style: getRegularStyle(
-                        color: ColorManager.kTurquoiseDarkColor,
-                        fontSize: FontSize.s14,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: AppString.termsAndUseText,
-                          style: getRegularStyle(
-                            color: ColorManager.kButtonTextNavyBlue,
-                            fontSize: FontSize.s14,
-                          ),
+            const SizedBox(height: AppSize.s40),
+            InputField(
+              label: AppString.emailAddress,
+              hintText: AppString.emailAddressPlaceholder,
+              border: InputBorder.none,
+              onChanged: model.setEmailAddress,
+            ),
+            if (model.hasErrorForKey(EMAIL_ADDRESS_VALIDATOR))
+              Alert.primary(
+                text: model.error(EMAIL_ADDRESS_VALIDATOR),
+              ),
+            const SizedBox(height: AppSize.s6),
+            PosCheckBox(
+                value: model.tos ?? false,
+                onChanged: (value) => model.setTos(value),
+                richText: Expanded(
+                  child: RichText(
+                    textAlign: TextAlign.start,
+                    text: TextSpan(
+                        text: AppString.iAgreeText,
+                        style: getRegularStyle(
+                          color: ColorManager.kTurquoiseDarkColor,
+                          fontSize: FontSize.s14,
                         ),
-                        TextSpan(
-                            text: AppString.haveReadText,
+                        children: [
+                          TextSpan(
+                            text: AppString.termsAndUseText,
                             style: getRegularStyle(
-                              color: ColorManager.kTurquoiseDarkColor,
-                              fontSize: FontSize.s14,
-                            )),
-                        TextSpan(
-                            text: AppString.privacyPolicyText,
-                            style: getMediumStyle(
                               color: ColorManager.kButtonTextNavyBlue,
                               fontSize: FontSize.s14,
                             ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = (() {
-                                print('Hello barrest dev in');
-                              })),
-                      ]),
-                ),
-              )),
-          const SizedBox(height: AppSize.s12),
-          if (model.hasErrorForKey(TOS_VALIDATOR))
-            Alert.primary(
-              text: model.error(TOS_VALIDATOR),
+                          ),
+                          TextSpan(
+                              text: AppString.haveReadText,
+                              style: getRegularStyle(
+                                color: ColorManager.kTurquoiseDarkColor,
+                                fontSize: FontSize.s14,
+                              )),
+                          TextSpan(
+                              text: AppString.privacyPolicyText,
+                              style: getMediumStyle(
+                                color: ColorManager.kButtonTextNavyBlue,
+                                fontSize: FontSize.s14,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = (() {
+                                  print('Hello barrest dev in');
+                                })),
+                        ]),
+                  ),
+                )),
+            const SizedBox(height: AppSize.s12),
+            if (model.hasErrorForKey(TOS_VALIDATOR))
+              Alert.primary(
+                text: model.error(TOS_VALIDATOR),
+              ),
+            if (model.hasErrorForKey(VERIFY_MERCHANT_TASK_OBJECT))
+              Alert.primary(
+                text: '${model.error(VERIFY_MERCHANT_TASK_OBJECT)}',
+              ),
+            const SizedBox(height: AppSize.s12),
+            PosButton(
+              onPressed: () {
+                dismissKeyboard(context);
+                model.navigateToVerifyMerchant();
+              },
+              title: AppString.continueText,
+              trailingIcon: Icons.arrow_forward,
+              trailingIconColor: ColorManager.kWhiteColor,
+              trailingIconSpace: AppSize.s28,
+              fontSize: FontSize.s16,
+              fontWeight: FontWeightManager.bold,
+              borderRadius: AppSize.s8,
+              busy: model.isBusy,
             ),
-          if (model.hasErrorForKey(VERIFY_MERCHANT_TASK_OBJECT))
-            Alert.primary(
-              text: '${model.error(VERIFY_MERCHANT_TASK_OBJECT)}',
-            ),
-          const SizedBox(height: AppSize.s12),
-          PosButton(
-            onPressed: () {
-              dismissKeyboard(context);
-              model.navigateToVerifyMerchant();
-            },
-            title: AppString.continueText,
-            trailingIcon: Icons.arrow_forward,
-            trailingIconColor: ColorManager.kWhiteColor,
-            trailingIconSpace: AppSize.s28,
-            fontSize: FontSize.s16,
-            fontWeight: FontWeightManager.bold,
-            borderRadius: AppSize.s8,
-            busy: model.isBusy,
-          ),
-          const SizedBox(height: AppSize.s28),
-        ]),
+            const SizedBox(height: AppSize.s28),
+          ]),
+        ),
       ),
     );
   }

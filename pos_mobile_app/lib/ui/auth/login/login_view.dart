@@ -15,6 +15,7 @@ class LoginView extends StatelessWidget {
     return ViewModelBuilder<LoginViewModel>.nonReactive(
       viewModelBuilder: () => LoginViewModel(),
       builder: (context, model, child) => Scaffold(
+        // resizeToAvoidBottomInset: false,
         body: GestureDetector(
           onTap: () {
             FocusScopeNode currentFocus = FocusScope.of(context);
@@ -80,66 +81,70 @@ class LoginFormView extends ViewModelWidget<LoginViewModel> {
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(AppSize.s16),
                 topRight: Radius.circular(AppSize.s16))),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const SizedBox(height: AppSize.s40),
-          Text(
-            AppString.enterYourLoginDetails,
-            style: getMediumStyle(
-                color: ColorManager.kDarkCharcoal, fontSize: FontSize.s20),
-          ),
-          const SizedBox(height: AppSize.s40),
-          InputField(
-            label: AppString.usernameOrEmailAddress,
-            hintText: AppString.emailAddressPlaceholder,
-            border: InputBorder.none,
-            onChanged: model.setEmailAddress,
-          ),
-          if (model.hasErrorForKey(EMAIL_VALIDATOR))
-            Alert.primary(text: AppString.emailValidatorText),
-          const SizedBox(height: AppSize.s12),
-          InputField(
-            label: AppString.password,
-            hintText: AppString.password,
-            border: InputBorder.none,
-            obscureText: true,
-            labelRightItem: TextButton(
-              onPressed: () {},
-              child: Text(AppString.forgotPassword,
-                  style: getRegularStyle(
-                      color: ColorManager.kSecondaryColor,
-                      fontSize: FontSize.s14)),
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            const SizedBox(height: AppSize.s40),
+            Text(
+              AppString.enterYourLoginDetails,
+              style: getMediumStyle(
+                  color: ColorManager.kDarkCharcoal, fontSize: FontSize.s20),
             ),
-            onChanged: model.setPassword,
-          ),
-          if (model.hasErrorForKey(PASSWORD_VALIDATOR))
-            Alert.primary(text: AppString.passwordValidatorText),
-          const SizedBox(height: AppSize.s20),
-          if (model.hasErrorForKey(LOGIN_TASK_OBJECT))
-            Alert.primary(text: '${model.error(LOGIN_TASK_OBJECT)}'),
-          const SizedBox(height: AppSize.s20),
-          PosButton(
-            onPressed: () => model.login(),
-            title: AppString.login,
-            // buttonBgColor: ColorManager.kLightGreen1,
-            // buttonTextColor: ColorManager.kDarkCharcoal,
-            fontSize: FontSize.s16,
-            fontWeight: FontWeightManager.bold,
-            border: Border.all(
-              color: ColorManager.kBorderLightGreen,
-              width: 1,
+            const SizedBox(height: AppSize.s40),
+            InputField(
+              label: AppString.usernameOrEmailAddress,
+              hintText: AppString.emailAddressPlaceholder,
+              border: InputBorder.none,
+              onChanged: model.setEmailAddress,
             ),
-            borderRadius: AppSize.s8,
-            busy: model.isBusy,
-          ),
-          const SizedBox(height: AppSize.s20),
-          PosButton(
-            onPressed: model.navigateToRegisterNow,
-            title: AppString.dontHaveAnAccountRegisterNow,
-            buttonType: ButtonType.text,
-            buttonTextColor: ColorManager.kButtonTextNavyBlue,
-          ),
-          const SizedBox(height: AppSize.s20),
-        ]),
+            if (model.hasErrorForKey(EMAIL_VALIDATOR))
+              Alert.primary(text: AppString.emailValidatorText),
+            const SizedBox(height: AppSize.s12),
+            InputField(
+              label: AppString.password,
+              hintText: AppString.password,
+              border: InputBorder.none,
+              obscureText: true,
+              labelRightItem: TextButton(
+                onPressed: () {},
+                child: Text(AppString.forgotPassword,
+                    style: getRegularStyle(
+                        color: ColorManager.kSecondaryColor,
+                        fontSize: FontSize.s14)),
+              ),
+              onChanged: model.setPassword,
+            ),
+            if (model.hasErrorForKey(PASSWORD_VALIDATOR))
+              Alert.primary(text: AppString.passwordValidatorText),
+            const SizedBox(height: AppSize.s20),
+            if (model.hasErrorForKey(LOGIN_TASK_OBJECT))
+              Alert.primary(text: '${model.error(LOGIN_TASK_OBJECT)}'),
+            const SizedBox(height: AppSize.s20),
+            PosButton(
+              onPressed: () => model.login(),
+              title: AppString.login,
+              // buttonBgColor: ColorManager.kLightGreen1,
+              // buttonTextColor: ColorManager.kDarkCharcoal,
+              fontSize: FontSize.s16,
+              fontWeight: FontWeightManager.bold,
+              border: Border.all(
+                color: ColorManager.kBorderLightGreen,
+                width: 1,
+              ),
+              borderRadius: AppSize.s8,
+              busy: model.isBusy,
+            ),
+            const SizedBox(height: AppSize.s20),
+            PosButton(
+              onPressed: model.navigateToRegisterNow,
+              title: AppString.dontHaveAnAccountRegisterNow,
+              buttonType: ButtonType.text,
+              buttonTextColor: ColorManager.kButtonTextNavyBlue,
+            ),
+            const SizedBox(height: AppSize.s20),
+          ]),
+        ),
       ),
     );
   }
