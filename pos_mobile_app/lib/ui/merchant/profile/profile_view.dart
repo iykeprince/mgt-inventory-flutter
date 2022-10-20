@@ -20,8 +20,7 @@ class ProfileView extends StatelessWidget {
                     const TabHeader(
                       title: AppString.accountSettingsText,
                       margin: EdgeInsets.only(
-                        bottom: 10,
-                      ),
+                          bottom: AppMargin.m10, top: AppMargin.m10),
                     ),
                     const SizedBox(
                       height: AppSize.s8,
