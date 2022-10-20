@@ -6,6 +6,7 @@ import 'package:pos_mobile_app/ui/auth/compeleteMerchantRegistration/compelete_m
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../../../../enums/bottom_sheet_type.dart';
 import '../../../../models/merchant.model.dart';
 import '../../../../models/user.model.dart';
 import '../../../../services/authentication.service.dart';
@@ -82,4 +83,17 @@ class EditProfileViewModel extends BaseViewModel {
       setBusy(false);
     }
   }
+
+// ignore: prefer_final_fields
+  // BottomSheetService _bottomSheetService = locator<BottomSheetService>();
+  // Future<void> openSheet() async {
+  //   var confirmationResponse = await _bottomSheetService.showCustomSheet(
+  //     variant: BottomSheetType.openBalance,
+  //     title: 'This is a floating bottom sheet',
+  //     description:
+  //         'This sheet is a custom built bottom sheet UI that allows you to show it from any service or viewmodel.',
+  //     mainButtonTitle: 'Awesome!',
+  //     secondaryButtonTitle: 'This is cool',
+  //   );
+  // }
 }

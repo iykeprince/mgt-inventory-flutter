@@ -1,3 +1,1 @@
-enum BottomSheetType {
-  normal,
-}
+enum BottomSheetType { normal, openBalance }
