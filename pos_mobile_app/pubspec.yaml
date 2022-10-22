@@ -41,6 +41,7 @@ dependencies:
     path: ../pos_mobile_ui_package
   storybook_flutter: ^0.11.1
   flutter_svg: ^1.1.0
+  fluttertoast: ^8.1.1
 
 dev_dependencies:
   flutter_test:

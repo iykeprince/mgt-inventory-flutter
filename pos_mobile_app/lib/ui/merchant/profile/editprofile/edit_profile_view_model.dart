@@ -27,31 +27,10 @@ class EditProfileViewModel extends BaseViewModel {
   TextEditingController addressController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
 
-  String? _contactPhone;
-  String? _email;
-  String? _address;
-  String? _fullname;
-
   String? get contactPhone => phoneController.text;
   String? get email => emailController.text;
   String? get address => addressController.text;
   String? get fullname => fullnameController.text;
-
-  setPhone(String value) {
-    _contactPhone = value;
-  }
-
-  setAddress(String value) {
-    _address = value;
-  }
-
-  setEmail(String value) {
-    _email = value;
-  }
-
-  setFullname(String value) {
-    _fullname = value;
-  }
 
   updateMerchant() {
     runBusyFuture(runUpdateMerchant(),
