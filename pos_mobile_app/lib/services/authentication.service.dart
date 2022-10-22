@@ -28,8 +28,7 @@ class AuthenticationService with ReactiveServiceMixin {
   final ReactiveValue<Merchant?> _currentMerchantUser =
       ReactiveValue<Merchant?>(null);
   final ReactiveValue<Admin?> _currentAdminUser = ReactiveValue<Admin?>(null);
-  // final ReactiveValue<SuperAdmin?> _currentSuperAdminUser =
-  //     ReactiveValue<SuperAdmin?>(null);
+
   User? get currentUser => _currentBaseUser.value;
   Merchant? get currentMerchantUser => _currentMerchantUser.value;
   Admin? get currentAdminUser => _currentAdminUser.value;
@@ -134,5 +133,18 @@ class AuthenticationService with ReactiveServiceMixin {
     );
 
     return DefaultResponse.fromJson(response.data);
+  }
+
+  Future<DefaultResponse> changePassword(Map<String, dynamic> formData) async {
+    var response = await dioClient.post(
+      '/user/change-password',
+      data: formData,
+    );
+    return DefaultResponse.fromJson(response.data);
+  }
+
+  Future<void> logout() async {
+    final preferences = await SharedPreferences.getInstance();
+    preferences.setString(AUTH_TOKEN_KEY, "");
   }
 }

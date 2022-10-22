@@ -6,7 +6,6 @@
 
 // ignore_for_file: public_member_api_docs, unused_import, non_constant_identifier_names
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -24,7 +23,9 @@ import '../ui/auth/verifyAdminSuccess/verify_admin_success_view.dart';
 import '../ui/auth/verifyMerchant/verify_merchant_view.dart';
 import '../ui/auth/verifyMerchantSuccess/verify_merchant_success_view.dart';
 import '../ui/merchant/merchant_home_view.dart';
+import '../ui/merchant/profile/changepassword/change_password_view.dart';
 import '../ui/merchant/profile/editprofile/edit_profile_view.dart';
+import '../ui/merchant/profile/howItWorks/how_it_works_view.dart';
 import '../ui/onboarding/onboarding_view.dart';
 import '../ui/splash/splash_view.dart';
 
@@ -47,6 +48,8 @@ class Routes {
   static const String adminHomeView = '/admin-home-view';
   static const String merchantHomeView = '/merchant-home-view';
   static const String editProfileView = '/edit-profile-view';
+  static const String howItWorksView = '/how-it-works-view';
+  static const String changePasswordView = '/change-password-view';
   static const all = <String>{
     splashView,
     onboardView,
@@ -64,6 +67,8 @@ class Routes {
     adminHomeView,
     merchantHomeView,
     editProfileView,
+    howItWorksView,
+    changePasswordView,
   };
 }
 
@@ -87,12 +92,14 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.adminHomeView, page: AdminHomeView),
     RouteDef(Routes.merchantHomeView, page: MerchantHomeView),
     RouteDef(Routes.editProfileView, page: EditProfileView),
+    RouteDef(Routes.howItWorksView, page: HowItWorksView),
+    RouteDef(Routes.changePasswordView, page: ChangePasswordView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, StackedRouteFactory>{
     SplashView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const SplashView(),
         settings: data,
       );
@@ -101,38 +108,38 @@ class StackedRouter extends RouterBase {
       var args = data.getArgs<OnboardViewArguments>(
         orElse: () => OnboardViewArguments(),
       );
-      return MaterialPageRoute<dynamic>(
+      return buildAdaptivePageRoute<dynamic>(
         builder: (context) => OnboardView(key: args.key),
         settings: data,
       );
     },
     AuthView: (data) {
-      return CupertinoPageRoute<dynamic>(
+      return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const AuthView(),
         settings: data,
       );
     },
     LoginView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const LoginView(),
         settings: data,
       );
     },
     CreateAdminView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const CreateAdminView(),
         settings: data,
       );
     },
     RegisterMerchantView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const RegisterMerchantView(),
         settings: data,
       );
     },
     VerifyAdminView: (data) {
       var args = data.getArgs<VerifyAdminViewArguments>(nullOk: false);
-      return MaterialPageRoute<dynamic>(
+      return buildAdaptivePageRoute<dynamic>(
         builder: (context) => VerifyAdminView(
           key: args.key,
           email: args.email,
@@ -141,26 +148,26 @@ class StackedRouter extends RouterBase {
       );
     },
     VerifyAdminSuccessView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const VerifyAdminSuccessView(),
         settings: data,
       );
     },
     CreateAdminBusinessView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const CreateAdminBusinessView(),
         settings: data,
       );
     },
     CreateAccountSuccessView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const CreateAccountSuccessView(),
         settings: data,
       );
     },
     VerifyMerchantView: (data) {
       var args = data.getArgs<VerifyMerchantViewArguments>(nullOk: false);
-      return MaterialPageRoute<dynamic>(
+      return buildAdaptivePageRoute<dynamic>(
         builder: (context) => VerifyMerchantView(
           key: args.key,
           emailAddress: args.emailAddress,
@@ -169,32 +176,44 @@ class StackedRouter extends RouterBase {
       );
     },
     VerifyMerchantSuccessView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const VerifyMerchantSuccessView(),
         settings: data,
       );
     },
     CompeleteMerchantRegister: (data) {
-      return MaterialPageRoute<dynamic>(
+      return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const CompeleteMerchantRegister(),
         settings: data,
       );
     },
     AdminHomeView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const AdminHomeView(),
         settings: data,
       );
     },
     MerchantHomeView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const MerchantHomeView(),
         settings: data,
       );
     },
     EditProfileView: (data) {
-      return CupertinoPageRoute<dynamic>(
+      return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const EditProfileView(),
+        settings: data,
+      );
+    },
+    HowItWorksView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const HowItWorksView(),
+        settings: data,
+      );
+    },
+    ChangePasswordView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const ChangePasswordView(),
         settings: data,
       );
     },
@@ -488,6 +507,38 @@ extension NavigatorStateExtension on NavigationService {
   }) async {
     return navigateTo(
       Routes.editProfileView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToHowItWorksView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.howItWorksView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToChangePasswordView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.changePasswordView,
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,

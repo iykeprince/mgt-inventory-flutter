@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pos_mobile_app/utils/pos_contants.dart';
 import 'package:pos_mobile_ui_package/utils/values_manager.dart';
 import './dashboard/dashboard_view.dart';
 import './history/history_view.dart';
@@ -90,19 +91,20 @@ class MerchantHomeView extends StatelessWidget {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: model.triggerAction,
           child: Container(
-              height: 64,
-              width: 64,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: LinearGradient(
-                  colors: [linearFrom, linearTo],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
+            height: 64,
+            width: 64,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                colors: [linearFrom, linearTo],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
               ),
-              child: const Icon(Icons.add)),
+            ),
+            child: getFabIcon(model.currentIndex),
+          ),
           elevation: 0,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -112,16 +114,28 @@ class MerchantHomeView extends StatelessWidget {
 
   Widget getViewForIndex(int index) {
     switch (index) {
-      case 0:
+      case DASBHOARD_VIEW_INDEX:
         return DashboardView();
-      case 1:
+      case HISTORY_VIEW_INDEX:
         return HistoryView();
-      case 3:
+      case REPORT_VIEW_INDEX:
         return ReportView();
-      case 4:
+      case PROFILE_VIEW_INDEX:
         return ProfileView();
       default:
         return DashboardView();
+    }
+  }
+
+  Icon getFabIcon(int index) {
+    switch (index) {
+      case DASBHOARD_VIEW_INDEX:
+      case HISTORY_VIEW_INDEX:
+        return const Icon(Icons.add);
+      case REPORT_VIEW_INDEX:
+      case PROFILE_VIEW_INDEX:
+      default:
+        return const Icon(Icons.house);
     }
   }
 }

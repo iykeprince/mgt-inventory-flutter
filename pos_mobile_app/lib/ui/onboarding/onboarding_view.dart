@@ -14,31 +14,31 @@ class OnboardView extends StatefulWidget {
 
 class _OnboardViewState extends State<OnboardView> {
   int _currentPage = 0;
-  PageController _pageController = PageController(initialPage: 0);
-  // Timer? _timer;
+  final PageController _pageController = PageController(initialPage: 0);
+  Timer? _timer;
 
   @override
   void initState() {
     super.initState();
-    // _timer = Timer.periodic(const Duration(seconds: 10), (Timer timer) {
-    //   if (_currentPage < 2) {
-    //     _currentPage++;
-    //   } else {
-    //     _currentPage = 0;
-    //   }
+    _timer = Timer.periodic(const Duration(seconds: 10), (Timer timer) {
+      if (_currentPage < 2) {
+        _currentPage++;
+      } else {
+        _currentPage = 0;
+      }
 
-    //   _pageController.animateToPage(
-    //     _currentPage,
-    //     duration: const Duration(milliseconds: 350),
-    //     curve: Curves.easeIn,
-    //   );
-    // });
+      _pageController.animateToPage(
+        _currentPage,
+        duration: const Duration(milliseconds: 350),
+        curve: Curves.easeIn,
+      );
+    });
   }
 
   @override
   void dispose() {
     super.dispose();
-    // _timer?.cancel();
+    _timer?.cancel();
   }
 
   @override

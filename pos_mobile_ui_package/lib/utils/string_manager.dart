@@ -93,4 +93,8 @@ class AppString {
   static const String totalWithdrawalText = "Total Withdrawal";
   static const String balCashAtHandText = "Bal. Cash at Hand";
   static const String accountSettingsText = "Account Settings";
+  static const String oldPasswordText = "Old Password";
+  static const String newPasswordText = "New Password";
+
+  static const String confirmPasswordText = "Confirm Password";
 }

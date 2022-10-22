@@ -13,7 +13,9 @@ import 'package:pos_mobile_app/ui/auth/verifyAdminSuccess/verify_admin_success_v
 import 'package:pos_mobile_app/ui/auth/verifyMerchant/verify_merchant_view.dart';
 import 'package:pos_mobile_app/ui/auth/verifyMerchantSuccess/verify_merchant_success_view.dart';
 import 'package:pos_mobile_app/ui/merchant/merchant_home_view.dart';
+import 'package:pos_mobile_app/ui/merchant/profile/changepassword/change_password_view.dart';
 import 'package:pos_mobile_app/ui/merchant/profile/editprofile/edit_profile_view.dart';
+import 'package:pos_mobile_app/ui/merchant/profile/howItWorks/how_it_works_view.dart';
 import 'package:pos_mobile_app/ui/onboarding/onboarding_view.dart';
 import 'package:pos_mobile_app/ui/splash/splash_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,22 +26,24 @@ import '../services/merchant.service.dart';
 
 @StackedApp(
   routes: [
-    MaterialRoute(page: SplashView, initial: true),
-    MaterialRoute(page: OnboardView),
-    CupertinoRoute(page: AuthView),
-    MaterialRoute(page: LoginView),
-    MaterialRoute(page: CreateAdminView),
-    MaterialRoute(page: RegisterMerchantView),
-    MaterialRoute(page: VerifyAdminView),
-    MaterialRoute(page: VerifyAdminSuccessView),
-    MaterialRoute(page: CreateAdminBusinessView),
-    MaterialRoute(page: CreateAccountSuccessView),
-    MaterialRoute(page: VerifyMerchantView),
-    MaterialRoute(page: VerifyMerchantSuccessView),
-    MaterialRoute(page: CompeleteMerchantRegister),
-    MaterialRoute(page: AdminHomeView),
-    MaterialRoute(page: MerchantHomeView),
-    CupertinoRoute(page: EditProfileView),
+    AdaptiveRoute(page: SplashView, initial: true),
+    AdaptiveRoute(page: OnboardView),
+    AdaptiveRoute(page: AuthView),
+    AdaptiveRoute(page: LoginView),
+    AdaptiveRoute(page: CreateAdminView),
+    AdaptiveRoute(page: RegisterMerchantView),
+    AdaptiveRoute(page: VerifyAdminView),
+    AdaptiveRoute(page: VerifyAdminSuccessView),
+    AdaptiveRoute(page: CreateAdminBusinessView),
+    AdaptiveRoute(page: CreateAccountSuccessView),
+    AdaptiveRoute(page: VerifyMerchantView),
+    AdaptiveRoute(page: VerifyMerchantSuccessView),
+    AdaptiveRoute(page: CompeleteMerchantRegister),
+    AdaptiveRoute(page: AdminHomeView),
+    AdaptiveRoute(page: MerchantHomeView),
+    AdaptiveRoute(page: EditProfileView),
+    AdaptiveRoute(page: HowItWorksView),
+    AdaptiveRoute(page: ChangePasswordView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),
