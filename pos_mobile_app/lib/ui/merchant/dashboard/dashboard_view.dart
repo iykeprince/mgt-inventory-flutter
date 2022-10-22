@@ -71,6 +71,7 @@ class DashboardView extends StatelessWidget {
                     ),
                     const SizedBox(height: AppSize.s12),
                     InkWell(
+                      onTap: model.openSheet,
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: AppPadding.p16,
