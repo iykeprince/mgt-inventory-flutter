@@ -16,4 +16,15 @@ class ProfileViewModel extends BaseViewModel {
 
   navigateToEditProfile() =>
       _navigationService.navigateTo(Routes.editProfileView);
+
+  navigateToHowItWorks() =>
+      _navigationService.navigateTo(Routes.howItWorksView);
+
+  navigateToChangePassword() =>
+      _navigationService.navigateTo(Routes.changePasswordView);
+
+  logout() async {
+    await _authService.logout();
+    _navigationService.pushNamedAndRemoveUntil(Routes.authView);
+  }
 }
