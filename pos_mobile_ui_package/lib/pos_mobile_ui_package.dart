@@ -19,6 +19,8 @@ export 'widgets/dropdown/dropdown.dart';
 export 'widgets/tabheader/tab_header.dart';
 export 'widgets/avatar/avatar.dart';
 export 'widgets/card/card.dart';
+export 'widgets/textarea/textarea.dart';
+export 'widgets/date_picker/date_picker.dart';
 
 //export the utils
 export './utils/colors.dart';

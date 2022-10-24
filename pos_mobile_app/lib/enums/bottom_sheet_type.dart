@@ -1,1 +1,1 @@
-enum BottomSheetType { normal, openBalance }
+enum BottomSheetType { normal, openBalance, createLogs }

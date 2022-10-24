@@ -22,12 +22,14 @@ class PosButton extends StatelessWidget {
   final IconData? leadingIcon;
   final IconData? trailingIcon;
   final double trailingIconSpace;
+  final double leadingIconSpace;
   PosButton({
     Key? key,
     this.borderRadius = 8.0,
     this.border,
     this.fontSize = 16.0,
     this.trailingIconSpace = 4.0,
+    this.leadingIconSpace = 4.0,
     this.fontWeight = FontWeight.w500,
     required this.onPressed,
     this.buttonBgColor = ColorManager.kPrimaryColor,
@@ -98,36 +100,46 @@ class PosButton extends StatelessWidget {
           color: _bgColor,
           border: constructBorder(),
         ),
-        child: busy
-            ? const SizedBox(
-                width: AppSize.s16,
-                height: AppSize.s16,
-                child: PosCircularProgress(),
-              )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  if (leadingIcon != null)
-                    Icon(
-                      leadingIcon,
-                      color: leadingIconColor,
-                    ),
-                  Text(
-                    title,
-                    style: TextStyle(
-                        color: _color,
-                        fontSize: fontSize,
-                        fontWeight: fontWeight),
-                  ),
-                  if (trailingIcon != null) SizedBox(width: trailingIconSpace),
-                  if (trailingIcon != null)
-                    Icon(
-                      trailingIcon,
-                      color: trailingIconColor,
-                    ),
-                ],
+        child:
+            // busy
+            //     ? const SizedBox(
+            //         width: AppSize.s16,
+            //         height: AppSize.s16,
+            //         child: PosCircularProgress(),
+            //       )
+            // :
+            Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (leadingIcon != null)
+              Icon(
+                leadingIcon,
+                color: leadingIconColor,
               ),
+            if (leadingIcon != null) SizedBox(width: leadingIconSpace),
+            Text(
+              title,
+              style: TextStyle(
+                  color: _color, fontSize: fontSize, fontWeight: fontWeight),
+            ),
+            if (trailingIcon != null) SizedBox(width: trailingIconSpace),
+            if (trailingIcon != null)
+              Icon(
+                trailingIcon,
+                color: trailingIconColor,
+              ),
+            if (busy != null && busy)
+              const SizedBox(
+                width: 15,
+                height: 15,
+                child: CircularProgressIndicator(
+                  color: ColorManager.kWhiteColor,
+                  strokeWidth: 2,
+                ),
+              )
+          ],
+        ),
       ),
     );
   }

@@ -27,6 +27,8 @@ class DropDownField extends StatelessWidget {
   final Radius? scrollbarRadius;
   final double? scrollbarThickness;
   final bool? scrollbarAlwaysShow;
+  final String? label;
+  final TextStyle? labelStyle;
   final Offset? offset;
 
   const DropDownField({
@@ -57,80 +59,102 @@ class DropDownField extends StatelessWidget {
     this.scrollbarThickness,
     this.scrollbarAlwaysShow,
     this.offset,
+    this.label,
+    this.labelStyle,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonHideUnderline(
-      child: DropdownButton2(
-        //To avoid long text overflowing.
-        isExpanded: true,
-        hint: Container(
-          alignment: hintAlignment,
-          child: Text(
-            hint,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-            style: TextStyle(
-              fontSize: 14,
-              color: Theme.of(context).hintColor,
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (label != null)
+          Column(children: [
+            Text(
+              label!,
+              style: labelStyle ??
+                  getRegularStyle(
+                    color: ColorManager.kDarkCharcoal,
+                    fontSize: FontSize.s14,
+                  ),
+            ),
+            const SizedBox(
+              height: AppSize.s4,
+            ),
+          ]),
+        DropdownButton2(
+          //To avoid long text overflowing.
+          isExpanded: true,
+          hint: Container(
+            alignment: hintAlignment,
+            child: Text(
+              hint,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: TextStyle(
+                fontSize: 14,
+                color: Theme.of(context).hintColor,
+              ),
             ),
           ),
-        ),
-        value: value,
-        items: dropdownItems
-            .map((item) => DropdownMenuItem<String>(
-                  value: item,
-                  child: Container(
-                    alignment: valueAlignment,
-                    child: Text(
-                      item,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style: getMediumStyle(
-                          color: ColorManager.kPrimaryColor,
-                          fontSize: FontSize.s16),
+          value: value,
+          items: dropdownItems
+              .map((item) => DropdownMenuItem<String>(
+                    value: item,
+                    child: Container(
+                      alignment: valueAlignment,
+                      child: Text(
+                        item,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: getMediumStyle(
+                            color: ColorManager.kPrimaryColor,
+                            fontSize: FontSize.s16),
+                      ),
                     ),
+                  ))
+              .toList(),
+          onChanged: onChanged,
+          selectedItemBuilder: selectedItemBuilder,
+          icon: icon ?? const Icon(Icons.expand_more),
+          iconSize: iconSize ?? AppSize.s18,
+          iconEnabledColor: iconEnabledColor ?? ColorManager.kPrimaryColor,
+          iconDisabledColor: iconDisabledColor,
+          buttonHeight: buttonHeight ?? 40,
+          buttonWidth: buttonWidth ?? 140,
+          buttonPadding:
+              buttonPadding ?? const EdgeInsets.only(left: 14, right: 14),
+          buttonDecoration: buttonDecoration ??
+              BoxDecoration(
+                  borderRadius: BorderRadius.circular(AppSize.s8),
+                  border: Border.all(
+                    color: ColorManager.kTransparent,
                   ),
-                ))
-            .toList(),
-        onChanged: onChanged,
-        selectedItemBuilder: selectedItemBuilder,
-        icon: icon ?? const Icon(Icons.expand_more),
-        iconSize: iconSize ?? AppSize.s18,
-        iconEnabledColor: iconEnabledColor ?? ColorManager.kPrimaryColor,
-        iconDisabledColor: iconDisabledColor,
-        buttonHeight: buttonHeight ?? 40,
-        buttonWidth: buttonWidth ?? 140,
-        buttonPadding:
-            buttonPadding ?? const EdgeInsets.only(left: 14, right: 14),
-        buttonDecoration: buttonDecoration ??
-            BoxDecoration(
-                borderRadius: BorderRadius.circular(AppSize.s8),
-                border: Border.all(
-                  color: ColorManager.kTransparent,
-                ),
-                color: ColorManager.kBackgroundolor),
-        buttonElevation: buttonElevation,
-        itemHeight: itemHeight ?? 40,
-        itemPadding: itemPadding ?? const EdgeInsets.only(left: 14, right: 14),
-        //Max height for the dropdown menu & becoming scrollable if there are more items. If you pass Null it will take max height possible for the items.
-        dropdownMaxHeight: dropdownHeight ?? 200,
-        dropdownWidth: dropdownWidth ?? 140,
-        dropdownPadding: dropdownPadding,
-        dropdownDecoration: dropdownDecoration ??
-            BoxDecoration(
-              borderRadius: BorderRadius.circular(14),
-            ),
-        dropdownElevation: dropdownElevation ?? 8,
-        scrollbarRadius: scrollbarRadius ?? const Radius.circular(40),
-        scrollbarThickness: scrollbarThickness,
-        scrollbarAlwaysShow: scrollbarAlwaysShow,
-        //Null or Offset(0, 0) will open just under the button. You can edit as you want.
-        offset: offset,
-        dropdownOverButton: false, //Default is false to show menu below button
-      ),
-    );
+                  color: ColorManager.kBackgroundolor),
+          buttonElevation: buttonElevation,
+          itemHeight: itemHeight ?? 40,
+          itemPadding:
+              itemPadding ?? const EdgeInsets.only(left: 14, right: 14),
+          //Max height for the dropdown menu & becoming scrollable if there are more items. If you pass Null it will take max height possible for the items.
+          dropdownMaxHeight: dropdownHeight ?? 200,
+          dropdownWidth: dropdownWidth ?? 140,
+          dropdownPadding: dropdownPadding,
+          dropdownDecoration: dropdownDecoration ??
+              BoxDecoration(
+                borderRadius: BorderRadius.circular(14),
+              ),
+          dropdownElevation: dropdownElevation ?? 8,
+          scrollbarRadius: scrollbarRadius ?? const Radius.circular(40),
+          scrollbarThickness: scrollbarThickness,
+          scrollbarAlwaysShow: scrollbarAlwaysShow,
+          //Null or Offset(0, 0) will open just under the button. You can edit as you want.
+          offset: offset,
+          dropdownOverButton:
+              false, //Default is false to show menu below button
+        ),
+      ],
+    ));
   }
 }

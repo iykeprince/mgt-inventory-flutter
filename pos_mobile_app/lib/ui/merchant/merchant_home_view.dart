@@ -90,23 +90,7 @@ class MerchantHomeView extends StatelessWidget {
                 ]),
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: model.triggerAction,
-          child: Container(
-            height: 64,
-            width: 64,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                colors: [linearFrom, linearTo],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-            ),
-            child: getFabIcon(model.currentIndex),
-          ),
-          elevation: 0,
-        ),
+        floatingActionButton: HomeView(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
@@ -126,10 +110,36 @@ class MerchantHomeView extends StatelessWidget {
         return DashboardView();
     }
   }
+}
 
-  Icon getFabIcon(int index) {
+class HomeView extends ViewModelWidget<MerchantHomeViewModel> {
+  const HomeView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, MerchantHomeViewModel model) {
+    return FloatingActionButton(
+      onPressed: model.triggerAction,
+      child: Container(
+        height: 64,
+        width: 64,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: LinearGradient(
+            colors: [linearFrom, linearTo],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: getFabIcon(model.currentIndex, model),
+      ),
+      elevation: 0,
+    );
+  }
+
+  Icon getFabIcon(int index, [MerchantHomeViewModel? model]) {
     switch (index) {
       case DASBHOARD_VIEW_INDEX:
+        return model!.add ? Icon(Icons.add) : const Icon(Icons.close);
       case HISTORY_VIEW_INDEX:
         return const Icon(Icons.add);
       case REPORT_VIEW_INDEX:

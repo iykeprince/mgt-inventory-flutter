@@ -12,6 +12,8 @@ import 'package:pos_mobile_app/ui/auth/verifyAdmin/verify_admin_view.dart';
 import 'package:pos_mobile_app/ui/auth/verifyAdminSuccess/verify_admin_success_view.dart';
 import 'package:pos_mobile_app/ui/auth/verifyMerchant/verify_merchant_view.dart';
 import 'package:pos_mobile_app/ui/auth/verifyMerchantSuccess/verify_merchant_success_view.dart';
+import 'package:pos_mobile_app/ui/merchant/dashboard/create_logs/new_expense/log_new_expense_view.dart';
+import 'package:pos_mobile_app/ui/merchant/dashboard/create_logs/new_transactions/log_new_transaction_view.dart';
 import 'package:pos_mobile_app/ui/merchant/merchant_home_view.dart';
 import 'package:pos_mobile_app/ui/merchant/profile/changepassword/change_password_view.dart';
 import 'package:pos_mobile_app/ui/merchant/profile/editprofile/edit_profile_view.dart';
@@ -44,6 +46,8 @@ import '../services/merchant.service.dart';
     AdaptiveRoute(page: EditProfileView),
     AdaptiveRoute(page: HowItWorksView),
     AdaptiveRoute(page: ChangePasswordView),
+    AdaptiveRoute(page: LogNewExpenseView),
+    AdaptiveRoute(page: LogNewTransactionView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

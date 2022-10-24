@@ -97,4 +97,29 @@ class AppString {
   static const String newPasswordText = "New Password";
 
   static const String confirmPasswordText = "Confirm Password";
+  static const String logNewTranscationText = "Log New Transaction";
+  static const String logNewExpenseText = "Log New Expense";
+  static const String iD = "ID";
+  static const String date = "Date";
+  static const String expenseName = "Expense Name";
+  static const String expenseType = "Expense Type";
+  static const String amount = "Amount";
+  static const String paymentMethod = "Payment Method";
+  static const String comment = "Comment";
+  static const String accountDetails = "Account Details";
+  static const String logTransaction = "Log Transaction";
+  static const String additionalInfo = "Additional comment here...";
+  static const String selectExpenseType = "Select expense type";
+  static const String selectPaymentMethod = "Select payment method";
+  static const String selectTransactionType = "Select Transaction Type";
+  static const String selectAccountDetails = "Select Account Details";
+  static const String enterExpenseName = "Enter expense name";
+  static const String transactionType = "Transaction Type";
+  static const String serviceChargePayment = "Service Charge Payment";
+  static const String bankCharge = "Bank Charge";
+  static const String serviceCharge = "Service Charge";
+  static const String serviceChargePaymentMethod =
+      "Select charge payment method";
+  static const String amountPlaceholder = "0.00";
+  static const String dateformat = 'MM/DD/YYYY';
 }
