@@ -5,7 +5,7 @@ import 'package:pos_mobile_ui_package/utils/font_styles.dart';
 import 'package:pos_mobile_ui_package/utils/text_styles.dart';
 import 'package:pos_mobile_ui_package/utils/values_manager.dart';
 
-class InputField extends StatelessWidget {
+class Textarea extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final AutovalidateMode? autovalidateMode;
   final TextAlign? textAlign;
@@ -36,8 +36,9 @@ class InputField extends StatelessWidget {
   final Widget? labelRightItem;
   final TextStyle? labelStyle;
   final int? minLines;
+  final int? maxLines;
 
-  const InputField({
+  const Textarea({
     this.autovalidateMode,
     this.inputFormatters,
     this.textAlign,
@@ -58,6 +59,7 @@ class InputField extends StatelessWidget {
     this.onTap,
     this.maxLength,
     this.minLines,
+    this.maxLines,
     this.enabled = true,
     this.border,
     this.enabledBorder,
@@ -76,31 +78,26 @@ class InputField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              label,
-              style: labelStyle ??
-                  getRegularStyle(
-                    color: ColorManager.kDarkCharcoal,
-                    fontSize: FontSize.s14,
-                  ),
-            ),
-            if (labelRightItem != null) labelRightItem!
-          ],
+        Text(
+          label,
+          style: labelStyle ??
+              getRegularStyle(
+                color: ColorManager.kDarkCharcoal,
+                fontSize: FontSize.s14,
+              ),
         ),
+        if (labelRightItem != null) labelRightItem!,
         const SizedBox(
           height: AppSize.s4,
         ),
-        TextFormField(
+        TextField(
           showCursor: showCursor,
           readOnly: readOnly,
           maxLength: maxLength,
           enabled: enabled,
           onTap: onTap,
           minLines: minLines,
-          autovalidateMode: autovalidateMode,
+          maxLines: maxLines,
           focusNode: focusnode,
           controller: controller,
           textInputAction: TextInputAction.next,
@@ -140,7 +137,6 @@ class InputField extends StatelessWidget {
             fontSize: FontSize.s16,
           ),
           inputFormatters: inputFormatters,
-          validator: validationCallback,
           keyboardType: keyBoardType,
           // onChanged: (val) {
           //   if (clearForm != null) {

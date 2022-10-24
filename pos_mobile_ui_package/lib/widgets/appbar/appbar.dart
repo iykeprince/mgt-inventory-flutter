@@ -50,15 +50,16 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          // if (leadingText.isNotEmpty)
           Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            if (leadingText.isNotEmpty)
-              Text(
-                leadingText,
-                style: getMediumStyle(
-                  color: textColor ?? ColorManager.kDarkCharcoal,
-                  fontSize: fontsize,
-                ),
-              )
+            // if (leadingText.isNotEmpty)
+            Text(
+              leadingText,
+              style: getMediumStyle(
+                color: textColor ?? ColorManager.kDarkCharcoal,
+                fontSize: fontsize,
+              ),
+            )
           ]),
           Text(
             title!,
@@ -66,10 +67,13 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
               color: textColor ?? ColorManager.kDarkCharcoal,
               fontSize: fontsize,
             ),
+            textAlign: TextAlign.start,
           ),
+          // if (trailing != null)
           Container(
             child: trailing,
-          )
+          ),
+          if (title != '') Container()
         ],
       ),
       elevation: elevation ?? 0,

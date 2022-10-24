@@ -22,12 +22,14 @@ class PosButton extends StatelessWidget {
   final IconData? leadingIcon;
   final IconData? trailingIcon;
   final double trailingIconSpace;
+  final double leadingIconSpace;
   PosButton({
     Key? key,
     this.borderRadius = 8.0,
     this.border,
     this.fontSize = 16.0,
     this.trailingIconSpace = 4.0,
+    this.leadingIconSpace = 4.0,
     this.fontWeight = FontWeight.w500,
     required this.onPressed,
     this.buttonBgColor = ColorManager.kPrimaryColor,
@@ -115,6 +117,7 @@ class PosButton extends StatelessWidget {
                 leadingIcon,
                 color: leadingIconColor,
               ),
+            if (leadingIcon != null) SizedBox(width: leadingIconSpace),
             Text(
               title,
               style: TextStyle(
@@ -126,7 +129,7 @@ class PosButton extends StatelessWidget {
                 trailingIcon,
                 color: trailingIconColor,
               ),
-            if (busy != null && busy!)
+            if (busy != null && busy)
               const SizedBox(
                 width: 15,
                 height: 15,

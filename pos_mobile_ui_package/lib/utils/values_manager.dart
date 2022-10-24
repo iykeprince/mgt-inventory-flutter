@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class AppMargin {
   static const double m8 = 8.0;
   static const double m10 = 10.0;
@@ -49,4 +51,13 @@ class AppSize {
 }
 
 // ignore: constant_identifier_names
-const ScreenHorizontalSize = 24.0;
+const ScreenHorizontalSize = 16.0;
+const ScreenVerticalSize = 40.0;
+
+double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
+double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
+
+/// Returns the pixel amount for the percentage of the screen height. [percentage] should
+/// be between 0 and 1 where 0 is 0% and 100 is 100% of the screens height
+double screenHeightPercentage(BuildContext context, {double percentage = 1}) =>
+    screenHeight(context) * percentage;
