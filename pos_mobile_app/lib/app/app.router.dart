@@ -22,6 +22,8 @@ import '../ui/auth/verifyAdmin/verify_admin_view.dart';
 import '../ui/auth/verifyAdminSuccess/verify_admin_success_view.dart';
 import '../ui/auth/verifyMerchant/verify_merchant_view.dart';
 import '../ui/auth/verifyMerchantSuccess/verify_merchant_success_view.dart';
+import '../ui/merchant/dashboard/create_logs/new_expense/log_new_expense_view.dart';
+import '../ui/merchant/dashboard/create_logs/new_transactions/log_new_transaction_view.dart';
 import '../ui/merchant/merchant_home_view.dart';
 import '../ui/merchant/profile/changepassword/change_password_view.dart';
 import '../ui/merchant/profile/editprofile/edit_profile_view.dart';
@@ -50,6 +52,8 @@ class Routes {
   static const String editProfileView = '/edit-profile-view';
   static const String howItWorksView = '/how-it-works-view';
   static const String changePasswordView = '/change-password-view';
+  static const String logNewExpenseView = '/log-new-expense-view';
+  static const String logNewTransactionView = '/log-new-transaction-view';
   static const all = <String>{
     splashView,
     onboardView,
@@ -69,6 +73,8 @@ class Routes {
     editProfileView,
     howItWorksView,
     changePasswordView,
+    logNewExpenseView,
+    logNewTransactionView,
   };
 }
 
@@ -94,6 +100,8 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.editProfileView, page: EditProfileView),
     RouteDef(Routes.howItWorksView, page: HowItWorksView),
     RouteDef(Routes.changePasswordView, page: ChangePasswordView),
+    RouteDef(Routes.logNewExpenseView, page: LogNewExpenseView),
+    RouteDef(Routes.logNewTransactionView, page: LogNewTransactionView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -217,6 +225,24 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    LogNewExpenseView: (data) {
+      var args = data.getArgs<LogNewExpenseViewArguments>(
+        orElse: () => LogNewExpenseViewArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => LogNewExpenseView(key: args.key),
+        settings: data,
+      );
+    },
+    LogNewTransactionView: (data) {
+      var args = data.getArgs<LogNewTransactionViewArguments>(
+        orElse: () => LogNewTransactionViewArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => LogNewTransactionView(key: args.key),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -242,6 +268,18 @@ class VerifyMerchantViewArguments {
   final Key? key;
   final String emailAddress;
   VerifyMerchantViewArguments({this.key, required this.emailAddress});
+}
+
+/// LogNewExpenseView arguments holder class
+class LogNewExpenseViewArguments {
+  final Key? key;
+  LogNewExpenseViewArguments({this.key});
+}
+
+/// LogNewTransactionView arguments holder class
+class LogNewTransactionViewArguments {
+  final Key? key;
+  LogNewTransactionViewArguments({this.key});
 }
 
 /// ************************************************************************
@@ -539,6 +577,42 @@ extension NavigatorStateExtension on NavigationService {
   }) async {
     return navigateTo(
       Routes.changePasswordView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToLogNewExpenseView({
+    Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.logNewExpenseView,
+      arguments: LogNewExpenseViewArguments(key: key),
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToLogNewTransactionView({
+    Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.logNewTransactionView,
+      arguments: LogNewTransactionViewArguments(key: key),
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,

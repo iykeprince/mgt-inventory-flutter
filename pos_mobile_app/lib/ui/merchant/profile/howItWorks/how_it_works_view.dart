@@ -14,8 +14,7 @@ class HowItWorksView extends StatelessWidget {
       builder: (context, model, child) => Scaffold(
         backgroundColor: ColorManager.kWhiteColor,
         appBar: Navbar(
-          leadingText: AppString.howItWorksText,
-          leadingWidth: double.infinity,
+          title: AppString.howItWorksText,
           onTap: model.navigateBack,
           iconColor: ColorManager.kDarkCharcoal,
         ),
