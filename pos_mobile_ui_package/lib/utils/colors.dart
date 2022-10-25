@@ -30,4 +30,8 @@ class ColorManager {
 
   static const Color kHowItWorksTitle = Color(0xff145C53);
   static const Color kHowItWorksContent = Color(0xff374846);
+
+  static const Color kTimelineOrange = Color(0xffE48B06);
+
+  static const Color kTimelineBorder = Color(0xff4E9C73);
 }

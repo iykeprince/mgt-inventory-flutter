@@ -5,7 +5,7 @@ part 'default_response.model.g.dart';
 @JsonSerializable()
 class DefaultResponse {
   String message;
-  String status;
+  dynamic status;
   String? token;
 
   DefaultResponse({

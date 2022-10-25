@@ -140,6 +140,7 @@ class AuthenticationService with ReactiveServiceMixin {
       '/user/change-password',
       data: formData,
     );
+    print('Default Resposne: ${response.data}');
     return DefaultResponse.fromJson(response.data);
   }
 
