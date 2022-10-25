@@ -42,6 +42,7 @@ dependencies:
   storybook_flutter: ^0.11.1
   flutter_svg: ^1.1.0
   fluttertoast: ^8.1.1
+  timelines: ^0.1.0
 
 dev_dependencies:
   flutter_test:

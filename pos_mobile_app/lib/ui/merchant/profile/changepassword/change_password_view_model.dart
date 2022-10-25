@@ -29,7 +29,7 @@ class ChangePasswordViewModel extends BaseViewModel {
     await runBusyFuture(runChangePassword(), busyObject: CHANGE_PASSWORD_TASK);
   }
 
-  Future<String> runChangePassword() async {
+  Future<DefaultResponse> runChangePassword() async {
     Map<String, dynamic> formData = {
       'oldPassword': oldPassword!.toString(),
       'newPassword': newPassword!.toString(),
@@ -52,7 +52,7 @@ class ChangePasswordViewModel extends BaseViewModel {
 
       setMessage("Passwrod was changed successfully!");
       _navigationService.back();
-      return response.message;
+      return response;
     } on DioError catch (error) {
       throw Exception(error.response?.data["message"]);
     } finally {

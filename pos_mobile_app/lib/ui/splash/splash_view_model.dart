@@ -10,55 +10,49 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class SplashViewViewModel extends BaseViewModel {
+class SplashViewViewModel extends FutureViewModel<void> {
   final log = getLogger('MyViewModel');
   final AuthenticationService _authenticationService =
       locator<AuthenticationService>();
   final NavigationService _navigationService = locator<NavigationService>();
 
-  runSplash() async {
+  Future<void> getCurrentUser() async {
+    log.i('');
     SharedPreferences preferences = await SharedPreferences.getInstance();
     final bool? isFirstTimeUser = preferences.getBool(IS_FIRST_TIME_USER);
-    if (isFirstTimeUser != null && !isFirstTimeUser) {
-      return _navigationService.replaceWith(Routes.authView);
+    if (isFirstTimeUser != null && isFirstTimeUser) {
+      return _navigationService.replaceWith(Routes.onboardView);
     }
-    Future.delayed(const Duration(seconds: 2), () {
-      _navigationService.replaceWith(Routes.onboardView);
-    });
+
+    String? routeName;
+    try {
+      User response = await _authenticationService.getCurrentBaseUser();
+
+      log.i('Success Profile ${response.role}');
+      switch (response.role) {
+        case "MERCHANT":
+          routeName = Routes.merchantHomeView;
+          break;
+        case "ADMIN":
+          routeName = Routes.adminHomeView;
+          break;
+        case "SUPERADMIN":
+        default:
+          break;
+      }
+      _navigationService.replaceWith(routeName!);
+    } on DioError catch (error) {
+      _navigationService.replaceWith(Routes.authView);
+    }
   }
 
-  // Future<User> getCurrentUser() async {
+  @override
+  Future<void> futureToRun() => getCurrentUser();
 
-  // log.i('');
-  // try {
-  //   var response = await _authenticationService.getCurrentBaseUser();
-  //   if (response == null) {
-  //     log.i('Success Profile ${response.role}');
-
-  //     // switch (response.role) {
-  //     //   case "MERCHANT":
-  //     //   case "ADMIN":
-  //     //   case "SUPERADMIN":
-  //     //     break;
-  //     // }
-  //   }
-  //   return response;
-  // } on DioError catch (error) {
-  //   throw Exception(error.message);
-  // }
-  // }
-
-  // @override
-  // Future<User> futureToRun() => getCurrentUser();
-
-  // @override
-  // void onError(error) {
-  //   log.e(error);
-  //   //hello who are you
-  //   log.i('Error e');
-
-  // bool? isFirstTimeUser = _sharedPreferences.getBool(IS_FIRST_TIME_USER);
-  // if (isFirstTimeUser == null) {
-  // }
-  // }
+  @override
+  void onError(error) {
+    log.e(error);
+    //hello who are you
+    log.i('Error e');
+  }
 }

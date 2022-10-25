@@ -11,8 +11,8 @@ class SplashView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SplashViewViewModel>.reactive(
       viewModelBuilder: () => SplashViewViewModel(),
-      onModelReady: (model) => model.runSplash(),
       builder: (context, viewModel, child) {
+        print('SPLASH [isBusy]: ${viewModel.isBusy}');
         return Scaffold(
           body: Container(
             decoration: BoxDecoration(
@@ -22,13 +22,10 @@ class SplashView extends StatelessWidget {
                 end: Alignment.bottomCenter,
               ),
             ),
-            child: GestureDetector(
-              onTap: () => viewModel.runSplash(),
-              child: Center(
-                child: Image.asset(
-                  'assets/images/POS.png',
-                  fit: BoxFit.contain,
-                ),
+            child: Center(
+              child: Image.asset(
+                'assets/images/POS.png',
+                fit: BoxFit.contain,
               ),
             ),
           ),

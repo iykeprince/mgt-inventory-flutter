@@ -9,7 +9,7 @@ part of 'default_response.model.dart';
 DefaultResponse _$DefaultResponseFromJson(Map<String, dynamic> json) =>
     DefaultResponse(
       message: json['message'] as String,
-      status: json['status'] as String,
+      status: json['status'],
       token: json['token'] as String?,
     );
 
