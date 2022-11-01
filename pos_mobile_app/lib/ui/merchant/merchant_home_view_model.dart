@@ -38,9 +38,10 @@ class MerchantHomeViewModel extends IndexTrackingViewModel {
       variant: BottomSheetType.createLogs,
       mainButtonTitle: "Log New Expense",
       secondaryButtonTitle: "Log New Transaction",
-      useRootNavigator: false,
+      useRootNavigator: true,
       data: navigateToLogNewTransaction,
       customData: navigateToLogNewExpense,
+      ignoreSafeArea: true,
 
       // description:
       //     'This sheet is a custom built bottom sheet UI that allows you to show it from any service or viewmodel.',
