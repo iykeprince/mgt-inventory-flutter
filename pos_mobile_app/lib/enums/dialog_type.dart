@@ -1,1 +1,1 @@
-enum DialogType { switchBranch }
+enum DialogType { DELETE_MERCHANT_ACCOUNT, SWITCH_BRANCH }

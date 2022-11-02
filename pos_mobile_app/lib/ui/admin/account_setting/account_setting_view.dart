@@ -90,7 +90,9 @@ class AccountSettingView extends StatelessWidget {
                       ),
                       ProfileItem(
                         title: AppString.manageBranches,
-                        onTap: () {},
+                        onTap: () {
+                          model.showDialog();
+                        },
                       ),
                       ProfileItem(
                         title: AppString.manageReportSettings,
