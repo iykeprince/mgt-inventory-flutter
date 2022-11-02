@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pos_mobile_app/ui/admin/account_setting/account_setting_view.dart';
 import 'package:pos_mobile_app/ui/admin/dashboard/dasboard_view.dart';
 import 'package:pos_mobile_app/ui/merchant/dashboard/dashboard_view.dart';
 
@@ -17,6 +18,7 @@ class AdminHomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<AdminHomeViewModel>.reactive(
       viewModelBuilder: () => AdminHomeViewModel(),
+      onModelReady: (model) => model.getCurrentUser(),
       builder: (context, model, child) => Scaffold(
         extendBody: true,
         body: getViewForIndex(model.currentIndex),
@@ -120,7 +122,7 @@ class AdminHomeView extends StatelessWidget {
       case 3:
         return const Center(child: Text('Admin Reports'));
       case 4:
-        return const Center(child: Text('Admin Settings'));
+        return AccountSettingView();
       default:
         return const Center(child: Text('Admin Dashboard'));
     }

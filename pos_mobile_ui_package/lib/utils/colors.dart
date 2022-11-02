@@ -39,4 +39,6 @@ class ColorManager {
   static const Color kTimelineOrange = Color(0xffE48B06);
 
   static const Color kTimelineBorder = Color(0xff4E9C73);
+
+  static const Color kBgSmokeWhite = Color(0xffF4F4F4);
 }
