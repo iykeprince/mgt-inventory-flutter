@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:pos_mobile_app/app/app.locator.dart';
 import 'package:pos_mobile_app/app/app.router.dart';
 import 'package:pos_mobile_app/utils/setup_bottom_sheet_ui.dart';
+import 'package:pos_mobile_app/utils/setup_dialog_ui.dart';
 import 'package:pos_mobile_ui_package/utils/colors.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -10,6 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
   setupBottomSheetUi();
+  setupDialogUi();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(const MyApp());
 }

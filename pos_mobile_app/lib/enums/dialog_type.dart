@@ -1,0 +1,1 @@
+enum DialogType { DELETE_MERCHANT_ACCOUNT }
