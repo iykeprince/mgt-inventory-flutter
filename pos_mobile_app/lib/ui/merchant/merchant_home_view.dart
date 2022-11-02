@@ -118,7 +118,7 @@ class HomeView extends ViewModelWidget<MerchantHomeViewModel> {
   @override
   Widget build(BuildContext context, MerchantHomeViewModel model) {
     return FloatingActionButton(
-      onPressed: model.triggerAction,
+      onPressed: (model.triggerAction),
       child: Container(
         height: 64,
         width: 64,
