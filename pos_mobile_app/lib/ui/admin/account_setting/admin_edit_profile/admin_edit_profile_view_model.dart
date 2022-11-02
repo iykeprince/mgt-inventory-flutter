@@ -1,49 +1,50 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:pos_mobile_app/app/app.locator.dart';
-import 'package:pos_mobile_app/ui/auth/compeleteMerchantRegistration/compelete_merchant_register_model.dart';
 import 'package:stacked/stacked.dart';
+import 'package:pos_mobile_app/app/app.router.dart';
+import 'package:pos_mobile_app/ui/auth/compeleteMerchantRegistration/compelete_merchant_register_model.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import '../../../../app/app.router.dart';
 import '../../../../enums/bottom_sheet_type.dart';
+import '../../../../models/admin.model.dart';
 import '../../../../models/merchant.model.dart';
 import '../../../../models/user.model.dart';
 import '../../../../services/authentication.service.dart';
 import '../../../../services/merchant.service.dart';
 
-class EditProfileViewModel extends BaseViewModel {
+class AdminEditProfileViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _authService = locator<AuthenticationService>();
   final _merchantService = locator<MerchantService>();
 
   User? get user => _authService.currentUser;
-  Merchant? get merchant => _authService.currentMerchantUser;
+  Admin? get admin => _authService.currentAdminUser;
 
   navigateBack() => _navigationService.back();
 
-  TextEditingController fullnameController = TextEditingController();
+  TextEditingController businessNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  TextEditingController numOfBranchController = TextEditingController();
 
   String? get contactPhone => phoneController.text;
   String? get email => emailController.text;
-  String? get address => addressController.text;
-  String? get fullname => fullnameController.text;
+  String? get numOfBranch => numOfBranchController.text;
+  String? get businessName => businessNameController.text;
 
   updateMerchant() {
-    runBusyFuture(runUpdateMerchant(),
-        busyObject: UPDATE_MERCHANT_PROFILE_TASK_OBJECT);
+    // runBusyFuture(runUpdateMerchant(),
+    //     busyObject: UPDATE_MERCHANT_PROFILE_TASK_OBJECT);
   }
 
-  Future runUpdateMerchant() async {
+  Future runUpdateAdmin() async {
     var formData = {
-      "name": fullname ?? merchant?.name,
-      "email": email ?? merchant?.user?.email,
-      "contactPhone": contactPhone ?? merchant?.contactPhone,
-      "address": address ?? merchant?.address,
-      "branchId": merchant!.branchId
+      // "name": fullname ?? merchant?.name,
+      // "email": email ?? merchant?.user?.email,
+      // "contactPhone": contactPhone ?? merchant?.contactPhone,
+      // "address": address ?? merchant?.address,
+      // "branchId": merchant!.branchId
     };
 
     print(formData);
@@ -51,9 +52,9 @@ class EditProfileViewModel extends BaseViewModel {
     try {
       var response = await _merchantService.updateMerchant(formData);
 
-      _navigationService.navigateTo(
-        Routes.merchantHomeView,
-      );
+      // _navigationService.navigateTo(
+      //   Routes.merchantHomeView,
+      // );
       return response;
     } on DioError catch (error) {
       print(error.response?.data["message"]);

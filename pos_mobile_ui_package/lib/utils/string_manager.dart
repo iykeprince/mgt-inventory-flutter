@@ -6,6 +6,7 @@ class AppString {
   static const String login = "Log In";
   static const String logout = "Logout";
   static const String merchant = "Merchant";
+  static const String admin = "Admin";
   static const String overview = "Overview";
   static const String forgotPassword = "Forgot Password?";
   static const String onBoardSub1 =
@@ -26,6 +27,8 @@ class AppString {
   static const String usernameOrEmailAddress = "Username or Email Address";
   static const String password = "Password";
   static const String emailAddressPlaceholder = "sample@email.com";
+  static const String businessEmailAddressPlaceholder =
+      "johndoetechnologies@email.com";
   static const String dontHaveAnAccountRegisterNow =
       "Don’t have an account? Register now";
   static const String enterYourEmailAddress = "Enter your email address";
@@ -122,4 +125,10 @@ class AppString {
       "Select charge payment method";
   static const String amountPlaceholder = "0.00";
   static const String dateformat = 'MM/DD/YYYY';
+
+  static const String manageMerchantAccounts = 'Manage Merchant Accounts';
+  static const String manageBranches = 'Manage Branches';
+  static const String manageReportSettings = 'Manage Report Settings';
+  static const String termsOfUseAndPrivacyPolicy =
+      'Terms of Use & Privacy Policy';
 }

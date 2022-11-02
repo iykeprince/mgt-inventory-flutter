@@ -5,6 +5,8 @@ import 'package:pos_mobile_ui_package/utils/colors.dart';
 
 enum ButtonType { fill, outline, text }
 
+enum BorderRadiusType { none, left, right }
+
 class PosButton extends StatelessWidget {
   final double borderRadius;
   final double fontSize;
@@ -23,6 +25,8 @@ class PosButton extends StatelessWidget {
   final IconData? trailingIcon;
   final double trailingIconSpace;
   final double leadingIconSpace;
+  final BorderRadiusType borderRadiusType;
+
   PosButton({
     Key? key,
     this.borderRadius = 8.0,
@@ -41,6 +45,7 @@ class PosButton extends StatelessWidget {
     this.trailingIconColor = ColorManager.kPrimaryColor,
     this.busy = false,
     this.buttonType = ButtonType.fill,
+    this.borderRadiusType = BorderRadiusType.none,
   });
 
   Color getBackgroundColor() {
@@ -84,6 +89,27 @@ class PosButton extends StatelessWidget {
     }
   }
 
+  BorderRadius _constructBorderRadius(BorderRadiusType type) {
+    switch (type) {
+      case BorderRadiusType.left:
+        return BorderRadius.only(
+          topLeft: Radius.circular(borderRadius),
+          topRight: Radius.zero,
+          bottomLeft: Radius.circular(borderRadius),
+          bottomRight: Radius.zero,
+        );
+      case BorderRadiusType.right:
+        return BorderRadius.only(
+          topLeft: Radius.zero,
+          topRight: Radius.circular(borderRadius),
+          bottomLeft: Radius.zero,
+          bottomRight: Radius.circular(borderRadius),
+        );
+      default:
+        return BorderRadius.circular(borderRadius);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final _color = getColor();
@@ -96,7 +122,7 @@ class PosButton extends StatelessWidget {
           vertical: 23.0,
         ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(borderRadius),
+          borderRadius: _constructBorderRadius(borderRadiusType),
           color: _bgColor,
           border: constructBorder(),
         ),

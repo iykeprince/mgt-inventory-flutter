@@ -10,6 +10,11 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../ui/admin/account_setting/account_setting_view.dart';
+import '../ui/admin/account_setting/admin_change_password/admin_change_password_view.dart';
+import '../ui/admin/account_setting/admin_edit_profile/admin_edit_profile_view.dart';
+import '../ui/admin/account_setting/admin_howItWorks/admin_how_it_works_view.dart';
+import '../ui/admin/account_setting/admin_manage_merchant_account/admin_manage_merchant_account_view.dart';
 import '../ui/admin/admin_home_view.dart';
 import '../ui/auth/auth_view.dart';
 import '../ui/auth/compeleteMerchantRegistration/compelete_merchant_register.dart';
@@ -48,6 +53,12 @@ class Routes {
   static const String compeleteMerchantRegister =
       '/compelete-merchant-register';
   static const String adminHomeView = '/admin-home-view';
+  static const String accountSettingView = '/account-setting-view';
+  static const String adminEditProfileView = '/admin-edit-profile-view';
+  static const String adminManageMerchantAccountView =
+      '/admin-manage-merchant-account-view';
+  static const String adminChangePasswordView = '/admin-change-password-view';
+  static const String adminHowItWorksView = '/admin-how-it-works-view';
   static const String merchantHomeView = '/merchant-home-view';
   static const String editProfileView = '/edit-profile-view';
   static const String howItWorksView = '/how-it-works-view';
@@ -69,6 +80,11 @@ class Routes {
     verifyMerchantSuccessView,
     compeleteMerchantRegister,
     adminHomeView,
+    accountSettingView,
+    adminEditProfileView,
+    adminManageMerchantAccountView,
+    adminChangePasswordView,
+    adminHowItWorksView,
     merchantHomeView,
     editProfileView,
     howItWorksView,
@@ -96,6 +112,12 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.verifyMerchantSuccessView, page: VerifyMerchantSuccessView),
     RouteDef(Routes.compeleteMerchantRegister, page: CompeleteMerchantRegister),
     RouteDef(Routes.adminHomeView, page: AdminHomeView),
+    RouteDef(Routes.accountSettingView, page: AccountSettingView),
+    RouteDef(Routes.adminEditProfileView, page: AdminEditProfileView),
+    RouteDef(Routes.adminManageMerchantAccountView,
+        page: AdminManageMerchantAccountView),
+    RouteDef(Routes.adminChangePasswordView, page: AdminChangePasswordView),
+    RouteDef(Routes.adminHowItWorksView, page: AdminHowItWorksView),
     RouteDef(Routes.merchantHomeView, page: MerchantHomeView),
     RouteDef(Routes.editProfileView, page: EditProfileView),
     RouteDef(Routes.howItWorksView, page: HowItWorksView),
@@ -198,6 +220,36 @@ class StackedRouter extends RouterBase {
     AdminHomeView: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const AdminHomeView(),
+        settings: data,
+      );
+    },
+    AccountSettingView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const AccountSettingView(),
+        settings: data,
+      );
+    },
+    AdminEditProfileView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const AdminEditProfileView(),
+        settings: data,
+      );
+    },
+    AdminManageMerchantAccountView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const AdminManageMerchantAccountView(),
+        settings: data,
+      );
+    },
+    AdminChangePasswordView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const AdminChangePasswordView(),
+        settings: data,
+      );
+    },
+    AdminHowItWorksView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const AdminHowItWorksView(),
         settings: data,
       );
     },
@@ -513,6 +565,86 @@ extension NavigatorStateExtension on NavigationService {
   }) async {
     return navigateTo(
       Routes.adminHomeView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToAccountSettingView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.accountSettingView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToAdminEditProfileView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.adminEditProfileView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToAdminManageMerchantAccountView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.adminManageMerchantAccountView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToAdminChangePasswordView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.adminChangePasswordView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToAdminHowItWorksView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.adminHowItWorksView,
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,
