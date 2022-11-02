@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 
-class BottomSheetContainer extends StatelessWidget {
+class ShowDialogContainer extends StatelessWidget {
   final Widget child;
   final EdgeInsets? margin;
   final EdgeInsets? padding;
   final Color? color;
   final BorderRadius? borderRadius;
-  const BottomSheetContainer({
+  const ShowDialogContainer({
     Key? key,
     required this.child,
     this.color,

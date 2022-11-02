@@ -21,6 +21,7 @@ export 'widgets/avatar/avatar.dart';
 export 'widgets/card/card.dart';
 export 'widgets/textarea/textarea.dart';
 export 'widgets/date_picker/date_picker.dart';
+export 'widgets/show_dialog/show_dialog_container.dart';
 
 //export the utils
 export './utils/colors.dart';

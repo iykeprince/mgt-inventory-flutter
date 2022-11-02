@@ -27,6 +27,11 @@ class ColorManager {
   static const Color kBackgroundolor = Color(0xffF0F1FD);
   static const Color kGreyBtn = Color(0xffE5E5E5);
   static const Color kRed = Color(0xffD10000);
+  static const Color kLightGray = Color(0xffAAAAAA);
+  static const Color kRichBlack = Color(0xff050F19);
+  static const Color kLightGrayishOrange = Color(0xffFEF7ED);
+  static const Color kGoldenAmber = Color(0xffE69214);
+  static const Color kPinkSwan = Color(0xffB4B5BE);
 
   static const Color kHowItWorksTitle = Color(0xff145C53);
   static const Color kHowItWorksContent = Color(0xff374846);
