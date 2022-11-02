@@ -1,5 +1,10 @@
 import 'package:pos_mobile_app/client/dio_client.dart';
 import 'package:pos_mobile_app/services/authentication.service.dart';
+import 'package:pos_mobile_app/ui/admin/account_setting/account_setting_view.dart';
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_change_password/admin_change_password_view.dart';
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_edit_profile/admin_edit_profile_view.dart';
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_howItWorks/admin_how_it_works_view.dart';
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_merchant_account/admin_manage_merchant_account_view.dart';
 import 'package:pos_mobile_app/ui/admin/admin_home_view.dart';
 import 'package:pos_mobile_app/ui/auth/auth_view.dart';
 import 'package:pos_mobile_app/ui/auth/compeleteMerchantRegistration/compelete_merchant_register.dart';
@@ -41,7 +46,15 @@ import '../services/merchant.service.dart';
     AdaptiveRoute(page: VerifyMerchantView),
     AdaptiveRoute(page: VerifyMerchantSuccessView),
     AdaptiveRoute(page: CompeleteMerchantRegister),
+/**Admin journey to be refactored */
     AdaptiveRoute(page: AdminHomeView),
+    AdaptiveRoute(page: AccountSettingView),
+    AdaptiveRoute(page: AdminEditProfileView),
+    AdaptiveRoute(page: AdminManageMerchantAccountView),
+    AdaptiveRoute(page: AdminChangePasswordView),
+    AdaptiveRoute(page: AdminHowItWorksView),
+
+/**Merchant Journey to be refactored */
     AdaptiveRoute(page: MerchantHomeView),
     AdaptiveRoute(page: EditProfileView),
     AdaptiveRoute(page: HowItWorksView),
