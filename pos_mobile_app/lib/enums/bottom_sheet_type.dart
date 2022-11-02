@@ -1,1 +1,1 @@
-enum BottomSheetType { normal, openBalance, createLogs }
+enum BottomSheetType { normal, openBalance, createLogs, createMerchant }
