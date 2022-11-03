@@ -16,12 +16,12 @@ class CreateMerchantBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomSheetContainer(
-        padding: EdgeInsets.all(0),
+        padding: const EdgeInsets.all(0),
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.only(top: AppMargin.m12),
-              decoration: BoxDecoration(
+              margin: const EdgeInsets.only(top: AppMargin.m12),
+              decoration: const BoxDecoration(
                 color: ColorManager.kPinkSwan,
               ),
               width: AppSize.s64,
@@ -80,7 +80,10 @@ class CreateMerchantBottomSheet extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppPadding.p24),
               child: PosButton(
-                onPressed: () {},
+                onPressed: () {
+                  completer!(SheetResponse(confirmed: true));
+                  request!.customData();
+                },
                 title: 'Add Branch Details',
                 leadingIcon: Icons.add_circle,
                 leadingIconColor: ColorManager.kPrimaryColor,
@@ -88,6 +91,10 @@ class CreateMerchantBottomSheet extends StatelessWidget {
                 fontWeight: FontWeightManager.medium,
                 buttonBgColor: ColorManager.kLightGreen1,
                 leadingIconSpace: AppSize.s24,
+                border: Border.all(
+                  color: ColorManager.kBorderLightGreen,
+                  width: 1,
+                ),
               ),
             )
           ],
