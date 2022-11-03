@@ -17,6 +17,7 @@ class AppString {
       "Create, revoke, and manage moderator accounts; automatically own a copy of weekly, monthly, quarterly or yearly transaction reports.";
   static const String welcomeTo = "Welcome to";
   static const String pos = "POS.";
+  static const String posNameText = "POS Name";
   static const String registerQuestion = "What would you like to do?";
   static const String registerMerchant = "Register Merchant Account";
   static const String completeProfile = "Complete your profile";
@@ -37,6 +38,17 @@ class AppString {
   static const String iAgreeToTersOfUse =
       "I agree to the Terms of Use, and have read the Privacy Policy.";
   static const String verifyEmailText = "Verify your email address";
+
+  static const String branchNamePlaceholderText = "Lagos Branch";
+
+  static const String posNameUsedInBranchText = "Name of POS used in branch";
+
+  static const String bankAccountDetailText = "Bank Account Detail";
+  static const String bankAccountDetailPlaceholderText =
+      "GTB - 0120200001 - Jane Doe";
+
+  static const String bankAccountRecommendedForPosText =
+      "Bank account details for POS. We recommend seperating with an hyphen";
   static String verifyEmailSubText(String email) =>
       "We sent a six-digit code to your email address ($email) for verification.";
   static const String otpCodeText = "OTP Code";
@@ -98,6 +110,8 @@ class AppString {
   static const String accountSettingsText = "Account Settings";
   static const String oldPasswordText = "Old Password";
   static const String newPasswordText = "New Password";
+  static const String locationText = "Location";
+  static const String locationPlaceholderText = "Ikeja, Lagos";
 
   static const String confirmPasswordText = "Confirm Password";
   static const String logNewTranscationText = "Log New Transaction";
@@ -134,4 +148,8 @@ class AppString {
       'Terms of Use & Privacy Policy';
   static const String createMerchantAccount = "Create Merchant Account";
   static const String merchantName = "Merchant Name";
+  static const String saveBranchDetailText = "Save branch detail";
+  static const String numberOfMerchantText =
+      "Number of merchants managing this branch";
+  static const String numberOfMerchantPlaceholderText = "1";
 }
