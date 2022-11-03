@@ -3,29 +3,56 @@ import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 
 class ShowDialogContainer extends StatelessWidget {
   final Widget child;
-  final EdgeInsets? margin;
+  final double? height;
   final EdgeInsets? padding;
+  final String? title;
   final Color? color;
   final BorderRadius? borderRadius;
+  final Function() onPressed;
   const ShowDialogContainer({
     Key? key,
     required this.child,
+    required this.onPressed,
     this.color,
-    this.margin,
+    this.height,
+    this.title,
     this.padding,
     this.borderRadius,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: margin,
-      padding: padding ?? EdgeInsets.all(AppPadding.p24),
-      decoration: BoxDecoration(
-        color: color ?? Colors.white,
-        borderRadius: borderRadius ?? BorderRadius.circular(15),
-      ),
-      child: child,
-    );
+    return Dialog(
+        insetPadding: const EdgeInsets.symmetric(horizontal: AppPadding.p24),
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        elevation: 0,
+        child: SizedBox(
+          height: height ?? 500,
+          child: Column(
+            children: [
+              Align(
+                  alignment: Alignment.topRight,
+                  child: IconButton(
+                    onPressed: onPressed,
+                    icon: const Icon(Icons.cancel_rounded),
+                    color: ColorManager.kChineseSilver,
+                  )),
+              Text(
+                title ?? '',
+                style: getSemiBoldStyle(
+                    color: ColorManager.kDarkCharcoal, fontSize: FontSize.s18),
+              ),
+              const SizedBox(
+                height: AppSize.s16,
+              ),
+              Container(
+                width: double.infinity,
+                height: AppSize.s1_5,
+                color: ColorManager.kAzureishWhite,
+              ),
+              child,
+            ],
+          ),
+        ));
   }
 }

@@ -32,6 +32,9 @@ class ColorManager {
   static const Color kLightGrayishOrange = Color(0xffFEF7ED);
   static const Color kGoldenAmber = Color(0xffE69214);
   static const Color kPinkSwan = Color(0xffB4B5BE);
+  static const Color kAzureishWhite = Color(0xffD0EBE8);
+  static const Color kChineseSilver = Color(0xffCCCCCC);
+  static const Color kMidnightBlue = Color(0xff1B4672);
 
   static const Color kHowItWorksTitle = Color(0xff145C53);
   static const Color kHowItWorksContent = Color(0xff374846);
