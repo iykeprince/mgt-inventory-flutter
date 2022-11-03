@@ -10,6 +10,7 @@ import 'package:stacked_core/stacked_core.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../client/dio_client.dart';
+import '../services/admin.service.dart';
 import '../services/authentication.service.dart';
 import '../services/merchant.service.dart';
 
@@ -29,4 +30,5 @@ Future<void> setupLocator(
   locator.registerLazySingleton(() => DioClient());
   locator.registerLazySingleton(() => AuthenticationService());
   locator.registerLazySingleton(() => MerchantService());
+  locator.registerLazySingleton(() => AdminService());
 }

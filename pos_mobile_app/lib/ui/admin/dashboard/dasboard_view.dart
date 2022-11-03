@@ -65,7 +65,7 @@ class AdminDashboardView extends StatelessWidget {
                       height: AppSize.s20,
                     ),
                     PosButton(
-                      onPressed: model.createMerchantSheet,
+                      onPressed: model.navigateToCreateMerchant,
                       title: 'Create Merchant Account',
                       fontWeight: FontWeightManager.bold,
                       fontSize: FontSize.s16,

@@ -68,6 +68,7 @@ flutter:
     - assets/images/
     - assets/images/auth/
     - assets/images/MerchantDashboard/
+    - assets/images/adminDashboard/
     # - assets/icons/
   #   - images/a_dot_ham.jpeg
 

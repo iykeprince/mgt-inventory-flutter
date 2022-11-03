@@ -1,4 +1,5 @@
 import 'package:pos_mobile_app/client/dio_client.dart';
+import 'package:pos_mobile_app/services/admin.service.dart';
 import 'package:pos_mobile_app/services/authentication.service.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/account_setting_view.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_change_password/admin_change_password_view.dart';
@@ -6,6 +7,7 @@ import 'package:pos_mobile_app/ui/admin/account_setting/admin_edit_profile/admin
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_howItWorks/admin_how_it_works_view.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_merchant_account/admin_manage_merchant_account_view.dart';
 import 'package:pos_mobile_app/ui/admin/admin_home_view.dart';
+import 'package:pos_mobile_app/ui/admin/dashboard/create_merchant_account/create_merchant_account_view.dart';
 import 'package:pos_mobile_app/ui/auth/auth_view.dart';
 import 'package:pos_mobile_app/ui/auth/compeleteMerchantRegistration/compelete_merchant_register.dart';
 import 'package:pos_mobile_app/ui/auth/createAccountSuccess/create_account_success_view.dart';
@@ -53,6 +55,7 @@ import '../services/merchant.service.dart';
     AdaptiveRoute(page: AdminManageMerchantAccountView),
     AdaptiveRoute(page: AdminChangePasswordView),
     AdaptiveRoute(page: AdminHowItWorksView),
+    AdaptiveRoute(page: CreateMerchantAccountView),
 
 /**Merchant Journey to be refactored */
     AdaptiveRoute(page: MerchantHomeView),
@@ -69,7 +72,8 @@ import '../services/merchant.service.dart';
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: DioClient),
     LazySingleton(classType: AuthenticationService),
-    LazySingleton(classType: MerchantService)
+    LazySingleton(classType: MerchantService),
+    LazySingleton(classType: AdminService),
   ],
   logger: StackedLogger(),
 )

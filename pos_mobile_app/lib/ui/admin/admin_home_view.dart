@@ -7,6 +7,7 @@ import 'package:pos_mobile_app/ui/merchant/dashboard/dashboard_view.dart';
 import 'package:pos_mobile_app/utils/colors.dart';
 import 'package:pos_mobile_app/utils/custom_notch.dart';
 import 'package:pos_mobile_ui_package/utils/colors.dart';
+import 'package:pos_mobile_ui_package/utils/values_manager.dart';
 import 'package:stacked/stacked.dart';
 
 import 'admin_home_view_model.dart';
@@ -18,7 +19,10 @@ class AdminHomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<AdminHomeViewModel>.reactive(
       viewModelBuilder: () => AdminHomeViewModel(),
-      onModelReady: (model) => model.getCurrentUser(),
+      onModelReady: (model) {
+        model.getCurrentUser();
+        model.fetchBranch();
+      },
       builder: (context, model, child) => Scaffold(
         extendBody: true,
         body: getViewForIndex(model.currentIndex),
@@ -88,19 +92,27 @@ class AdminHomeView extends StatelessWidget {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: model.busy(ADMIN_FETCH_BRANCH) ? null : model.navigateSwitchBranch,
           child: Container(
-              height: 64,
-              width: 64,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: LinearGradient(
-                  colors: [linearFrom, linearTo],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
+            height: 64,
+            width: 64,
+            padding: const EdgeInsets.all(AppSize.s12),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                colors: [linearFrom, linearTo],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
               ),
-              child: const Icon(Icons.add)),
+            ),
+            child: SizedBox(
+              child: SvgPicture.asset(
+                !model.showBranches
+                    ? 'assets/images/adminDashboard/home_icon.svg'
+                    : "assets/images/adminDashboard/home_x_icon.svg",
+              ),
+            ),
+          ),
           elevation: 0,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
