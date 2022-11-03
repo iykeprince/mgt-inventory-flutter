@@ -7,6 +7,7 @@ import 'package:pos_mobile_app/ui/admin/account_setting/admin_edit_profile/admin
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_howItWorks/admin_how_it_works_view.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_merchant_account/admin_manage_merchant_account_view.dart';
 import 'package:pos_mobile_app/ui/admin/admin_home_view.dart';
+import 'package:pos_mobile_app/ui/admin/dashboard/add_branch/add_branch_view.dart';
 import 'package:pos_mobile_app/ui/admin/dashboard/create_merchant_account/create_merchant_account_view.dart';
 import 'package:pos_mobile_app/ui/auth/auth_view.dart';
 import 'package:pos_mobile_app/ui/auth/compeleteMerchantRegistration/compelete_merchant_register.dart';
@@ -56,6 +57,7 @@ import '../services/merchant.service.dart';
     AdaptiveRoute(page: AdminChangePasswordView),
     AdaptiveRoute(page: AdminHowItWorksView),
     AdaptiveRoute(page: CreateMerchantAccountView),
+    AdaptiveRoute(page: AddBranchView),
 
 /**Merchant Journey to be refactored */
     AdaptiveRoute(page: MerchantHomeView),

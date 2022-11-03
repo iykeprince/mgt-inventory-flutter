@@ -22,6 +22,7 @@ class AdminHomeView extends StatelessWidget {
       onModelReady: (model) {
         model.getCurrentUser();
         model.fetchBranch();
+        model.fetchMerchants();
       },
       builder: (context, model, child) => Scaffold(
         extendBody: true,
@@ -92,7 +93,9 @@ class AdminHomeView extends StatelessWidget {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: model.busy(ADMIN_FETCH_BRANCH) ? null : model.navigateSwitchBranch,
+          onPressed: model.busy(ADMIN_FETCH_BRANCH)
+              ? null
+              : model.navigateSwitchBranch,
           child: Container(
             height: 64,
             width: 64,
