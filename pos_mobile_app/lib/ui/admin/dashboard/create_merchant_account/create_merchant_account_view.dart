@@ -81,10 +81,7 @@ class CreateMerchantAccountFormView
                   hint: AppString.branchNameText,
                   value: model.selectedValue,
                   dropdownItems: model.branches!.map((e) => e.name!).toList(),
-                  onChanged: (value) {
-                    model.setBranch(value!);
-                    print('value: $value');
-                  },
+                  onChanged: (value) => model.setBranch(value!),
                   label: AppString.branchNameText,
                   labelStyle: getBoldStyle(
                     color: ColorManager.kDarkCharcoal,

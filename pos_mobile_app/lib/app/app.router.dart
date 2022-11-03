@@ -16,6 +16,7 @@ import '../ui/admin/account_setting/admin_edit_profile/admin_edit_profile_view.d
 import '../ui/admin/account_setting/admin_howItWorks/admin_how_it_works_view.dart';
 import '../ui/admin/account_setting/admin_manage_merchant_account/admin_manage_merchant_account_view.dart';
 import '../ui/admin/admin_home_view.dart';
+import '../ui/admin/dashboard/add_branch/add_branch_view.dart';
 import '../ui/admin/dashboard/create_merchant_account/create_merchant_account_view.dart';
 import '../ui/auth/auth_view.dart';
 import '../ui/auth/compeleteMerchantRegistration/compelete_merchant_register.dart';
@@ -62,6 +63,7 @@ class Routes {
   static const String adminHowItWorksView = '/admin-how-it-works-view';
   static const String createMerchantAccountView =
       '/create-merchant-account-view';
+  static const String addBranchView = '/add-branch-view';
   static const String merchantHomeView = '/merchant-home-view';
   static const String editProfileView = '/edit-profile-view';
   static const String howItWorksView = '/how-it-works-view';
@@ -89,6 +91,7 @@ class Routes {
     adminChangePasswordView,
     adminHowItWorksView,
     createMerchantAccountView,
+    addBranchView,
     merchantHomeView,
     editProfileView,
     howItWorksView,
@@ -123,6 +126,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.adminChangePasswordView, page: AdminChangePasswordView),
     RouteDef(Routes.adminHowItWorksView, page: AdminHowItWorksView),
     RouteDef(Routes.createMerchantAccountView, page: CreateMerchantAccountView),
+    RouteDef(Routes.addBranchView, page: AddBranchView),
     RouteDef(Routes.merchantHomeView, page: MerchantHomeView),
     RouteDef(Routes.editProfileView, page: EditProfileView),
     RouteDef(Routes.howItWorksView, page: HowItWorksView),
@@ -261,6 +265,12 @@ class StackedRouter extends RouterBase {
     CreateMerchantAccountView: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const CreateMerchantAccountView(),
+        settings: data,
+      );
+    },
+    AddBranchView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const AddBranchView(),
         settings: data,
       );
     },
@@ -672,6 +682,22 @@ extension NavigatorStateExtension on NavigationService {
   }) async {
     return navigateTo(
       Routes.createMerchantAccountView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToAddBranchView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.addBranchView,
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,

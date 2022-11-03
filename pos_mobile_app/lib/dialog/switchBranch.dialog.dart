@@ -38,7 +38,9 @@ class SwitchBranchDialog extends StatelessWidget {
             ),
           ),
           PosButton(
-            onPressed: () {},
+            onPressed: () => onDialogTap!(
+              DialogResponse(confirmed: true, data: "ADD_NEW_BRANCH"),
+            ),
             title: AppString.addNewBranch,
             borderRadius: 0,
             leadingIcon: Icons.add,

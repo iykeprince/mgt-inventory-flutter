@@ -11,11 +11,19 @@ class AdminService with ReactiveServiceMixin {
   Dio dioClient = locator<DioClient>().dio;
 
   AdminService() {
-    listenToReactiveValues([_branches]);
+    listenToReactiveValues([_branches, _merchants]);
   }
   final ReactiveValue<List<Branch>?> _branches =
       ReactiveValue<List<Branch>?>([]);
+  final ReactiveValue<List<Merchant>> _merchants =
+      ReactiveValue<List<Merchant>>([]);
+
   List<Branch>? get branches => _branches.value;
+  List<Merchant> get merchants => _merchants.value;
+
+  void addBranch() {
+    _branches.value = [...?_branches.value, Branch()];
+  }
 
   Future<Admin> updateAdmin(Map formData) async {
     var response = await dioClient.put('/admin/update', data: formData);
@@ -26,11 +34,27 @@ class AdminService with ReactiveServiceMixin {
 
   Future<List<Branch>> getBranches() async {
     var response = await dioClient.get('/admin/branches');
-    print('body: ${response.data}');
     List<Branch> branches = (response.data as List<dynamic>)
         .map((x) => Branch.fromJson(x))
         .toList();
     _branches.value = branches;
     return branches;
+  }
+
+  Future<List<Merchant>> getMerchants() async {
+    var response = await dioClient.get('/admin/merchants');
+    List<Merchant> merchants = (response.data as List<dynamic>)
+        .map((x) => Merchant.fromJson(x))
+        .toList();
+    _merchants.value = merchants;
+    print('merchants: ${_merchants.value}');
+    return merchants;
+  }
+
+  Future<Merchant> createMerchantAccount(Map formData) async {
+    var response = await dioClient.post('/merchant/create', data: formData);
+    Merchant merchant = Merchant.fromJson(response.data);
+    _merchants.value = [..._merchants.value, merchant];
+    return merchant;
   }
 }
