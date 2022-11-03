@@ -28,7 +28,7 @@ class DashboardView extends StatelessWidget {
           return Scaffold(
             appBar: Navbar(
               leadingText: AppString.overview,
-              trailing: DropDownField(
+              trailing: PosDropDownField(
                 hint: 'Select Item',
                 dropdownItems: items,
                 value: selectedValue,
