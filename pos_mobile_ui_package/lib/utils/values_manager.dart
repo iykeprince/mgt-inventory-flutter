@@ -49,6 +49,8 @@ class AppSize {
   static const double s184 = 184.0;
   static const double s220 = 220.0;
   static const double s320 = 320.0;
+
+  static const double s56 = 56.0;
 }
 
 // ignore: constant_identifier_names

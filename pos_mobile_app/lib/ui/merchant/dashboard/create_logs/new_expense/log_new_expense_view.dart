@@ -68,7 +68,7 @@ class LogNewExpenseView extends StatelessWidget {
                 // controller: model.fullnameController,
               ),
               const SizedBox(height: AppSize.s16),
-              DropDownField(
+              PosDropDownField(
                 label: AppString.expenseType,
                 hint: AppString.selectExpenseType,
                 dropdownItems: items,
@@ -92,7 +92,7 @@ class LogNewExpenseView extends StatelessWidget {
                 // controller: model.fullnameController,
               ),
               const SizedBox(height: AppSize.s16),
-              DropDownField(
+              PosDropDownField(
                 label: AppString.paymentMethod,
                 hint: AppString.selectPaymentMethod,
                 dropdownItems: items,

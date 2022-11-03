@@ -2,7 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 
-class DropDownField extends StatelessWidget {
+class PosDropDownField extends StatelessWidget {
   final String hint;
   final String? value;
   final List<String> dropdownItems;
@@ -31,7 +31,7 @@ class DropDownField extends StatelessWidget {
   final TextStyle? labelStyle;
   final Offset? offset;
 
-  const DropDownField({
+  const PosDropDownField({
     required this.hint,
     required this.value,
     required this.dropdownItems,

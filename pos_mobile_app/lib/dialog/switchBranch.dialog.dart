@@ -29,9 +29,9 @@ class SwitchBranchDialog extends StatelessWidget {
                 Branch branch = (dialogRequest!.data as List<Branch>)[index];
                 return BranchCardItem(
                   item: branch,
+                  // selectedItem: ,
                   onItemSelected: (branch) {
                     DialogResponse(data: branch);
-                    print('branch: $branch');
                   },
                 );
               },
@@ -72,6 +72,7 @@ class BranchCardItem extends StatefulWidget {
       this.padding,
       this.margin,
       required this.item,
+      this.selectedItem,
       this.onItemSelected})
       : super(key: key);
   Branch item;
@@ -79,25 +80,24 @@ class BranchCardItem extends StatefulWidget {
   EdgeInsets? margin;
   Color? bgColor;
   Function(Branch)? onItemSelected;
-
+  Branch? selectedItem;
   @override
   State<BranchCardItem> createState() => _BranchCardItemState();
 }
 
 class _BranchCardItemState extends State<BranchCardItem> {
-  Branch? _selectedItem;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         setState(() {
-          _selectedItem = widget.item;
+          widget.selectedItem = widget.item;
         });
         widget.onItemSelected!(widget.item);
       },
       child: Container(
         decoration: BoxDecoration(
-          color: widget.item.id == _selectedItem?.id
+          color: widget.item.id == widget.selectedItem?.id
               ? ColorManager.kMidnightBlue
               : ColorManager.kWhiteColor,
           borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)),
@@ -110,7 +110,7 @@ class _BranchCardItemState extends State<BranchCardItem> {
         child: Column(
           children: [
             SvgPicture.asset(
-              widget.item.id == _selectedItem?.id
+              widget.item.id == widget.selectedItem?.id
                   ? 'assets/images/whiteAvatar.svg'
                   : 'assets/images/greyAvatar.svg',
             ),
@@ -119,7 +119,7 @@ class _BranchCardItemState extends State<BranchCardItem> {
             ),
             Text('${widget.item.name}',
                 style: getBoldStyle(
-                    color: widget.item.id == _selectedItem?.id
+                    color: widget.item.id == widget.selectedItem?.id
                         ? ColorManager.kWhiteColor
                         : ColorManager.kGrey1,
                     fontSize: FontSize.s20)),
@@ -129,7 +129,7 @@ class _BranchCardItemState extends State<BranchCardItem> {
             Text(
               'Managed by ${widget.item.location}',
               style: getRegularStyle(
-                  color: widget.item.id == _selectedItem?.id
+                  color: widget.item.id == widget.selectedItem?.id
                       ? ColorManager.kWhiteColor
                       : ColorManager.kGrey1,
                   fontSize: FontSize.s14),

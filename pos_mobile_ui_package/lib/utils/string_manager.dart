@@ -132,4 +132,6 @@ class AppString {
   static const String manageReportSettings = 'Manage Report Settings';
   static const String termsOfUseAndPrivacyPolicy =
       'Terms of Use & Privacy Policy';
+  static const String createMerchantAccount = "Create Merchant Account";
+  static const String merchantName = "Merchant Name";
 }
