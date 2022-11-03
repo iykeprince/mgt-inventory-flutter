@@ -20,6 +20,7 @@ class AccountSettingView extends StatelessWidget {
               color: Colors.white,
               width: double.infinity,
               child: SafeArea(
+                bottom: false,
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,6 +129,9 @@ class AccountSettingView extends StatelessWidget {
                           border: Border.all(
                               width: 1.0, color: ColorManager.kGreyBtn),
                         ),
+                      ),
+                      const SizedBox(
+                        height: AppSize.s100,
                       ),
                     ],
                   ),

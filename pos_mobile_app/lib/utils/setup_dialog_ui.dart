@@ -14,11 +14,11 @@ void setupDialogUi() {
   final builders = {
     DialogType.DELETE_MERCHANT_ACCOUNT: (context, sheetRequest, completer) =>
         DeleteMerchantDialog(request: sheetRequest, completer: completer),
-    DialogType.SWITCH_BRANCH: (context, dialogRequest, completer) => Dialog(
-          child: SwitchBranchDialog(
-            dialogRequest: dialogRequest,
-            onDialogTap: completer,
-          ),
+    DialogType.SWITCH_BRANCH: (context, DialogRequest dialogRequest,
+            Function(DialogResponse) completer) =>
+        SwitchBranchDialog(
+          dialogRequest: dialogRequest,
+          onDialogTap: completer,
         ),
   };
 
