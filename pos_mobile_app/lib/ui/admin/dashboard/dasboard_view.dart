@@ -31,7 +31,7 @@ class AdminDashboardView extends StatelessWidget {
                                 style: getRegularStyle(
                                     color: ColorManager.kLightGray,
                                     fontSize: FontSize.s16)),
-                            Text('John Doe Technologies',
+                            Text(model.admin?.businessName ?? "",
                                 style: getBoldStyle(
                                     color: ColorManager.kDarkCharcoal,
                                     fontSize: FontSize.s20))

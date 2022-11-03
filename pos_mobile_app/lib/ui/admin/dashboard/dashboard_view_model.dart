@@ -4,8 +4,16 @@ import 'package:pos_mobile_app/enums/dialog_type.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../../../models/admin.model.dart';
+import '../../../models/user.model.dart';
+import '../../../services/authentication.service.dart';
+
 class AdminDashboardViewModel extends BaseViewModel {
-  //Dashboard bottom sheet
+  final _authService = locator<AuthenticationService>();
+  final _dialogService = locator<DialogService>();
+
+  User? get user => _authService.currentUser;
+  Admin? get admin => _authService.currentAdminUser;
 
   BottomSheetService _bottomSheetService = locator<BottomSheetService>();
   Future<void> createMerchantSheet() async {
@@ -26,7 +34,6 @@ class AdminDashboardViewModel extends BaseViewModel {
     );
   }
 
-  DialogService _dialogService = locator<DialogService>();
   Future<void> switchBranch() async {
     var confirmationResponse = await _dialogService.showCustomDialog(
       variant: DialogType.SWITCH_BRANCH,
