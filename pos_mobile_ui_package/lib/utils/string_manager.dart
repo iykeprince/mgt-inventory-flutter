@@ -125,6 +125,7 @@ class AppString {
       "Select charge payment method";
   static const String amountPlaceholder = "0.00";
   static const String dateformat = 'MM/DD/YYYY';
+  static const String addNewBranch = 'Add New Branch';
 
   static const String manageMerchantAccounts = 'Manage Merchant Accounts';
   static const String manageBranches = 'Manage Branches';

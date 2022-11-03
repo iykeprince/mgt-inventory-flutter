@@ -19,21 +19,36 @@ class SwitchBranchDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return ShowDialogContainer(
       title: '${dialogRequest!.title}',
-      child: SizedBox(
-        height: 350,
-        child: ListView.builder(
-          itemCount: (dialogRequest!.data as List<Branch>).length,
-          itemBuilder: (BuildContext context, int index) {
-            Branch branch = (dialogRequest!.data as List<Branch>)[index];
-            return BranchCardItem(
-              item: branch,
-              onItemSelected: (branch) {
-                DialogResponse(data: branch);
-                print('branch: $branch');
+      child: Column(
+        children: [
+          SizedBox(
+            height: 342,
+            child: ListView.builder(
+              itemCount: (dialogRequest!.data as List<Branch>).length,
+              itemBuilder: (BuildContext context, int index) {
+                Branch branch = (dialogRequest!.data as List<Branch>)[index];
+                return BranchCardItem(
+                  item: branch,
+                  onItemSelected: (branch) {
+                    DialogResponse(data: branch);
+                    print('branch: $branch');
+                  },
+                );
               },
-            );
-          },
-        ),
+            ),
+          ),
+          PosButton(
+            onPressed: () {},
+            title: AppString.addNewBranch,
+            borderRadius: 0,
+            leadingIcon: Icons.add,
+            leadingIconColor: ColorManager.kPrimaryColor,
+            buttonTextColor: ColorManager.kPrimaryColor,
+            fontWeight: FontWeightManager.extraBold,
+            buttonBgColor: ColorManager.kLightGreen1,
+            leadingIconSpace: AppSize.s24,
+          )
+        ],
       ),
       onPressed: () => onDialogTap!(
         DialogResponse(confirmed: true, data: true),
