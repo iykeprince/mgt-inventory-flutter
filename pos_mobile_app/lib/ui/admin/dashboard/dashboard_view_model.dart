@@ -26,6 +26,7 @@ class AdminDashboardViewModel extends BaseViewModel {
       secondaryButtonTitle: "Log New Transaction",
       useRootNavigator: true,
       ignoreSafeArea: true,
+      customData: switchBranch,
 
       // description:
       //     'This sheet is a custom built bottom sheet UI that allows you to show it from any service or viewmodel.',
@@ -37,7 +38,7 @@ class AdminDashboardViewModel extends BaseViewModel {
   Future<void> switchBranch() async {
     var confirmationResponse = await _dialogService.showCustomDialog(
       variant: DialogType.SWITCH_BRANCH,
-      title: "Merchant  Details",
+      title: "Switch Branch",
       description:
           'You haven’t added branch details to your account yet.\n You need to add branch details in order to be able to register your merchants accounts.',
       mainButtonTitle: "Add Branch Details",
