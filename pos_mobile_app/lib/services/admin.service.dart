@@ -60,4 +60,12 @@ class AdminService with ReactiveServiceMixin {
     _merchants.value = [..._merchants.value, merchant];
     return merchant;
   }
+
+  Future<Merchant> deleteMerchantAccount(String id) async {
+    var response = await dioClient.delete('/merchant/remove/$id');
+    print('response.data: ${response.data}');
+    Merchant merchant = Merchant.fromJson(response.data);
+
+    return merchant;
+  }
 }

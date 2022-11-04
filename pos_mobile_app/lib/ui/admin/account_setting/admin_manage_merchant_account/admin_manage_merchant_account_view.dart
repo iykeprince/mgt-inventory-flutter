@@ -12,7 +12,7 @@ class AdminManageMerchantAccountView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<AdminManageMerchantAccountViewModel>.nonReactive(
+    return ViewModelBuilder<AdminManageMerchantAccountViewModel>.reactive(
       viewModelBuilder: () => AdminManageMerchantAccountViewModel(),
       builder: (context, model, child) => Scaffold(
         backgroundColor: ColorManager.kWhiteColor,
@@ -24,6 +24,7 @@ class AdminManageMerchantAccountView extends StatelessWidget {
         body: KeyboardAware(
           child: Column(
             children: [
+              if (model.isBusy) const LinearProgressIndicator(),
               const SizedBox(
                 height: AppSize.s12,
               ),
@@ -52,12 +53,15 @@ class AdminManageMerchantAccountView extends StatelessWidget {
                       if (!merchantItem.user!.isVerified!) {
                         return PendingMerchantAccountItem(
                           merchant: merchantItem,
+                          onDelete: (merchant) {
+                            model.showDeleteMerchantDialog(merchant);
+                          },
                         );
                       }
                       return MerchantAccountItem(
                         merchant: merchantItem,
                         onDelete: (merchant) {
-                          model.showDeleteMerchantDialog();
+                          model.showDeleteMerchantDialog(merchant);
                         },
                         onTap: () {
                           model.navigateToMerchantDetails();
@@ -143,15 +147,6 @@ class MerchantAccountItem extends StatelessWidget {
             icon: Icons.delete_forever,
             label: 'Delete',
           ),
-          // Container(
-          //   decoration: BoxDecoration(
-          //     color: ColorManager.kRed,
-          //   ),
-          //   child: Icon(
-          //     Icons.delete_forever,
-          //     color: ColorManager.kWhiteColor,
-          //   ),
-          // ),
         ],
       ),
     );
@@ -162,27 +157,47 @@ class PendingMerchantAccountItem extends StatelessWidget {
   const PendingMerchantAccountItem({
     Key? key,
     required this.merchant,
+    this.onDelete,
   }) : super(key: key);
   final Merchant merchant;
+  final Function(Merchant)? onDelete;
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      horizontalTitleGap: 0,
-      leading: Icon(
-        Icons.account_circle_rounded,
-        color: ColorManager.kTurquoiseDarkColor,
-      ),
-      title: Text(
-        merchant.user?.email ?? '',
-        style: TextStyle(
-          fontSize: FontSize.s16,
-          fontWeight: FontWeightManager.medium,
+    return Slidable(
+      child: ListTile(
+        horizontalTitleGap: 0,
+        leading: Icon(
+          Icons.account_circle_rounded,
+          color: ColorManager.kTurquoiseDarkColor,
+        ),
+        title: Text(
+          merchant.user?.email ?? '',
+          style: TextStyle(
+            fontSize: FontSize.s16,
+            fontWeight: FontWeightManager.medium,
+          ),
+        ),
+        trailing: PosBadge(
+          text: "PENDING",
+          bgColor: ColorManager.kBadgeBgColor,
+          textColor: ColorManager.kBadgeTextColor,
         ),
       ),
-      trailing: PosBadge(
-        text: "PENDING",
-        bgColor: ColorManager.kBadgeBgColor,
-        textColor: ColorManager.kBadgeTextColor,
+      endActionPane: ActionPane(
+        motion: ScrollMotion(),
+        extentRatio: 0.2,
+        children: [
+          SlidableAction(
+            onPressed: (context) {
+              onDelete!(merchant);
+            },
+            autoClose: true,
+            backgroundColor: ColorManager.kRed,
+            foregroundColor: Colors.white,
+            icon: Icons.delete_forever,
+            label: 'Delete',
+          ),
+        ],
       ),
     );
   }

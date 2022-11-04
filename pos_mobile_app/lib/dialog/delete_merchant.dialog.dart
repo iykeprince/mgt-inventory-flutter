@@ -122,8 +122,12 @@ class DeleteMerchantDialog extends StatelessWidget {
                         leadingIcon: Icons.delete_forever,
                         leadingIconColor: ColorManager.kWhiteColor,
                         onPressed: () {
-                          completer(DialogResponse(
-                              confirmed: true, data: 'DELETE_MERCHANT'));
+                          completer(
+                            DialogResponse(
+                              confirmed: true,
+                              data: 'DELETE_MERCHANT',
+                            ),
+                          );
                         },
                       ),
                     ),
