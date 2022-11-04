@@ -10,11 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../models/branch.model.dart';
 import '../models/merchant.model.dart';
 import '../ui/admin/account_setting/account_setting_view.dart';
+import '../ui/admin/account_setting/admin_branch_detail/admin_branch_detail_view.dart';
 import '../ui/admin/account_setting/admin_change_password/admin_change_password_view.dart';
 import '../ui/admin/account_setting/admin_edit_profile/admin_edit_profile_view.dart';
 import '../ui/admin/account_setting/admin_howItWorks/admin_how_it_works_view.dart';
+import '../ui/admin/account_setting/admin_manage_branch/admin_manage_branch_view.dart';
 import '../ui/admin/account_setting/admin_manage_merchant_account/admin_manage_merchant_account_view.dart';
 import '../ui/admin/account_setting/admin_merchant_detail/admin_merchant_detail_view.dart';
 import '../ui/admin/admin_home_view.dart';
@@ -67,6 +70,8 @@ class Routes {
   static const String createMerchantAccountView =
       '/create-merchant-account-view';
   static const String addBranchView = '/add-branch-view';
+  static const String adminManageBranchView = '/admin-manage-branch-view';
+  static const String adminBranchDetailView = '/admin-branch-detail-view';
   static const String merchantHomeView = '/merchant-home-view';
   static const String editProfileView = '/edit-profile-view';
   static const String howItWorksView = '/how-it-works-view';
@@ -96,6 +101,8 @@ class Routes {
     adminHowItWorksView,
     createMerchantAccountView,
     addBranchView,
+    adminManageBranchView,
+    adminBranchDetailView,
     merchantHomeView,
     editProfileView,
     howItWorksView,
@@ -132,6 +139,8 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.adminHowItWorksView, page: AdminHowItWorksView),
     RouteDef(Routes.createMerchantAccountView, page: CreateMerchantAccountView),
     RouteDef(Routes.addBranchView, page: AddBranchView),
+    RouteDef(Routes.adminManageBranchView, page: AdminManageBranchView),
+    RouteDef(Routes.adminBranchDetailView, page: AdminBranchDetailView),
     RouteDef(Routes.merchantHomeView, page: MerchantHomeView),
     RouteDef(Routes.editProfileView, page: EditProfileView),
     RouteDef(Routes.howItWorksView, page: HowItWorksView),
@@ -289,6 +298,22 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    AdminManageBranchView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const AdminManageBranchView(),
+        settings: data,
+      );
+    },
+    AdminBranchDetailView: (data) {
+      var args = data.getArgs<AdminBranchDetailViewArguments>(nullOk: false);
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => AdminBranchDetailView(
+          key: args.key,
+          branch: args.branch,
+        ),
+        settings: data,
+      );
+    },
     MerchantHomeView: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const MerchantHomeView(),
@@ -363,6 +388,13 @@ class AdminMerchantDetailViewArguments {
   final Key? key;
   final Merchant merchant;
   AdminMerchantDetailViewArguments({this.key, required this.merchant});
+}
+
+/// AdminBranchDetailView arguments holder class
+class AdminBranchDetailViewArguments {
+  final Key? key;
+  final Branch branch;
+  AdminBranchDetailViewArguments({this.key, required this.branch});
 }
 
 /// LogNewExpenseView arguments holder class
@@ -739,6 +771,41 @@ extension NavigatorStateExtension on NavigationService {
   }) async {
     return navigateTo(
       Routes.addBranchView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToAdminManageBranchView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.adminManageBranchView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToAdminBranchDetailView({
+    Key? key,
+    required Branch branch,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.adminBranchDetailView,
+      arguments: AdminBranchDetailViewArguments(key: key, branch: branch),
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,

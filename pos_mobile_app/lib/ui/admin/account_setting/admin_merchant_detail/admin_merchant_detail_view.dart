@@ -4,8 +4,8 @@ import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_merchant_ac
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../../../models/merchant.model.dart';
-import '../../../../models/user.model.dart';
+import '../../../../../models/merchant.model.dart';
+import 'admin_merchant_detail_view_model.dart';
 
 class AdminMerchantDetailView extends StatelessWidget {
   const AdminMerchantDetailView({
@@ -15,8 +15,8 @@ class AdminMerchantDetailView extends StatelessWidget {
   final Merchant merchant;
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<AdminManageMerchantAccountViewModel>.nonReactive(
-      viewModelBuilder: () => AdminManageMerchantAccountViewModel(),
+    return ViewModelBuilder<AdminMerchantDetailViewModel>.nonReactive(
+      viewModelBuilder: () => AdminMerchantDetailViewModel(),
       builder: (context, model, child) => Scaffold(
         backgroundColor: ColorManager.kWhiteColor,
         appBar: Navbar(
@@ -139,27 +139,16 @@ class AdminMerchantDetailView extends StatelessWidget {
                   busy: model.isBusy,
                 ),
                 const SizedBox(height: AppSize.s40),
-                !model.user!.disabled!
-                    ? PosButton(
-                        onPressed: () =>
-                            model.revokeMerchantAccess(merchant.user!.id!),
-                        title: AppString.revokeMerchantAccesss,
-                        buttonBgColor: ColorManager.kTransparent,
-                        buttonTextColor: ColorManager.kRed,
-                        busy: model.busy(REVOKE_MERCHANT_ACCESS_TASK),
+                PosButton(
+                  onPressed: () =>
+                      model.revokeMerchantAccess(merchant.user!.id!),
+                  title: AppString.revokeMerchantAccesss,
+                  buttonBgColor: ColorManager.kTransparent,
+                  buttonTextColor: ColorManager.kRed,
+                  busy: model.busy(REVOKE_MERCHANT_ACCESS_TASK),
 
-                        // border: Border.all(width: 1.0, color: ColorManager.kGreyBtn),
-                      )
-                    : PosButton(
-                        onPressed: () =>
-                            model.enableMerchantAccess(merchant.user!.id!),
-                        title: AppString.enableMerchantAccesss,
-                        buttonBgColor: ColorManager.kTransparent,
-                        buttonTextColor: ColorManager.kRed,
-                        busy: model.busy(ENABLE_MERCHANT_ACCESS_TASK),
-
-                        // border: Border.all(width: 1.0, color: ColorManager.kGreyBtn),
-                      ),
+                  // border: Border.all(width: 1.0, color: ColorManager.kGreyBtn),
+                )
               ],
             ),
           ),

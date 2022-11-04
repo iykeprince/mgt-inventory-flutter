@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pos_mobile_app/app/app.locator.dart';
 import 'package:pos_mobile_app/app/app.router.dart';
 import 'package:pos_mobile_app/ui/auth/createAdminBusiness/create_admin_business_view_model.dart';
+import 'package:pos_mobile_ui_package/utils/colors.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -125,6 +128,15 @@ class CompeleteMerchantRegisterModel extends BaseViewModel {
       );
       return response;
     } on DioError catch (error) {
+      Fluttertoast.showToast(
+        msg: "${error.response?.data["message"]}",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: ColorManager.kDarkCharcoal,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
       throw Exception(error.response?.data["message"]);
     } finally {
       setBusy(false);
