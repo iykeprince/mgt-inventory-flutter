@@ -44,6 +44,11 @@ class AdminService with ReactiveServiceMixin {
     return branch;
   }
 
+  Future<Branch> deleteBranch(String id) async {
+    var response = await dioClient.delete('/admin/branches/$id');
+    return Branch.fromJson(response.data);
+  }
+
   Future<List<Merchant>> getMerchants() async {
     var response = await dioClient.get('/admin/merchants');
     List<Merchant> merchants = (response.data as List<dynamic>)
@@ -63,7 +68,7 @@ class AdminService with ReactiveServiceMixin {
 
   Future<Merchant> deleteMerchantAccount(String id) async {
     var response = await dioClient.delete('/merchant/remove/$id');
-    print('response.data: ${response.data}');
+
     Merchant merchant = Merchant.fromJson(response.data);
 
     return merchant;

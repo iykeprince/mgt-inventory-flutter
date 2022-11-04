@@ -2,9 +2,11 @@ import 'package:pos_mobile_app/client/dio_client.dart';
 import 'package:pos_mobile_app/services/admin.service.dart';
 import 'package:pos_mobile_app/services/authentication.service.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/account_setting_view.dart';
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_branch_detail/admin_branch_detail_view.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_change_password/admin_change_password_view.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_edit_profile/admin_edit_profile_view.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_howItWorks/admin_how_it_works_view.dart';
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_branch/admin_manage_branch_view.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_merchant_account/admin_manage_merchant_account_view.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_merchant_detail/admin_merchant_detail_view.dart';
 import 'package:pos_mobile_app/ui/admin/admin_home_view.dart';
@@ -34,6 +36,7 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../services/merchant.service.dart';
+import '../services/user.service.dart';
 
 @StackedApp(
   routes: [
@@ -60,6 +63,9 @@ import '../services/merchant.service.dart';
     AdaptiveRoute(page: AdminHowItWorksView),
     AdaptiveRoute(page: CreateMerchantAccountView),
     AdaptiveRoute(page: AddBranchView),
+    AdaptiveRoute(page: AdminManageBranchView),
+    AdaptiveRoute(page: AdminBranchDetailView),
+
 /**Merchant Journey to be refactored */
     AdaptiveRoute(page: MerchantHomeView),
     AdaptiveRoute(page: EditProfileView),
@@ -77,6 +83,7 @@ import '../services/merchant.service.dart';
     LazySingleton(classType: AuthenticationService),
     LazySingleton(classType: MerchantService),
     LazySingleton(classType: AdminService),
+    LazySingleton(classType: UserService),
   ],
   logger: StackedLogger(),
 )

@@ -4,16 +4,19 @@ import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_merchant_ac
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../../../models/merchant.model.dart';
-import '../../../../models/user.model.dart';
+import '../../../../../models/merchant.model.dart';
+import 'admin_merchant_detail_view_model.dart';
 
 class AdminMerchantDetailView extends StatelessWidget {
-  const AdminMerchantDetailView({Key? key}) : super(key: key);
-
+  const AdminMerchantDetailView({
+    Key? key,
+    required this.merchant,
+  }) : super(key: key);
+  final Merchant merchant;
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<AdminManageMerchantAccountViewModel>.nonReactive(
-      viewModelBuilder: () => AdminManageMerchantAccountViewModel(),
+    return ViewModelBuilder<AdminMerchantDetailViewModel>.nonReactive(
+      viewModelBuilder: () => AdminMerchantDetailViewModel(),
       builder: (context, model, child) => Scaffold(
         backgroundColor: ColorManager.kWhiteColor,
         appBar: Navbar(
@@ -29,7 +32,7 @@ class AdminMerchantDetailView extends StatelessWidget {
                 MerchantDetailItem(
                   label: 'Merchant Name',
                   content: Text(
-                    'Taiwo Kehinde',
+                    merchant.name!,
                     style: TextStyle(
                       color: ColorManager.kTurquoiseDarkColor,
                       fontSize: FontSize.s16,
@@ -38,9 +41,9 @@ class AdminMerchantDetailView extends StatelessWidget {
                   ),
                 ),
                 MerchantDetailItem(
-                  label: 'Email Address',
+                  label: "Email Address",
                   content: Text(
-                    'taiwokehinde@gmail.com',
+                    merchant.user!.email!,
                     style: TextStyle(
                       color: ColorManager.kTurquoiseDarkColor,
                       fontSize: FontSize.s16,
@@ -62,7 +65,7 @@ class AdminMerchantDetailView extends StatelessWidget {
                 MerchantDetailItem(
                   label: 'Branch Name',
                   content: Text(
-                    'Iyana-Itire Branch',
+                    merchant.branch?.name ?? "N/A",
                     style: TextStyle(
                       color: ColorManager.kTurquoiseDarkColor,
                       fontSize: FontSize.s16,
@@ -137,12 +140,15 @@ class AdminMerchantDetailView extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSize.s40),
                 PosButton(
-                  onPressed: () {},
+                  onPressed: () =>
+                      model.revokeMerchantAccess(merchant.user!.id!),
                   title: AppString.revokeMerchantAccesss,
                   buttonBgColor: ColorManager.kTransparent,
                   buttonTextColor: ColorManager.kRed,
+                  busy: model.busy(REVOKE_MERCHANT_ACCESS_TASK),
+
                   // border: Border.all(width: 1.0, color: ColorManager.kGreyBtn),
-                ),
+                )
               ],
             ),
           ),

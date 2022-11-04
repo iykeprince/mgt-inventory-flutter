@@ -22,15 +22,14 @@ class AccountSettingViewModel extends BaseViewModel {
   navigateToManageMerchantAccount() =>
       _navigationService.navigateTo(Routes.adminManageMerchantAccountView);
 
+  navigateToManageBranches() =>
+      _navigationService.navigateTo(Routes.adminManageBranchView);
+
   navigateToHowItWorks() =>
       _navigationService.navigateTo(Routes.adminHowItWorksView);
 
   navigateToChangePassword() =>
       _navigationService.navigateTo(Routes.adminChangePasswordView);
-
-  showDialog() async => await _dialogService.showCustomDialog(
-        variant: DialogType.DELETE_MERCHANT_ACCOUNT,
-      );
 
   logout() async {
     await _authService.logout();
