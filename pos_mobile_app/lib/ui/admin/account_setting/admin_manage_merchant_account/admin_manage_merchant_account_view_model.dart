@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pos_mobile_app/enums/dialog_type.dart';
+import 'package:pos_mobile_app/models/default_response.model.dart';
+import 'package:pos_mobile_app/services/user.service.dart';
 import 'package:pos_mobile_ui_package/utils/colors.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -9,15 +11,23 @@ import 'package:stacked_services/stacked_services.dart';
 import '../../../../app/app.locator.dart';
 import '../../../../app/app.router.dart';
 import '../../../../models/merchant.model.dart';
+import '../../../../models/user.model.dart';
 import '../../../../services/admin.service.dart';
+import '../../../../services/authentication.service.dart';
 
 const String DELETING_MERCHANT_TASK = 'DELETING_MERCHANT_TASK';
+const String REVOKE_MERCHANT_ACCESS_TASK = 'REVOKE_MERCHANT_ACCESS_TASK';
+const String ENABLE_MERCHANT_ACCESS_TASK = 'ENABLE_MERCHANT_ACCESS_TASK';
 
 class AdminManageMerchantAccountViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _adminService = locator<AdminService>();
   final _dialogService = locator<DialogService>();
+  final _userService = locator<UserService>();
+  final _authenticationService = locator<AuthenticationService>();
 
+  User? _user;
+  User? get user => _user;
   List<Merchant> get merchants => _adminService.merchants;
 
   void navigateBack() => _navigationService.back();
@@ -28,8 +38,11 @@ class AdminManageMerchantAccountViewModel extends BaseViewModel {
     print('calling from back');
   }
 
-  Future<void> navigateToMerchantDetails() async =>
-      _navigationService.navigateTo(Routes.adminMerchantDetailView);
+  Future<void> navigateToMerchantDetails(Merchant merchant) async =>
+      _navigationService.navigateTo(
+        Routes.adminMerchantDetailView,
+        arguments: AdminMerchantDetailViewArguments(merchant: merchant),
+      );
 
   Future<void> showDeleteMerchantDialog(Merchant merchant) async {
     var response = await _dialogService.showCustomDialog(
@@ -71,6 +84,48 @@ class AdminManageMerchantAccountViewModel extends BaseViewModel {
     } finally {
       setBusy(false);
 
+      notifyListeners();
+    }
+  }
+
+  Future<void> revokeMerchantAccess(String id) async {
+    runBusyFuture(
+      revokeMerchantAccessTask(id),
+      busyObject: REVOKE_MERCHANT_ACCESS_TASK,
+    );
+  }
+
+  Future<User?> revokeMerchantAccessTask(String id) async {
+    setBusyForObject(REVOKE_MERCHANT_ACCESS_TASK, true);
+    try {
+      await _userService.disableUser(id);
+      _user = await _authenticationService.getCurrentBaseUser();
+      return _user;
+    } on DioError catch (error) {
+      throw Exception(error.response?.data);
+    } finally {
+      setBusyForObject(REVOKE_MERCHANT_ACCESS_TASK, false);
+      notifyListeners();
+    }
+  }
+
+  Future<void> enableMerchantAccess(String id) async {
+    runBusyFuture(
+      enableMerchantAccessTask(id),
+      busyObject: ENABLE_MERCHANT_ACCESS_TASK,
+    );
+  }
+
+  Future<User?> enableMerchantAccessTask(String id) async {
+    setBusyForObject(ENABLE_MERCHANT_ACCESS_TASK, true);
+    try {
+      await _userService.enableUser(id);
+      _user = await _authenticationService.getCurrentBaseUser();
+      return _user;
+    } on DioError catch (error) {
+      throw Exception(error.response?.data);
+    } finally {
+      setBusyForObject(ENABLE_MERCHANT_ACCESS_TASK, false);
       notifyListeners();
     }
   }

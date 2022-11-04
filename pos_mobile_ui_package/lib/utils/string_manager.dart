@@ -55,6 +55,7 @@ class AppString {
   static var deleteAccount = "Delete Account";
 
   static var revokeMerchantAccesss = "Revoke Merchant Access";
+  static var enableMerchantAccesss = "Enable Merchant Access";
   static String verifyEmailSubText(String email) =>
       "We sent a six-digit code to your email address ($email) for verification.";
   static const String otpCodeText = "OTP Code";

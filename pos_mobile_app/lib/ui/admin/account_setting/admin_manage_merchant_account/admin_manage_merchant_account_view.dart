@@ -8,7 +8,9 @@ import '../../../../models/merchant.model.dart';
 import '../../../../models/user.model.dart';
 
 class AdminManageMerchantAccountView extends StatelessWidget {
-  const AdminManageMerchantAccountView({Key? key}) : super(key: key);
+  const AdminManageMerchantAccountView({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +66,7 @@ class AdminManageMerchantAccountView extends StatelessWidget {
                           model.showDeleteMerchantDialog(merchant);
                         },
                         onTap: () {
-                          model.navigateToMerchantDetails();
+                          model.navigateToMerchantDetails(merchantItem);
                         },
                       );
                     }

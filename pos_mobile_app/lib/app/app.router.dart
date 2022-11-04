@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../models/merchant.model.dart';
 import '../ui/admin/account_setting/account_setting_view.dart';
 import '../ui/admin/account_setting/admin_change_password/admin_change_password_view.dart';
 import '../ui/admin/account_setting/admin_edit_profile/admin_edit_profile_view.dart';
@@ -255,8 +256,12 @@ class StackedRouter extends RouterBase {
       );
     },
     AdminMerchantDetailView: (data) {
+      var args = data.getArgs<AdminMerchantDetailViewArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const AdminMerchantDetailView(),
+        builder: (context) => AdminMerchantDetailView(
+          key: args.key,
+          merchant: args.merchant,
+        ),
         settings: data,
       );
     },
@@ -351,6 +356,13 @@ class VerifyMerchantViewArguments {
   final Key? key;
   final String emailAddress;
   VerifyMerchantViewArguments({this.key, required this.emailAddress});
+}
+
+/// AdminMerchantDetailView arguments holder class
+class AdminMerchantDetailViewArguments {
+  final Key? key;
+  final Merchant merchant;
+  AdminMerchantDetailViewArguments({this.key, required this.merchant});
 }
 
 /// LogNewExpenseView arguments holder class
@@ -652,6 +664,8 @@ extension NavigatorStateExtension on NavigationService {
   }
 
   Future<dynamic> navigateToAdminMerchantDetailView({
+    Key? key,
+    required Merchant merchant,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -660,6 +674,7 @@ extension NavigatorStateExtension on NavigationService {
   }) async {
     return navigateTo(
       Routes.adminMerchantDetailView,
+      arguments: AdminMerchantDetailViewArguments(key: key, merchant: merchant),
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,

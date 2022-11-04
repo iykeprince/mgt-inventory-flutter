@@ -34,6 +34,7 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../services/merchant.service.dart';
+import '../services/user.service.dart';
 
 @StackedApp(
   routes: [
@@ -77,6 +78,7 @@ import '../services/merchant.service.dart';
     LazySingleton(classType: AuthenticationService),
     LazySingleton(classType: MerchantService),
     LazySingleton(classType: AdminService),
+    LazySingleton(classType: UserService),
   ],
   logger: StackedLogger(),
 )

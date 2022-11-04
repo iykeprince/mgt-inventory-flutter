@@ -8,8 +8,11 @@ import '../../../../models/merchant.model.dart';
 import '../../../../models/user.model.dart';
 
 class AdminMerchantDetailView extends StatelessWidget {
-  const AdminMerchantDetailView({Key? key}) : super(key: key);
-
+  const AdminMerchantDetailView({
+    Key? key,
+    required this.merchant,
+  }) : super(key: key);
+  final Merchant merchant;
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<AdminManageMerchantAccountViewModel>.nonReactive(
@@ -29,7 +32,7 @@ class AdminMerchantDetailView extends StatelessWidget {
                 MerchantDetailItem(
                   label: 'Merchant Name',
                   content: Text(
-                    'Taiwo Kehinde',
+                    merchant.name!,
                     style: TextStyle(
                       color: ColorManager.kTurquoiseDarkColor,
                       fontSize: FontSize.s16,
@@ -38,9 +41,9 @@ class AdminMerchantDetailView extends StatelessWidget {
                   ),
                 ),
                 MerchantDetailItem(
-                  label: 'Email Address',
+                  label: "Email Address",
                   content: Text(
-                    'taiwokehinde@gmail.com',
+                    merchant.user!.email!,
                     style: TextStyle(
                       color: ColorManager.kTurquoiseDarkColor,
                       fontSize: FontSize.s16,
@@ -62,7 +65,7 @@ class AdminMerchantDetailView extends StatelessWidget {
                 MerchantDetailItem(
                   label: 'Branch Name',
                   content: Text(
-                    'Iyana-Itire Branch',
+                    merchant.branch?.name ?? "N/A",
                     style: TextStyle(
                       color: ColorManager.kTurquoiseDarkColor,
                       fontSize: FontSize.s16,
@@ -136,13 +139,27 @@ class AdminMerchantDetailView extends StatelessWidget {
                   busy: model.isBusy,
                 ),
                 const SizedBox(height: AppSize.s40),
-                PosButton(
-                  onPressed: () {},
-                  title: AppString.revokeMerchantAccesss,
-                  buttonBgColor: ColorManager.kTransparent,
-                  buttonTextColor: ColorManager.kRed,
-                  // border: Border.all(width: 1.0, color: ColorManager.kGreyBtn),
-                ),
+                !model.user!.disabled!
+                    ? PosButton(
+                        onPressed: () =>
+                            model.revokeMerchantAccess(merchant.user!.id!),
+                        title: AppString.revokeMerchantAccesss,
+                        buttonBgColor: ColorManager.kTransparent,
+                        buttonTextColor: ColorManager.kRed,
+                        busy: model.busy(REVOKE_MERCHANT_ACCESS_TASK),
+
+                        // border: Border.all(width: 1.0, color: ColorManager.kGreyBtn),
+                      )
+                    : PosButton(
+                        onPressed: () =>
+                            model.enableMerchantAccess(merchant.user!.id!),
+                        title: AppString.enableMerchantAccesss,
+                        buttonBgColor: ColorManager.kTransparent,
+                        buttonTextColor: ColorManager.kRed,
+                        busy: model.busy(ENABLE_MERCHANT_ACCESS_TASK),
+
+                        // border: Border.all(width: 1.0, color: ColorManager.kGreyBtn),
+                      ),
               ],
             ),
           ),
