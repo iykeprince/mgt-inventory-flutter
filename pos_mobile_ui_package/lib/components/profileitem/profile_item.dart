@@ -10,6 +10,7 @@ class ProfileItem extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final Function()? onTap;
   final bool enabled;
+  final Color? textColor;
 
   ProfileItem({
     required this.title,
@@ -17,6 +18,7 @@ class ProfileItem extends StatelessWidget {
     this.margin,
     this.showBottomBorder = true,
     this.enabled = true,
+    this.textColor,
   });
 
   @override
@@ -39,7 +41,8 @@ class ProfileItem extends StatelessWidget {
           title: Text(
             title,
             style: getMediumStyle(
-                color: ColorManager.kDarkCharcoal, fontSize: FontSize.s16),
+                color: textColor ?? ColorManager.kDarkCharcoal,
+                fontSize: FontSize.s16),
           ),
           contentPadding: EdgeInsets.zero,
           trailing: const Icon(

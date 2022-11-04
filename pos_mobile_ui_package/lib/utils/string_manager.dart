@@ -49,6 +49,12 @@ class AppString {
 
   static const String bankAccountRecommendedForPosText =
       "Bank account details for POS. We recommend seperating with an hyphen";
+
+  static var editMerchantDetail = "Edit";
+
+  static var deleteAccount = "Delete Account";
+
+  static var revokeMerchantAccesss = "Revoke Merchant Access";
   static String verifyEmailSubText(String email) =>
       "We sent a six-digit code to your email address ($email) for verification.";
   static const String otpCodeText = "OTP Code";
@@ -143,6 +149,7 @@ class AppString {
   static const String addNewMerchantAccount = 'Add New Merchant Account';
 
   static const String manageMerchantAccounts = 'Manage Merchant Accounts';
+  static const String merchantDetails = 'Merchant Details';
   static const String manageBranches = 'Manage Branches';
   static const String manageReportSettings = 'Manage Report Settings';
   static const String termsOfUseAndPrivacyPolicy =

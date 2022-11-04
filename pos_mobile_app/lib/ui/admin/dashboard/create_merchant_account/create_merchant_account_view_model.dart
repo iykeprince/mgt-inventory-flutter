@@ -43,13 +43,12 @@ class CreateMerchantAccountViewModel extends BaseViewModel {
     await runBusyFuture(runCreateMerchant());
   }
 
-  runCreateMerchant() async {
+  Future<List<Merchant>> runCreateMerchant() async {
     var formData = {"name": merchantName, "email": email, "branchId": branch};
     setBusy(true);
     try {
-      Merchant createdMerchant =
-          await _adminService.createMerchantAccount(formData);
-
+      await _adminService.createMerchantAccount(formData);
+      List<Merchant> merchants = await _adminService.getMerchants();
       Fluttertoast.showToast(
         msg: "Merchant account created",
         toastLength: Toast.LENGTH_LONG,
@@ -62,11 +61,12 @@ class CreateMerchantAccountViewModel extends BaseViewModel {
 
       setMessage("Merchant account created successfully!");
       _navigationService.back();
-      return createdMerchant;
+      return merchants;
     } on DioError catch (error) {
       throw Exception(error.response?.data['message']);
     } finally {
       setBusy(false);
+      notifyListeners();
     }
   }
 }
