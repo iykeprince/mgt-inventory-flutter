@@ -42,4 +42,5 @@ class ColorManager {
   static const Color kBgSmokeWhite = Color(0xffF4F4F4);
   static const Color kBadgeTextColor = Color(0xffE67E22);
   static const Color kBadgeBgColor = Color(0xffFFF4E4);
+  static const Color kDividerLineDarkColor = Color(0xffE2E2E2);
 }
