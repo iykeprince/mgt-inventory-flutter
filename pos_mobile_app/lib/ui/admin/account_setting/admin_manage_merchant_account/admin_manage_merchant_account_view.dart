@@ -7,12 +7,6 @@ import 'package:stacked/stacked.dart';
 import '../../../../models/merchant.model.dart';
 import '../../../../models/user.model.dart';
 
-List<Merchant> merchantList = [
-  Merchant(name: "Taiwo Kehinde", user: User(email: "kehindetaiwo@email.com")),
-  Merchant(name: "Taiwo Kehinde", user: User(email: "kehindetaiwo@email.com")),
-  Merchant(name: "Taiwo Kehinde", user: User(email: "kehindetaiwo@email.com")),
-];
-
 class AdminManageMerchantAccountView extends StatelessWidget {
   const AdminManageMerchantAccountView({Key? key}) : super(key: key);
 
@@ -57,12 +51,16 @@ class AdminManageMerchantAccountView extends StatelessWidget {
 
                       if (!merchantItem.user!.isVerified!) {
                         return PendingMerchantAccountItem(
-                            merchant: merchantList[index]);
+                          merchant: merchantItem,
+                        );
                       }
                       return MerchantAccountItem(
-                        merchant: merchantList[index],
+                        merchant: merchantItem,
                         onDelete: (merchant) {
-                          print('selected delete: ${merchant.toJson()}');
+                          model.showDeleteMerchantDialog();
+                        },
+                        onTap: () {
+                          model.navigateToMerchantDetails();
                         },
                       );
                     }

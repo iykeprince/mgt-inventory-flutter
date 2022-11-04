@@ -112,9 +112,15 @@ class AccountSettingView extends StatelessWidget {
                         onTap: () {},
                       ),
                       ProfileItem(
-                          title: AppString.termsOfUseAndPrivacyPolicy,
-                          onTap: () {},
-                          showBottomBorder: false),
+                        title: AppString.termsOfUseAndPrivacyPolicy,
+                        onTap: () {},
+                        showBottomBorder: false,
+                      ),
+                      ProfileItem(
+                        title: AppString.deleteAccount,
+                        onTap: () {},
+                        showBottomBorder: false,
+                      ),
                       const SizedBox(
                         height: AppSize.s32,
                       ),
