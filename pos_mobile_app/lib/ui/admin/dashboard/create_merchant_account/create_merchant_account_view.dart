@@ -31,7 +31,7 @@ class CreateMerchantAccountView extends StatelessWidget {
               SizedBox(
                 height: AppSize.s12,
               ),
-              CreateMerchantAccountFormView()
+              CreateMerchantAccountFormView(),
             ],
           )),
         ),
@@ -119,27 +119,9 @@ class CreateMerchantAccountFormView
 
           // const SizedBox(height: AppSize.s4),
           Expanded(child: Container()),
-          Container(
-            padding: const EdgeInsets.all(AppPadding.p24),
-            decoration: const BoxDecoration(
-              color: ColorManager.kLightGrayishOrange,
-            ),
-            child: Column(
-              children: [
-                SvgPicture.asset('assets/images/bulb.svg'),
-                const SizedBox(
-                  height: AppSize.s12,
-                ),
-                Text(
-                  'You will need to create or assign the merchant account to a newly created branch for it to be activated.',
-                  style: getBoldStyle(
-                    color: ColorManager.kGrey1,
-                    fontSize: FontSize.s14,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
+          const BottomStickyNote(
+            text:
+                "You will need to create or assign the merchant account to a newly created branch for it to be activated.",
           ),
         ],
       ),

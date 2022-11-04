@@ -140,6 +140,7 @@ class AppString {
   static const String amountPlaceholder = "0.00";
   static const String dateformat = 'MM/DD/YYYY';
   static const String addNewBranch = 'Add New Branch';
+  static const String addNewMerchantAccount = 'Add New Merchant Account';
 
   static const String manageMerchantAccounts = 'Manage Merchant Accounts';
   static const String manageBranches = 'Manage Branches';
@@ -149,7 +150,8 @@ class AppString {
   static const String createMerchantAccount = "Create Merchant Account";
   static const String merchantName = "Merchant Name";
   static const String saveBranchDetailText = "Save branch detail";
-  static const String numberOfMerchantText =
+  static const String numberOfMerchantText = "Number of Merchants";
+  static const String numberOfMerchantManagingThisBranchText =
       "Number of merchants managing this branch";
   static const String numberOfMerchantPlaceholderText = "1";
 }

@@ -95,11 +95,14 @@ class AdminHomeViewModel extends IndexTrackingViewModel {
     }
     if (confirmationResponse?.data is Branch) {
       //selected branch do something with
+
     }
     if (confirmationResponse?.data is String &&
         confirmationResponse?.data == "ADD_NEW_BRANCH") {
       print('add new branch');
       _navigationService.navigateTo(Routes.addBranchView);
+      _showBranches = false;
+      notifyListeners();
     }
     print('confirm fresponse: ${confirmationResponse?.data}');
     /**

@@ -10,12 +10,14 @@ import '../../../../models/branch.model.dart';
 
 class AddBranchView extends StatelessWidget {
   const AddBranchView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    int _counter = 0;
     return ViewModelBuilder<AddBranchViewModel>.reactive(
       viewModelBuilder: () => AddBranchViewModel(),
-      onModelReady: (model) {},
+      onModelReady: (model) {
+        model.initialiseForm();
+      },
       builder: (context, model, child) => Scaffold(
         backgroundColor: ColorManager.kWhiteColor,
         appBar: Navbar(
@@ -31,9 +33,8 @@ class AddBranchView extends StatelessWidget {
                   height: AppSize.s12,
                 ),
                 Column(
-                  children: model.branches!.map((branch) {
+                  children: model.createBranchForm.map((branch) {
                     return AddBranchExpandableView(
-                      index: 1 + _counter++,
                       data: branch,
                     );
                   }).toList(),
@@ -52,6 +53,11 @@ class AddBranchView extends StatelessWidget {
                   leadingIconSpace: AppSize.s24,
                 ),
                 const SizedBox(height: AppSize.s40),
+                if (model.hasError)
+                  Alert.primary(
+                    text: '${model.modelError}',
+                  ),
+                const SizedBox(height: AppSize.s16),
                 PosButton(
                   onPressed: model.saveBranchDetail,
                   title: AppString.saveBranchDetailText,
@@ -76,21 +82,10 @@ class AddBranchView extends StatelessWidget {
   }
 }
 
-class AddBranchExpandableView extends StatefulWidget {
-  AddBranchExpandableView({
-    Key? key,
-    required this.index,
-    this.data,
-  }) : super(key: key);
-  final int index;
-  final Branch? data;
-
-  @override
-  State<AddBranchExpandableView> createState() =>
-      _AddBranchExpandableViewState();
-}
-
-class _AddBranchExpandableViewState extends State<AddBranchExpandableView> {
+class AddBranchExpandableView extends StatelessWidget {
+  const AddBranchExpandableView({Key? key, required this.data})
+      : super(key: key);
+  final Map<String, dynamic> data;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -108,7 +103,7 @@ class _AddBranchExpandableViewState extends State<AddBranchExpandableView> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Branch ${widget.index}',
+                'Branch ${data['idx']}',
                 style: const TextStyle(
                   color: ColorManager.kPrimaryColor,
                   fontSize: AppSize.s16,
@@ -126,43 +121,27 @@ class _AddBranchExpandableViewState extends State<AddBranchExpandableView> {
             ],
           ),
         ),
-        AddBranchFormView(data: widget.data)
+        AddBranchFormView(data: data)
       ],
     );
   }
 }
 
 class AddBranchFormView extends StatefulWidget {
-  AddBranchFormView({
+  const AddBranchFormView({
     Key? key,
     this.data,
   }) : super(key: key);
-  final Branch? data;
+  final Map<String, dynamic>? data;
 
   @override
   State<AddBranchFormView> createState() => _AddBranchFormViewState();
 }
 
 class _AddBranchFormViewState extends State<AddBranchFormView> {
-  TextEditingController branchNameController = TextEditingController();
-  TextEditingController locationController = TextEditingController();
-  TextEditingController numOfMerchantsController = TextEditingController();
-  TextEditingController posNameController = TextEditingController();
-  TextEditingController bankAccountDetailController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    branchNameController.text = widget.data?.name ?? "";
-    locationController.text = widget.data?.location ?? "";
-    numOfMerchantsController.text =
-        widget.data?.numberOfMerchants.toString() ?? "1";
-
-    print('branch: ${widget.data!.toJson()}');
-  }
-
   @override
   Widget build(BuildContext context) {
+    print('number of merchants: ${widget.data?['numOfMerchants'] ?? 0}');
     return Padding(
       padding: const EdgeInsets.all(AppSize.s12),
       child: Column(
@@ -171,30 +150,50 @@ class _AddBranchFormViewState extends State<AddBranchFormView> {
             label: AppString.branchNameText,
             hintText: AppString.branchNamePlaceholderText,
             border: InputBorder.none,
-            controller: branchNameController,
+            onChanged: (value) {
+              setState(() {
+                widget.data!['name'] = value;
+              });
+            },
+            initialValue: widget.data?['name'] ?? '',
           ),
           const SizedBox(height: AppSize.s12),
           InputField(
             label: AppString.locationText,
             hintText: AppString.locationPlaceholderText,
             border: InputBorder.none,
-            controller: locationController,
+            onChanged: (value) {
+              setState(() {
+                widget.data!['location'] = value;
+              });
+            },
+            initialValue: widget.data?['location'] ?? '',
           ),
           const SizedBox(height: AppSize.s12),
           InputField(
             label: AppString.numberOfMerchantText,
             hintText: AppString.numberOfMerchantPlaceholderText,
             border: InputBorder.none,
-            controller: numOfMerchantsController,
+            onChanged: (value) {
+              setState(() {
+                widget.data!['numOfMerchants'] = value;
+              });
+            },
             keyBoardType: TextInputType.number,
+            initialValue: '${widget.data?['numOfMerchants'] ?? 0}',
           ),
-          Alert.primary(text: AppString.numberOfMerchantText),
+          // Alert.primary(text: AppString.numberOfMerchantManagingThisBranchText),
           const SizedBox(height: AppSize.s12),
           InputField(
             label: AppString.posNameText,
             hintText: AppString.numOfBranchPlaceholder,
             border: InputBorder.none,
-            controller: posNameController,
+            onChanged: (value) {
+              setState(() {
+                widget.data!['posName'] = value;
+              });
+            },
+            initialValue: widget.data?['posName'] ?? '',
             labelRightItem: GestureDetector(
               onTap: () {},
               child: const Text(
@@ -207,13 +206,18 @@ class _AddBranchFormViewState extends State<AddBranchFormView> {
               ),
             ),
           ),
-          Alert.primary(text: AppString.posNameUsedInBranchText),
+          // Alert.primary(text: AppString.posNameUsedInBranchText),
           const SizedBox(height: AppSize.s12),
           InputField(
             label: AppString.bankAccountDetailText,
             hintText: AppString.bankAccountDetailPlaceholderText,
             border: InputBorder.none,
-            controller: bankAccountDetailController,
+            onChanged: (value) {
+              setState(() {
+                widget.data!['bankAccountDetail'] = value;
+              });
+            },
+            initialValue: widget.data?['bankAccountDetail'] ?? '',
             labelRightItem: GestureDetector(
               onTap: () {},
               child: const Text(
@@ -226,7 +230,7 @@ class _AddBranchFormViewState extends State<AddBranchFormView> {
               ),
             ),
           ),
-          Alert.primary(text: AppString.bankAccountRecommendedForPosText),
+          // Alert.primary(text: AppString.bankAccountRecommendedForPosText),
           const SizedBox(height: AppSize.s12),
         ],
       ),

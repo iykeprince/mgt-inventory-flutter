@@ -58,7 +58,6 @@ import '../services/merchant.service.dart';
     AdaptiveRoute(page: AdminHowItWorksView),
     AdaptiveRoute(page: CreateMerchantAccountView),
     AdaptiveRoute(page: AddBranchView),
-
 /**Merchant Journey to be refactored */
     AdaptiveRoute(page: MerchantHomeView),
     AdaptiveRoute(page: EditProfileView),
