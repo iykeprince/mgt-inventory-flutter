@@ -21,10 +21,6 @@ class AdminService with ReactiveServiceMixin {
   List<Branch>? get branches => _branches.value;
   List<Merchant> get merchants => _merchants.value;
 
-  void addBranch() {
-    _branches.value = [...?_branches.value, Branch()];
-  }
-
   Future<Admin> updateAdmin(Map formData) async {
     var response = await dioClient.put('/admin/update', data: formData);
     Admin admin = Admin.fromJson(response.data);
@@ -39,6 +35,13 @@ class AdminService with ReactiveServiceMixin {
         .toList();
     _branches.value = branches;
     return branches;
+  }
+
+  Future<Branch> createBranch(Map<String, dynamic> formData) async {
+    var response = await dioClient.post('/admin/branches', data: formData);
+    Branch branch = Branch.fromJson(response.data);
+    _branches.value = [...?_branches.value, branch];
+    return branch;
   }
 
   Future<List<Merchant>> getMerchants() async {

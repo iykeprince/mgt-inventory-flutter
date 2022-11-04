@@ -36,6 +36,7 @@ class InputField extends StatelessWidget {
   final Widget? labelRightItem;
   final TextStyle? labelStyle;
   final int? minLines;
+  final String? initialValue;
 
   const InputField({
     this.autovalidateMode,
@@ -68,6 +69,7 @@ class InputField extends StatelessWidget {
     this.readOnly = false,
     this.labelRightItem,
     this.labelStyle,
+    this.initialValue,
   });
 
   @override
@@ -94,6 +96,7 @@ class InputField extends StatelessWidget {
           height: AppSize.s4,
         ),
         TextFormField(
+          initialValue: initialValue,
           showCursor: showCursor,
           readOnly: readOnly,
           maxLength: maxLength,

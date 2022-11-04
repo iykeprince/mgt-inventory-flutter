@@ -37,11 +37,9 @@ class ColorManager {
   static const Color kMidnightBlue = Color(0xff1B4672);
 
   static const Color kHowItWorksTitle = Color(0xff145C53);
-  static const Color kHowItWorksContent = Color(0xff374846);
-
   static const Color kTimelineOrange = Color(0xffE48B06);
-
   static const Color kTimelineBorder = Color(0xff4E9C73);
-
   static const Color kBgSmokeWhite = Color(0xffF4F4F4);
+  static const Color kBadgeTextColor = Color(0xffE67E22);
+  static const Color kBadgeBgColor = Color(0xffFFF4E4);
 }

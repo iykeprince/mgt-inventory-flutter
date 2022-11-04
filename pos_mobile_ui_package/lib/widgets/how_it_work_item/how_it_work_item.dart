@@ -56,7 +56,7 @@ class HowItWorksItem extends StatelessWidget {
                   Text(content,
                       style: const TextStyle(
                         fontSize: FontSize.s16,
-                        color: ColorManager.kHowItWorksContent,
+                        color: ColorManager.kTurquoiseDarkColor,
                       ),
                       textAlign: TextAlign.left)
                 ],

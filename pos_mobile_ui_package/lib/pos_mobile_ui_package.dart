@@ -24,6 +24,7 @@ export 'widgets/date_picker/date_picker.dart';
 export 'widgets/buttons/toggle_button.dart';
 export 'widgets/how_it_work_item/how_it_work_item.dart';
 export 'widgets/show_dialog/show_dialog_container.dart';
+export 'widgets/bottom_sticky_note/bottom_sticky_note.dart';
 
 //export the utils
 export './utils/colors.dart';
