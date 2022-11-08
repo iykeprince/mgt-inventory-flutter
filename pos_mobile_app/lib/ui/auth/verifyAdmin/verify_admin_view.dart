@@ -108,7 +108,6 @@ class VerifyAdminFormView extends ViewModelWidget<VerifyAdminViewModel> {
               label: AppString.otpCodeText,
               hintText: AppString.otpCodeText,
               border: InputBorder.none,
-              obscureText: true,
               onChanged: model.setOTP,
               keyBoardType: TextInputType.number,
             ),

@@ -23,7 +23,7 @@ class CardItems {
     return [
       CardItem(
         imgUrl: 'assets/images/MerchantDashboard/transaction.png',
-        amount: '5000',
+        amount: '0',
         color: ColorManager.kPrimaryColor,
         title: AppString.balCashAtHandText,
         titleColor: ColorManager.kWhiteColor,
@@ -31,17 +31,17 @@ class CardItems {
       ),
       CardItem(
         imgUrl: 'assets/images/MerchantDashboard/transaction.png',
-        amount: '5000',
+        amount: '0',
         title: AppString.totalWithdrawalText,
       ),
       CardItem(
         imgUrl: 'assets/images/MerchantDashboard/transaction.png',
-        amount: '5000',
+        amount: '0',
         title: AppString.totalProfitMadeText,
       ),
       CardItem(
         imgUrl: 'assets/images/MerchantDashboard/transaction.png',
-        amount: '5000',
+        amount: '0',
         title: AppString.openingBalanceText,
       ),
     ];

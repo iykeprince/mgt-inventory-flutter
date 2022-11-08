@@ -6,6 +6,17 @@ import 'package:stacked_services/stacked_services.dart';
 class VerifyMerchantSuccessViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
 
-  navigateToCompeleteMerchantRegister() =>
-      _navigationService.navigateTo(Routes.compeleteMerchantRegister);
+  String _email = '';
+  String get email => _email;
+
+  setEmailAddress(String value) {
+    _email = value;
+  }
+
+  navigateToCompeleteMerchantRegister() => _navigationService.navigateTo(
+        Routes.compeleteMerchantRegister,
+        arguments: CompeleteMerchantRegisterArguments(
+          emailAddress: email,
+        ),
+      );
 }

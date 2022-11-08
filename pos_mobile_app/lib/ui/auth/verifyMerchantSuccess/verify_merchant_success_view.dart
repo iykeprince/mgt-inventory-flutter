@@ -9,13 +9,16 @@ import '../../../utils/helpers.dart';
 import 'verify_merchant_success_view.dart';
 
 class VerifyMerchantSuccessView extends StatelessWidget {
-  const VerifyMerchantSuccessView({Key? key}) : super(key: key);
+  const VerifyMerchantSuccessView({Key? key, required this.emailAddress})
+      : super(key: key);
+
+  final String emailAddress;
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<VerifyMerchantSuccessViewModel>.reactive(
       viewModelBuilder: () => VerifyMerchantSuccessViewModel(),
-      // onModelReady: ,
+      onModelReady: (model) => model.setEmailAddress(emailAddress),
       builder: (context, model, child) {
         return Scaffold(
           body: Container(

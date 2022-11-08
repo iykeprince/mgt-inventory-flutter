@@ -8,12 +8,18 @@ import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 
 class CompeleteMerchantRegister extends StatelessWidget {
-  const CompeleteMerchantRegister({Key? key}) : super(key: key);
+  const CompeleteMerchantRegister({
+    Key? key,
+    required this.emailAddress,
+  }) : super(key: key);
+
+  final String emailAddress;
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CompeleteMerchantRegisterModel>.nonReactive(
       viewModelBuilder: () => CompeleteMerchantRegisterModel(),
+      onModelReady: (model) => model.setEmailAddress(emailAddress),
       builder: (context, model, child) => Scaffold(
         body: KeyboardAware(
           child: Container(
@@ -79,7 +85,7 @@ class CompleteMerchantFormView
             const SizedBox(height: AppSize.s40),
             InputField(
               label: AppString.fullNameText,
-              hintText: AppString.businessNamePlaceholder,
+              hintText: AppString.fullnamePlaceholderText,
               border: InputBorder.none,
               validationCallback: model.fullNameValidation,
               onChanged: model.setFullName,
@@ -87,16 +93,16 @@ class CompleteMerchantFormView
             ),
             if (model.hasErrorForKey(FULLNAME_VALIDATOR))
               Alert.primary(text: AppString.fullNameValidatorText),
-            const SizedBox(height: AppSize.s12),
-            InputField(
-              label: AppString.emailAddress,
-              hintText: AppString.emailAddressPlaceholder,
-              border: InputBorder.none,
-              keyBoardType: TextInputType.emailAddress,
-              onChanged: model.setEmailAddress,
-              validationCallback: model.emailValidation,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-            ),
+            // const SizedBox(height: AppSize.s12),
+            // InputField(
+            //   label: AppString.emailAddress,
+            //   hintText: AppString.emailAddressPlaceholder,
+            //   border: InputBorder.none,
+            //   keyBoardType: TextInputType.emailAddress,
+            //   onChanged: model.setEmailAddress,
+            //   validationCallback: model.emailValidation,
+            //   autovalidateMode: AutovalidateMode.onUserInteraction,
+            // ),
             // if (model.hasErrorForKey(EMAIL_VALIDATOR))
             // Alert.primary(text: AppString.emailValidatorText),
             const SizedBox(height: AppSize.s12),

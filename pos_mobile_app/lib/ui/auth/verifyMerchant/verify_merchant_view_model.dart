@@ -36,7 +36,10 @@ class VerifyMerchantViewModel extends BaseViewModel {
     setBusy(true);
     try {
       var response = await _authenticationService.verifyOtp(formData);
-      _navigationService.replaceWith(Routes.verifyMerchantSuccessView);
+      _navigationService.replaceWith(
+        Routes.verifyMerchantSuccessView,
+        arguments: VerifyMerchantSuccessViewArguments(emailAddress: email),
+      );
       return response;
     } on DioError catch (error) {
       throw Exception(error.response?.data["message"]);
@@ -45,8 +48,8 @@ class VerifyMerchantViewModel extends BaseViewModel {
     }
   }
 
-  navigateToVerifySuccess() =>
-      _navigationService.navigateTo(Routes.verifyMerchantSuccessView);
+  // navigateToVerifySuccess() =>
+  //     _navigationService.navigateTo(Routes.verifyMerchantSuccessView);
 
   navigateBack() => _navigationService.back();
 }

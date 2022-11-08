@@ -63,6 +63,16 @@ class CreateMerchantAccountViewModel extends BaseViewModel {
       _navigationService.back();
       return merchants;
     } on DioError catch (error) {
+      print('error: ${error.response?.data}');
+      Fluttertoast.showToast(
+        msg: error.response?.data['message'],
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: ColorManager.kDarkCharcoal,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
       throw Exception(error.response?.data['message']);
     } finally {
       setBusy(false);
