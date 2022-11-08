@@ -48,7 +48,7 @@ class ProfileItem extends StatelessWidget {
           trailing: const Icon(
             Icons.chevron_right,
             size: AppSize.s28,
-            color: ColorManager.kGreyOpacity,
+            color: ColorManager.kDarkCharcoal,
           ),
         ),
       ),

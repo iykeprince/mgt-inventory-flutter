@@ -229,14 +229,24 @@ class StackedRouter extends RouterBase {
       );
     },
     VerifyMerchantSuccessView: (data) {
+      var args =
+          data.getArgs<VerifyMerchantSuccessViewArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const VerifyMerchantSuccessView(),
+        builder: (context) => VerifyMerchantSuccessView(
+          key: args.key,
+          emailAddress: args.emailAddress,
+        ),
         settings: data,
       );
     },
     CompeleteMerchantRegister: (data) {
+      var args =
+          data.getArgs<CompeleteMerchantRegisterArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const CompeleteMerchantRegister(),
+        builder: (context) => CompeleteMerchantRegister(
+          key: args.key,
+          emailAddress: args.emailAddress,
+        ),
         settings: data,
       );
     },
@@ -381,6 +391,20 @@ class VerifyMerchantViewArguments {
   final Key? key;
   final String emailAddress;
   VerifyMerchantViewArguments({this.key, required this.emailAddress});
+}
+
+/// VerifyMerchantSuccessView arguments holder class
+class VerifyMerchantSuccessViewArguments {
+  final Key? key;
+  final String emailAddress;
+  VerifyMerchantSuccessViewArguments({this.key, required this.emailAddress});
+}
+
+/// CompeleteMerchantRegister arguments holder class
+class CompeleteMerchantRegisterArguments {
+  final Key? key;
+  final String emailAddress;
+  CompeleteMerchantRegisterArguments({this.key, required this.emailAddress});
 }
 
 /// AdminMerchantDetailView arguments holder class
@@ -600,6 +624,8 @@ extension NavigatorStateExtension on NavigationService {
   }
 
   Future<dynamic> navigateToVerifyMerchantSuccessView({
+    Key? key,
+    required String emailAddress,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -608,6 +634,8 @@ extension NavigatorStateExtension on NavigationService {
   }) async {
     return navigateTo(
       Routes.verifyMerchantSuccessView,
+      arguments: VerifyMerchantSuccessViewArguments(
+          key: key, emailAddress: emailAddress),
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,
@@ -616,6 +644,8 @@ extension NavigatorStateExtension on NavigationService {
   }
 
   Future<dynamic> navigateToCompeleteMerchantRegister({
+    Key? key,
+    required String emailAddress,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -624,6 +654,8 @@ extension NavigatorStateExtension on NavigationService {
   }) async {
     return navigateTo(
       Routes.compeleteMerchantRegister,
+      arguments: CompeleteMerchantRegisterArguments(
+          key: key, emailAddress: emailAddress),
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,

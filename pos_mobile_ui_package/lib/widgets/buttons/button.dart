@@ -155,7 +155,8 @@ class PosButton extends StatelessWidget {
                 trailingIcon,
                 color: trailingIconColor,
               ),
-            if (busy != null && busy)
+            if (busy) const SizedBox(width: AppSize.s20),
+            if (busy)
               const SizedBox(
                 width: 15,
                 height: 15,

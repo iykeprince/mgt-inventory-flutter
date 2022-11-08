@@ -96,10 +96,10 @@ class CompeleteMerchantRegisterModel extends BaseViewModel {
       return setErrorForObject(FULLNAME_VALIDATOR, "fullname name is empty");
     }
     setErrorForObject(FULLNAME_VALIDATOR, null);
-    if (_emailAddress == null || _emailAddress!.isEmpty) {
-      return setErrorForObject(EMAIL_VALIDATOR, "Email address is required");
-    }
-    setErrorForObject(EMAIL_VALIDATOR, null);
+    // if (_emailAddress == null || _emailAddress!.isEmpty) {
+    //   return setErrorForObject(EMAIL_VALIDATOR, "Email address is required");
+    // }
+    // setErrorForObject(EMAIL_VALIDATOR, null);
 
     if (_phone == null || _phone!.isEmpty) {
       return setErrorForObject(CONTACT_PHONE_VALIDATOR, "Phone is required");

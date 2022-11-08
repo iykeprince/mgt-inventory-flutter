@@ -118,6 +118,7 @@ class AccountSettingView extends StatelessWidget {
                         title: AppString.deleteAccount,
                         onTap: () {},
                         showBottomBorder: false,
+                        textColor: ColorManager.kRed,
                       ),
                       const SizedBox(
                         height: AppSize.s32,
