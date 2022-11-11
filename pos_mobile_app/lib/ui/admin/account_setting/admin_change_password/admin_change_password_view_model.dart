@@ -26,8 +26,10 @@ class AdminChangePasswordViewModel extends BaseViewModel {
   navigateBack() => _navigationService.back();
 
   changePassword() async {
-    await runBusyFuture(runChangePassword(),
-        busyObject: ADMIN_CHANGE_PASSWORD_TASK);
+    await runBusyFuture(
+      runChangePassword(),
+      busyObject: ADMIN_CHANGE_PASSWORD_TASK,
+    );
   }
 
   Future<DefaultResponse> runChangePassword() async {
@@ -44,7 +46,7 @@ class AdminChangePasswordViewModel extends BaseViewModel {
       Fluttertoast.showToast(
         msg: "Password successfully changed",
         toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
+        gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
         backgroundColor: ColorManager.kDarkCharcoal,
         textColor: Colors.white,

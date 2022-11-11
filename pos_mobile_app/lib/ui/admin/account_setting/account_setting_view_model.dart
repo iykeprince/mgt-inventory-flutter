@@ -25,11 +25,17 @@ class AccountSettingViewModel extends BaseViewModel {
   navigateToManageBranches() =>
       _navigationService.navigateTo(Routes.adminManageBranchView);
 
+  navigateToManageReportSettings() =>
+      _navigationService.navigateTo(Routes.adminManageReportSettingView);
+
   navigateToHowItWorks() =>
       _navigationService.navigateTo(Routes.adminHowItWorksView);
 
   navigateToChangePassword() =>
       _navigationService.navigateTo(Routes.adminChangePasswordView);
+
+  navigateToDeleteAccount() =>
+      _navigationService.navigateTo(Routes.adminDeleteAccountView);
 
   logout() async {
     await _authService.logout();

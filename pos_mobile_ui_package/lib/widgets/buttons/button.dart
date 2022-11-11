@@ -27,6 +27,8 @@ class PosButton extends StatelessWidget {
   final double leadingIconSpace;
   final BorderRadiusType borderRadiusType;
 
+  final bool? disabled;
+
   PosButton({
     Key? key,
     this.borderRadius = 8.0,
@@ -46,6 +48,7 @@ class PosButton extends StatelessWidget {
     this.busy = false,
     this.buttonType = ButtonType.fill,
     this.borderRadiusType = BorderRadiusType.none,
+    this.disabled = false,
   });
 
   Color getBackgroundColor() {
@@ -123,7 +126,7 @@ class PosButton extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: _constructBorderRadius(borderRadiusType),
-          color: _bgColor,
+          color: disabled! ? ColorManager.kLightGray : _bgColor,
           border: constructBorder(),
         ),
         child:

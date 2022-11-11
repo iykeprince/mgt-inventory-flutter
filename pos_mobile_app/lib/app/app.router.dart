@@ -15,10 +15,12 @@ import '../models/merchant.model.dart';
 import '../ui/admin/account_setting/account_setting_view.dart';
 import '../ui/admin/account_setting/admin_branch_detail/admin_branch_detail_view.dart';
 import '../ui/admin/account_setting/admin_change_password/admin_change_password_view.dart';
+import '../ui/admin/account_setting/admin_delete_account/admin_delete_account_view.dart';
 import '../ui/admin/account_setting/admin_edit_profile/admin_edit_profile_view.dart';
 import '../ui/admin/account_setting/admin_howItWorks/admin_how_it_works_view.dart';
 import '../ui/admin/account_setting/admin_manage_branch/admin_manage_branch_view.dart';
 import '../ui/admin/account_setting/admin_manage_merchant_account/admin_manage_merchant_account_view.dart';
+import '../ui/admin/account_setting/admin_manage_report_setting/admin_manage_report_setting_view.dart';
 import '../ui/admin/account_setting/admin_merchant_detail/admin_merchant_detail_view.dart';
 import '../ui/admin/admin_home_view.dart';
 import '../ui/admin/dashboard/add_branch/add_branch_view.dart';
@@ -72,6 +74,9 @@ class Routes {
   static const String addBranchView = '/add-branch-view';
   static const String adminManageBranchView = '/admin-manage-branch-view';
   static const String adminBranchDetailView = '/admin-branch-detail-view';
+  static const String adminManageReportSettingView =
+      '/admin-manage-report-setting-view';
+  static const String adminDeleteAccountView = '/admin-delete-account-view';
   static const String merchantHomeView = '/merchant-home-view';
   static const String editProfileView = '/edit-profile-view';
   static const String howItWorksView = '/how-it-works-view';
@@ -103,6 +108,8 @@ class Routes {
     addBranchView,
     adminManageBranchView,
     adminBranchDetailView,
+    adminManageReportSettingView,
+    adminDeleteAccountView,
     merchantHomeView,
     editProfileView,
     howItWorksView,
@@ -141,6 +148,9 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.addBranchView, page: AddBranchView),
     RouteDef(Routes.adminManageBranchView, page: AdminManageBranchView),
     RouteDef(Routes.adminBranchDetailView, page: AdminBranchDetailView),
+    RouteDef(Routes.adminManageReportSettingView,
+        page: AdminManageReportSettingView),
+    RouteDef(Routes.adminDeleteAccountView, page: AdminDeleteAccountView),
     RouteDef(Routes.merchantHomeView, page: MerchantHomeView),
     RouteDef(Routes.editProfileView, page: EditProfileView),
     RouteDef(Routes.howItWorksView, page: HowItWorksView),
@@ -321,6 +331,18 @@ class StackedRouter extends RouterBase {
           key: args.key,
           branch: args.branch,
         ),
+        settings: data,
+      );
+    },
+    AdminManageReportSettingView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const AdminManageReportSettingView(),
+        settings: data,
+      );
+    },
+    AdminDeleteAccountView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const AdminDeleteAccountView(),
         settings: data,
       );
     },
@@ -838,6 +860,38 @@ extension NavigatorStateExtension on NavigationService {
     return navigateTo(
       Routes.adminBranchDetailView,
       arguments: AdminBranchDetailViewArguments(key: key, branch: branch),
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToAdminManageReportSettingView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.adminManageReportSettingView,
+      id: routerId,
+      preventDuplicates: preventDuplicates,
+      parameters: parameters,
+      transition: transition,
+    );
+  }
+
+  Future<dynamic> navigateToAdminDeleteAccountView({
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo(
+      Routes.adminDeleteAccountView,
       id: routerId,
       preventDuplicates: preventDuplicates,
       parameters: parameters,

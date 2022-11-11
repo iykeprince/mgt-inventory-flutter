@@ -4,6 +4,7 @@ import 'package:pos_mobile_app/services/authentication.service.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/account_setting_view.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_branch_detail/admin_branch_detail_view.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_change_password/admin_change_password_view.dart';
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_delete_account/admin_delete_account_view.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_edit_profile/admin_edit_profile_view.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_howItWorks/admin_how_it_works_view.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_branch/admin_manage_branch_view.dart';
@@ -37,6 +38,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../services/merchant.service.dart';
 import '../services/user.service.dart';
+import '../ui/admin/account_setting/admin_manage_report_setting/admin_manage_report_setting_view.dart';
 
 @StackedApp(
   routes: [
@@ -65,6 +67,8 @@ import '../services/user.service.dart';
     AdaptiveRoute(page: AddBranchView),
     AdaptiveRoute(page: AdminManageBranchView),
     AdaptiveRoute(page: AdminBranchDetailView),
+    AdaptiveRoute(page: AdminManageReportSettingView),
+    AdaptiveRoute(page: AdminDeleteAccountView),
 
 /**Merchant Journey to be refactored */
     AdaptiveRoute(page: MerchantHomeView),

@@ -95,7 +95,7 @@ class AccountSettingView extends StatelessWidget {
                       ),
                       ProfileItem(
                         title: AppString.manageReportSettings,
-                        onTap: () {},
+                        onTap: model.navigateToManageReportSettings,
                       ),
                       ProfileItem(
                         title: AppString.changePasswordText,
@@ -116,7 +116,7 @@ class AccountSettingView extends StatelessWidget {
                       ),
                       ProfileItem(
                         title: AppString.deleteAccount,
-                        onTap: () {},
+                        onTap: model.navigateToDeleteAccount,
                         showBottomBorder: false,
                         textColor: ColorManager.kRed,
                       ),

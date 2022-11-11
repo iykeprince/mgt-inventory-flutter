@@ -16,8 +16,7 @@ class AdminEditProfileView extends StatelessWidget {
       onModelReady: (model) {
         model.businessNameController.text = model.admin?.businessName ?? "";
         model.emailController.text = model.admin?.businessEmail ?? "";
-        model.numOfBranchController.text =
-            model.admin?.numOfBranches.toString() ?? "0";
+        model.homeAddressController.text = model.admin?.address ?? "";
         model.phoneController.text = model.admin?.contactPhone ?? "";
 
         print('admin profile: ${model.admin?.toJson()}');
@@ -72,6 +71,7 @@ class AdminEditProfileFormView
           labelStyle: getBoldStyle(
               color: ColorManager.kDarkCharcoal, fontSize: FontSize.s16),
           controller: model.businessNameController,
+          readOnly: !model.editProfile,
         ),
         const SizedBox(height: AppSize.s16),
         InputField(
@@ -81,6 +81,7 @@ class AdminEditProfileFormView
           labelStyle: getBoldStyle(
               color: ColorManager.kDarkCharcoal, fontSize: FontSize.s16),
           controller: model.emailController,
+          readOnly: !model.editProfile,
         ),
         const SizedBox(height: AppSize.s16),
         InputField(
@@ -90,16 +91,28 @@ class AdminEditProfileFormView
           labelStyle: getBoldStyle(
               color: ColorManager.kDarkCharcoal, fontSize: FontSize.s16),
           controller: model.phoneController,
+          readOnly: !model.editProfile,
         ),
         const SizedBox(height: AppSize.s16),
+        // InputField(
+        //   label: AppString.numOfBranchText,
+        //   hintText: AppString.numOfBranchPlaceholder,
+        //   border: InputBorder.none,
+        //   labelStyle: getBoldStyle(
+        //       color: ColorManager.kDarkCharcoal, fontSize: FontSize.s16),
+        //   keyBoardType: TextInputType.number,
+        //   controller: model.homeAddressController,
+        //   readOnly: !model.editProfile,
+        // ),
         InputField(
-          label: AppString.numOfBranchText,
-          hintText: AppString.numOfBranchPlaceholder,
+          label: AppString.addressText,
+          hintText: AppString.sampleAddressText,
           border: InputBorder.none,
           labelStyle: getBoldStyle(
               color: ColorManager.kDarkCharcoal, fontSize: FontSize.s16),
-          keyBoardType: TextInputType.number,
-          controller: model.numOfBranchController,
+          keyBoardType: TextInputType.text,
+          controller: model.homeAddressController,
+          readOnly: !model.editProfile,
         ),
         const SizedBox(height: AppSize.s32),
         if (model.hasError)
@@ -108,8 +121,13 @@ class AdminEditProfileFormView
           ),
         if (model.hasError) const SizedBox(height: AppSize.s20),
         PosButton(
-          onPressed: model.updateMerchant,
-          title: AppString.updateDetailsText,
+          onPressed: model.editProfile
+              ? model.updateMerchant
+              : model.handleEditProfile,
+          disabled: !model.editProfile,
+          title: !model.editProfile
+              ? AppString.editProfileText
+              : AppString.updateDetailsText,
           // buttonBgColor: ColorManager.kLightGreen1,
           // buttonTextColor: ColorManager.kDarkCharcoal,
           fontSize: FontSize.s16,
