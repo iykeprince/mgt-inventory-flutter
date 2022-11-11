@@ -62,6 +62,18 @@ class AppString {
   static var deleteBranchText = "Delete Branch";
 
   static var editBranchDetail = 'Edit Branch Details';
+
+  static String deleteAccountInstructionText =
+      "This action is immediate and cannot be undone. By clicking the “Delete My Account” button, you confirm that all your data and transactions should be deleted permanently from our database.";
+
+  static String beforeYouGoText = "Before you go, you can:";
+
+  static String tellUsWhyYouAreLeaving = 'Tell us why you are leaving';
+
+  static String downloadYourData = "Download your data";
+
+  static const String deleteAccountStickyText =
+      "We will keep your data for a recovery period of 30days when you will have the option to restore your account. It will be deleted permanently after 30days of inaccess.";
   static String verifyEmailSubText(String email) =>
       "We sent a six-digit code to your email address ($email) for verification.";
   static const String otpCodeText = "OTP Code";
@@ -114,6 +126,7 @@ class AppString {
   static const String howItWorksText = "How It Works";
   static const String needHelpText = "Need help? Contact support";
   static const String editProfileDetailsText = "Edit Profile Details";
+  static const String editProfileText = "Edit Profile";
   static const String updateDetailsText = "Update Details";
   static const String enterOpeningBalanceText = "Enter opening balance";
   static const String openingBalanceText = "Opening Balance";
@@ -168,4 +181,11 @@ class AppString {
   static const String numberOfMerchantManagingThisBranchText =
       "Number of merchants managing this branch";
   static const String numberOfMerchantPlaceholderText = "1";
+
+  static const String automaticallySendMonthlyReportToEmail =
+      "Automatically send monthly reports to my email";
+  static const String automaticallySendQuaterlyReportToEmail =
+      "Automatically send quarterly reports to my email";
+  static const String automaticallySendYearlyReportToEmail =
+      "Automatically send yearly reports to my email";
 }

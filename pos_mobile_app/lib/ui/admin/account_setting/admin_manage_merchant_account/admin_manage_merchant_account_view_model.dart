@@ -10,6 +10,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../../../../app/app.locator.dart';
 import '../../../../app/app.router.dart';
+import '../../../../models/branch.model.dart';
 import '../../../../models/merchant.model.dart';
 import '../../../../models/user.model.dart';
 import '../../../../services/admin.service.dart';
@@ -27,10 +28,23 @@ class AdminManageMerchantAccountViewModel extends BaseViewModel {
   User? _user;
   User? get user => _user;
   List<Merchant> get merchants => _adminService.merchants;
+  List<Branch>? get branches => _adminService.branches;
 
   void navigateBack() => _navigationService.back();
 
   Future<void> navigateToCreateMerchant() async {
+    if (branches!.isEmpty) {
+      Fluttertoast.showToast(
+        msg: "At least one branch is required to create a merchant!",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: ColorManager.kDarkCharcoal,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+      return;
+    }
     await _navigationService.navigateTo(Routes.createMerchantAccountView);
     notifyListeners();
     print('calling from back');
