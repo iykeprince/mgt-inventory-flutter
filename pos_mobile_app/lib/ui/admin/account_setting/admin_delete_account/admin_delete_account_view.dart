@@ -104,7 +104,7 @@ class AdminDeleteAccountView extends StatelessWidget {
                     title: 'Delete My Account',
                     buttonTextColor: ColorManager.kWhiteColor,
                     buttonBgColor: ColorManager.kRed,
-                    onPressed: () {},
+                    onPressed: model.showFeedbackSurveySheet,
                   ),
                 ),
               ],

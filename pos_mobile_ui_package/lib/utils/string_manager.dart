@@ -74,6 +74,19 @@ class AppString {
 
   static const String deleteAccountStickyText =
       "We will keep your data for a recovery period of 30days when you will have the option to restore your account. It will be deleted permanently after 30days of inaccess.";
+
+  static String whyAreYouDeletingYourAccount =
+      'Why are you deleting your account?';
+
+  static String feedbackSurveyText = 'Feedback Survey';
+
+  static String iNoLongerNeedYourServicesText =
+      'I no longer need your services';
+
+  static String anyComplaintRequestSuggestionText =
+      "Any complaints, requests, or suggestion?";
+
+  static String submitFeedback = "Submit Feedback";
   static String verifyEmailSubText(String email) =>
       "We sent a six-digit code to your email address ($email) for verification.";
   static const String otpCodeText = "OTP Code";
