@@ -8,6 +8,7 @@ class AppString {
   static const String merchant = "Merchant";
   static const String admin = "Admin";
   static const String overview = "Overview";
+  static const String welecome = "Welecome";
   static const String forgotPassword = "Forgot Password?";
   static const String onBoardSub1 =
       "Seamlessly and efficiently record up-to-date point-of-sale transactions from the comfort of your home or workplace.";
