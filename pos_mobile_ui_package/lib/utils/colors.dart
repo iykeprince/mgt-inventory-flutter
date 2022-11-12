@@ -35,7 +35,6 @@ class ColorManager {
   static const Color kAzureishWhite = Color(0xffD0EBE8);
   static const Color kChineseSilver = Color(0xffCCCCCC);
   static const Color kMidnightBlue = Color(0xff1B4672);
-
   static const Color kHowItWorksTitle = Color(0xff145C53);
   static const Color kTimelineOrange = Color(0xffE48B06);
   static const Color kTimelineBorder = Color(0xff4E9C73);
@@ -43,4 +42,7 @@ class ColorManager {
   static const Color kBadgeTextColor = Color(0xffE67E22);
   static const Color kBadgeBgColor = Color(0xffFFF4E4);
   static const Color kDividerLineDarkColor = Color(0xffE2E2E2);
+  static const Color kOuterSpaceColor = Color(0xff43514F);
+  static const Color klightYellowColor = Color(0xffFFFACF);
+  static const Color kPinkishPurpleColor = Color(0xffF8EAFF);
 }
