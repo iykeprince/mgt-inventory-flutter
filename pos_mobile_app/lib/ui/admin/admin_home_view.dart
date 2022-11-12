@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/account_setting_view.dart';
 import 'package:pos_mobile_app/ui/admin/dashboard/dasboard_view.dart';
+import 'package:pos_mobile_app/ui/admin/history/history_view.dart';
 import 'package:pos_mobile_app/ui/merchant/dashboard/dashboard_view.dart';
 
 import 'package:pos_mobile_app/utils/colors.dart';
@@ -133,7 +134,7 @@ class AdminHomeView extends StatelessWidget {
       case 0:
         return AdminDashboardView();
       case 1:
-        return const Center(child: Text('Admin Analytics'));
+        return AdminHistoryView();
       case 3:
         return const Center(child: Text('Admin Reports'));
       case 4:
