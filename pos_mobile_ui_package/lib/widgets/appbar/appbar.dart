@@ -8,11 +8,13 @@ import 'package:pos_mobile_ui_package/utils/values_manager.dart';
 class Navbar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final String leadingText;
+  final String bottomLeadingText;
   final double fontsize;
   final void Function()? onTap;
   final Color? color;
   final double? elevation;
   final Color? textColor;
+  final Color? bottomTextColor;
   final Color? iconThemeColor;
   final Color? iconColor;
   final Widget? trailing;
@@ -21,6 +23,8 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
   final Color? statusBarColor;
   final Brightness? statusBarBrightness;
   final Brightness? statusBarIconBrightness;
+  final TextStyle? leadingStyle;
+  final TextStyle? leadingBottomStyle;
 
   const Navbar(
       {Key? key,
@@ -29,8 +33,10 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
       this.color,
       this.fontsize = FontSize.s20,
       this.textColor,
+      this.bottomTextColor,
       this.iconThemeColor,
       this.leadingText = '',
+      this.bottomLeadingText = '',
       this.trailing,
       this.automaticallyImplyLeading = true,
       this.leadingWidth,
@@ -38,6 +44,8 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
       this.statusBarBrightness,
       this.elevation,
       this.iconColor,
+      this.leadingBottomStyle,
+      this.leadingStyle,
       this.statusBarIconBrightness})
       : super(key: key);
 
@@ -51,16 +59,35 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // if (leadingText.isNotEmpty)
-          Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            // if (leadingText.isNotEmpty)
-            Text(
-              leadingText,
-              style: getMediumStyle(
-                color: textColor ?? ColorManager.kDarkCharcoal,
-                fontSize: fontsize,
-              ),
-            )
-          ]),
+          Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // if (leadingText.isNotEmpty)
+                Text(
+                  leadingText,
+                  style: leadingStyle ??
+                      getMediumStyle(
+                        color: textColor ?? ColorManager.kDarkCharcoal,
+                        fontSize: fontsize,
+                      ),
+                ),
+                if (bottomLeadingText.isNotEmpty)
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 1.9,
+                    child: Text(
+                      bottomLeadingText,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: leadingBottomStyle ??
+                          getMediumStyle(
+                            color:
+                                bottomTextColor ?? ColorManager.kDarkCharcoal,
+                            fontSize: fontsize,
+                          ),
+                    ),
+                  ),
+              ]),
           Text(
             title!,
             style: getMediumStyle(
