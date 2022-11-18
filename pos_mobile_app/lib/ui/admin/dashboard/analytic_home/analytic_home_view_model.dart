@@ -1,18 +1,43 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pos_mobile_app/app/app.locator.dart';
+import 'package:pos_mobile_app/app/app.router.dart';
 import 'package:pos_mobile_app/dummy.widget/listtile_widget.dart';
+import 'package:pos_mobile_app/services/admin.service.dart';
 import 'package:pos_mobile_ui_package/utils/colors.dart';
 import 'package:pos_mobile_ui_package/utils/font_styles.dart';
 import 'package:pos_mobile_ui_package/utils/text_styles.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class AnalyticHomeViewModel extends BaseViewModel {
+  final _navigationService = locator<NavigationService>();
+  final _adminService = locator<AdminService>();
   String? _selectedValue;
   String? get selectedValue => _selectedValue;
+
+  navigateToTransactionPage() =>
+      _navigationService.navigateTo(Routes.adminTransactionView);
 
   handleSelectedValue(value) {
     _selectedValue = value;
     notifyListeners();
+  }
+
+  getStat() async {
+    await runBusyFuture(getStatTask());
+  }
+
+  getStatTask() async {
+    try {
+      setBusy(true);
+      return await _adminService.getStat();
+    } on DioError catch (error) {
+      throw Exception(error.response!.data['message']);
+    } finally {
+      setBusy(false);
+    }
   }
 
   List<ListTileWidget> cardLists(BuildContext context) {

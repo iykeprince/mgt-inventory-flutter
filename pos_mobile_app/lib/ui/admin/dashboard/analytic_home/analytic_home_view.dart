@@ -1,19 +1,15 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:pos_mobile_app/dummy.widget/listtile_widget.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../../models/transaction.model.dart';
+import '../dasboard_view.dart';
 import 'analytic_home_view_model.dart';
-
-List<Transaction> TRANSACTION_LIST = [
-  Transaction(id: '1', title: 'POS 1'),
-  Transaction(id: '2', title: 'POS 2'),
-  Transaction(id: '3', title: 'POS 3'),
-  Transaction(id: '4', title: 'POS 4'),
-  Transaction(id: '5', title: 'POS 5'),
-];
 
 class AnalyticHomeView extends StatelessWidget {
   AnalyticHomeView({Key? key}) : super(key: key);
@@ -35,6 +31,7 @@ class AnalyticHomeView extends StatelessWidget {
         builder: (context, model, child) {
           final cardList = model.cardLists(context);
           return Scaffold(
+            backgroundColor: ColorManager.kWhiteColor,
             appBar: Navbar(
               leadingText: AppString.welecome,
               leadingStyle: getMediumStyle(
@@ -71,10 +68,15 @@ class AnalyticHomeView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Today',
-                            style: getSemiBoldStyle(
-                                color: ColorManager.kOuterSpaceColor,
-                                fontSize: FontSize.s20)),
+                        GestureDetector(
+                          onTap: () {
+                            model.navigateToTransactionPage();
+                          },
+                          child: Text('Today',
+                              style: getSemiBoldStyle(
+                                  color: ColorManager.kOuterSpaceColor,
+                                  fontSize: FontSize.s20)),
+                        ),
                         const SizedBox(
                           height: AppSize.s12,
                         ),
@@ -156,17 +158,38 @@ class TransactionSummaryView extends ViewModelWidget<AnalyticHomeViewModel> {
               ),
             ),
           ),
+          SizedBox(height: AppSize.s40),
           Container(
             height: 200,
-            child: Center(
-                child: Text(
-              'Graph',
-              style: getBoldStyle(
-                color: ColorManager.kDarkCharcoal,
+            child: PieChart(
+              PieChartData(
+                // read about it in the PieChartData section
+                sections: [
+                  PieChartSectionData(
+                    value: 30.0,
+                    color: ColorManager.kBadgeTextColor,
+                    showTitle: false,
+                    radius: AppSize.s24,
+                  ),
+                  PieChartSectionData(
+                    value: 60.0,
+                    color: ColorManager.kDeepNavyBlue,
+                    showTitle: false,
+                    radius: AppSize.s24,
+                  ),
+                  PieChartSectionData(
+                    value: 10.0,
+                    color: ColorManager.kDeepViolet,
+                    showTitle: false,
+                    radius: AppSize.s24,
+                  ),
+                ],
               ),
-            )),
+              swapAnimationDuration: Duration(milliseconds: 150), // Optional
+              swapAnimationCurve: Curves.linear, // Optional
+            ),
           ), //chart,
-          const SizedBox(height: AppSize.s20),
+          const SizedBox(height: AppSize.s40),
           Column(
             children: [
               TransactionSummaryItemBox(
@@ -249,11 +272,11 @@ class TransactionSummaryItemBox extends StatelessWidget {
   }
 }
 
-class TransactionSummaryList extends StatelessWidget {
+class TransactionSummaryList extends ViewModelWidget<AnalyticHomeViewModel> {
   const TransactionSummaryList({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, AnalyticHomeViewModel model) {
     return Container(
       padding: const EdgeInsets.all(AppPadding.p24),
       decoration: const BoxDecoration(color: ColorManager.kWhiteColor),
@@ -269,11 +292,17 @@ class TransactionSummaryList extends StatelessWidget {
                   fontSize: FontSize.s20,
                 ),
               ),
-              Text(
-                'See All',
-                style: getRegularStyle(
-                  color: ColorManager.kDarkCharcoal,
-                  fontSize: FontSize.s20,
+              GestureDetector(
+                onTap: () {
+                  model.navigateToTransactionPage();
+                  print('hello click');
+                },
+                child: Text(
+                  'See all',
+                  style: getMediumStyle(
+                    color: ColorManager.kPrimaryColor,
+                    fontSize: FontSize.s20,
+                  ),
                 ),
               ),
             ],
@@ -285,39 +314,12 @@ class TransactionSummaryList extends StatelessWidget {
             shrinkWrap: true,
             itemCount: 5,
             itemBuilder: (BuildContext context, int index) {
-              return TransactionSummaryListItem(
-                transaction: TRANSACTION_LIST[index],
-              );
+              Transaction transaction = TRANSACTION_LIST[index];
+              return TransactionSummaryListItem(transaction: transaction);
             },
           ),
         ],
       ),
     );
   }
-}
-
-class TransactionSummaryListItem extends StatelessWidget {
-  const TransactionSummaryListItem({
-    Key? key,
-    required this.transaction,
-  }) : super(key: key);
-
-  final Transaction transaction;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(Icons.add),
-      title: Text('Card Withdrawal'),
-      subtitle: Text("10 July '22"),
-      trailing: Text('45,000'),
-    );
-  }
-}
-
-class Transaction {
-  String id;
-  String title;
-
-  Transaction({required this.id, required this.title});
 }

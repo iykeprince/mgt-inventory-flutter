@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:pos_mobile_app/models/admin-stat.model.dart';
 import 'package:pos_mobile_app/models/admin.model.dart';
 import 'package:stacked/stacked.dart';
 
@@ -20,6 +21,11 @@ class AdminService with ReactiveServiceMixin {
 
   List<Branch>? get branches => _branches.value;
   List<Merchant> get merchants => _merchants.value;
+
+  Future<AdminStat> getStat() async {
+    var response = await dioClient.get('/admin/stat');
+    return AdminStat.fromJson(response.data);
+  }
 
   Future<Admin> updateAdmin(Map formData) async {
     var response = await dioClient.put('/admin/update', data: formData);

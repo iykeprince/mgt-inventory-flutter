@@ -12,6 +12,7 @@ import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_merchant_ac
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_merchant_detail/admin_merchant_detail_view.dart';
 import 'package:pos_mobile_app/ui/admin/admin_home_view.dart';
 import 'package:pos_mobile_app/ui/admin/dashboard/add_branch/add_branch_view.dart';
+import 'package:pos_mobile_app/ui/admin/dashboard/admin_transaction/admin_transaction_view.dart';
 import 'package:pos_mobile_app/ui/admin/dashboard/create_merchant_account/create_merchant_account_view.dart';
 import 'package:pos_mobile_app/ui/auth/auth_view.dart';
 import 'package:pos_mobile_app/ui/auth/compeleteMerchantRegistration/compelete_merchant_register.dart';
@@ -69,6 +70,7 @@ import '../ui/admin/account_setting/admin_manage_report_setting/admin_manage_rep
     AdaptiveRoute(page: AdminBranchDetailView),
     AdaptiveRoute(page: AdminManageReportSettingView),
     AdaptiveRoute(page: AdminDeleteAccountView),
+    AdaptiveRoute(page: AdminTransactionView),
 
 /**Merchant Journey to be refactored */
     AdaptiveRoute(page: MerchantHomeView),

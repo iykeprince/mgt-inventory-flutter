@@ -9,6 +9,9 @@ import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:pos_mobile_ui_package/utils/colors.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../enums/transaction_status.dart';
+import '../../../models/transaction.model.dart';
+
 class AdminDashboardView extends StatelessWidget {
   const AdminDashboardView({Key? key}) : super(key: key);
 
@@ -88,6 +91,63 @@ class EmptyDashboard extends ViewModelWidget<AdminDashboardViewModel> {
               leadingIconSpace: AppSize.s24,
             )
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/**
+ * cleanr up later
+ */
+
+class TransactionSummaryListItem extends StatelessWidget {
+  const TransactionSummaryListItem({
+    Key? key,
+    required this.transaction,
+    this.isContentPadding = true,
+  }) : super(key: key);
+
+  final Transaction transaction;
+  final bool isContentPadding;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: isContentPadding ? EdgeInsets.zero : null,
+      leading: transaction.status == TransactionStatus.CREDIT
+          ? SvgPicture.asset(
+              'assets/images/success_tranx_icon.svg',
+              fit: BoxFit.cover,
+            )
+          : SvgPicture.asset(
+              'assets/images/danger_tranx_icon.svg',
+              fit: BoxFit.cover,
+            ),
+      title: Text(
+        transaction.title,
+        style: TextStyle(
+          fontSize: FontSize.s16,
+          color: ColorManager.kTurquoiseDarkColor,
+          fontWeight: FontWeightManager.medium,
+        ),
+      ),
+      subtitle: Text(
+        transaction.date,
+        style: TextStyle(
+          color: ColorManager.kNavNonActiveColor,
+          fontSize: FontSize.s14,
+          fontWeight: FontWeightManager.regular,
+        ),
+      ),
+      trailing: Text(
+        transaction.amount,
+        style: TextStyle(
+          color: transaction.status == TransactionStatus.CREDIT
+              ? ColorManager.kGreen
+              : ColorManager.kRed,
+          fontSize: FontSize.s18,
+          fontWeight: FontWeightManager.semiBold,
         ),
       ),
     );

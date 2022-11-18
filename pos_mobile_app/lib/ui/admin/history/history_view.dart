@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -27,24 +28,30 @@ class AdminHistoryView extends StatelessWidget {
         builder: (context, model, child) {
           final cardList = model.cardLists(context);
           return (Scaffold(
-            appBar: Navbar(
-              leadingText: AppString.welecome,
-              leadingStyle: getMediumStyle(
-                  color: ColorManager.kLightGray, fontSize: FontSize.s16),
-              leadingBottomStyle: getBoldStyle(
-                  color: ColorManager.kDarkCharcoal, fontSize: FontSize.s20),
-              bottomLeadingText: AppString.businessNamePlaceholder,
-              trailing: PosDropDownField(
-                hint: 'Select Item',
-                dropdownItems: items,
-                value: selectedValue,
-                onChanged: model.handleSelectedValue,
+            appBar: AppBar(
+              title: Text(
+                AppString.transactionHistory,
+                style: getMediumStyle(
+                  color: ColorManager.kPrimaryColor,
+                  fontSize: FontSize.s20,
+                ),
               ),
+              backgroundColor: ColorManager.kWhiteColor,
+              actions: [
+                Container(
+                  margin: EdgeInsets.only(
+                    top: AppPadding.p8,
+                    right: AppPadding.p10,
+                  ),
+                  child: PosDropDownField(
+                    hint: 'PaySure POS',
+                    dropdownItems: items,
+                    value: selectedValue,
+                    onChanged: model.handleSelectedValue,
+                  ),
+                ),
+              ],
               automaticallyImplyLeading: false,
-              statusBarBrightness: Brightness.light,
-              statusBarColor: ColorManager.kDarkBlue,
-              statusBarIconBrightness: Brightness.light,
-              color: ColorManager.kWhiteColor,
               elevation: .5,
             ),
             body: SingleChildScrollView(
@@ -54,36 +61,24 @@ class AdminHistoryView extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Today',
-                          style: getSemiBoldStyle(
-                              color: ColorManager.kOuterSpaceColor,
-                              fontSize: FontSize.s20)),
-                      const SizedBox(
-                        height: AppSize.s12,
-                      ),
+                      SizedBox(height: AppPadding.p16),
                       Container(
-                        padding: const EdgeInsets.all(AppSize.s24),
-                        width: double.infinity,
-                        decoration: const BoxDecoration(
-                            color: ColorManager.kButtonTextNavyBlue,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(AppSize.s4))),
-                        child: RichText(
-                          text: TextSpan(
-                            text: 'Opening Cash : ',
-                            style: getSemiBoldStyle(
-                                color: ColorManager.kWhiteColor,
-                                fontSize: FontSize.s12),
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: 'NGN 20,0000000',
-                                  style: getBoldStyle(
-                                      color: ColorManager.kWhiteColor,
-                                      fontSize: FontSize.s16)),
-                            ],
+                        height: 30,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 2,
+                            color: ColorManager.kPrimaryColor,
                           ),
                         ),
+                        child: ListView.builder(
+                          itemCount: 3,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Text('$index month');
+                          },
+                        ),
                       ),
+                      SizedBox(height: AppPadding.p16),
                       GridView.count(
                         primary: false,
                         padding: const EdgeInsets.only(
