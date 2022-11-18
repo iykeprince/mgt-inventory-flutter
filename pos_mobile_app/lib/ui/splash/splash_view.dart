@@ -22,11 +22,21 @@ class SplashView extends StatelessWidget {
                 end: Alignment.bottomCenter,
               ),
             ),
-            child: Center(
-              child: Image.asset(
-                'assets/images/POS.png',
-                fit: BoxFit.contain,
-              ),
+            child: Stack(
+              children: [
+                const Positioned(
+                  top: AppSize.s28,
+                  left: 0,
+                  right: 0,
+                  child: LinearProgressIndicator(),
+                ),
+                Center(
+                  child: Image.asset(
+                    'assets/images/POS.png',
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ],
             ),
           ),
         );

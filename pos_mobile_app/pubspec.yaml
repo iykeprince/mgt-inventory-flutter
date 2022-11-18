@@ -44,6 +44,12 @@ dependencies:
   fluttertoast: ^8.1.1
   timelines: ^0.1.0
   flutter_slidable:
+  firebase_core:
+  firebase_crashlytics:
+  fl_chart: ^0.55.2
+
+dependency_overrides:
+  firebase_core_platform_interface: 4.5.1
 
 dev_dependencies:
   flutter_test:

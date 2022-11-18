@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "982984562092",
+    "project_id": "pos-app-e85e4",
+    "storage_bucket": "pos-app-e85e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:982984562092:android:42241501588d447e9ed609",
+        "android_client_info": {
+          "package_name": "com.spartanmedia.pos.pos_mobile_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "982984562092-7bhsklbmipfggqk8v9k9q2eln9euoeso.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spartanmedia.pos.pos_mobile_app",
+            "certificate_hash": "382c8879a7d4b982565bdc5ee32fe23b75d3df58"
+          }
+        },
+        {
+          "client_id": "982984562092-knmg9ne1bfkeihs7ehrq4ha0n68js4u8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCz0O-34m4eIfttKkdTFelUK2EJCnllGCc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "982984562092-knmg9ne1bfkeihs7ehrq4ha0n68js4u8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "982984562092-t2v6f702fhstau64m11r2087ab4po3df.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.spartanmedia.pos.posMobileApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

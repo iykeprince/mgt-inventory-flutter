@@ -4,85 +4,143 @@
 // StackedRouterGenerator
 // **************************************************************************
 
-// ignore_for_file: public_member_api_docs, unused_import, non_constant_identifier_names
-
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:flutter/material.dart' as _i35;
 import 'package:flutter/material.dart';
-import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
-
-import '../models/branch.model.dart';
-import '../models/merchant.model.dart';
-import '../ui/admin/account_setting/account_setting_view.dart';
-import '../ui/admin/account_setting/admin_branch_detail/admin_branch_detail_view.dart';
-import '../ui/admin/account_setting/admin_change_password/admin_change_password_view.dart';
-import '../ui/admin/account_setting/admin_delete_account/admin_delete_account_view.dart';
-import '../ui/admin/account_setting/admin_edit_profile/admin_edit_profile_view.dart';
-import '../ui/admin/account_setting/admin_howItWorks/admin_how_it_works_view.dart';
-import '../ui/admin/account_setting/admin_manage_branch/admin_manage_branch_view.dart';
-import '../ui/admin/account_setting/admin_manage_merchant_account/admin_manage_merchant_account_view.dart';
-import '../ui/admin/account_setting/admin_manage_report_setting/admin_manage_report_setting_view.dart';
-import '../ui/admin/account_setting/admin_merchant_detail/admin_merchant_detail_view.dart';
-import '../ui/admin/admin_home_view.dart';
-import '../ui/admin/dashboard/add_branch/add_branch_view.dart';
-import '../ui/admin/dashboard/create_merchant_account/create_merchant_account_view.dart';
-import '../ui/auth/auth_view.dart';
-import '../ui/auth/compeleteMerchantRegistration/compelete_merchant_register.dart';
-import '../ui/auth/createAccountSuccess/create_account_success_view.dart';
-import '../ui/auth/createAdmin/create_admin_view.dart';
-import '../ui/auth/createAdminBusiness/create_admin_business.dart';
-import '../ui/auth/login/login_view.dart';
-import '../ui/auth/registerMerchant/register_merchant_view.dart';
-import '../ui/auth/verifyAdmin/verify_admin_view.dart';
-import '../ui/auth/verifyAdminSuccess/verify_admin_success_view.dart';
-import '../ui/auth/verifyMerchant/verify_merchant_view.dart';
-import '../ui/auth/verifyMerchantSuccess/verify_merchant_success_view.dart';
-import '../ui/merchant/dashboard/create_logs/new_expense/log_new_expense_view.dart';
-import '../ui/merchant/dashboard/create_logs/new_transactions/log_new_transaction_view.dart';
-import '../ui/merchant/merchant_home_view.dart';
-import '../ui/merchant/profile/changepassword/change_password_view.dart';
-import '../ui/merchant/profile/editprofile/edit_profile_view.dart';
-import '../ui/merchant/profile/howItWorks/how_it_works_view.dart';
-import '../ui/onboarding/onboarding_view.dart';
-import '../ui/splash/splash_view.dart';
+import 'package:pos_mobile_app/models/branch.model.dart' as _i37;
+import 'package:pos_mobile_app/models/merchant.model.dart' as _i36;
+import 'package:pos_mobile_app/ui/admin/account_setting/account_setting_view.dart'
+    as _i16;
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_branch_detail/admin_branch_detail_view.dart'
+    as _i25;
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_change_password/admin_change_password_view.dart'
+    as _i20;
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_delete_account/admin_delete_account_view.dart'
+    as _i27;
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_edit_profile/admin_edit_profile_view.dart'
+    as _i17;
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_howItWorks/admin_how_it_works_view.dart'
+    as _i21;
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_branch/admin_manage_branch_view.dart'
+    as _i24;
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_merchant_account/admin_manage_merchant_account_view.dart'
+    as _i18;
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_report_setting/admin_manage_report_setting_view.dart'
+    as _i26;
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_merchant_detail/admin_merchant_detail_view.dart'
+    as _i19;
+import 'package:pos_mobile_app/ui/admin/admin_home_view.dart' as _i15;
+import 'package:pos_mobile_app/ui/admin/dashboard/add_branch/add_branch_view.dart'
+    as _i23;
+import 'package:pos_mobile_app/ui/admin/dashboard/admin_transaction/admin_transaction_view.dart'
+    as _i28;
+import 'package:pos_mobile_app/ui/admin/dashboard/create_merchant_account/create_merchant_account_view.dart'
+    as _i22;
+import 'package:pos_mobile_app/ui/auth/auth_view.dart' as _i4;
+import 'package:pos_mobile_app/ui/auth/compeleteMerchantRegistration/compelete_merchant_register.dart'
+    as _i14;
+import 'package:pos_mobile_app/ui/auth/createAccountSuccess/create_account_success_view.dart'
+    as _i11;
+import 'package:pos_mobile_app/ui/auth/createAdmin/create_admin_view.dart'
+    as _i6;
+import 'package:pos_mobile_app/ui/auth/createAdminBusiness/create_admin_business.dart'
+    as _i10;
+import 'package:pos_mobile_app/ui/auth/login/login_view.dart' as _i5;
+import 'package:pos_mobile_app/ui/auth/registerMerchant/register_merchant_view.dart'
+    as _i7;
+import 'package:pos_mobile_app/ui/auth/verifyAdmin/verify_admin_view.dart'
+    as _i8;
+import 'package:pos_mobile_app/ui/auth/verifyAdminSuccess/verify_admin_success_view.dart'
+    as _i9;
+import 'package:pos_mobile_app/ui/auth/verifyMerchant/verify_merchant_view.dart'
+    as _i12;
+import 'package:pos_mobile_app/ui/auth/verifyMerchantSuccess/verify_merchant_success_view.dart'
+    as _i13;
+import 'package:pos_mobile_app/ui/merchant/dashboard/create_logs/new_expense/log_new_expense_view.dart'
+    as _i33;
+import 'package:pos_mobile_app/ui/merchant/dashboard/create_logs/new_transactions/log_new_transaction_view.dart'
+    as _i34;
+import 'package:pos_mobile_app/ui/merchant/merchant_home_view.dart' as _i29;
+import 'package:pos_mobile_app/ui/merchant/profile/changepassword/change_password_view.dart'
+    as _i32;
+import 'package:pos_mobile_app/ui/merchant/profile/editprofile/edit_profile_view.dart'
+    as _i30;
+import 'package:pos_mobile_app/ui/merchant/profile/howItWorks/how_it_works_view.dart'
+    as _i31;
+import 'package:pos_mobile_app/ui/onboarding/onboarding_view.dart' as _i3;
+import 'package:pos_mobile_app/ui/splash/splash_view.dart' as _i2;
+import 'package:stacked/stacked.dart' as _i1;
+import 'package:stacked_services/stacked_services.dart' as _i38;
 
 class Routes {
-  static const String splashView = '/';
-  static const String onboardView = '/onboard-view';
-  static const String authView = '/auth-view';
-  static const String loginView = '/login-view';
-  static const String createAdminView = '/create-admin-view';
-  static const String registerMerchantView = '/register-merchant-view';
-  static const String verifyAdminView = '/verify-admin-view';
-  static const String verifyAdminSuccessView = '/verify-admin-success-view';
-  static const String createAdminBusinessView = '/create-admin-business-view';
-  static const String createAccountSuccessView = '/create-account-success-view';
-  static const String verifyMerchantView = '/verify-merchant-view';
-  static const String verifyMerchantSuccessView =
-      '/verify-merchant-success-view';
-  static const String compeleteMerchantRegister =
-      '/compelete-merchant-register';
-  static const String adminHomeView = '/admin-home-view';
-  static const String accountSettingView = '/account-setting-view';
-  static const String adminEditProfileView = '/admin-edit-profile-view';
-  static const String adminManageMerchantAccountView =
+  static const splashView = '/';
+
+  static const onboardView = '/onboard-view';
+
+  static const authView = '/auth-view';
+
+  static const loginView = '/login-view';
+
+  static const createAdminView = '/create-admin-view';
+
+  static const registerMerchantView = '/register-merchant-view';
+
+  static const verifyAdminView = '/verify-admin-view';
+
+  static const verifyAdminSuccessView = '/verify-admin-success-view';
+
+  static const createAdminBusinessView = '/create-admin-business-view';
+
+  static const createAccountSuccessView = '/create-account-success-view';
+
+  static const verifyMerchantView = '/verify-merchant-view';
+
+  static const verifyMerchantSuccessView = '/verify-merchant-success-view';
+
+  static const compeleteMerchantRegister = '/compelete-merchant-register';
+
+  static const adminHomeView = '/admin-home-view';
+
+  static const accountSettingView = '/account-setting-view';
+
+  static const adminEditProfileView = '/admin-edit-profile-view';
+
+  static const adminManageMerchantAccountView =
       '/admin-manage-merchant-account-view';
-  static const String adminMerchantDetailView = '/admin-merchant-detail-view';
-  static const String adminChangePasswordView = '/admin-change-password-view';
-  static const String adminHowItWorksView = '/admin-how-it-works-view';
-  static const String createMerchantAccountView =
-      '/create-merchant-account-view';
-  static const String addBranchView = '/add-branch-view';
-  static const String adminManageBranchView = '/admin-manage-branch-view';
-  static const String adminBranchDetailView = '/admin-branch-detail-view';
-  static const String adminManageReportSettingView =
+
+  static const adminMerchantDetailView = '/admin-merchant-detail-view';
+
+  static const adminChangePasswordView = '/admin-change-password-view';
+
+  static const adminHowItWorksView = '/admin-how-it-works-view';
+
+  static const createMerchantAccountView = '/create-merchant-account-view';
+
+  static const addBranchView = '/add-branch-view';
+
+  static const adminManageBranchView = '/admin-manage-branch-view';
+
+  static const adminBranchDetailView = '/admin-branch-detail-view';
+
+  static const adminManageReportSettingView =
       '/admin-manage-report-setting-view';
-  static const String adminDeleteAccountView = '/admin-delete-account-view';
-  static const String merchantHomeView = '/merchant-home-view';
-  static const String editProfileView = '/edit-profile-view';
-  static const String howItWorksView = '/how-it-works-view';
-  static const String changePasswordView = '/change-password-view';
-  static const String logNewExpenseView = '/log-new-expense-view';
-  static const String logNewTransactionView = '/log-new-transaction-view';
+
+  static const adminDeleteAccountView = '/admin-delete-account-view';
+
+  static const adminTransactionView = '/admin-transaction-view';
+
+  static const merchantHomeView = '/merchant-home-view';
+
+  static const editProfileView = '/edit-profile-view';
+
+  static const howItWorksView = '/how-it-works-view';
+
+  static const changePasswordView = '/change-password-view';
+
+  static const logNewExpenseView = '/log-new-expense-view';
+
+  static const logNewTransactionView = '/log-new-transaction-view';
+
   static const all = <String>{
     splashView,
     onboardView,
@@ -110,6 +168,7 @@ class Routes {
     adminBranchDetailView,
     adminManageReportSettingView,
     adminDeleteAccountView,
+    adminTransactionView,
     merchantHomeView,
     editProfileView,
     howItWorksView,
@@ -119,447 +178,546 @@ class Routes {
   };
 }
 
-class StackedRouter extends RouterBase {
-  @override
-  List<RouteDef> get routes => _routes;
-  final _routes = <RouteDef>[
-    RouteDef(Routes.splashView, page: SplashView),
-    RouteDef(Routes.onboardView, page: OnboardView),
-    RouteDef(Routes.authView, page: AuthView),
-    RouteDef(Routes.loginView, page: LoginView),
-    RouteDef(Routes.createAdminView, page: CreateAdminView),
-    RouteDef(Routes.registerMerchantView, page: RegisterMerchantView),
-    RouteDef(Routes.verifyAdminView, page: VerifyAdminView),
-    RouteDef(Routes.verifyAdminSuccessView, page: VerifyAdminSuccessView),
-    RouteDef(Routes.createAdminBusinessView, page: CreateAdminBusinessView),
-    RouteDef(Routes.createAccountSuccessView, page: CreateAccountSuccessView),
-    RouteDef(Routes.verifyMerchantView, page: VerifyMerchantView),
-    RouteDef(Routes.verifyMerchantSuccessView, page: VerifyMerchantSuccessView),
-    RouteDef(Routes.compeleteMerchantRegister, page: CompeleteMerchantRegister),
-    RouteDef(Routes.adminHomeView, page: AdminHomeView),
-    RouteDef(Routes.accountSettingView, page: AccountSettingView),
-    RouteDef(Routes.adminEditProfileView, page: AdminEditProfileView),
-    RouteDef(Routes.adminManageMerchantAccountView,
-        page: AdminManageMerchantAccountView),
-    RouteDef(Routes.adminMerchantDetailView, page: AdminMerchantDetailView),
-    RouteDef(Routes.adminChangePasswordView, page: AdminChangePasswordView),
-    RouteDef(Routes.adminHowItWorksView, page: AdminHowItWorksView),
-    RouteDef(Routes.createMerchantAccountView, page: CreateMerchantAccountView),
-    RouteDef(Routes.addBranchView, page: AddBranchView),
-    RouteDef(Routes.adminManageBranchView, page: AdminManageBranchView),
-    RouteDef(Routes.adminBranchDetailView, page: AdminBranchDetailView),
-    RouteDef(Routes.adminManageReportSettingView,
-        page: AdminManageReportSettingView),
-    RouteDef(Routes.adminDeleteAccountView, page: AdminDeleteAccountView),
-    RouteDef(Routes.merchantHomeView, page: MerchantHomeView),
-    RouteDef(Routes.editProfileView, page: EditProfileView),
-    RouteDef(Routes.howItWorksView, page: HowItWorksView),
-    RouteDef(Routes.changePasswordView, page: ChangePasswordView),
-    RouteDef(Routes.logNewExpenseView, page: LogNewExpenseView),
-    RouteDef(Routes.logNewTransactionView, page: LogNewTransactionView),
+class StackedRouter extends _i1.RouterBase {
+  final _routes = <_i1.RouteDef>[
+    _i1.RouteDef(
+      Routes.splashView,
+      page: _i2.SplashView,
+    ),
+    _i1.RouteDef(
+      Routes.onboardView,
+      page: _i3.OnboardView,
+    ),
+    _i1.RouteDef(
+      Routes.authView,
+      page: _i4.AuthView,
+    ),
+    _i1.RouteDef(
+      Routes.loginView,
+      page: _i5.LoginView,
+    ),
+    _i1.RouteDef(
+      Routes.createAdminView,
+      page: _i6.CreateAdminView,
+    ),
+    _i1.RouteDef(
+      Routes.registerMerchantView,
+      page: _i7.RegisterMerchantView,
+    ),
+    _i1.RouteDef(
+      Routes.verifyAdminView,
+      page: _i8.VerifyAdminView,
+    ),
+    _i1.RouteDef(
+      Routes.verifyAdminSuccessView,
+      page: _i9.VerifyAdminSuccessView,
+    ),
+    _i1.RouteDef(
+      Routes.createAdminBusinessView,
+      page: _i10.CreateAdminBusinessView,
+    ),
+    _i1.RouteDef(
+      Routes.createAccountSuccessView,
+      page: _i11.CreateAccountSuccessView,
+    ),
+    _i1.RouteDef(
+      Routes.verifyMerchantView,
+      page: _i12.VerifyMerchantView,
+    ),
+    _i1.RouteDef(
+      Routes.verifyMerchantSuccessView,
+      page: _i13.VerifyMerchantSuccessView,
+    ),
+    _i1.RouteDef(
+      Routes.compeleteMerchantRegister,
+      page: _i14.CompeleteMerchantRegister,
+    ),
+    _i1.RouteDef(
+      Routes.adminHomeView,
+      page: _i15.AdminHomeView,
+    ),
+    _i1.RouteDef(
+      Routes.accountSettingView,
+      page: _i16.AccountSettingView,
+    ),
+    _i1.RouteDef(
+      Routes.adminEditProfileView,
+      page: _i17.AdminEditProfileView,
+    ),
+    _i1.RouteDef(
+      Routes.adminManageMerchantAccountView,
+      page: _i18.AdminManageMerchantAccountView,
+    ),
+    _i1.RouteDef(
+      Routes.adminMerchantDetailView,
+      page: _i19.AdminMerchantDetailView,
+    ),
+    _i1.RouteDef(
+      Routes.adminChangePasswordView,
+      page: _i20.AdminChangePasswordView,
+    ),
+    _i1.RouteDef(
+      Routes.adminHowItWorksView,
+      page: _i21.AdminHowItWorksView,
+    ),
+    _i1.RouteDef(
+      Routes.createMerchantAccountView,
+      page: _i22.CreateMerchantAccountView,
+    ),
+    _i1.RouteDef(
+      Routes.addBranchView,
+      page: _i23.AddBranchView,
+    ),
+    _i1.RouteDef(
+      Routes.adminManageBranchView,
+      page: _i24.AdminManageBranchView,
+    ),
+    _i1.RouteDef(
+      Routes.adminBranchDetailView,
+      page: _i25.AdminBranchDetailView,
+    ),
+    _i1.RouteDef(
+      Routes.adminManageReportSettingView,
+      page: _i26.AdminManageReportSettingView,
+    ),
+    _i1.RouteDef(
+      Routes.adminDeleteAccountView,
+      page: _i27.AdminDeleteAccountView,
+    ),
+    _i1.RouteDef(
+      Routes.adminTransactionView,
+      page: _i28.AdminTransactionView,
+    ),
+    _i1.RouteDef(
+      Routes.merchantHomeView,
+      page: _i29.MerchantHomeView,
+    ),
+    _i1.RouteDef(
+      Routes.editProfileView,
+      page: _i30.EditProfileView,
+    ),
+    _i1.RouteDef(
+      Routes.howItWorksView,
+      page: _i31.HowItWorksView,
+    ),
+    _i1.RouteDef(
+      Routes.changePasswordView,
+      page: _i32.ChangePasswordView,
+    ),
+    _i1.RouteDef(
+      Routes.logNewExpenseView,
+      page: _i33.LogNewExpenseView,
+    ),
+    _i1.RouteDef(
+      Routes.logNewTransactionView,
+      page: _i34.LogNewTransactionView,
+    ),
   ];
-  @override
-  Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
-  final _pagesMap = <Type, StackedRouteFactory>{
-    SplashView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const SplashView(),
+
+  final _pagesMap = <Type, _i1.StackedRouteFactory>{
+    _i2.SplashView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i2.SplashView(),
         settings: data,
       );
     },
-    OnboardView: (data) {
-      var args = data.getArgs<OnboardViewArguments>(
-        orElse: () => OnboardViewArguments(),
+    _i3.OnboardView: (data) {
+      final args = data.getArgs<OnboardViewArguments>(
+        orElse: () => const OnboardViewArguments(),
       );
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => OnboardView(key: args.key),
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => _i3.OnboardView(key: args.key),
         settings: data,
       );
     },
-    AuthView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const AuthView(),
+    _i4.AuthView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i4.AuthView(),
         settings: data,
       );
     },
-    LoginView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const LoginView(),
+    _i5.LoginView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i5.LoginView(),
         settings: data,
       );
     },
-    CreateAdminView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const CreateAdminView(),
+    _i6.CreateAdminView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i6.CreateAdminView(),
         settings: data,
       );
     },
-    RegisterMerchantView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const RegisterMerchantView(),
+    _i7.RegisterMerchantView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i7.RegisterMerchantView(),
         settings: data,
       );
     },
-    VerifyAdminView: (data) {
-      var args = data.getArgs<VerifyAdminViewArguments>(nullOk: false);
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => VerifyAdminView(
-          key: args.key,
-          email: args.email,
-        ),
+    _i8.VerifyAdminView: (data) {
+      final args = data.getArgs<VerifyAdminViewArguments>(nullOk: false);
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) =>
+            _i8.VerifyAdminView(key: args.key, email: args.email),
         settings: data,
       );
     },
-    VerifyAdminSuccessView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const VerifyAdminSuccessView(),
+    _i9.VerifyAdminSuccessView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i9.VerifyAdminSuccessView(),
         settings: data,
       );
     },
-    CreateAdminBusinessView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const CreateAdminBusinessView(),
+    _i10.CreateAdminBusinessView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i10.CreateAdminBusinessView(),
         settings: data,
       );
     },
-    CreateAccountSuccessView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const CreateAccountSuccessView(),
+    _i11.CreateAccountSuccessView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i11.CreateAccountSuccessView(),
         settings: data,
       );
     },
-    VerifyMerchantView: (data) {
-      var args = data.getArgs<VerifyMerchantViewArguments>(nullOk: false);
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => VerifyMerchantView(
-          key: args.key,
-          emailAddress: args.emailAddress,
-        ),
+    _i12.VerifyMerchantView: (data) {
+      final args = data.getArgs<VerifyMerchantViewArguments>(nullOk: false);
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => _i12.VerifyMerchantView(
+            key: args.key, emailAddress: args.emailAddress),
         settings: data,
       );
     },
-    VerifyMerchantSuccessView: (data) {
-      var args =
+    _i13.VerifyMerchantSuccessView: (data) {
+      final args =
           data.getArgs<VerifyMerchantSuccessViewArguments>(nullOk: false);
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => VerifyMerchantSuccessView(
-          key: args.key,
-          emailAddress: args.emailAddress,
-        ),
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => _i13.VerifyMerchantSuccessView(
+            key: args.key, emailAddress: args.emailAddress),
         settings: data,
       );
     },
-    CompeleteMerchantRegister: (data) {
-      var args =
+    _i14.CompeleteMerchantRegister: (data) {
+      final args =
           data.getArgs<CompeleteMerchantRegisterArguments>(nullOk: false);
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => CompeleteMerchantRegister(
-          key: args.key,
-          emailAddress: args.emailAddress,
-        ),
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => _i14.CompeleteMerchantRegister(
+            key: args.key, emailAddress: args.emailAddress),
         settings: data,
       );
     },
-    AdminHomeView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const AdminHomeView(),
+    _i15.AdminHomeView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i15.AdminHomeView(),
         settings: data,
       );
     },
-    AccountSettingView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const AccountSettingView(),
+    _i16.AccountSettingView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i16.AccountSettingView(),
         settings: data,
       );
     },
-    AdminEditProfileView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const AdminEditProfileView(),
+    _i17.AdminEditProfileView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i17.AdminEditProfileView(),
         settings: data,
       );
     },
-    AdminManageMerchantAccountView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const AdminManageMerchantAccountView(),
+    _i18.AdminManageMerchantAccountView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i18.AdminManageMerchantAccountView(),
         settings: data,
       );
     },
-    AdminMerchantDetailView: (data) {
-      var args = data.getArgs<AdminMerchantDetailViewArguments>(nullOk: false);
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => AdminMerchantDetailView(
-          key: args.key,
-          merchant: args.merchant,
-        ),
+    _i19.AdminMerchantDetailView: (data) {
+      final args =
+          data.getArgs<AdminMerchantDetailViewArguments>(nullOk: false);
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => _i19.AdminMerchantDetailView(
+            key: args.key, merchant: args.merchant),
         settings: data,
       );
     },
-    AdminChangePasswordView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const AdminChangePasswordView(),
+    _i20.AdminChangePasswordView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i20.AdminChangePasswordView(),
         settings: data,
       );
     },
-    AdminHowItWorksView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const AdminHowItWorksView(),
+    _i21.AdminHowItWorksView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i21.AdminHowItWorksView(),
         settings: data,
       );
     },
-    CreateMerchantAccountView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const CreateMerchantAccountView(),
+    _i22.CreateMerchantAccountView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i22.CreateMerchantAccountView(),
         settings: data,
       );
     },
-    AddBranchView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const AddBranchView(),
+    _i23.AddBranchView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i23.AddBranchView(),
         settings: data,
       );
     },
-    AdminManageBranchView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const AdminManageBranchView(),
+    _i24.AdminManageBranchView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i24.AdminManageBranchView(),
         settings: data,
       );
     },
-    AdminBranchDetailView: (data) {
-      var args = data.getArgs<AdminBranchDetailViewArguments>(nullOk: false);
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => AdminBranchDetailView(
-          key: args.key,
-          branch: args.branch,
-        ),
+    _i25.AdminBranchDetailView: (data) {
+      final args = data.getArgs<AdminBranchDetailViewArguments>(nullOk: false);
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) =>
+            _i25.AdminBranchDetailView(key: args.key, branch: args.branch),
         settings: data,
       );
     },
-    AdminManageReportSettingView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const AdminManageReportSettingView(),
+    _i26.AdminManageReportSettingView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i26.AdminManageReportSettingView(),
         settings: data,
       );
     },
-    AdminDeleteAccountView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const AdminDeleteAccountView(),
+    _i27.AdminDeleteAccountView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i27.AdminDeleteAccountView(),
         settings: data,
       );
     },
-    MerchantHomeView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const MerchantHomeView(),
+    _i28.AdminTransactionView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i28.AdminTransactionView(),
         settings: data,
       );
     },
-    EditProfileView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const EditProfileView(),
+    _i29.MerchantHomeView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i29.MerchantHomeView(),
         settings: data,
       );
     },
-    HowItWorksView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const HowItWorksView(),
+    _i30.EditProfileView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i30.EditProfileView(),
         settings: data,
       );
     },
-    ChangePasswordView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const ChangePasswordView(),
+    _i31.HowItWorksView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i31.HowItWorksView(),
         settings: data,
       );
     },
-    LogNewExpenseView: (data) {
-      var args = data.getArgs<LogNewExpenseViewArguments>(
-        orElse: () => LogNewExpenseViewArguments(),
-      );
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => LogNewExpenseView(key: args.key),
+    _i32.ChangePasswordView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i32.ChangePasswordView(),
         settings: data,
       );
     },
-    LogNewTransactionView: (data) {
-      var args = data.getArgs<LogNewTransactionViewArguments>(
-        orElse: () => LogNewTransactionViewArguments(),
+    _i33.LogNewExpenseView: (data) {
+      final args = data.getArgs<LogNewExpenseViewArguments>(
+        orElse: () => const LogNewExpenseViewArguments(),
       );
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => LogNewTransactionView(key: args.key),
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => _i33.LogNewExpenseView(key: args.key),
+        settings: data,
+      );
+    },
+    _i34.LogNewTransactionView: (data) {
+      final args = data.getArgs<LogNewTransactionViewArguments>(
+        orElse: () => const LogNewTransactionViewArguments(),
+      );
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => _i34.LogNewTransactionView(key: args.key),
         settings: data,
       );
     },
   };
+
+  @override
+  List<_i1.RouteDef> get routes => _routes;
+  @override
+  Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-/// ************************************************************************
-/// Arguments holder classes
-/// *************************************************************************
-
-/// OnboardView arguments holder class
 class OnboardViewArguments {
-  final Key? key;
-  OnboardViewArguments({this.key});
+  const OnboardViewArguments({this.key});
+
+  final _i35.Key? key;
 }
 
-/// VerifyAdminView arguments holder class
 class VerifyAdminViewArguments {
-  final Key? key;
+  const VerifyAdminViewArguments({
+    this.key,
+    required this.email,
+  });
+
+  final _i35.Key? key;
+
   final String email;
-  VerifyAdminViewArguments({this.key, required this.email});
 }
 
-/// VerifyMerchantView arguments holder class
 class VerifyMerchantViewArguments {
-  final Key? key;
+  const VerifyMerchantViewArguments({
+    this.key,
+    required this.emailAddress,
+  });
+
+  final _i35.Key? key;
+
   final String emailAddress;
-  VerifyMerchantViewArguments({this.key, required this.emailAddress});
 }
 
-/// VerifyMerchantSuccessView arguments holder class
 class VerifyMerchantSuccessViewArguments {
-  final Key? key;
+  const VerifyMerchantSuccessViewArguments({
+    this.key,
+    required this.emailAddress,
+  });
+
+  final _i35.Key? key;
+
   final String emailAddress;
-  VerifyMerchantSuccessViewArguments({this.key, required this.emailAddress});
 }
 
-/// CompeleteMerchantRegister arguments holder class
 class CompeleteMerchantRegisterArguments {
-  final Key? key;
+  const CompeleteMerchantRegisterArguments({
+    this.key,
+    required this.emailAddress,
+  });
+
+  final _i35.Key? key;
+
   final String emailAddress;
-  CompeleteMerchantRegisterArguments({this.key, required this.emailAddress});
 }
 
-/// AdminMerchantDetailView arguments holder class
 class AdminMerchantDetailViewArguments {
-  final Key? key;
-  final Merchant merchant;
-  AdminMerchantDetailViewArguments({this.key, required this.merchant});
+  const AdminMerchantDetailViewArguments({
+    this.key,
+    required this.merchant,
+  });
+
+  final _i35.Key? key;
+
+  final _i36.Merchant merchant;
 }
 
-/// AdminBranchDetailView arguments holder class
 class AdminBranchDetailViewArguments {
-  final Key? key;
-  final Branch branch;
-  AdminBranchDetailViewArguments({this.key, required this.branch});
+  const AdminBranchDetailViewArguments({
+    this.key,
+    required this.branch,
+  });
+
+  final _i35.Key? key;
+
+  final _i37.Branch branch;
 }
 
-/// LogNewExpenseView arguments holder class
 class LogNewExpenseViewArguments {
-  final Key? key;
-  LogNewExpenseViewArguments({this.key});
+  const LogNewExpenseViewArguments({this.key});
+
+  final _i35.Key? key;
 }
 
-/// LogNewTransactionView arguments holder class
 class LogNewTransactionViewArguments {
-  final Key? key;
-  LogNewTransactionViewArguments({this.key});
+  const LogNewTransactionViewArguments({this.key});
+
+  final _i35.Key? key;
 }
 
-/// ************************************************************************
-/// Extension for strongly typed navigation
-/// *************************************************************************
-
-extension NavigatorStateExtension on NavigationService {
-  Future<dynamic> navigateToSplashView({
+extension NavigatorStateExtension on _i38.NavigationService {
+  Future<dynamic> navigateToSplashView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.splashView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.splashView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
   Future<dynamic> navigateToOnboardView({
-    Key? key,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   }) async {
-    return navigateTo(
-      Routes.onboardView,
-      arguments: OnboardViewArguments(key: key),
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+    return navigateTo<dynamic>(Routes.onboardView,
+        arguments: OnboardViewArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToAuthView({
+  Future<dynamic> navigateToAuthView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.authView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.authView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToLoginView({
+  Future<dynamic> navigateToLoginView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.loginView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.loginView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToCreateAdminView({
+  Future<dynamic> navigateToCreateAdminView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.createAdminView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.createAdminView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToRegisterMerchantView({
+  Future<dynamic> navigateToRegisterMerchantView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.registerMerchantView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.registerMerchantView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
   Future<dynamic> navigateToVerifyAdminView({
-    Key? key,
+    _i35.Key? key,
     required String email,
     int? routerId,
     bool preventDuplicates = true,
@@ -567,66 +725,58 @@ extension NavigatorStateExtension on NavigationService {
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   }) async {
-    return navigateTo(
-      Routes.verifyAdminView,
-      arguments: VerifyAdminViewArguments(key: key, email: email),
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+    return navigateTo<dynamic>(Routes.verifyAdminView,
+        arguments: VerifyAdminViewArguments(key: key, email: email),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToVerifyAdminSuccessView({
+  Future<dynamic> navigateToVerifyAdminSuccessView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.verifyAdminSuccessView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.verifyAdminSuccessView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToCreateAdminBusinessView({
+  Future<dynamic> navigateToCreateAdminBusinessView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.createAdminBusinessView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.createAdminBusinessView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToCreateAccountSuccessView({
+  Future<dynamic> navigateToCreateAccountSuccessView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.createAccountSuccessView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.createAccountSuccessView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
   Future<dynamic> navigateToVerifyMerchantView({
-    Key? key,
+    _i35.Key? key,
     required String emailAddress,
     int? routerId,
     bool preventDuplicates = true,
@@ -634,19 +784,17 @@ extension NavigatorStateExtension on NavigationService {
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   }) async {
-    return navigateTo(
-      Routes.verifyMerchantView,
-      arguments:
-          VerifyMerchantViewArguments(key: key, emailAddress: emailAddress),
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+    return navigateTo<dynamic>(Routes.verifyMerchantView,
+        arguments:
+            VerifyMerchantViewArguments(key: key, emailAddress: emailAddress),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
   Future<dynamic> navigateToVerifyMerchantSuccessView({
-    Key? key,
+    _i35.Key? key,
     required String emailAddress,
     int? routerId,
     bool preventDuplicates = true,
@@ -654,19 +802,17 @@ extension NavigatorStateExtension on NavigationService {
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   }) async {
-    return navigateTo(
-      Routes.verifyMerchantSuccessView,
-      arguments: VerifyMerchantSuccessViewArguments(
-          key: key, emailAddress: emailAddress),
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+    return navigateTo<dynamic>(Routes.verifyMerchantSuccessView,
+        arguments: VerifyMerchantSuccessViewArguments(
+            key: key, emailAddress: emailAddress),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
   Future<dynamic> navigateToCompeleteMerchantRegister({
-    Key? key,
+    _i35.Key? key,
     required String emailAddress,
     int? routerId,
     bool preventDuplicates = true,
@@ -674,328 +820,303 @@ extension NavigatorStateExtension on NavigationService {
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   }) async {
-    return navigateTo(
-      Routes.compeleteMerchantRegister,
-      arguments: CompeleteMerchantRegisterArguments(
-          key: key, emailAddress: emailAddress),
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+    return navigateTo<dynamic>(Routes.compeleteMerchantRegister,
+        arguments: CompeleteMerchantRegisterArguments(
+            key: key, emailAddress: emailAddress),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToAdminHomeView({
+  Future<dynamic> navigateToAdminHomeView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.adminHomeView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.adminHomeView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToAccountSettingView({
+  Future<dynamic> navigateToAccountSettingView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.accountSettingView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.accountSettingView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToAdminEditProfileView({
+  Future<dynamic> navigateToAdminEditProfileView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.adminEditProfileView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.adminEditProfileView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToAdminManageMerchantAccountView({
+  Future<dynamic> navigateToAdminManageMerchantAccountView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.adminManageMerchantAccountView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.adminManageMerchantAccountView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
   Future<dynamic> navigateToAdminMerchantDetailView({
-    Key? key,
-    required Merchant merchant,
+    _i35.Key? key,
+    required _i36.Merchant merchant,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   }) async {
-    return navigateTo(
-      Routes.adminMerchantDetailView,
-      arguments: AdminMerchantDetailViewArguments(key: key, merchant: merchant),
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+    return navigateTo<dynamic>(Routes.adminMerchantDetailView,
+        arguments:
+            AdminMerchantDetailViewArguments(key: key, merchant: merchant),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToAdminChangePasswordView({
+  Future<dynamic> navigateToAdminChangePasswordView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.adminChangePasswordView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.adminChangePasswordView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToAdminHowItWorksView({
+  Future<dynamic> navigateToAdminHowItWorksView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.adminHowItWorksView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.adminHowItWorksView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToCreateMerchantAccountView({
+  Future<dynamic> navigateToCreateMerchantAccountView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.createMerchantAccountView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.createMerchantAccountView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToAddBranchView({
+  Future<dynamic> navigateToAddBranchView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.addBranchView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.addBranchView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToAdminManageBranchView({
+  Future<dynamic> navigateToAdminManageBranchView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.adminManageBranchView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.adminManageBranchView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
   Future<dynamic> navigateToAdminBranchDetailView({
-    Key? key,
-    required Branch branch,
+    _i35.Key? key,
+    required _i37.Branch branch,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   }) async {
-    return navigateTo(
-      Routes.adminBranchDetailView,
-      arguments: AdminBranchDetailViewArguments(key: key, branch: branch),
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+    return navigateTo<dynamic>(Routes.adminBranchDetailView,
+        arguments: AdminBranchDetailViewArguments(key: key, branch: branch),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToAdminManageReportSettingView({
+  Future<dynamic> navigateToAdminManageReportSettingView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.adminManageReportSettingView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.adminManageReportSettingView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToAdminDeleteAccountView({
+  Future<dynamic> navigateToAdminDeleteAccountView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.adminDeleteAccountView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.adminDeleteAccountView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToMerchantHomeView({
+  Future<dynamic> navigateToAdminTransactionView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.merchantHomeView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.adminTransactionView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToEditProfileView({
+  Future<dynamic> navigateToMerchantHomeView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.editProfileView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.merchantHomeView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToHowItWorksView({
+  Future<dynamic> navigateToEditProfileView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.howItWorksView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.editProfileView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
-  Future<dynamic> navigateToChangePasswordView({
+  Future<dynamic> navigateToHowItWorksView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
-    return navigateTo(
-      Routes.changePasswordView,
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+  ]) async {
+    return navigateTo<dynamic>(Routes.howItWorksView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToChangePasswordView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.changePasswordView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
   Future<dynamic> navigateToLogNewExpenseView({
-    Key? key,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   }) async {
-    return navigateTo(
-      Routes.logNewExpenseView,
-      arguments: LogNewExpenseViewArguments(key: key),
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+    return navigateTo<dynamic>(Routes.logNewExpenseView,
+        arguments: LogNewExpenseViewArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 
   Future<dynamic> navigateToLogNewTransactionView({
-    Key? key,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   }) async {
-    return navigateTo(
-      Routes.logNewTransactionView,
-      arguments: LogNewTransactionViewArguments(key: key),
-      id: routerId,
-      preventDuplicates: preventDuplicates,
-      parameters: parameters,
-      transition: transition,
-    );
+    return navigateTo<dynamic>(Routes.logNewTransactionView,
+        arguments: LogNewTransactionViewArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
   }
 }
