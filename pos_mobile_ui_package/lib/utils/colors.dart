@@ -48,4 +48,7 @@ class ColorManager {
   static const Color kDeepNavyBlue = Color(0xff002D63);
   static const Color kDeepViolet = Color(0xff440062);
   static const Color kLightBlue = Color(0xffF5F6FD);
+  static const Color kGreen = Color(0xff009721);
+  static const Color kLightIndigo = Color(0xffE3E5FC);
+  static const Color kLightIndigoBg = Color(0xffF0F2FD);
 }

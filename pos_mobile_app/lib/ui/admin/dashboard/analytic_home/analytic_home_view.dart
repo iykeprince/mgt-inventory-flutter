@@ -124,7 +124,7 @@ class OpeningBalanceWidget extends ViewModelWidget<AnalyticHomeViewModel> {
               color: ColorManager.kWhiteColor, fontSize: FontSize.s12),
           children: <TextSpan>[
             TextSpan(
-                text: 'NGN 20,0000000',
+                text: 'NGN 0',
                 style: getBoldStyle(
                     color: ColorManager.kWhiteColor, fontSize: FontSize.s16)),
           ],
@@ -234,7 +234,7 @@ class AnalyticStatWidget extends ViewModelWidget<AnalyticHomeViewModel> {
               ),
               Expanded(
                 child: Text(
-                  '1240000000',
+                  '0',
                   maxLines: 1,
                   style: getThickStyle(
                       color: ColorManager.kDarkCharcoal,

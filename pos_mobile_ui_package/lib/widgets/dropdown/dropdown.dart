@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
+import 'package:pos_mobile_ui_package/utils/colors.dart';
 
 class PosDropDownField extends StatelessWidget {
   final String hint;
@@ -29,6 +30,7 @@ class PosDropDownField extends StatelessWidget {
   final bool? scrollbarAlwaysShow;
   final String? label;
   final TextStyle? labelStyle;
+  final TextStyle? valueStyle;
   final Offset? offset;
 
   const PosDropDownField({
@@ -36,6 +38,7 @@ class PosDropDownField extends StatelessWidget {
     required this.value,
     required this.dropdownItems,
     required this.onChanged,
+    this.valueStyle,
     this.selectedItemBuilder,
     this.hintAlignment,
     this.valueAlignment,
@@ -93,13 +96,18 @@ class PosDropDownField extends StatelessWidget {
               hint,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
-              style: TextStyle(
-                fontSize: 14,
-                color: Theme.of(context).hintColor,
-              ),
+              style: valueStyle ??
+                  TextStyle(
+                    fontSize: 14,
+                    color: Theme.of(context).hintColor,
+                  ),
             ),
           ),
           value: value,
+          style: valueStyle ??
+              getMediumStyle(
+                color: ColorManager.kPrimaryColor,
+              ),
           items: dropdownItems
               .map((item) => DropdownMenuItem<String>(
                     value: item,
