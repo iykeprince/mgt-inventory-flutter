@@ -47,6 +47,7 @@ dependencies:
   firebase_core:
   firebase_crashlytics:
   fl_chart: ^0.55.2
+  intl: ^0.17.0
 
 dependency_overrides:
   firebase_core_platform_interface: 4.5.1

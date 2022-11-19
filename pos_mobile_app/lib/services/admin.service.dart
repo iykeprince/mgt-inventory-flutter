@@ -5,6 +5,7 @@ import 'package:stacked/stacked.dart';
 
 import '../app/app.locator.dart';
 import '../client/dio_client.dart';
+import '../models/account.model.dart';
 import '../models/branch.model.dart';
 import '../models/merchant.model.dart';
 
@@ -12,19 +13,32 @@ class AdminService with ReactiveServiceMixin {
   Dio dioClient = locator<DioClient>().dio;
 
   AdminService() {
-    listenToReactiveValues([_branches, _merchants]);
+    listenToReactiveValues([_branches, _merchants, _stat, _accountBalances]);
   }
   final ReactiveValue<List<Branch>?> _branches =
       ReactiveValue<List<Branch>?>([]);
   final ReactiveValue<List<Merchant>> _merchants =
       ReactiveValue<List<Merchant>>([]);
+  final ReactiveValue<List<Account>> _accountBalances =
+      ReactiveValue<List<Account>>([]);
+  final ReactiveValue<AdminStat?> _stat = ReactiveValue<AdminStat?>(null);
 
   List<Branch>? get branches => _branches.value;
   List<Merchant> get merchants => _merchants.value;
+  List<Account> get accountBalances => _accountBalances.value;
+  AdminStat? get stat => _stat.value;
 
-  Future<AdminStat> getStat() async {
-    var response = await dioClient.get('/admin/stat');
-    return AdminStat.fromJson(response.data);
+  Future<AdminStat> getStat(String? id) async {
+    String url;
+    if (id == null) {
+      url = '/admin/stat';
+    } else {
+      url = '/admin/stat?branchId=$id';
+    }
+    var response = await dioClient.get(url);
+    AdminStat statResponse = AdminStat.fromJson(response.data);
+    _stat.value = statResponse;
+    return statResponse;
   }
 
   Future<Admin> updateAdmin(Map formData) async {
@@ -78,5 +92,14 @@ class AdminService with ReactiveServiceMixin {
     Merchant merchant = Merchant.fromJson(response.data);
 
     return merchant;
+  }
+
+  Future<List<Account>> getAccountBalances() async {
+    var response = await dioClient.get('/admin/balances');
+    List<Account> accounts = (response.data as List<dynamic>)
+        .map((x) => Account.fromJson(x))
+        .toList();
+    _accountBalances.value = accounts;
+    return accounts;
   }
 }

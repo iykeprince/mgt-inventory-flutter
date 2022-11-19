@@ -1,55 +1,48 @@
-import '../enums/transaction_status.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-List<Transaction> TRANSACTION_LIST = [
-  Transaction(
-    id: '1',
-    title: 'POS 1',
-    date: "11 July, '22",
-    status: TransactionStatus.CREDIT,
-    amount: '45,000',
-  ),
-  Transaction(
-    id: '2',
-    title: 'POS 2',
-    date: "11 July, '22",
-    status: TransactionStatus.DEBIT,
-    amount: '45,000',
-  ),
-  Transaction(
-    id: '3',
-    title: 'POS 3',
-    date: "11 July, '22",
-    status: TransactionStatus.DEBIT,
-    amount: '1,250',
-  ),
-  Transaction(
-    id: '4',
-    title: 'POS 4',
-    date: "11 July, '22",
-    status: TransactionStatus.CREDIT,
-    amount: '8,000',
-  ),
-  Transaction(
-    id: '5',
-    title: 'POS 5',
-    date: "11 July, '22",
-    status: TransactionStatus.DEBIT,
-    amount: '45,000',
-  ),
-];
+part 'transaction.model.g.dart';
 
+@JsonSerializable()
 class Transaction {
-  String id;
-  String title;
-  TransactionStatus status;
-  String date;
-  String amount;
-
   Transaction({
-    required this.id,
-    required this.title,
-    required this.status,
-    required this.date,
-    required this.amount,
+    this.accountId,
+    this.isDeduction,
+    this.isCardWithdrawal,
+    this.isTransferWithdrawal,
+    this.id,
+    this.type,
+    this.other,
+    this.transactionId,
+    this.amount,
+    this.serviceCharge,
+    this.bankCharge,
+    this.serviceChargePaymentType,
+    this.merchantId,
+    this.branchId,
+    this.comment,
+    this.createdAt,
+    this.updatedAt,
   });
+
+  String? accountId;
+  bool? isDeduction;
+  bool? isCardWithdrawal;
+  bool? isTransferWithdrawal;
+  String? id;
+  String? type;
+  String? other;
+  String? transactionId;
+  int? amount;
+  int? serviceCharge;
+  int? bankCharge;
+  String? serviceChargePaymentType;
+  String? merchantId;
+  String? branchId;
+  String? comment;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+
+  factory Transaction.fromJson(Map<String, dynamic> json) =>
+      _$TransactionFromJson(json);
+  Map<String, dynamic> toJson() => _$TransactionToJson(this);
 }

@@ -12,8 +12,11 @@ class AdminTransactionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<AdminTransactionViewModel>.nonReactive(
+    return ViewModelBuilder<AdminTransactionViewModel>.reactive(
         viewModelBuilder: () => AdminTransactionViewModel(),
+        onModelReady: (model) {
+          model.getTransactions();
+        },
         builder: (context, model, child) {
           return Scaffold(
             appBar: AppBar(
@@ -48,9 +51,9 @@ class AdminTransactionView extends StatelessWidget {
             ),
             backgroundColor: ColorManager.kWhiteColor,
             body: ListView.builder(
-              itemCount: TRANSACTION_LIST.length,
+              itemCount: model.transactions!.length,
               itemBuilder: (BuildContext context, int index) {
-                Transaction transaction = TRANSACTION_LIST[index];
+                Transaction transaction = model.transactions![index];
                 return TransactionSummaryListItem(
                   transaction: transaction,
                   isContentPadding: false,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 import 'package:pos_mobile_app/ui/admin/dashboard/analytic_home/analytic_home_view.dart';
 import 'package:pos_mobile_app/ui/admin/dashboard/dashboard_view_model.dart';
 import 'package:pos_mobile_app/ui/merchant/dashboard/dashboard_view_model.dart';
@@ -115,7 +116,7 @@ class TransactionSummaryListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: isContentPadding ? EdgeInsets.zero : null,
-      leading: transaction.status == TransactionStatus.CREDIT
+      leading: transaction.type == TransactionStatus.CREDIT
           ? SvgPicture.asset(
               'assets/images/success_tranx_icon.svg',
               fit: BoxFit.cover,
@@ -125,25 +126,25 @@ class TransactionSummaryListItem extends StatelessWidget {
               fit: BoxFit.cover,
             ),
       title: Text(
-        transaction.title,
-        style: TextStyle(
+        '${transaction.type}',
+        style: const TextStyle(
           fontSize: FontSize.s16,
           color: ColorManager.kTurquoiseDarkColor,
           fontWeight: FontWeightManager.medium,
         ),
       ),
       subtitle: Text(
-        transaction.date,
-        style: TextStyle(
+        DateFormat("DD MM 'YY").format(transaction.createdAt!),
+        style: const TextStyle(
           color: ColorManager.kNavNonActiveColor,
           fontSize: FontSize.s14,
           fontWeight: FontWeightManager.regular,
         ),
       ),
       trailing: Text(
-        transaction.amount,
+        '${transaction.amount ?? 0}',
         style: TextStyle(
-          color: transaction.status == TransactionStatus.CREDIT
+          color: transaction.type == TransactionStatus.CREDIT
               ? ColorManager.kGreen
               : ColorManager.kRed,
           fontSize: FontSize.s18,
