@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/account_setting_view.dart';
 import 'package:pos_mobile_app/ui/admin/dashboard/dasboard_view.dart';
 import 'package:pos_mobile_app/ui/admin/history/history_view.dart';
+import 'package:pos_mobile_app/ui/admin/report/report_view.dart';
 import 'package:pos_mobile_app/ui/merchant/dashboard/dashboard_view.dart';
 
 import 'package:pos_mobile_app/utils/colors.dart';
@@ -27,7 +28,9 @@ class AdminHomeView extends StatelessWidget {
       },
       builder: (context, model, child) => Scaffold(
         extendBody: true,
-        body: getViewForIndex(model.currentIndex),
+        body: model.busy(ADMIN_FETCH_BRANCH)
+            ? Center(child: CircularProgressIndicator())
+            : getViewForIndex(model.currentIndex),
         bottomNavigationBar: BottomAppBar(
           shape: const CustomNotchedRectangle(),
           notchMargin: 12,
@@ -136,7 +139,7 @@ class AdminHomeView extends StatelessWidget {
       case 1:
         return AdminHistoryView();
       case 3:
-        return const Center(child: Text('Admin Reports'));
+        return AdminReportView();
       case 4:
         return AccountSettingView();
       default:

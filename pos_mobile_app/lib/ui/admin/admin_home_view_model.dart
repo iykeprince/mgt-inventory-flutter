@@ -43,7 +43,10 @@ class AdminHomeViewModel extends IndexTrackingViewModel {
   }
 
   fetchBranch() async {
-    runBusyFuture(_adminService.getBranches(), busyObject: ADMIN_FETCH_BRANCH);
+    runBusyFuture(
+      _adminService.getBranches(),
+      busyObject: ADMIN_FETCH_BRANCH,
+    );
   }
 
   fetchMerchants() async {

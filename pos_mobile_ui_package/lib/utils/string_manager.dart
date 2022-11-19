@@ -9,6 +9,8 @@ class AppString {
   static const String admin = "Admin";
   static const String overview = "Overview";
   static const String welecome = "Welecome";
+  static const String report = "Report";
+  static const String transactionHistory = "Transaction History";
   static const String forgotPassword = "Forgot Password?";
   static const String onBoardSub1 =
       "Seamlessly and efficiently record up-to-date point-of-sale transactions from the comfort of your home or workplace.";
@@ -88,6 +90,8 @@ class AppString {
       "Any complaints, requests, or suggestion?";
 
   static String submitFeedback = "Submit Feedback";
+
+  static String transactions = "Transactions";
   static String verifyEmailSubText(String email) =>
       "We sent a six-digit code to your email address ($email) for verification.";
   static const String otpCodeText = "OTP Code";

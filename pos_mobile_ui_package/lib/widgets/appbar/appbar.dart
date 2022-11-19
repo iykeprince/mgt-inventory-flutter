@@ -25,10 +25,12 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
   final Brightness? statusBarIconBrightness;
   final TextStyle? leadingStyle;
   final TextStyle? leadingBottomStyle;
+  final TextStyle? titleStyle;
 
   const Navbar(
       {Key? key,
       this.title = '',
+      this.titleStyle,
       this.onTap,
       this.color,
       this.fontsize = FontSize.s20,
@@ -88,19 +90,23 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ),
               ]),
-          Text(
-            title!,
-            style: getMediumStyle(
-              color: textColor ?? ColorManager.kDarkCharcoal,
-              fontSize: fontsize,
+          if (title != '')
+            Expanded(
+              child: Text(
+                title!,
+                style: titleStyle ??
+                    getMediumStyle(
+                      color: textColor ?? ColorManager.kDarkCharcoal,
+                      fontSize: fontsize,
+                    ),
+                textAlign: TextAlign.start,
+              ),
             ),
-            textAlign: TextAlign.start,
-          ),
           // if (trailing != null)
           Container(
             child: trailing,
           ),
-          if (title != '') Container()
+          // if (title != '') Container()
         ],
       ),
       elevation: elevation ?? 0,
