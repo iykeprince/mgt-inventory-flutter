@@ -4,6 +4,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pos_mobile_app/dummy.widget/listtile_widget.dart';
+import 'package:pos_mobile_app/utils/helpers.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 
@@ -13,23 +14,19 @@ import 'analytic_home_view_model.dart';
 
 class AnalyticHomeView extends StatelessWidget {
   AnalyticHomeView({Key? key}) : super(key: key);
-  final List<String> items = [
-    'Item1',
-    'Item2',
-    'Item3',
-    'Item4',
-    'Item5',
-    'Item6',
-    'Item7',
-    'Item8',
+
+  List<String> branchNameList = [
+    'All',
   ];
-  String? selectedValue;
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<AnalyticHomeViewModel>.nonReactive(
+        onModelReady: (model) {
+          model.getStat();
+        },
         viewModelBuilder: () => AnalyticHomeViewModel(),
         builder: (context, model, child) {
-          final cardList = model.cardLists(context);
           return Scaffold(
             backgroundColor: ColorManager.kWhiteColor,
             appBar: Navbar(
@@ -38,13 +35,8 @@ class AnalyticHomeView extends StatelessWidget {
                   color: ColorManager.kLightGray, fontSize: FontSize.s16),
               leadingBottomStyle: getBoldStyle(
                   color: ColorManager.kDarkCharcoal, fontSize: FontSize.s20),
-              bottomLeadingText: AppString.businessNamePlaceholder,
-              trailing: PosDropDownField(
-                hint: 'Select Item',
-                dropdownItems: items,
-                value: selectedValue,
-                onChanged: model.handleSelectedValue,
-              ),
+              bottomLeadingText: model.admin?.businessName ?? "",
+              trailing: const BranchDropdownWidget(),
               automaticallyImplyLeading: false,
               statusBarBrightness: Brightness.light,
               statusBarColor: ColorManager.kDarkBlue,
@@ -62,7 +54,7 @@ class AnalyticHomeView extends StatelessWidget {
                       right: 24.0,
                       bottom: 0,
                     ),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: ColorManager.kWhiteColor,
                     ),
                     child: Column(
@@ -80,50 +72,13 @@ class AnalyticHomeView extends StatelessWidget {
                         const SizedBox(
                           height: AppSize.s12,
                         ),
-                        Container(
-                          padding: const EdgeInsets.all(AppSize.s24),
-                          width: double.infinity,
-                          decoration: const BoxDecoration(
-                              color: ColorManager.kButtonTextNavyBlue,
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(AppSize.s4))),
-                          child: RichText(
-                            text: TextSpan(
-                              text: 'Opening Cash : ',
-                              style: getSemiBoldStyle(
-                                  color: ColorManager.kWhiteColor,
-                                  fontSize: FontSize.s12),
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text: 'NGN 20,0000000',
-                                    style: getBoldStyle(
-                                        color: ColorManager.kWhiteColor,
-                                        fontSize: FontSize.s16)),
-                              ],
-                            ),
-                          ),
-                        ),
-                        GridView.count(
-                          primary: false,
-                          padding: const EdgeInsets.only(
-                              bottom: AppPadding.p40, top: AppPadding.p16),
-                          crossAxisCount: 2,
-                          crossAxisSpacing: AppSize.s8,
-                          mainAxisSpacing: AppSize.s8,
-                          shrinkWrap: true,
-                          childAspectRatio: (1 / 0.9),
-                          children: List.generate(cardList.length, (index) {
-                            return ListTileWidget(
-                              color: cardList[index].color,
-                              child: cardList[index].child,
-                            );
-                          }),
-                        ),
+                        const OpeningBalanceWidget(),
+                        const AnalyticStatWidget(),
                       ],
                     ),
                   ),
-                  TransactionSummaryView(),
-                  TransactionSummaryList()
+                  const TransactionSummaryView(),
+                  const TransactionSummaryList()
                 ],
               ),
             ),
@@ -132,11 +87,185 @@ class AnalyticHomeView extends StatelessWidget {
   }
 }
 
+class BranchDropdownWidget extends ViewModelWidget<AnalyticHomeViewModel> {
+  const BranchDropdownWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, AnalyticHomeViewModel model) {
+    return PosDropDownField(
+      hint: 'Select item',
+      dropdownItems: [
+        'All',
+        ...model.branches!.map((e) => e.name!).toList(),
+      ],
+      value: model.selectedValue!,
+      onChanged: model.handleSelectedValue,
+    );
+  }
+}
+
+class OpeningBalanceWidget extends ViewModelWidget<AnalyticHomeViewModel> {
+  const OpeningBalanceWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, AnalyticHomeViewModel model) {
+    return Container(
+      padding: const EdgeInsets.all(AppSize.s24),
+      width: double.infinity,
+      decoration: const BoxDecoration(
+          color: ColorManager.kButtonTextNavyBlue,
+          borderRadius: BorderRadius.all(Radius.circular(AppSize.s4))),
+      child: RichText(
+        text: TextSpan(
+          text: 'Opening Cash : ',
+          style: getSemiBoldStyle(
+              color: ColorManager.kWhiteColor, fontSize: FontSize.s12),
+          children: <TextSpan>[
+            TextSpan(
+                text: 'NGN 20,0000000',
+                style: getBoldStyle(
+                    color: ColorManager.kWhiteColor, fontSize: FontSize.s16)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AnalyticStatWidget extends ViewModelWidget<AnalyticHomeViewModel> {
+  const AnalyticStatWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, AnalyticHomeViewModel model) {
+    print('stat json from response vm: ${model.stat?.toJson()}');
+    return GridView.count(
+        primary: false,
+        padding:
+            const EdgeInsets.only(bottom: AppPadding.p40, top: AppPadding.p16),
+        crossAxisCount: 2,
+        crossAxisSpacing: AppSize.s8,
+        mainAxisSpacing: AppSize.s8,
+        shrinkWrap: true,
+        childAspectRatio: (1 / 0.9),
+        children: [
+          ListTileWidget(
+            color: ColorManager.klightYellowColor,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SvgPicture.asset('assets/images/Frame_3891.svg'),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Expanded(
+                    child: Text(
+                      '${model.stat != null ? calculateTotalWithdrawal(model.stat!.cardWithdrawal!, model.stat!.transferWithdrawal!) : 0}',
+                      maxLines: 1,
+                      style: getThickStyle(
+                          color: ColorManager.kDarkCharcoal,
+                          fontSize: FontSize.s28),
+                    ),
+                  ),
+                  Text(
+                    'Total Withdrawal',
+                    style: getRegularStyle(
+                        color: ColorManager.kNavNonActiveColor,
+                        fontSize: FontSize.s12),
+                  )
+                ]),
+          ),
+          ListTileWidget(
+            color: ColorManager.kBackgroundolor,
+            child: Column(children: [
+              SvgPicture.asset('assets/images/servicechargeicon.svg'),
+              const SizedBox(
+                height: 8,
+              ),
+              Expanded(
+                child: Text(
+                  formatCurrency(model.stat?.serviceCharge ?? 0.0),
+                  maxLines: 1,
+                  style: getThickStyle(
+                      color: ColorManager.kDarkCharcoal,
+                      fontSize: FontSize.s28),
+                ),
+              ),
+              Text(
+                'Service Charges',
+                style: getRegularStyle(
+                    color: ColorManager.kNavNonActiveColor,
+                    fontSize: FontSize.s12),
+              )
+            ]),
+          ),
+          ListTileWidget(
+            color: ColorManager.kPinkishPurpleColor,
+            child: Column(children: [
+              SvgPicture.asset('assets/images/expenseicon.svg'),
+              const SizedBox(
+                height: 8,
+              ),
+              Expanded(
+                child: Text(
+                  formatCurrency(model.stat?.expenses ?? 0),
+                  maxLines: 1,
+                  style: getThickStyle(
+                      color: ColorManager.kDarkCharcoal,
+                      fontSize: FontSize.s28),
+                ),
+              ),
+              Text(
+                'Expenses',
+                style: getRegularStyle(
+                    color: ColorManager.kNavNonActiveColor,
+                    fontSize: FontSize.s12),
+              )
+            ]),
+          ),
+          ListTileWidget(
+            color: ColorManager.kLightGreen1,
+            child: Column(children: [
+              SvgPicture.asset('assets/images/Frame 6.svg'),
+              const SizedBox(
+                height: 8,
+              ),
+              Expanded(
+                child: Text(
+                  '1240000000',
+                  maxLines: 1,
+                  style: getThickStyle(
+                      color: ColorManager.kDarkCharcoal,
+                      fontSize: FontSize.s28),
+                ),
+              ),
+              Text(
+                'Total Balance(Bank)',
+                style: getRegularStyle(
+                    color: ColorManager.kNavNonActiveColor,
+                    fontSize: FontSize.s12),
+              )
+            ]),
+          )
+        ]);
+  }
+}
+
 class TransactionSummaryView extends ViewModelWidget<AnalyticHomeViewModel> {
   const TransactionSummaryView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, AnalyticHomeViewModel model) {
+    print('stat: ${model.stat?.toJson()}');
+    double serviceCharges = model.stat?.serviceCharge ?? 0;
+
+    double expenses = model.stat?.expenses ?? 0;
+    double withdrawals = (model.stat?.cardWithdrawal ?? 0) +
+        (model.stat?.transferWithdrawal ?? 0);
+    double pieChartTotal = serviceCharges + expenses + withdrawals;
+
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: AppSize.s40,
@@ -166,19 +295,19 @@ class TransactionSummaryView extends ViewModelWidget<AnalyticHomeViewModel> {
                 // read about it in the PieChartData section
                 sections: [
                   PieChartSectionData(
-                    value: 30.0,
+                    value: pieChartCalculate(pieChartTotal, withdrawals),
                     color: ColorManager.kBadgeTextColor,
                     showTitle: false,
                     radius: AppSize.s24,
                   ),
                   PieChartSectionData(
-                    value: 60.0,
+                    value: pieChartCalculate(pieChartTotal, serviceCharges),
                     color: ColorManager.kDeepNavyBlue,
                     showTitle: false,
                     radius: AppSize.s24,
                   ),
                   PieChartSectionData(
-                    value: 10.0,
+                    value: pieChartCalculate(pieChartTotal, expenses),
                     color: ColorManager.kDeepViolet,
                     showTitle: false,
                     radius: AppSize.s24,
@@ -194,7 +323,10 @@ class TransactionSummaryView extends ViewModelWidget<AnalyticHomeViewModel> {
             children: [
               TransactionSummaryItemBox(
                 color: ColorManager.kBadgeTextColor,
-                value: '1,450,000',
+                value: model.stat != null
+                    ? calculateTotalWithdrawal(model.stat!.cardWithdrawal!,
+                        model.stat!.transferWithdrawal!)
+                    : '0',
                 label: 'Total cash withdrawal',
               ),
               const SizedBox(height: AppSize.s40),
@@ -204,15 +336,15 @@ class TransactionSummaryView extends ViewModelWidget<AnalyticHomeViewModel> {
                   Expanded(
                     child: TransactionSummaryItemBox(
                       color: ColorManager.kDeepNavyBlue,
-                      value: '26,000',
+                      value: formatCurrency(model.stat?.serviceCharge ?? 0),
                       label: 'Service charge for all transactions',
                     ),
                   ),
                   Expanded(
                     child: TransactionSummaryItemBox(
                       color: ColorManager.kDeepViolet,
-                      value: '4,8000',
-                      label: 'Total cash withdrawal',
+                      value: formatCurrency(model.stat?.expenses ?? 0),
+                      label: 'Business expenses recorded',
                     ),
                   ),
                 ],
@@ -295,7 +427,6 @@ class TransactionSummaryList extends ViewModelWidget<AnalyticHomeViewModel> {
               GestureDetector(
                 onTap: () {
                   model.navigateToTransactionPage();
-                  print('hello click');
                 },
                 child: Text(
                   'See all',
@@ -312,9 +443,9 @@ class TransactionSummaryList extends ViewModelWidget<AnalyticHomeViewModel> {
           SizedBox(height: AppSize.s12),
           ListView.builder(
             shrinkWrap: true,
-            itemCount: 5,
+            itemCount: model.transactions!.length,
             itemBuilder: (BuildContext context, int index) {
-              Transaction transaction = TRANSACTION_LIST[index];
+              Transaction transaction = model.transactions![index];
               return TransactionSummaryListItem(transaction: transaction);
             },
           ),

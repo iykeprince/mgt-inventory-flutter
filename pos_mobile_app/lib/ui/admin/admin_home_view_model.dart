@@ -48,9 +48,18 @@ class AdminHomeViewModel extends IndexTrackingViewModel {
 
   fetchMerchants() async {
     runBusyFuture(
-      _adminService.getMerchants(),
+      fetchMerchantTask(),
       busyObject: ADMIN_FETCH_MERCHANT,
     );
+  }
+
+  fetchMerchantTask() async {
+    try {
+      return await _adminService.getMerchants();
+    } on DioError catch (e) {
+      print("error: ${e.response!.data['message']}'");
+      throw Exception(e.response!.data['message']);
+    }
   }
 
   Future<void> navigateSwitchBranch() async {

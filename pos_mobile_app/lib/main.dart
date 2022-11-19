@@ -7,7 +7,6 @@ import 'package:pos_mobile_app/utils/setup_bottom_sheet_ui.dart';
 import 'package:pos_mobile_app/utils/setup_dialog_ui.dart';
 import 'package:pos_mobile_ui_package/utils/colors.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() async {
