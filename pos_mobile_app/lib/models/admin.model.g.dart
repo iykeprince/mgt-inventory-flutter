@@ -15,6 +15,7 @@ Admin _$AdminFromJson(Map<String, dynamic> json) => Admin(
       numOfBranches: json['numOfBranches'] as int?,
       userId: json['userId'] as String?,
       registeredAt: json['registeredAt'] as String?,
+      imgUrl: json['imgUrl'] as String?,
       user: json['user'] == null
           ? null
           : User.fromJson(json['user'] as Map<String, dynamic>),
@@ -29,5 +30,6 @@ Map<String, dynamic> _$AdminToJson(Admin instance) => <String, dynamic>{
       'numOfBranches': instance.numOfBranches,
       'userId': instance.userId,
       'registeredAt': instance.registeredAt,
+      'imgUrl': instance.imgUrl,
       'user': instance.user,
     };

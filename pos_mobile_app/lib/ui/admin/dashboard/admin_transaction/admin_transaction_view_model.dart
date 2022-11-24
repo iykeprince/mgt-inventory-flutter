@@ -21,7 +21,7 @@ class AdminTransactionViewModel extends BaseViewModel {
   Future<List<Transaction>> getTransactionsTask() async {
     try {
       List<Transaction> transactions =
-          await _transactionService.getTransactions(branchId);
+          await _transactionService.getTransactions(branchId: branchId);
       return [];
     } on DioError catch (error) {
       print(error.response!.data['message']);

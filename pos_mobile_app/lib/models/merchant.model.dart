@@ -17,6 +17,7 @@ class Merchant {
   String? userId;
   String? branchId;
   String? adminId;
+  String? imgUrl;
   User? user;
   Branch? branch;
 

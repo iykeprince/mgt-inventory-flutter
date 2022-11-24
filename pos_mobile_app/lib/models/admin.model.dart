@@ -13,6 +13,7 @@ class Admin {
   int? numOfBranches;
   String? userId;
   String? registeredAt;
+  String? imgUrl;
   User? user;
 
   Admin({
@@ -24,6 +25,7 @@ class Admin {
     this.numOfBranches,
     this.userId,
     this.registeredAt,
+    this.imgUrl,
     this.user,
   });
 

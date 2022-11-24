@@ -33,49 +33,7 @@ class AccountSettingView extends StatelessWidget {
                       const SizedBox(
                         height: AppSize.s8,
                       ),
-                      Container(
-                        color: ColorManager.kBackgroundolor,
-                        padding: const EdgeInsets.all(AppPadding.p24),
-                        width: double.infinity,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            AvatarWidget(
-                              text:
-                                  getInitials(model.admin?.businessName ?? ''),
-                              isEdit: false,
-                              color: ColorManager.kPrimaryColor,
-                              onClicked: () {},
-                            ),
-                            const SizedBox(
-                              height: AppSize.s12,
-                            ),
-                            Text(
-                              model.admin?.businessName ?? '',
-                              style: getThickStyle(
-                                  color: ColorManager.kDarkCharcoal,
-                                  fontSize: FontSize.s20),
-                            ),
-                            const SizedBox(
-                              height: AppSize.s4,
-                            ),
-                            Text(
-                              model.admin?.businessEmail ?? '',
-                              style: getMediumStyle(
-                                  color: ColorManager.kGrey1,
-                                  fontSize: FontSize.s16),
-                            ),
-                            const SizedBox(
-                              height: AppSize.s12,
-                            ),
-                            Text(AppString.admin,
-                                style: getBoldStyle(
-                                    color: ColorManager.kPrimaryColor,
-                                    fontSize: FontSize.s16)),
-                          ],
-                        ),
-                      ),
+                      ProfileAvatarWidget(),
                       const SizedBox(
                         height: AppSize.s8,
                       ),
@@ -143,5 +101,59 @@ class AccountSettingView extends StatelessWidget {
                 ),
               ),
             ));
+  }
+}
+
+class ProfileAvatarWidget extends ViewModelWidget<AccountSettingViewModel> {
+  const ProfileAvatarWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, AccountSettingViewModel model) {
+    return Column(
+      children: [
+        Container(
+          color: ColorManager.kBackgroundolor,
+          padding: const EdgeInsets.all(AppPadding.p24),
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              AvatarWidget(
+                imgUrl: model.admin?.imgUrl,
+                text: getInitials(model.admin?.businessName ?? ''),
+                isEdit: false,
+                color: ColorManager.kPrimaryColor,
+                onClicked: model.handleImageSelect,
+              ),
+              const SizedBox(
+                height: AppSize.s12,
+              ),
+              Text(
+                model.admin?.businessName ?? '',
+                style: getThickStyle(
+                    color: ColorManager.kDarkCharcoal, fontSize: FontSize.s20),
+              ),
+              const SizedBox(
+                height: AppSize.s4,
+              ),
+              Text(
+                model.admin?.businessEmail ?? '',
+                style: getMediumStyle(
+                    color: ColorManager.kGrey1, fontSize: FontSize.s16),
+              ),
+              const SizedBox(
+                height: AppSize.s12,
+              ),
+              Text(AppString.admin,
+                  style: getBoldStyle(
+                      color: ColorManager.kPrimaryColor,
+                      fontSize: FontSize.s16)),
+            ],
+          ),
+        ),
+        model.isBusy ? const LinearProgressIndicator() : Container(),
+      ],
+    );
   }
 }
