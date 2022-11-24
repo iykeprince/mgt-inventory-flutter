@@ -73,10 +73,31 @@ class HistoryBranchDropdown extends ViewModelWidget<AdminHistoryViewModel> {
   }
 }
 
+class DateFilter {
+  int? day;
+  int? hour;
+  int? minute;
+  int? seconds;
+  String text;
+
+  DateFilter({
+    this.day,
+    this.hour,
+    this.minute,
+    this.seconds,
+    required this.text,
+  });
+}
+
 class FilterBoxWidget extends ViewModelWidget<AdminHistoryViewModel> {
   FilterBoxWidget({Key? key}) : super(key: key);
 
-  final List<String> filterList = ['30 days', '3 month', '1 year'];
+  // final List<String> filterList = ['30 days', '3 month', '1 year'];
+  final List<DateFilter> dateFilterList = [
+    DateFilter(day: 30, text: '30 days'),
+    DateFilter(day: 90, text: '3 months'),
+    DateFilter(day: 365, text: '1 year')
+  ];
 
   @override
   Widget build(BuildContext context, AdminHistoryViewModel model) {
@@ -84,10 +105,10 @@ class FilterBoxWidget extends ViewModelWidget<AdminHistoryViewModel> {
       height: 36,
       margin: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
       child: ListView.builder(
-        itemCount: filterList.length + 1,
+        itemCount: dateFilterList.length + 1,
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) {
-          if (index == filterList.length) {
+          if (index == dateFilterList.length) {
             return GestureDetector(
               onTap: () {
                 print('hello tapped');
@@ -98,14 +119,9 @@ class FilterBoxWidget extends ViewModelWidget<AdminHistoryViewModel> {
               ),
             );
           }
-          String item = filterList[index];
+          DateFilter item = dateFilterList[index];
           return HistoryFilterItem(
             item: item,
-            onFilterSelected: (value) {
-              print('selected: $value');
-              model.setSelectedFilter(value!);
-            },
-            selectedValue: model.selectedFilter,
           );
         },
       ),
@@ -235,29 +251,18 @@ class HistoryAnalyticWidget extends ViewModelWidget<AdminHistoryViewModel> {
   }
 }
 
-class HistoryFilterItem extends StatefulWidget {
+class HistoryFilterItem extends ViewModelWidget<AdminHistoryViewModel> {
   const HistoryFilterItem({
     Key? key,
     required this.item,
-    this.selectedValue,
-    this.onFilterSelected,
   }) : super(key: key);
-  final String item;
-  final String? selectedValue;
-  final Function(String?)? onFilterSelected;
+  final DateFilter item;
 
   @override
-  State<HistoryFilterItem> createState() => _HistoryFilterItemState();
-}
-
-class _HistoryFilterItemState extends State<HistoryFilterItem> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, AdminHistoryViewModel model) {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          widget.onFilterSelected!(widget.item);
-        });
+        model.setSelectedFilter(item);
       },
       child: Container(
         padding: const EdgeInsets.symmetric(
@@ -267,19 +272,19 @@ class _HistoryFilterItemState extends State<HistoryFilterItem> {
         margin: const EdgeInsets.only(right: AppSize.s12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSize.s100),
-          color: widget.selectedValue == widget.item
+          color: model.selectedFilter == item
               ? ColorManager.kLightIndigo
               : Colors.transparent,
         ),
         child: Center(
           child: Text(
-            widget.item,
+            item.text,
             style: TextStyle(
-              color: widget.selectedValue == widget.item
+              color: model.selectedFilter == item
                   ? ColorManager.kPrimaryColor
                   : ColorManager.kTurquoiseDarkColor,
               fontSize: FontSize.s14,
-              fontWeight: widget.selectedValue == widget.item
+              fontWeight: model.selectedFilter == item
                   ? FontWeight.bold
                   : FontWeight.w400,
             ),
@@ -325,7 +330,7 @@ class HistoryTransactionWidget extends ViewModelWidget<AdminHistoryViewModel> {
               Expanded(
                 child: InputField(
                   keyBoardType: TextInputType.text,
-                  suffixIcon: Icon(
+                  suffixIcon: const Icon(
                     Icons.search,
                     size: AppSize.s24,
                     color: ColorManager.kNavNonActiveColor,
@@ -338,7 +343,7 @@ class HistoryTransactionWidget extends ViewModelWidget<AdminHistoryViewModel> {
                 child: IconButton(
                     alignment: Alignment.center,
                     onPressed: () {},
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.download_sharp,
                       color: ColorManager.kPrimaryColor,
                       size: AppSize.s24,
@@ -349,14 +354,16 @@ class HistoryTransactionWidget extends ViewModelWidget<AdminHistoryViewModel> {
           SizedBox(height: AppSize.s12),
           Divider(),
           SizedBox(height: AppSize.s12),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: model.transactions!.length,
-            itemBuilder: (BuildContext context, int index) {
-              Transaction transaction = model.transactions![index];
-              return TransactionSummaryListItem(transaction: transaction);
-            },
-          ),
+          model.isBusy
+              ? Center(child: CircularProgressIndicator())
+              : ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: model.transactions!.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    Transaction transaction = model.transactions![index];
+                    return TransactionSummaryListItem(transaction: transaction);
+                  },
+                ),
           SizedBox(height: AppSize.s12),
           PosButton(
             onPressed: () {},

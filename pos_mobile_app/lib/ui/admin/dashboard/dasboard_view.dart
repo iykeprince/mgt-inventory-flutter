@@ -116,7 +116,7 @@ class TransactionSummaryListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: isContentPadding ? EdgeInsets.zero : null,
-      leading: transaction.type == TransactionStatus.CREDIT
+      leading: transaction.isDeduction == false
           ? SvgPicture.asset(
               'assets/images/success_tranx_icon.svg',
               fit: BoxFit.cover,
@@ -134,7 +134,7 @@ class TransactionSummaryListItem extends StatelessWidget {
         ),
       ),
       subtitle: Text(
-        DateFormat("DD MM 'YY").format(transaction.createdAt!),
+        DateFormat("d/M/yyyy h:ma").format(transaction.createdAt!),
         style: const TextStyle(
           color: ColorManager.kNavNonActiveColor,
           fontSize: FontSize.s14,

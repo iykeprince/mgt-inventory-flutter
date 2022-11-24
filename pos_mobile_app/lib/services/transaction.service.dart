@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:pos_mobile_app/enums/transaction_status.dart';
 import 'package:stacked/stacked.dart';
 
 import '../app/app.locator.dart';
@@ -14,29 +15,57 @@ class TransactionService with ReactiveServiceMixin {
   final ReactiveValue<List<Transaction>?> _transactions =
       ReactiveValue<List<Transaction>?>([]);
 
+  List<Transaction>? get transactions => _transactions.value;
+
   Future<Transaction> createTransaction(Map formData) async {
     var response = await dioClient.post(
-      'transaction',
+      '/transaction',
       data: formData,
     );
     return Transaction.fromJson(response.data);
   }
 
-  Future<List<Transaction>> getTransactions(String? branchId) async {
-    String url;
-    if (branchId == null) {
-      url = 'transaction/admin';
-    } else {
-      url = 'transaction/admin?branchId=$branchId';
+  Future<List<Transaction>> getTransactions({
+    int? page,
+    int? pageSize,
+    String? type,
+    DateTime? start,
+    DateTime? end,
+    String? branchId,
+  }) async {
+    String url = "";
+
+    url += "/transaction/admin?";
+
+    if (page != null) {
+      url += 'page=$page';
     }
+    if (pageSize != null) {
+      url += '&pageSize=$pageSize';
+    }
+    if (type != null) {
+      url += '&type=$type';
+    }
+    if (start != null) {
+      url += '&start=${start.toIso8601String()}';
+    }
+    if (end != null) {
+      url += '&end=${end.toIso8601String()}';
+    }
+    if (branchId != null) {
+      url += 'branchId=$branchId';
+    }
+
+    print('new url: $url');
+
     try {
       var response = await dioClient.get(url);
       print('response data transactions: ${response.data}');
-      // List<Transaction> transactions = (response.data as List<dynamic>)
-      //     .map((x) => Transaction.fromJson(x))
-      //     .toList();
-      // _transactions.value = transactions;
-      return [];
+      List<Transaction> transactions = (response.data as List<dynamic>)
+          .map((x) => Transaction.fromJson(x))
+          .toList();
+      _transactions.value = transactions;
+      return transactions;
     } on DioError catch (err) {
       print(err.response!.data);
       throw err;
@@ -44,7 +73,7 @@ class TransactionService with ReactiveServiceMixin {
   }
 
   Future<List<Transaction>> getMerchantTransactions() async {
-    var response = await dioClient.get('transaction/merchant');
+    var response = await dioClient.get('/transaction/merchant');
     List<Transaction> transactions = (response.data as List<dynamic>)
         .map((x) => Transaction.fromJson(x))
         .toList();

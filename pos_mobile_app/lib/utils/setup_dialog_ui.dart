@@ -5,6 +5,7 @@ import 'package:pos_mobile_ui_package/utils/values_manager.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../app/app.locator.dart';
+import '../dialog/confirm_dialog.dart';
 import '../dialog/delete_merchant.dialog.dart';
 import '../enums/dialog_type.dart';
 import 'package:pos_mobile_app/dialog/switchBranch.dialog.dart';
