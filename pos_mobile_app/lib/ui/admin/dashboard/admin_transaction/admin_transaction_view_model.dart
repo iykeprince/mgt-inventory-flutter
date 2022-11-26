@@ -5,6 +5,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../../../../services/transaction.service.dart';
+import '../../../../utils/http_exception.dart';
 
 class AdminTransactionViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
@@ -25,7 +26,7 @@ class AdminTransactionViewModel extends BaseViewModel {
       return [];
     } on DioError catch (error) {
       print(error.response!.data['message']);
-      throw Exception(error.response!.data['message']);
+      throw HttpException(error.response!.data['message']);
     }
   }
 

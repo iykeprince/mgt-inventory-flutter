@@ -7,6 +7,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../../../app/app.locator.dart';
+import '../../../utils/http_exception.dart';
 
 const String BUSINESS_NAME_VALIDATOR = 'BUSINESS_NAME_VALIDATOR';
 const String EMAIL_VALIDATOR = 'EMAIL_VALIDATOR';
@@ -96,7 +97,7 @@ class CreateAdminBusinessViewModel extends BaseViewModel {
       );
       return response;
     } on DioError catch (error) {
-      throw Exception(error.response?.data["message"]);
+      throw HttpException(error.response?.data["message"]);
     } finally {
       setBusy(false);
     }

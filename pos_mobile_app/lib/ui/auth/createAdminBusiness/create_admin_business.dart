@@ -7,8 +7,6 @@ import 'package:pos_mobile_app/utils/helpers.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 
-import '../createAdmin/create_admin_view_model.dart';
-
 class CreateAdminBusinessView extends StatelessWidget {
   const CreateAdminBusinessView({Key? key}) : super(key: key);
 

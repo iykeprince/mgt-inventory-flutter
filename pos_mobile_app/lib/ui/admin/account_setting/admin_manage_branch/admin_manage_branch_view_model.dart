@@ -10,6 +10,7 @@ import 'package:stacked_services/stacked_services.dart';
 import '../../../../app/app.locator.dart';
 import '../../../../enums/dialog_type.dart';
 import '../../../../models/branch.model.dart';
+import '../../../../utils/http_exception.dart';
 
 class AdminManageBranchViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
@@ -64,7 +65,7 @@ class AdminManageBranchViewModel extends BaseViewModel {
         textColor: Colors.white,
         fontSize: 16.0,
       );
-      throw Exception(e.response!.data);
+      throw HttpException(e.response!.data);
     } finally {
       setBusy(false);
 

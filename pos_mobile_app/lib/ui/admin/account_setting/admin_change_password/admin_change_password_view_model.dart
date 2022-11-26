@@ -9,6 +9,8 @@ import '../../../../app/app.locator.dart';
 import '../../../../services/authentication.service.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../../../utils/http_exception.dart';
+
 const String ADMIN_CHANGE_PASSWORD_TASK = 'ADMIN_CHANGE_PASSWORD_TASK';
 
 class AdminChangePasswordViewModel extends BaseViewModel {
@@ -57,7 +59,7 @@ class AdminChangePasswordViewModel extends BaseViewModel {
       _navigationService.back();
       return response;
     } on DioError catch (error) {
-      throw Exception(error.response?.data["message"]);
+      throw HttpException(error.response?.data["message"]);
     } finally {
       setBusy(false);
     }

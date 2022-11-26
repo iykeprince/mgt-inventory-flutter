@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:pos_mobile_app/app/app.router.dart';
+import 'package:pos_mobile_app/utils/http_exception.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -36,7 +37,7 @@ class AdminHomeViewModel extends IndexTrackingViewModel {
       await _authService.getCurrentBaseUser();
       await _authService.getCurrentAdminUser();
     } on DioError catch (exception) {
-      throw Exception(exception);
+      throw HttpException(exception.response!.data['message']);
     } finally {
       notifyListeners();
     }
@@ -61,7 +62,7 @@ class AdminHomeViewModel extends IndexTrackingViewModel {
       return await _adminService.getMerchants();
     } on DioError catch (e) {
       print("error: ${e.response!.data['message']}'");
-      throw Exception(e.response!.data['message']);
+      throw HttpException(e.response!.data['message']);
     }
   }
 

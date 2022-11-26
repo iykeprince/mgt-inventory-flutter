@@ -15,6 +15,7 @@ import '../../../../models/merchant.model.dart';
 import '../../../../models/user.model.dart';
 import '../../../../services/admin.service.dart';
 import '../../../../services/authentication.service.dart';
+import '../../../../utils/http_exception.dart';
 
 const String DELETING_MERCHANT_TASK = 'DELETING_MERCHANT_TASK';
 
@@ -92,7 +93,7 @@ class AdminManageMerchantAccountViewModel extends BaseViewModel {
         textColor: Colors.white,
         fontSize: 16.0,
       );
-      throw Exception(e.response!.data);
+      throw HttpException(e.response!.data);
     } finally {
       setBusy(false);
 

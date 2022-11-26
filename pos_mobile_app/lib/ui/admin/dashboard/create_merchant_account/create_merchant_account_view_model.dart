@@ -10,6 +10,7 @@ import '../../../../app/app.locator.dart';
 import '../../../../models/branch.model.dart';
 import '../../../../models/merchant.model.dart';
 import '../../../../services/admin.service.dart';
+import '../../../../utils/http_exception.dart';
 
 class CreateMerchantAccountViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
@@ -73,7 +74,7 @@ class CreateMerchantAccountViewModel extends BaseViewModel {
         textColor: Colors.white,
         fontSize: 16.0,
       );
-      throw Exception(error.response?.data['message']);
+      throw HttpException(error.response?.data['message']);
     } finally {
       setBusy(false);
       notifyListeners();

@@ -7,6 +7,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../../../app/app.locator.dart';
+import '../../../utils/http_exception.dart';
 
 const String TERM_OF_USE_VALIDATOR = 'TERM_OF_USE_VALIDATOR';
 const String SIGN_UP_WITH_EMAIL_OBJECT_KEY = 'sign-up-with-email-object-key';
@@ -50,13 +51,14 @@ class CreateAdminViewModel extends BaseViewModel {
       "numOfBranches": 1,
       "password": "password123"
     };
+    print('hello');
     try {
       var response = await _authenticationService.register(formData);
       _navigationService.navigateTo(Routes.verifyAdminView);
       // setMessage(response)
       return response;
     } on DioError catch (error) {
-      throw Exception(error.response?.data);
+      throw HttpException(error.response?.data);
     } finally {
       setBusy(false);
     }

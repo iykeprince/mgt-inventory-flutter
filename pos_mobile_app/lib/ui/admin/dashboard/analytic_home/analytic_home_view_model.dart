@@ -16,6 +16,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../../../../models/branch.model.dart';
 import '../../../../models/transaction.model.dart';
+import '../../../../utils/http_exception.dart';
 
 class AnalyticHomeViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
@@ -58,7 +59,7 @@ class AnalyticHomeViewModel extends BaseViewModel {
       print('stat json: ${stat?.toJson()}');
       return stat;
     } on DioError catch (error) {
-      throw Exception(error.response!.data['message']);
+      throw HttpException(error.response!.data['message']);
     } finally {
       setBusy(false);
     }

@@ -18,7 +18,6 @@ import 'package:pos_mobile_app/ui/admin/dashboard/create_merchant_account/create
 import 'package:pos_mobile_app/ui/auth/auth_view.dart';
 import 'package:pos_mobile_app/ui/auth/compeleteMerchantRegistration/compelete_merchant_register.dart';
 import 'package:pos_mobile_app/ui/auth/createAccountSuccess/create_account_success_view.dart';
-import 'package:pos_mobile_app/ui/auth/createAdmin/create_admin_view.dart';
 import 'package:pos_mobile_app/ui/auth/createAdminBusiness/create_admin_business.dart';
 import 'package:pos_mobile_app/ui/auth/login/login_view.dart';
 import 'package:pos_mobile_app/ui/auth/registerMerchant/register_merchant_view.dart';
@@ -48,7 +47,6 @@ import '../ui/admin/account_setting/admin_manage_report_setting/admin_manage_rep
     AdaptiveRoute(page: OnboardView),
     AdaptiveRoute(page: AuthView),
     AdaptiveRoute(page: LoginView),
-    AdaptiveRoute(page: CreateAdminView),
     AdaptiveRoute(page: RegisterMerchantView),
     AdaptiveRoute(page: VerifyAdminView),
     AdaptiveRoute(page: VerifyAdminSuccessView),

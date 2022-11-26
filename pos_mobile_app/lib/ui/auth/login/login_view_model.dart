@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:pos_mobile_app/services/authentication.service.dart';
+import 'package:pos_mobile_app/utils/http_exception.dart';
 import 'package:pos_mobile_app/utils/pos_contants.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -67,7 +68,7 @@ class LoginViewModel extends BaseViewModel {
       return response;
     } on DioError catch (error) {
       print('error: ${error.response?.data["message"]}');
-      throw Exception(error.response?.data["message"]);
+      throw HttpException(error.response?.data["message"]);
     } finally {
       setBusy(false);
     }

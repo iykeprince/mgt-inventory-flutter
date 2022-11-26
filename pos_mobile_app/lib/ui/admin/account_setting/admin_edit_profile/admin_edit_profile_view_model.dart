@@ -15,6 +15,7 @@ import '../../../../models/user.model.dart';
 import '../../../../services/admin.service.dart';
 import '../../../../services/authentication.service.dart';
 import '../../../../services/merchant.service.dart';
+import '../../../../utils/http_exception.dart';
 
 const String UPDATE_ADMIN_PROFILE_TASK_OBJECT =
     'UPDATE_ADMIN_PROFILE_TASK_OBJECT';
@@ -78,7 +79,7 @@ class AdminEditProfileViewModel extends BaseViewModel {
       return response;
     } on DioError catch (error) {
       print(error.response?.data["message"]);
-      throw Exception(error.response?.data["message"]);
+      throw HttpException(error.response?.data["message"]);
     } finally {
       setBusy(false);
       _editProfile = false;

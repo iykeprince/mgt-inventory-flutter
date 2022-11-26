@@ -6,6 +6,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../../../app/app.locator.dart';
+import '../../../utils/http_exception.dart';
 
 class VerifyAdminViewModel extends BaseViewModel {
   final _authenticationService = locator<AuthenticationService>();
@@ -32,7 +33,7 @@ class VerifyAdminViewModel extends BaseViewModel {
       _navigationService.replaceWith(Routes.verifyAdminSuccessView);
       return response;
     } on DioError catch (error) {
-      throw Exception(error.response?.data["message"]);
+      throw HttpException(error.response?.data["message"]);
     } finally {
       setBusy(false);
     }
