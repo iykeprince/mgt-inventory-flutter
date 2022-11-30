@@ -6,6 +6,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../../../app/app.locator.dart';
 import '../../../models/user.model.dart';
+import '../../../utils/http_exception.dart';
 import '../../../utils/pos_contants.dart';
 
 class RegisterMerchantViewModel extends BaseViewModel {
@@ -48,7 +49,7 @@ class RegisterMerchantViewModel extends BaseViewModel {
     try {
       User user = await _authenticationService.checkEmail(formData);
       if (user.role != MERCHANT) {
-        throw Exception(
+        throw HttpException(
             "Operation not allowed. Only merchant email address needed");
       }
       await _authenticationService.requestOTP(formData);
@@ -58,7 +59,7 @@ class RegisterMerchantViewModel extends BaseViewModel {
       );
       return user;
     } on DioError catch (error) {
-      throw Exception(error.response?.data["message"]);
+      throw HttpException(error.response?.data["message"]);
     } finally {
       setBusy(false);
     }

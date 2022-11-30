@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:pos_mobile_app/services/authentication.service.dart';
+import 'package:pos_mobile_app/ui/auth/login/login_view.form.dart';
+import 'package:pos_mobile_app/utils/http_exception.dart';
 import 'package:pos_mobile_app/utils/pos_contants.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -15,39 +17,20 @@ const String PASSWORD_VALIDATOR = 'PASSWORD_VALIDATOR';
 const String LOGIN_TASK_OBJECT = 'LOGIN_TASK_OBJECT';
 const String ADMIN = 'ADMIN';
 
-class LoginViewModel extends BaseViewModel {
+class LoginViewModel extends FormViewModel {
   final _navigationService = locator<NavigationService>();
   final _authenticationService = locator<AuthenticationService>();
 
-  String? _emailAddress;
-  String? _password;
-
-  String? get emailAddress => _emailAddress;
-  String? get password => _password;
-
-  setEmailAddress(String value) {
-    _emailAddress = value;
-  }
-
-  setPassword(String value) {
-    _password = value;
-  }
+  String? get emailAddress => emailValue;
+  String? get password => passwordValue;
+  bool _isFormValid = false;
+  bool get isFormValid => _isFormValid;
 
   login() async {
     runBusyFuture(runLogin(), busyObject: LOGIN_TASK_OBJECT);
   }
 
   Future runLogin() async {
-    if (_emailAddress == null || _emailAddress!.isEmpty) {
-      return setErrorForObject(EMAIL_VALIDATOR, "Email address is required");
-    }
-    setErrorForObject(EMAIL_VALIDATOR, null);
-
-    if (_password == null || _password!.isEmpty) {
-      return setErrorForObject(PASSWORD_VALIDATOR, "Password is required");
-    }
-    setErrorForObject(PASSWORD_VALIDATOR, null);
-
     setBusy(true);
 
     var formData = {"email": emailAddress, "password": password};
@@ -66,8 +49,8 @@ class LoginViewModel extends BaseViewModel {
       }
       return response;
     } on DioError catch (error) {
-      print('error: ${error.response?.data["message"]}');
-      throw Exception(error.response?.data["message"]);
+      print('error: ${error.response?.data}');
+      throw HttpException(error.response?.data["message"]);
     } finally {
       setBusy(false);
     }
@@ -76,6 +59,29 @@ class LoginViewModel extends BaseViewModel {
   navigateBack() => _navigationService.back();
 
   navigateToRegisterNow() => _navigationService.back();
+
+  @override
+  void setFormStatus() {
+    // TODO: implement setFormStatus
+    _isFormValid = true;
+    if (emailValue == null) {
+      _isFormValid = false;
+      setEmailValidationMessage("Email address is required");
+    }
+    if (emailValue!.isEmpty) {
+      _isFormValid = false;
+      setEmailValidationMessage("Email address is required");
+    }
+
+    if (passwordValue == null) {
+      _isFormValid = false;
+      setPasswordValidationMessage("Password is required");
+    }
+    if (passwordValue!.isEmpty) {
+      _isFormValid = false;
+      setPasswordValidationMessage("Password is required");
+    }
+  }
 
   //  navigateToHome() => _navigationService.navigateTo(Routes.homeView);
 }

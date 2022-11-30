@@ -24,6 +24,7 @@ class AnalyticHomeView extends StatelessWidget {
     return ViewModelBuilder<AnalyticHomeViewModel>.nonReactive(
         onModelReady: (model) {
           model.getStat();
+          model.getTransactions();
         },
         viewModelBuilder: () => AnalyticHomeViewModel(),
         builder: (context, model, child) {

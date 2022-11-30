@@ -10,6 +10,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../../models/merchant.model.dart';
 import '../../services/authentication.service.dart';
+import '../../utils/http_exception.dart';
 
 class MerchantHomeViewModel extends IndexTrackingViewModel {
   final _authService = locator<AuthenticationService>();
@@ -55,7 +56,7 @@ class MerchantHomeViewModel extends IndexTrackingViewModel {
       await _authService.getCurrentBaseUser();
       await _authService.getCurrentMerchantUser();
     } on DioError catch (exception) {
-      throw Exception(exception);
+      throw HttpException(exception.response!.data['message']);
     } finally {
       notifyListeners();
     }

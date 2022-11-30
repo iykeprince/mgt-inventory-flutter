@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:pos_mobile_app/models/default_response.model.dart';
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_change_password/admin_change_password_view.form.dart';
 import 'package:pos_mobile_ui_package/utils/colors.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -9,19 +10,24 @@ import '../../../../app/app.locator.dart';
 import '../../../../services/authentication.service.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../../../utils/http_exception.dart';
+
 const String ADMIN_CHANGE_PASSWORD_TASK = 'ADMIN_CHANGE_PASSWORD_TASK';
 
-class AdminChangePasswordViewModel extends BaseViewModel {
+class AdminChangePasswordViewModel extends FormViewModel {
   final _navigationService = locator<NavigationService>();
   final _authService = locator<AuthenticationService>();
 
-  TextEditingController oldPasswordController = TextEditingController();
-  TextEditingController newPasswordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+  bool _isFormValid = false;
+  bool get isFormValid => _isFormValid;
 
-  String? get oldPassword => oldPasswordController.text;
-  String? get newPassword => newPasswordController.text;
-  String? get confirmPassword => confirmPasswordController.text;
+  // TextEditingController oldPasswordController = TextEditingController();
+  // TextEditingController newPasswordController = TextEditingController();
+  // TextEditingController confirmPasswordController = TextEditingController();
+
+  // String? get oldPassword => oldPasswordController.text;
+  // String? get newPassword => newPasswordController.text;
+  // String? get confirmPassword => confirmPasswordController.text;
 
   navigateBack() => _navigationService.back();
 
@@ -34,9 +40,9 @@ class AdminChangePasswordViewModel extends BaseViewModel {
 
   Future<DefaultResponse> runChangePassword() async {
     Map<String, dynamic> formData = {
-      'oldPassword': oldPassword!.toString(),
-      'newPassword': newPassword!.toString(),
-      'confirmPassword': confirmPassword!.toString()
+      'oldPassword': oldPasswordValue,
+      'newPassword': newPasswordValue,
+      'confirmPassword': confirmPasswordValue
     };
     setBusy(true);
     try {
@@ -57,9 +63,26 @@ class AdminChangePasswordViewModel extends BaseViewModel {
       _navigationService.back();
       return response;
     } on DioError catch (error) {
-      throw Exception(error.response?.data["message"]);
+      throw HttpException(error.response?.data["message"]);
     } finally {
       setBusy(false);
+    }
+  }
+
+  @override
+  void setFormStatus() {
+    _isFormValid = true;
+
+    if (oldPasswordValue == null ||
+        newPasswordValue == null ||
+        confirmPasswordValue == null) {
+      _isFormValid = false;
+    }
+
+    if (oldPasswordValue!.isEmpty ||
+        newPasswordValue!.isEmpty ||
+        confirmPasswordValue!.isEmpty) {
+      _isFormValid = false;
     }
   }
 }

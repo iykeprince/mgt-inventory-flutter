@@ -6,6 +6,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../../../app/app.locator.dart';
+import '../../../utils/http_exception.dart';
 
 const String VERIFY_MERCHANT_TASK_OBJECT = 'VERIFY_MERCHANT_TASK_OBJECT';
 
@@ -42,7 +43,7 @@ class VerifyMerchantViewModel extends BaseViewModel {
       );
       return response;
     } on DioError catch (error) {
-      throw Exception(error.response?.data["message"]);
+      throw HttpException(error.response?.data["message"]);
     } finally {
       setBusy(false);
     }

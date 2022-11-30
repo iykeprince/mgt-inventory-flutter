@@ -4,6 +4,7 @@ import 'package:pos_mobile_app/services/admin.service.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../../models/branch.model.dart';
+import '../../../../utils/http_exception.dart';
 
 class AddBranchViewModel extends BaseViewModel {
   final _adminService = locator<AdminService>();
@@ -51,7 +52,7 @@ class AddBranchViewModel extends BaseViewModel {
       print('results: ${results.map((e) => e.toJson()).toList()}');
       return results;
     } on DioError catch (error) {
-      throw Exception(error.response?.data['message']);
+      throw HttpException(error.response?.data['message']);
     } finally {
       setBusy(false);
     }

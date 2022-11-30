@@ -11,6 +11,7 @@ import '../../../../models/merchant.model.dart';
 import '../../../../models/user.model.dart';
 import '../../../../services/authentication.service.dart';
 import '../../../../services/merchant.service.dart';
+import '../../../../utils/http_exception.dart';
 
 class EditProfileViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
@@ -57,7 +58,7 @@ class EditProfileViewModel extends BaseViewModel {
       return response;
     } on DioError catch (error) {
       print(error.response?.data["message"]);
-      throw Exception(error.response?.data["message"]);
+      throw HttpException(error.response?.data["message"]);
     } finally {
       setBusy(false);
     }

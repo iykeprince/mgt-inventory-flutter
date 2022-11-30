@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,16 +8,26 @@ import 'package:pos_mobile_app/utils/colors.dart';
 import 'package:pos_mobile_app/utils/helpers.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 
-import '../createAdmin/create_admin_view_model.dart';
+import 'create_admin_business.form.dart';
 
-class CreateAdminBusinessView extends StatelessWidget {
-  const CreateAdminBusinessView({Key? key}) : super(key: key);
+@FormView(fields: [
+  FormTextField(name: 'businessName'),
+  FormTextField(name: 'emailAddress'),
+  FormTextField(name: 'numberOfBranches'),
+  FormTextField(name: 'userPassword')
+])
+class CreateAdminBusinessView extends StatelessWidget
+    with $CreateAdminBusinessView {
+  CreateAdminBusinessView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CreateAdminBusinessViewModel>.nonReactive(
       viewModelBuilder: () => CreateAdminBusinessViewModel(),
+      onModelReady: (model) => listenToFormUpdated(model),
+      onDispose: (_) => disposeForm(),
       builder: (context, model, child) => Scaffold(
         // resizeToAvoidBottomInset: true,
         body: KeyboardAware(
@@ -42,7 +54,15 @@ class CreateAdminBusinessView extends StatelessWidget {
                     automaticallyImplyLeading: false,
                   ),
                 ),
-                CreateBusinessFormView(),
+                CreateBusinessFormView(
+                    businessNameController: businessNameController,
+                    emailController: emailAddressController,
+                    numberOfBranchesController: numberOfBranchesController,
+                    passwordController: userPasswordController,
+                    businessNameFocusNode: businessNameFocusNode,
+                    emailFocusNode: emailAddressFocusNode,
+                    numberOfBranchesFocusNode: numberOfBranchesFocusNode,
+                    passwordFocusNode: userPasswordFocusNode),
               ],
             ),
           ),
@@ -54,7 +74,26 @@ class CreateAdminBusinessView extends StatelessWidget {
 
 class CreateBusinessFormView
     extends ViewModelWidget<CreateAdminBusinessViewModel> {
-  const CreateBusinessFormView({Key? key}) : super(key: key);
+  const CreateBusinessFormView({
+    Key? key,
+    required this.passwordController,
+    required this.numberOfBranchesController,
+    required this.emailController,
+    required this.businessNameController,
+    required this.businessNameFocusNode,
+    required this.emailFocusNode,
+    required this.numberOfBranchesFocusNode,
+    required this.passwordFocusNode,
+  }) : super(key: key);
+
+  final TextEditingController businessNameController;
+  final TextEditingController emailController;
+  final TextEditingController numberOfBranchesController;
+  final TextEditingController passwordController;
+  final FocusNode businessNameFocusNode;
+  final FocusNode emailFocusNode;
+  final FocusNode numberOfBranchesFocusNode;
+  final FocusNode passwordFocusNode;
 
   @override
   Widget build(BuildContext context, CreateAdminBusinessViewModel model) {
@@ -84,7 +123,8 @@ class CreateBusinessFormView
               label: AppString.businessNameText,
               hintText: AppString.businessNamePlaceholder,
               border: InputBorder.none,
-              onChanged: model.setBusinessName,
+              controller: businessNameController,
+              focusnode: businessNameFocusNode,
             ),
             if (model.hasErrorForKey(BUSINESS_NAME_VALIDATOR))
               Alert.primary(text: AppString.businessNameValidatorText),
@@ -93,7 +133,8 @@ class CreateBusinessFormView
               label: AppString.emailAddress,
               hintText: AppString.emailAddressPlaceholder,
               border: InputBorder.none,
-              onChanged: model.setEmailAddress,
+              controller: emailController,
+              focusnode: emailFocusNode,
               keyBoardType: TextInputType.emailAddress,
             ),
             if (model.hasErrorForKey(EMAIL_VALIDATOR))
@@ -103,7 +144,8 @@ class CreateBusinessFormView
               label: AppString.numOfBranchText,
               hintText: AppString.numOfBranchPlaceholder,
               border: InputBorder.none,
-              onChanged: model.setNumOfBranches,
+              controller: numberOfBranchesController,
+              focusnode: numberOfBranchesFocusNode,
               keyBoardType: TextInputType.number,
             ),
             if (model.hasErrorForKey(NUM_OF_BRANCH_VALIDATOR))
@@ -114,7 +156,8 @@ class CreateBusinessFormView
               hintText: AppString.password,
               border: InputBorder.none,
               obscureText: model.obscurePassword,
-              onChanged: model.setPassword,
+              controller: passwordController,
+              focusnode: passwordFocusNode,
               suffixIcon: InkWell(
                 onTap: model.togglePasswordVisibility,
                 child: Padding(
@@ -138,15 +181,18 @@ class CreateBusinessFormView
               ),
             if (model.hasError) const SizedBox(height: AppSize.s20),
             PosButton(
-              onPressed: () {
-                dismissKeyboard(context);
-                model.createAdmin();
-              },
+              onPressed: !model.isFormValid
+                  ? () {}
+                  : () {
+                      dismissKeyboard(context);
+                      model.createAdmin();
+                    },
               title: AppString.createAccountText,
               fontSize: FontSize.s16,
               fontWeight: FontWeightManager.bold,
               borderRadius: AppSize.s8,
               busy: model.isBusy,
+              disabled: !model.isFormValid,
             ),
             const SizedBox(height: AppSize.s32),
           ]),

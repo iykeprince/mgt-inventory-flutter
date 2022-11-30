@@ -121,10 +121,10 @@ class ProfileAvatarWidget extends ViewModelWidget<AccountSettingViewModel> {
             children: [
               AvatarWidget(
                 imgUrl: model.admin?.imgUrl,
+                onClicked: model.handleImageSelect,
                 text: getInitials(model.admin?.businessName ?? ''),
                 isEdit: false,
                 color: ColorManager.kPrimaryColor,
-                onClicked: model.handleImageSelect,
               ),
               const SizedBox(
                 height: AppSize.s12,

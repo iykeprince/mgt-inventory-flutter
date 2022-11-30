@@ -6,17 +6,28 @@ import 'package:pos_mobile_ui_package/utils/values_manager.dart';
 import 'package:pos_mobile_ui_package/widgets/appbar/appbar.dart';
 import 'package:pos_mobile_ui_package/widgets/keyboardAware/keyboard_aware.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 
+import 'admin_change_password_view.form.dart';
 import 'admin_change_password_view_model.dart';
 
-class AdminChangePasswordView extends StatelessWidget {
-  const AdminChangePasswordView({Key? key}) : super(key: key);
+@FormView(fields: [
+  FormTextField(name: 'oldPassword'),
+  FormTextField(name: 'newPassword'),
+  FormTextField(name: 'confirmPassword'),
+])
+class AdminChangePasswordView extends StatelessWidget
+    with $AdminChangePasswordView {
+  AdminChangePasswordView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<AdminChangePasswordViewModel>.nonReactive(
       viewModelBuilder: () => AdminChangePasswordViewModel(),
-      onModelReady: (model) {},
+      onModelReady: (model) {
+        listenToFormUpdated(model);
+      },
+      onDispose: (_) => disposeForm(),
       builder: (context, model, child) => Scaffold(
         backgroundColor: ColorManager.kWhiteColor,
         appBar: Navbar(
@@ -27,11 +38,17 @@ class AdminChangePasswordView extends StatelessWidget {
         body: KeyboardAware(
           child: SingleChildScrollView(
               child: Column(
-            children: const [
-              SizedBox(
+            children: [
+              const SizedBox(
                 height: AppSize.s12,
               ),
-              AdminChangePasswordFormView()
+              AdminChangePasswordFormView(
+                  oldPasswordController: oldPasswordController,
+                  oldPasswordFocusNode: oldPasswordFocusNode,
+                  newPasswordController: newPasswordController,
+                  newPasswordFocusNode: newPasswordFocusNode,
+                  confirmPasswordController: confirmPasswordController,
+                  confirmPasswordFocusNode: confirmPasswordFocusNode),
             ],
           )),
         ),
@@ -42,7 +59,22 @@ class AdminChangePasswordView extends StatelessWidget {
 
 class AdminChangePasswordFormView
     extends ViewModelWidget<AdminChangePasswordViewModel> {
-  const AdminChangePasswordFormView({Key? key}) : super(key: key);
+  const AdminChangePasswordFormView(
+      {Key? key,
+      required this.oldPasswordController,
+      required this.newPasswordController,
+      required this.confirmPasswordController,
+      required this.oldPasswordFocusNode,
+      required this.newPasswordFocusNode,
+      required this.confirmPasswordFocusNode})
+      : super(key: key);
+
+  final TextEditingController oldPasswordController;
+  final TextEditingController newPasswordController;
+  final TextEditingController confirmPasswordController;
+  final FocusNode oldPasswordFocusNode;
+  final FocusNode newPasswordFocusNode;
+  final FocusNode confirmPasswordFocusNode;
 
   @override
   Widget build(BuildContext context, AdminChangePasswordViewModel model) {
@@ -64,7 +96,8 @@ class AdminChangePasswordFormView
                   labelStyle: getBoldStyle(
                       color: ColorManager.kDarkCharcoal,
                       fontSize: FontSize.s16),
-                  controller: model.oldPasswordController,
+                  controller: oldPasswordController,
+                  focusnode: oldPasswordFocusNode,
                 ),
                 const SizedBox(height: AppSize.s16),
                 InputField(
@@ -74,7 +107,8 @@ class AdminChangePasswordFormView
                   labelStyle: getBoldStyle(
                       color: ColorManager.kDarkCharcoal,
                       fontSize: FontSize.s16),
-                  controller: model.newPasswordController,
+                  controller: newPasswordController,
+                  focusnode: newPasswordFocusNode,
                 ),
                 const SizedBox(height: AppSize.s16),
                 InputField(
@@ -84,7 +118,8 @@ class AdminChangePasswordFormView
                   labelStyle: getBoldStyle(
                       color: ColorManager.kDarkCharcoal,
                       fontSize: FontSize.s16),
-                  controller: model.confirmPasswordController,
+                  controller: confirmPasswordController,
+                  focusnode: confirmPasswordFocusNode,
                 ),
                 const SizedBox(height: AppSize.s32),
                 if (model.hasErrorForKey(ADMIN_CHANGE_PASSWORD_TASK))
@@ -99,7 +134,7 @@ class AdminChangePasswordFormView
               ],
             ),
             PosButton(
-              onPressed: model.changePassword,
+              onPressed: model.isFormValid ? model.changePassword : () {},
               title: AppString.changePasswordText,
               // buttonBgColor: ColorManager.kLightGreen1,
               // buttonTextColor: ColorManager.kDarkCharcoal,
@@ -111,6 +146,7 @@ class AdminChangePasswordFormView
               ),
               borderRadius: AppSize.s8,
               busy: model.isBusy,
+              disabled: !model.isFormValid,
             ),
             // const SizedBox(height: AppSize.s4),
           ],

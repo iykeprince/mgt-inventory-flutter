@@ -103,6 +103,7 @@ class AppString {
   static const String privacyPolicyText = "Privacy Policy.";
   static const String verifyCodeText = "Verify Code";
   static const String changeEmailAddressText = "Change email address";
+  static const String resendOTPText = "Resend OTP";
   static const String successEmailVerficationText =
       "Email Verified Successfully!";
   static const String successEmailVerficationCaption =

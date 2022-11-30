@@ -9,6 +9,7 @@ import '../../../../app/app.locator.dart';
 import '../../../../enums/dialog_type.dart';
 import '../../../../models/branch.model.dart';
 import '../../../../services/admin.service.dart';
+import '../../../../utils/http_exception.dart';
 
 class AdminBranchDetailViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
@@ -54,7 +55,7 @@ class AdminBranchDetailViewModel extends BaseViewModel {
         textColor: Colors.white,
         fontSize: 16.0,
       );
-      throw Exception(e.response!.data);
+      throw HttpException(e.response!.data["message"]);
     } finally {
       setBusy(false);
 

@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pos_mobile_app/app/app.locator.dart';
 import 'package:pos_mobile_ui_package/utils/colors.dart';
 import 'package:stacked/stacked.dart';
@@ -15,6 +19,7 @@ import '../../../../models/user.model.dart';
 import '../../../../services/admin.service.dart';
 import '../../../../services/authentication.service.dart';
 import '../../../../services/merchant.service.dart';
+import '../../../../utils/http_exception.dart';
 
 const String UPDATE_ADMIN_PROFILE_TASK_OBJECT =
     'UPDATE_ADMIN_PROFILE_TASK_OBJECT';
@@ -23,6 +28,12 @@ class AdminEditProfileViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _authService = locator<AuthenticationService>();
   final _adminService = locator<AdminService>();
+  final _dialogService = locator<DialogService>();
+
+  final storageRef = FirebaseStorage.instance.ref();
+  final ImagePicker _picker = ImagePicker();
+  File? _selectedFile;
+  File? get selectedFile => _selectedFile;
 
   bool _editProfile = false;
 
@@ -54,16 +65,30 @@ class AdminEditProfileViewModel extends BaseViewModel {
   }
 
   Future runUpdateAdmin() async {
+    setBusy(true);
+
+    File file = File(_selectedFile!.path);
+    String ext = file.path.split('.').last;
+    String filename = '${user!.id}.$ext';
+    print('filename: $filename');
+
+    String? imgUrl;
+    final ref = storageRef.child("profiles/$filename");
+    var task = await ref.putFile(_selectedFile!);
+    if (task.state == TaskState.success) {
+      imgUrl = await ref.getDownloadURL();
+    }
+
     var formData = {
       "businessName": businessName ?? admin?.businessName,
       "email": email ?? admin?.user?.email,
       "contactPhone": contactPhone ?? admin?.contactPhone,
       "homeAddress": address ?? admin?.address,
+      'imgUrl': imgUrl ?? admin?.imgUrl,
       // "branchId": merchant!.branchId
     };
 
     print(formData);
-    setBusy(true);
     try {
       var response = await _adminService.updateAdmin(formData);
       Fluttertoast.showToast(
@@ -78,10 +103,27 @@ class AdminEditProfileViewModel extends BaseViewModel {
       return response;
     } on DioError catch (error) {
       print(error.response?.data["message"]);
-      throw Exception(error.response?.data["message"]);
+      throw HttpException(error.response?.data["message"]);
     } finally {
       setBusy(false);
       _editProfile = false;
+    }
+  }
+
+  handleImageSelect() async {
+    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image == null) return;
+
+    var response = await _dialogService.showConfirmationDialog(
+      // Which builder you'd like to call that was assigned in the builders function above.
+      title: 'Profile Image',
+      description:
+          'Do you really want to proceed? If you proceed with this operation, you can always change it.',
+      confirmationTitle: 'Yes',
+      cancelTitle: 'No',
+    );
+    if (response!.confirmed) {
+      _selectedFile = File(image.path);
     }
   }
 

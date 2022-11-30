@@ -9,6 +9,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../../../services/authentication.service.dart';
+import '../../../utils/http_exception.dart';
 
 const String FULLNAME_VALIDATOR = 'BUSINESS_NAME_VALIDATOR';
 const String EMAIL_VALIDATOR = 'EMAIL_VALIDATOR';
@@ -137,7 +138,7 @@ class CompeleteMerchantRegisterModel extends BaseViewModel {
         textColor: Colors.white,
         fontSize: 16.0,
       );
-      throw Exception(error.response?.data["message"]);
+      throw HttpException(error.response?.data["message"]);
     } finally {
       setBusy(false);
     }

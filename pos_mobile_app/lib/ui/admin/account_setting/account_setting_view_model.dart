@@ -105,7 +105,7 @@ class AccountSettingViewModel extends BaseViewModel {
         //update the admin profile
 
       } on FirebaseException catch (e) {
-        throw Exception('Error: ${e.message}');
+        throw HttpException('Error: ${e.message}');
       } finally {
         setBusy(false);
         notifyListeners();

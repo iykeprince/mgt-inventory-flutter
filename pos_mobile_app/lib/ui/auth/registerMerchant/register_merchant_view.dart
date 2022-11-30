@@ -120,11 +120,12 @@ class RegisterMerchantFormView
                             ),
                           ),
                           TextSpan(
-                              text: AppString.haveReadText,
-                              style: getRegularStyle(
-                                color: ColorManager.kTurquoiseDarkColor,
-                                fontSize: FontSize.s14,
-                              )),
+                            text: AppString.haveReadText,
+                            style: getRegularStyle(
+                              color: ColorManager.kTurquoiseDarkColor,
+                              fontSize: FontSize.s14,
+                            ),
+                          ),
                           TextSpan(
                               text: AppString.privacyPolicyText,
                               style: getMediumStyle(

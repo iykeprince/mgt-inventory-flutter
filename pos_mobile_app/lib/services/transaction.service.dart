@@ -53,14 +53,14 @@ class TransactionService with ReactiveServiceMixin {
       url += '&end=${end.toIso8601String()}';
     }
     if (branchId != null) {
-      url += 'branchId=$branchId';
+      url += '&branchId=$branchId';
     }
 
     print('new url: $url');
 
     try {
       var response = await dioClient.get(url);
-      print('response data transactions: ${response.data}');
+
       List<Transaction> transactions = (response.data as List<dynamic>)
           .map((x) => Transaction.fromJson(x))
           .toList();

@@ -4,5 +4,7 @@ enum BottomSheetType {
   createLogs,
   createMerchant,
   feedbackSurvey,
-  accountData
+  accountData,
+
+  addBranch
 }

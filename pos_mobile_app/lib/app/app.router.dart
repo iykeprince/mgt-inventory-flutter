@@ -5,72 +5,70 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i35;
+import 'package:flutter/material.dart' as _i34;
 import 'package:flutter/material.dart';
-import 'package:pos_mobile_app/models/branch.model.dart' as _i37;
-import 'package:pos_mobile_app/models/merchant.model.dart' as _i36;
+import 'package:pos_mobile_app/models/branch.model.dart' as _i36;
+import 'package:pos_mobile_app/models/merchant.model.dart' as _i35;
 import 'package:pos_mobile_app/ui/admin/account_setting/account_setting_view.dart'
-    as _i16;
+    as _i15;
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_branch_detail/admin_branch_detail_view.dart'
-    as _i25;
-import 'package:pos_mobile_app/ui/admin/account_setting/admin_change_password/admin_change_password_view.dart'
-    as _i20;
-import 'package:pos_mobile_app/ui/admin/account_setting/admin_delete_account/admin_delete_account_view.dart'
-    as _i27;
-import 'package:pos_mobile_app/ui/admin/account_setting/admin_edit_profile/admin_edit_profile_view.dart'
-    as _i17;
-import 'package:pos_mobile_app/ui/admin/account_setting/admin_howItWorks/admin_how_it_works_view.dart'
-    as _i21;
-import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_branch/admin_manage_branch_view.dart'
     as _i24;
-import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_merchant_account/admin_manage_merchant_account_view.dart'
-    as _i18;
-import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_report_setting/admin_manage_report_setting_view.dart'
-    as _i26;
-import 'package:pos_mobile_app/ui/admin/account_setting/admin_merchant_detail/admin_merchant_detail_view.dart'
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_change_password/admin_change_password_view.dart'
     as _i19;
-import 'package:pos_mobile_app/ui/admin/admin_home_view.dart' as _i15;
-import 'package:pos_mobile_app/ui/admin/dashboard/add_branch/add_branch_view.dart'
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_delete_account/admin_delete_account_view.dart'
+    as _i26;
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_edit_profile/admin_edit_profile_view.dart'
+    as _i16;
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_howItWorks/admin_how_it_works_view.dart'
+    as _i20;
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_branch/admin_manage_branch_view.dart'
     as _i23;
-import 'package:pos_mobile_app/ui/admin/dashboard/admin_transaction/admin_transaction_view.dart'
-    as _i28;
-import 'package:pos_mobile_app/ui/admin/dashboard/create_merchant_account/create_merchant_account_view.dart'
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_merchant_account/admin_manage_merchant_account_view.dart'
+    as _i17;
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_report_setting/admin_manage_report_setting_view.dart'
+    as _i25;
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_merchant_detail/admin_merchant_detail_view.dart'
+    as _i18;
+import 'package:pos_mobile_app/ui/admin/admin_home_view.dart' as _i14;
+import 'package:pos_mobile_app/ui/admin/dashboard/add_branch/add_branch_view.dart'
     as _i22;
+import 'package:pos_mobile_app/ui/admin/dashboard/admin_transaction/admin_transaction_view.dart'
+    as _i27;
+import 'package:pos_mobile_app/ui/admin/dashboard/create_merchant_account/create_merchant_account_view.dart'
+    as _i21;
 import 'package:pos_mobile_app/ui/auth/auth_view.dart' as _i4;
 import 'package:pos_mobile_app/ui/auth/compeleteMerchantRegistration/compelete_merchant_register.dart'
-    as _i14;
+    as _i13;
 import 'package:pos_mobile_app/ui/auth/createAccountSuccess/create_account_success_view.dart'
-    as _i11;
-import 'package:pos_mobile_app/ui/auth/createAdmin/create_admin_view.dart'
-    as _i6;
-import 'package:pos_mobile_app/ui/auth/createAdminBusiness/create_admin_business.dart'
     as _i10;
+import 'package:pos_mobile_app/ui/auth/createAdminBusiness/create_admin_business.dart'
+    as _i9;
 import 'package:pos_mobile_app/ui/auth/login/login_view.dart' as _i5;
 import 'package:pos_mobile_app/ui/auth/registerMerchant/register_merchant_view.dart'
-    as _i7;
+    as _i6;
 import 'package:pos_mobile_app/ui/auth/verifyAdmin/verify_admin_view.dart'
-    as _i8;
+    as _i7;
 import 'package:pos_mobile_app/ui/auth/verifyAdminSuccess/verify_admin_success_view.dart'
-    as _i9;
+    as _i8;
 import 'package:pos_mobile_app/ui/auth/verifyMerchant/verify_merchant_view.dart'
-    as _i12;
+    as _i11;
 import 'package:pos_mobile_app/ui/auth/verifyMerchantSuccess/verify_merchant_success_view.dart'
-    as _i13;
+    as _i12;
 import 'package:pos_mobile_app/ui/merchant/dashboard/create_logs/new_expense/log_new_expense_view.dart'
-    as _i33;
-import 'package:pos_mobile_app/ui/merchant/dashboard/create_logs/new_transactions/log_new_transaction_view.dart'
-    as _i34;
-import 'package:pos_mobile_app/ui/merchant/merchant_home_view.dart' as _i29;
-import 'package:pos_mobile_app/ui/merchant/profile/changepassword/change_password_view.dart'
     as _i32;
-import 'package:pos_mobile_app/ui/merchant/profile/editprofile/edit_profile_view.dart'
-    as _i30;
-import 'package:pos_mobile_app/ui/merchant/profile/howItWorks/how_it_works_view.dart'
+import 'package:pos_mobile_app/ui/merchant/dashboard/create_logs/new_transactions/log_new_transaction_view.dart'
+    as _i33;
+import 'package:pos_mobile_app/ui/merchant/merchant_home_view.dart' as _i28;
+import 'package:pos_mobile_app/ui/merchant/profile/changepassword/change_password_view.dart'
     as _i31;
+import 'package:pos_mobile_app/ui/merchant/profile/editprofile/edit_profile_view.dart'
+    as _i29;
+import 'package:pos_mobile_app/ui/merchant/profile/howItWorks/how_it_works_view.dart'
+    as _i30;
 import 'package:pos_mobile_app/ui/onboarding/onboarding_view.dart' as _i3;
 import 'package:pos_mobile_app/ui/splash/splash_view.dart' as _i2;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i38;
+import 'package:stacked_services/stacked_services.dart' as _i37;
 
 class Routes {
   static const splashView = '/';
@@ -80,8 +78,6 @@ class Routes {
   static const authView = '/auth-view';
 
   static const loginView = '/login-view';
-
-  static const createAdminView = '/create-admin-view';
 
   static const registerMerchantView = '/register-merchant-view';
 
@@ -146,7 +142,6 @@ class Routes {
     onboardView,
     authView,
     loginView,
-    createAdminView,
     registerMerchantView,
     verifyAdminView,
     verifyAdminSuccessView,
@@ -197,120 +192,116 @@ class StackedRouter extends _i1.RouterBase {
       page: _i5.LoginView,
     ),
     _i1.RouteDef(
-      Routes.createAdminView,
-      page: _i6.CreateAdminView,
-    ),
-    _i1.RouteDef(
       Routes.registerMerchantView,
-      page: _i7.RegisterMerchantView,
+      page: _i6.RegisterMerchantView,
     ),
     _i1.RouteDef(
       Routes.verifyAdminView,
-      page: _i8.VerifyAdminView,
+      page: _i7.VerifyAdminView,
     ),
     _i1.RouteDef(
       Routes.verifyAdminSuccessView,
-      page: _i9.VerifyAdminSuccessView,
+      page: _i8.VerifyAdminSuccessView,
     ),
     _i1.RouteDef(
       Routes.createAdminBusinessView,
-      page: _i10.CreateAdminBusinessView,
+      page: _i9.CreateAdminBusinessView,
     ),
     _i1.RouteDef(
       Routes.createAccountSuccessView,
-      page: _i11.CreateAccountSuccessView,
+      page: _i10.CreateAccountSuccessView,
     ),
     _i1.RouteDef(
       Routes.verifyMerchantView,
-      page: _i12.VerifyMerchantView,
+      page: _i11.VerifyMerchantView,
     ),
     _i1.RouteDef(
       Routes.verifyMerchantSuccessView,
-      page: _i13.VerifyMerchantSuccessView,
+      page: _i12.VerifyMerchantSuccessView,
     ),
     _i1.RouteDef(
       Routes.compeleteMerchantRegister,
-      page: _i14.CompeleteMerchantRegister,
+      page: _i13.CompeleteMerchantRegister,
     ),
     _i1.RouteDef(
       Routes.adminHomeView,
-      page: _i15.AdminHomeView,
+      page: _i14.AdminHomeView,
     ),
     _i1.RouteDef(
       Routes.accountSettingView,
-      page: _i16.AccountSettingView,
+      page: _i15.AccountSettingView,
     ),
     _i1.RouteDef(
       Routes.adminEditProfileView,
-      page: _i17.AdminEditProfileView,
+      page: _i16.AdminEditProfileView,
     ),
     _i1.RouteDef(
       Routes.adminManageMerchantAccountView,
-      page: _i18.AdminManageMerchantAccountView,
+      page: _i17.AdminManageMerchantAccountView,
     ),
     _i1.RouteDef(
       Routes.adminMerchantDetailView,
-      page: _i19.AdminMerchantDetailView,
+      page: _i18.AdminMerchantDetailView,
     ),
     _i1.RouteDef(
       Routes.adminChangePasswordView,
-      page: _i20.AdminChangePasswordView,
+      page: _i19.AdminChangePasswordView,
     ),
     _i1.RouteDef(
       Routes.adminHowItWorksView,
-      page: _i21.AdminHowItWorksView,
+      page: _i20.AdminHowItWorksView,
     ),
     _i1.RouteDef(
       Routes.createMerchantAccountView,
-      page: _i22.CreateMerchantAccountView,
+      page: _i21.CreateMerchantAccountView,
     ),
     _i1.RouteDef(
       Routes.addBranchView,
-      page: _i23.AddBranchView,
+      page: _i22.AddBranchView,
     ),
     _i1.RouteDef(
       Routes.adminManageBranchView,
-      page: _i24.AdminManageBranchView,
+      page: _i23.AdminManageBranchView,
     ),
     _i1.RouteDef(
       Routes.adminBranchDetailView,
-      page: _i25.AdminBranchDetailView,
+      page: _i24.AdminBranchDetailView,
     ),
     _i1.RouteDef(
       Routes.adminManageReportSettingView,
-      page: _i26.AdminManageReportSettingView,
+      page: _i25.AdminManageReportSettingView,
     ),
     _i1.RouteDef(
       Routes.adminDeleteAccountView,
-      page: _i27.AdminDeleteAccountView,
+      page: _i26.AdminDeleteAccountView,
     ),
     _i1.RouteDef(
       Routes.adminTransactionView,
-      page: _i28.AdminTransactionView,
+      page: _i27.AdminTransactionView,
     ),
     _i1.RouteDef(
       Routes.merchantHomeView,
-      page: _i29.MerchantHomeView,
+      page: _i28.MerchantHomeView,
     ),
     _i1.RouteDef(
       Routes.editProfileView,
-      page: _i30.EditProfileView,
+      page: _i29.EditProfileView,
     ),
     _i1.RouteDef(
       Routes.howItWorksView,
-      page: _i31.HowItWorksView,
+      page: _i30.HowItWorksView,
     ),
     _i1.RouteDef(
       Routes.changePasswordView,
-      page: _i32.ChangePasswordView,
+      page: _i31.ChangePasswordView,
     ),
     _i1.RouteDef(
       Routes.logNewExpenseView,
-      page: _i33.LogNewExpenseView,
+      page: _i32.LogNewExpenseView,
     ),
     _i1.RouteDef(
       Routes.logNewTransactionView,
-      page: _i34.LogNewTransactionView,
+      page: _i33.LogNewTransactionView,
     ),
   ];
 
@@ -337,203 +328,206 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i5.LoginView: (data) {
+      final args = data.getArgs<LoginViewArguments>(
+        orElse: () => const LoginViewArguments(),
+      );
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i5.LoginView(),
+        builder: (context) => _i5.LoginView(key: args.key),
         settings: data,
       );
     },
-    _i6.CreateAdminView: (data) {
+    _i6.RegisterMerchantView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i6.CreateAdminView(),
+        builder: (context) => const _i6.RegisterMerchantView(),
         settings: data,
       );
     },
-    _i7.RegisterMerchantView: (data) {
-      return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i7.RegisterMerchantView(),
-        settings: data,
-      );
-    },
-    _i8.VerifyAdminView: (data) {
+    _i7.VerifyAdminView: (data) {
       final args = data.getArgs<VerifyAdminViewArguments>(nullOk: false);
       return _i1.buildAdaptivePageRoute<dynamic>(
         builder: (context) =>
-            _i8.VerifyAdminView(key: args.key, email: args.email),
+            _i7.VerifyAdminView(key: args.key, email: args.email),
         settings: data,
       );
     },
-    _i9.VerifyAdminSuccessView: (data) {
+    _i8.VerifyAdminSuccessView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i9.VerifyAdminSuccessView(),
+        builder: (context) => const _i8.VerifyAdminSuccessView(),
         settings: data,
       );
     },
-    _i10.CreateAdminBusinessView: (data) {
+    _i9.CreateAdminBusinessView: (data) {
+      final args = data.getArgs<CreateAdminBusinessViewArguments>(
+        orElse: () => const CreateAdminBusinessViewArguments(),
+      );
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i10.CreateAdminBusinessView(),
+        builder: (context) => _i9.CreateAdminBusinessView(key: args.key),
         settings: data,
       );
     },
-    _i11.CreateAccountSuccessView: (data) {
+    _i10.CreateAccountSuccessView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i11.CreateAccountSuccessView(),
+        builder: (context) => const _i10.CreateAccountSuccessView(),
         settings: data,
       );
     },
-    _i12.VerifyMerchantView: (data) {
+    _i11.VerifyMerchantView: (data) {
       final args = data.getArgs<VerifyMerchantViewArguments>(nullOk: false);
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => _i12.VerifyMerchantView(
+        builder: (context) => _i11.VerifyMerchantView(
             key: args.key, emailAddress: args.emailAddress),
         settings: data,
       );
     },
-    _i13.VerifyMerchantSuccessView: (data) {
+    _i12.VerifyMerchantSuccessView: (data) {
       final args =
           data.getArgs<VerifyMerchantSuccessViewArguments>(nullOk: false);
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => _i13.VerifyMerchantSuccessView(
+        builder: (context) => _i12.VerifyMerchantSuccessView(
             key: args.key, emailAddress: args.emailAddress),
         settings: data,
       );
     },
-    _i14.CompeleteMerchantRegister: (data) {
+    _i13.CompeleteMerchantRegister: (data) {
       final args =
           data.getArgs<CompeleteMerchantRegisterArguments>(nullOk: false);
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => _i14.CompeleteMerchantRegister(
+        builder: (context) => _i13.CompeleteMerchantRegister(
             key: args.key, emailAddress: args.emailAddress),
         settings: data,
       );
     },
-    _i15.AdminHomeView: (data) {
+    _i14.AdminHomeView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i15.AdminHomeView(),
+        builder: (context) => const _i14.AdminHomeView(),
         settings: data,
       );
     },
-    _i16.AccountSettingView: (data) {
+    _i15.AccountSettingView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i16.AccountSettingView(),
+        builder: (context) => const _i15.AccountSettingView(),
         settings: data,
       );
     },
-    _i17.AdminEditProfileView: (data) {
+    _i16.AdminEditProfileView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i17.AdminEditProfileView(),
+        builder: (context) => const _i16.AdminEditProfileView(),
         settings: data,
       );
     },
-    _i18.AdminManageMerchantAccountView: (data) {
+    _i17.AdminManageMerchantAccountView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i18.AdminManageMerchantAccountView(),
+        builder: (context) => const _i17.AdminManageMerchantAccountView(),
         settings: data,
       );
     },
-    _i19.AdminMerchantDetailView: (data) {
+    _i18.AdminMerchantDetailView: (data) {
       final args =
           data.getArgs<AdminMerchantDetailViewArguments>(nullOk: false);
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => _i19.AdminMerchantDetailView(
+        builder: (context) => _i18.AdminMerchantDetailView(
             key: args.key, merchant: args.merchant),
         settings: data,
       );
     },
-    _i20.AdminChangePasswordView: (data) {
+    _i19.AdminChangePasswordView: (data) {
+      final args = data.getArgs<AdminChangePasswordViewArguments>(
+        orElse: () => const AdminChangePasswordViewArguments(),
+      );
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i20.AdminChangePasswordView(),
+        builder: (context) => _i19.AdminChangePasswordView(key: args.key),
         settings: data,
       );
     },
-    _i21.AdminHowItWorksView: (data) {
+    _i20.AdminHowItWorksView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i21.AdminHowItWorksView(),
+        builder: (context) => const _i20.AdminHowItWorksView(),
         settings: data,
       );
     },
-    _i22.CreateMerchantAccountView: (data) {
+    _i21.CreateMerchantAccountView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i22.CreateMerchantAccountView(),
+        builder: (context) => const _i21.CreateMerchantAccountView(),
         settings: data,
       );
     },
-    _i23.AddBranchView: (data) {
+    _i22.AddBranchView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i23.AddBranchView(),
+        builder: (context) => const _i22.AddBranchView(),
         settings: data,
       );
     },
-    _i24.AdminManageBranchView: (data) {
+    _i23.AdminManageBranchView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i24.AdminManageBranchView(),
+        builder: (context) => const _i23.AdminManageBranchView(),
         settings: data,
       );
     },
-    _i25.AdminBranchDetailView: (data) {
+    _i24.AdminBranchDetailView: (data) {
       final args = data.getArgs<AdminBranchDetailViewArguments>(nullOk: false);
       return _i1.buildAdaptivePageRoute<dynamic>(
         builder: (context) =>
-            _i25.AdminBranchDetailView(key: args.key, branch: args.branch),
+            _i24.AdminBranchDetailView(key: args.key, branch: args.branch),
         settings: data,
       );
     },
-    _i26.AdminManageReportSettingView: (data) {
+    _i25.AdminManageReportSettingView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i26.AdminManageReportSettingView(),
+        builder: (context) => const _i25.AdminManageReportSettingView(),
         settings: data,
       );
     },
-    _i27.AdminDeleteAccountView: (data) {
+    _i26.AdminDeleteAccountView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i27.AdminDeleteAccountView(),
+        builder: (context) => const _i26.AdminDeleteAccountView(),
         settings: data,
       );
     },
-    _i28.AdminTransactionView: (data) {
+    _i27.AdminTransactionView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i28.AdminTransactionView(),
+        builder: (context) => const _i27.AdminTransactionView(),
         settings: data,
       );
     },
-    _i29.MerchantHomeView: (data) {
+    _i28.MerchantHomeView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i29.MerchantHomeView(),
+        builder: (context) => const _i28.MerchantHomeView(),
         settings: data,
       );
     },
-    _i30.EditProfileView: (data) {
+    _i29.EditProfileView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i30.EditProfileView(),
+        builder: (context) => const _i29.EditProfileView(),
         settings: data,
       );
     },
-    _i31.HowItWorksView: (data) {
+    _i30.HowItWorksView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i31.HowItWorksView(),
+        builder: (context) => const _i30.HowItWorksView(),
         settings: data,
       );
     },
-    _i32.ChangePasswordView: (data) {
+    _i31.ChangePasswordView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i32.ChangePasswordView(),
+        builder: (context) => const _i31.ChangePasswordView(),
         settings: data,
       );
     },
-    _i33.LogNewExpenseView: (data) {
+    _i32.LogNewExpenseView: (data) {
       final args = data.getArgs<LogNewExpenseViewArguments>(
         orElse: () => const LogNewExpenseViewArguments(),
       );
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => _i33.LogNewExpenseView(key: args.key),
+        builder: (context) => _i32.LogNewExpenseView(key: args.key),
         settings: data,
       );
     },
-    _i34.LogNewTransactionView: (data) {
+    _i33.LogNewTransactionView: (data) {
       final args = data.getArgs<LogNewTransactionViewArguments>(
         orElse: () => const LogNewTransactionViewArguments(),
       );
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => _i34.LogNewTransactionView(key: args.key),
+        builder: (context) => _i33.LogNewTransactionView(key: args.key),
         settings: data,
       );
     },
@@ -548,7 +542,13 @@ class StackedRouter extends _i1.RouterBase {
 class OnboardViewArguments {
   const OnboardViewArguments({this.key});
 
-  final _i35.Key? key;
+  final _i34.Key? key;
+}
+
+class LoginViewArguments {
+  const LoginViewArguments({this.key});
+
+  final _i34.Key? key;
 }
 
 class VerifyAdminViewArguments {
@@ -557,9 +557,15 @@ class VerifyAdminViewArguments {
     required this.email,
   });
 
-  final _i35.Key? key;
+  final _i34.Key? key;
 
   final String email;
+}
+
+class CreateAdminBusinessViewArguments {
+  const CreateAdminBusinessViewArguments({this.key});
+
+  final _i34.Key? key;
 }
 
 class VerifyMerchantViewArguments {
@@ -568,7 +574,7 @@ class VerifyMerchantViewArguments {
     required this.emailAddress,
   });
 
-  final _i35.Key? key;
+  final _i34.Key? key;
 
   final String emailAddress;
 }
@@ -579,7 +585,7 @@ class VerifyMerchantSuccessViewArguments {
     required this.emailAddress,
   });
 
-  final _i35.Key? key;
+  final _i34.Key? key;
 
   final String emailAddress;
 }
@@ -590,7 +596,7 @@ class CompeleteMerchantRegisterArguments {
     required this.emailAddress,
   });
 
-  final _i35.Key? key;
+  final _i34.Key? key;
 
   final String emailAddress;
 }
@@ -601,9 +607,15 @@ class AdminMerchantDetailViewArguments {
     required this.merchant,
   });
 
-  final _i35.Key? key;
+  final _i34.Key? key;
 
-  final _i36.Merchant merchant;
+  final _i35.Merchant merchant;
+}
+
+class AdminChangePasswordViewArguments {
+  const AdminChangePasswordViewArguments({this.key});
+
+  final _i34.Key? key;
 }
 
 class AdminBranchDetailViewArguments {
@@ -612,24 +624,24 @@ class AdminBranchDetailViewArguments {
     required this.branch,
   });
 
-  final _i35.Key? key;
+  final _i34.Key? key;
 
-  final _i37.Branch branch;
+  final _i36.Branch branch;
 }
 
 class LogNewExpenseViewArguments {
   const LogNewExpenseViewArguments({this.key});
 
-  final _i35.Key? key;
+  final _i34.Key? key;
 }
 
 class LogNewTransactionViewArguments {
   const LogNewTransactionViewArguments({this.key});
 
-  final _i35.Key? key;
+  final _i34.Key? key;
 }
 
-extension NavigatorStateExtension on _i38.NavigationService {
+extension NavigatorStateExtension on _i37.NavigationService {
   Future<dynamic> navigateToSplashView([
     int? routerId,
     bool preventDuplicates = true,
@@ -645,7 +657,7 @@ extension NavigatorStateExtension on _i38.NavigationService {
   }
 
   Future<dynamic> navigateToOnboardView({
-    _i35.Key? key,
+    _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -674,28 +686,16 @@ extension NavigatorStateExtension on _i38.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToLoginView([
+  Future<dynamic> navigateToLoginView({
+    _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.loginView,
-        id: routerId,
-        preventDuplicates: preventDuplicates,
-        parameters: parameters,
-        transition: transition);
-  }
-
-  Future<dynamic> navigateToCreateAdminView([
-    int? routerId,
-    bool preventDuplicates = true,
-    Map<String, String>? parameters,
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
-  ]) async {
-    return navigateTo<dynamic>(Routes.createAdminView,
+        arguments: LoginViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -717,7 +717,7 @@ extension NavigatorStateExtension on _i38.NavigationService {
   }
 
   Future<dynamic> navigateToVerifyAdminView({
-    _i35.Key? key,
+    _i34.Key? key,
     required String email,
     int? routerId,
     bool preventDuplicates = true,
@@ -747,14 +747,16 @@ extension NavigatorStateExtension on _i38.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToCreateAdminBusinessView([
+  Future<dynamic> navigateToCreateAdminBusinessView({
+    _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.createAdminBusinessView,
+        arguments: CreateAdminBusinessViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -776,7 +778,7 @@ extension NavigatorStateExtension on _i38.NavigationService {
   }
 
   Future<dynamic> navigateToVerifyMerchantView({
-    _i35.Key? key,
+    _i34.Key? key,
     required String emailAddress,
     int? routerId,
     bool preventDuplicates = true,
@@ -794,7 +796,7 @@ extension NavigatorStateExtension on _i38.NavigationService {
   }
 
   Future<dynamic> navigateToVerifyMerchantSuccessView({
-    _i35.Key? key,
+    _i34.Key? key,
     required String emailAddress,
     int? routerId,
     bool preventDuplicates = true,
@@ -812,7 +814,7 @@ extension NavigatorStateExtension on _i38.NavigationService {
   }
 
   Future<dynamic> navigateToCompeleteMerchantRegister({
-    _i35.Key? key,
+    _i34.Key? key,
     required String emailAddress,
     int? routerId,
     bool preventDuplicates = true,
@@ -886,8 +888,8 @@ extension NavigatorStateExtension on _i38.NavigationService {
   }
 
   Future<dynamic> navigateToAdminMerchantDetailView({
-    _i35.Key? key,
-    required _i36.Merchant merchant,
+    _i34.Key? key,
+    required _i35.Merchant merchant,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -903,14 +905,16 @@ extension NavigatorStateExtension on _i38.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToAdminChangePasswordView([
+  Future<dynamic> navigateToAdminChangePasswordView({
+    _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.adminChangePasswordView,
+        arguments: AdminChangePasswordViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -974,8 +978,8 @@ extension NavigatorStateExtension on _i38.NavigationService {
   }
 
   Future<dynamic> navigateToAdminBranchDetailView({
-    _i35.Key? key,
-    required _i37.Branch branch,
+    _i34.Key? key,
+    required _i36.Branch branch,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1089,7 +1093,7 @@ extension NavigatorStateExtension on _i38.NavigationService {
   }
 
   Future<dynamic> navigateToLogNewExpenseView({
-    _i35.Key? key,
+    _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1105,7 +1109,7 @@ extension NavigatorStateExtension on _i38.NavigationService {
   }
 
   Future<dynamic> navigateToLogNewTransactionView({
-    _i35.Key? key,
+    _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
