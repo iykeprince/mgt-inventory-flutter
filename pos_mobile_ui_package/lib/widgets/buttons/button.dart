@@ -28,6 +28,7 @@ class PosButton extends StatelessWidget {
   final BorderRadiusType borderRadiusType;
 
   final bool? disabled;
+  final Color? busyColor;
 
   PosButton({
     Key? key,
@@ -49,6 +50,7 @@ class PosButton extends StatelessWidget {
     this.buttonType = ButtonType.fill,
     this.borderRadiusType = BorderRadiusType.none,
     this.disabled = false,
+    this.busyColor,
   });
 
   Color getBackgroundColor() {
@@ -160,11 +162,11 @@ class PosButton extends StatelessWidget {
               ),
             if (busy) const SizedBox(width: AppSize.s20),
             if (busy)
-              const SizedBox(
+              SizedBox(
                 width: 15,
                 height: 15,
                 child: CircularProgressIndicator(
-                  color: ColorManager.kWhiteColor,
+                  color: busyColor ?? ColorManager.kWhiteColor,
                   strokeWidth: 2,
                 ),
               )

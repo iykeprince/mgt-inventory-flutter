@@ -40,7 +40,8 @@ class AdminEditProfileView extends StatelessWidget {
                 text: getInitials(model.admin?.businessName ?? ''),
                 isEdit: true,
                 color: ColorManager.kPrimaryColor,
-                onClicked: () {},
+                imgUrl: model.admin?.imgUrl,
+                onClicked: model.handleImageSelect,
               ),
               const SizedBox(
                 height: AppSize.s12,

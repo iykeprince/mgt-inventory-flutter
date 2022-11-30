@@ -6,14 +6,23 @@ import 'package:pos_mobile_app/utils/colors.dart';
 import 'package:pos_mobile_app/utils/helpers.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 
-class LoginView extends StatelessWidget {
-  const LoginView({Key? key}) : super(key: key);
+import 'login_view.form.dart';
+
+@FormView(fields: [
+  FormTextField(name: 'email'),
+  FormTextField(name: 'password'),
+])
+class LoginView extends StatelessWidget with $LoginView {
+  LoginView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginViewModel>.nonReactive(
       viewModelBuilder: () => LoginViewModel(),
+      onModelReady: (model) => listenToFormUpdated(model),
+      onDispose: (_) => disposeForm(),
       builder: (context, model, child) => Scaffold(
         // resizeToAvoidBottomInset: false,
         body: GestureDetector(
@@ -54,7 +63,12 @@ class LoginView extends StatelessWidget {
                     ],
                   ),
                 ),
-                const LoginFormView()
+                LoginFormView(
+                  emailController: emailController,
+                  emailFocusNode: emailFocusNode,
+                  passwordController: passwordController,
+                  passwordFocusNode: passwordFocusNode,
+                ),
               ],
             ),
           ),
@@ -65,7 +79,18 @@ class LoginView extends StatelessWidget {
 }
 
 class LoginFormView extends ViewModelWidget<LoginViewModel> {
-  const LoginFormView({Key? key}) : super(key: key);
+  const LoginFormView({
+    Key? key,
+    required this.emailController,
+    required this.passwordController,
+    required this.emailFocusNode,
+    required this.passwordFocusNode,
+  }) : super(key: key);
+
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  final FocusNode emailFocusNode;
+  final FocusNode passwordFocusNode;
 
   @override
   Widget build(BuildContext context, LoginViewModel model) {
@@ -96,7 +121,8 @@ class LoginFormView extends ViewModelWidget<LoginViewModel> {
               label: AppString.usernameOrEmailAddress,
               hintText: AppString.emailAddressPlaceholder,
               border: InputBorder.none,
-              onChanged: model.setEmailAddress,
+              controller: emailController,
+              focusnode: emailFocusNode,
             ),
             if (model.hasErrorForKey(EMAIL_VALIDATOR))
               Alert.primary(text: AppString.emailValidatorText),
@@ -113,7 +139,8 @@ class LoginFormView extends ViewModelWidget<LoginViewModel> {
                         color: ColorManager.kSecondaryColor,
                         fontSize: FontSize.s14)),
               ),
-              onChanged: model.setPassword,
+              controller: passwordController,
+              focusnode: passwordFocusNode,
             ),
             if (model.hasErrorForKey(PASSWORD_VALIDATOR))
               Alert.primary(text: AppString.passwordValidatorText),
@@ -122,7 +149,7 @@ class LoginFormView extends ViewModelWidget<LoginViewModel> {
               Alert.primary(text: '${model.error(LOGIN_TASK_OBJECT)}'),
             const SizedBox(height: AppSize.s20),
             PosButton(
-              onPressed: () => model.login(),
+              onPressed: !model.isFormValid ? () => model.login() : () {},
               title: AppString.login,
               // buttonBgColor: ColorManager.kLightGreen1,
               // buttonTextColor: ColorManager.kDarkCharcoal,
@@ -134,6 +161,7 @@ class LoginFormView extends ViewModelWidget<LoginViewModel> {
               ),
               borderRadius: AppSize.s8,
               busy: model.isBusy,
+              disabled: !model.isFormValid,
             ),
             const SizedBox(height: AppSize.s20),
             PosButton(

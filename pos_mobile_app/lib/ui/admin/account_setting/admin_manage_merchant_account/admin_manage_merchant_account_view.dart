@@ -118,7 +118,7 @@ class MerchantAccountItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              '747',
+              '0',
               style: TextStyle(
                 fontSize: FontSize.s16,
                 fontWeight: FontWeightManager.bold,

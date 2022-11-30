@@ -24,7 +24,7 @@ class DeleteBranchDialog extends StatelessWidget {
             right: AppSize.s4,
             child: GestureDetector(
               onTap: () {
-                completer(DialogResponse(confirmed: true, data: 'CANCELLED'));
+                completer(DialogResponse(confirmed: false));
               },
               child: const Icon(
                 Icons.cancel_sharp,
@@ -80,7 +80,6 @@ class DeleteBranchDialog extends StatelessWidget {
                           completer(
                             DialogResponse(
                               confirmed: true,
-                              data: 'DELETE_BRANCH',
                             ),
                           );
                         },

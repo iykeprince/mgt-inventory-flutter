@@ -328,8 +328,11 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i5.LoginView: (data) {
+      final args = data.getArgs<LoginViewArguments>(
+        orElse: () => const LoginViewArguments(),
+      );
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i5.LoginView(),
+        builder: (context) => _i5.LoginView(key: args.key),
         settings: data,
       );
     },
@@ -354,8 +357,11 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i9.CreateAdminBusinessView: (data) {
+      final args = data.getArgs<CreateAdminBusinessViewArguments>(
+        orElse: () => const CreateAdminBusinessViewArguments(),
+      );
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i9.CreateAdminBusinessView(),
+        builder: (context) => _i9.CreateAdminBusinessView(key: args.key),
         settings: data,
       );
     },
@@ -425,8 +431,11 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i19.AdminChangePasswordView: (data) {
+      final args = data.getArgs<AdminChangePasswordViewArguments>(
+        orElse: () => const AdminChangePasswordViewArguments(),
+      );
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i19.AdminChangePasswordView(),
+        builder: (context) => _i19.AdminChangePasswordView(key: args.key),
         settings: data,
       );
     },
@@ -536,6 +545,12 @@ class OnboardViewArguments {
   final _i34.Key? key;
 }
 
+class LoginViewArguments {
+  const LoginViewArguments({this.key});
+
+  final _i34.Key? key;
+}
+
 class VerifyAdminViewArguments {
   const VerifyAdminViewArguments({
     this.key,
@@ -545,6 +560,12 @@ class VerifyAdminViewArguments {
   final _i34.Key? key;
 
   final String email;
+}
+
+class CreateAdminBusinessViewArguments {
+  const CreateAdminBusinessViewArguments({this.key});
+
+  final _i34.Key? key;
 }
 
 class VerifyMerchantViewArguments {
@@ -589,6 +610,12 @@ class AdminMerchantDetailViewArguments {
   final _i34.Key? key;
 
   final _i35.Merchant merchant;
+}
+
+class AdminChangePasswordViewArguments {
+  const AdminChangePasswordViewArguments({this.key});
+
+  final _i34.Key? key;
 }
 
 class AdminBranchDetailViewArguments {
@@ -659,14 +686,16 @@ extension NavigatorStateExtension on _i37.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToLoginView([
+  Future<dynamic> navigateToLoginView({
+    _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.loginView,
+        arguments: LoginViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -718,14 +747,16 @@ extension NavigatorStateExtension on _i37.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToCreateAdminBusinessView([
+  Future<dynamic> navigateToCreateAdminBusinessView({
+    _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.createAdminBusinessView,
+        arguments: CreateAdminBusinessViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -874,14 +905,16 @@ extension NavigatorStateExtension on _i37.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToAdminChangePasswordView([
+  Future<dynamic> navigateToAdminChangePasswordView({
+    _i34.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.adminChangePasswordView,
+        arguments: AdminChangePasswordViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

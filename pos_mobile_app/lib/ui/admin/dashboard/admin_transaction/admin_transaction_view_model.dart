@@ -13,7 +13,7 @@ class AdminTransactionViewModel extends BaseViewModel {
 
   String? _branchId;
   String? get branchId => _branchId;
-  List<Transaction>? get transactions => [];
+  List<Transaction>? get transactions => _transactionService.transactions;
 
   getTransactions() async {
     runBusyFuture(getTransactionsTask());
@@ -21,12 +21,20 @@ class AdminTransactionViewModel extends BaseViewModel {
 
   Future<List<Transaction>> getTransactionsTask() async {
     try {
+      setBusy(true);
       List<Transaction> transactions =
-          await _transactionService.getTransactions(branchId: branchId);
-      return [];
+          await _transactionService.getTransactions(
+        type: 'ALL',
+        page: 1,
+        pageSize: 30,
+      );
+      return transactions;
     } on DioError catch (error) {
       print(error.response!.data['message']);
       throw HttpException(error.response!.data['message']);
+    } finally {
+      setBusy(false);
+      notifyListeners();
     }
   }
 

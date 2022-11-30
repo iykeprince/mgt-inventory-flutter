@@ -8,6 +8,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:flutter/material.dart';
 
 import '../sheets/pos_bottom.sheet.dart';
+import '../sheets/sheet_add_branch/sheet_add_branch_view.dart';
 
 void setupBottomSheetUi() {
   final bottomSheetService = locator<BottomSheetService>();
@@ -23,8 +24,8 @@ void setupBottomSheetUi() {
         CreateMerchantBottomSheet(request: sheetRequest, completer: completer),
     BottomSheetType.feedbackSurvey: (context, sheetRequest, completer) =>
         FeedbackSurveyBottomSheet(request: sheetRequest, completer: completer),
-    // BottomSheetType.accountData: (context, sheetRequest, completer) =>
-    //     Accpimt(request: sheetRequest, completer: completer),
+    BottomSheetType.addBranch: (context, sheetRequest, completer) =>
+        SheetAddBranchBottomSheet(request: sheetRequest, completer: completer),
   };
 
   bottomSheetService.setCustomSheetBuilders(builders);

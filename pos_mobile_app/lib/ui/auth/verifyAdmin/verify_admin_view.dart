@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
+import 'package:flutter_countdown_timer/index.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pos_mobile_app/ui/auth/auth_view_model.dart';
 import 'package:pos_mobile_app/ui/auth/login/login_view_model.dart';
@@ -126,12 +128,38 @@ class VerifyAdminFormView extends ViewModelWidget<VerifyAdminViewModel> {
             const SizedBox(height: AppSize.s20),
             if (model.hasError) Alert.primary(text: '${model.modelError}'),
             if (model.hasError) const SizedBox(height: AppSize.s20),
-            PosButton(
-              onPressed: () {},
-              title: AppString.changeEmailAddressText,
-              buttonType: ButtonType.text,
-              buttonTextColor: ColorManager.kButtonTextNavyBlue,
-              busy: model.isBusy,
+            if (model.hasErrorForKey(OTP_REQUEST))
+              Alert.primary(text: '${model.error(OTP_REQUEST)}'),
+            if (model.hasErrorForKey(OTP_REQUEST))
+              const SizedBox(height: AppSize.s20),
+            Column(
+              children: [
+                PosButton(
+                  onPressed: model.goBack,
+                  title: AppString.changeEmailAddressText,
+                  buttonType: ButtonType.text,
+                  buttonTextColor: ColorManager.kButtonTextNavyBlue,
+                  busy: model.isBusy,
+                ),
+                Center(
+                  child: CountdownTimer(
+                    endTime: model.endTime,
+                    widgetBuilder: (_, CurrentRemainingTime? time) {
+                      if (time == null) {
+                        return PosButton(
+                          onPressed: model.requestOTP,
+                          title: AppString.resendOTPText,
+                          buttonType: ButtonType.text,
+                          buttonTextColor: ColorManager.kButtonTextNavyBlue,
+                          busy: model.busy(OTP_REQUEST),
+                          busyColor: ColorManager.kPrimaryColor,
+                        );
+                      }
+                      return Text('Retry.. ${time.min ?? 00}:${time.sec}');
+                    },
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: AppSize.s20),
           ],
