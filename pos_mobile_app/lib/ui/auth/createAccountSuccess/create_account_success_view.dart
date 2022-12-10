@@ -55,7 +55,7 @@ class CreateAccountSuccessView extends StatelessWidget {
                     height: AppSize.s20,
                   ),
                   PosButton(
-                    onPressed: () {},
+                    onPressed: viewModel.navigateToAddBranch,
                     title: AppString.addBranchDetailsText,
                     buttonBgColor: ColorManager.kLightGreen,
                     buttonTextColor: ColorManager.kDarkBlue,

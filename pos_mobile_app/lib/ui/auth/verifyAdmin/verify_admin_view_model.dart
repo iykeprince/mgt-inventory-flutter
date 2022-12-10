@@ -16,7 +16,7 @@ class VerifyAdminViewModel extends BaseViewModel {
   final _authenticationService = locator<AuthenticationService>();
   final _navigationService = locator<NavigationService>();
 
-  int? _endTime;
+  int? _endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 60;
   int? get endTime => _endTime;
 
   String? _otp;

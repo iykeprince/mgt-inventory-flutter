@@ -6,6 +6,8 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../app/app.locator.dart';
 import '../dialog/confirm_dialog.dart';
+import '../dialog/create_bank_account_dialog.dart';
+import '../dialog/create_pos_account_dialog.dart';
 import '../dialog/delete_merchant.dialog.dart';
 import '../enums/dialog_type.dart';
 import 'package:pos_mobile_app/dialog/switchBranch.dialog.dart';
@@ -24,6 +26,10 @@ void setupDialogUi() {
           dialogRequest: dialogRequest,
           onDialogTap: completer,
         ),
+    DialogType.CREATE_BANK_ACCOUNT: (context, sheetRequest, completer) =>
+        CreateBankAccountDialog(request: sheetRequest, completer: completer),
+    DialogType.CREATE_POS_ACCOUNT: (context, sheetRequest, completer) =>
+        CreatePosAccountDialog(request: sheetRequest, completer: completer),
   };
 
   dialogService.registerCustomDialogBuilders(builders);
