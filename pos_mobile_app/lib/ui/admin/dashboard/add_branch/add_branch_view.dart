@@ -33,11 +33,14 @@ class AddBranchView extends StatelessWidget {
                   height: AppSize.s12,
                 ),
                 Column(
-                  children: model.createBranchForm.map((branch) {
+                  children:
+                      List.generate(model.createBranchForm.length, (index) {
+                    Map<String, dynamic> branch = model.createBranchForm[index];
                     return AddBranchExpandableView(
                       data: branch,
+                      index: index,
                     );
-                  }).toList(),
+                  }),
                 ),
                 const SizedBox(height: AppSize.s20),
                 //add the
@@ -82,12 +85,16 @@ class AddBranchView extends StatelessWidget {
   }
 }
 
-class AddBranchExpandableView extends StatelessWidget {
-  const AddBranchExpandableView({Key? key, required this.data})
-      : super(key: key);
+class AddBranchExpandableView extends ViewModelWidget<AddBranchViewModel> {
+  const AddBranchExpandableView({
+    Key? key,
+    required this.data,
+    required this.index,
+  }) : super(key: key);
   final Map<String, dynamic> data;
+  final int index;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, AddBranchViewModel model) {
     return Column(
       children: [
         Container(
@@ -103,7 +110,7 @@ class AddBranchExpandableView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Branch ${data['idx']}',
+                'Branch ${1 + index}',
                 style: const TextStyle(
                   color: ColorManager.kPrimaryColor,
                   fontSize: AppSize.s16,
@@ -111,7 +118,7 @@ class AddBranchExpandableView extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () => model.removeBranch(index),
                 child: const Icon(
                   Icons.remove,
                   color: ColorManager.kPrimaryColor,
@@ -180,56 +187,56 @@ class _AddBranchFormViewState extends State<AddBranchFormView> {
               });
             },
             keyBoardType: TextInputType.number,
-            initialValue: '${widget.data?['numOfMerchants'] ?? 0}',
+            // initialValue: '${widget.data?['numOfMerchants']}',
           ),
           // Alert.primary(text: AppString.numberOfMerchantManagingThisBranchText),
-          const SizedBox(height: AppSize.s12),
-          InputField(
-            label: AppString.posNameText,
-            hintText: AppString.numOfBranchPlaceholder,
-            border: InputBorder.none,
-            onChanged: (value) {
-              setState(() {
-                widget.data!['posName'] = value;
-              });
-            },
-            initialValue: widget.data?['posName'] ?? '',
-            labelRightItem: GestureDetector(
-              onTap: () {},
-              child: const Text(
-                'Add New POS',
-                style: TextStyle(
-                  color: ColorManager.kButtonTextNavyBlue,
-                  fontSize: AppSize.s14,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
-          ),
-          // Alert.primary(text: AppString.posNameUsedInBranchText),
-          const SizedBox(height: AppSize.s12),
-          InputField(
-            label: AppString.bankAccountDetailText,
-            hintText: AppString.bankAccountDetailPlaceholderText,
-            border: InputBorder.none,
-            onChanged: (value) {
-              setState(() {
-                widget.data!['bankAccountDetail'] = value;
-              });
-            },
-            initialValue: widget.data?['bankAccountDetail'] ?? '',
-            labelRightItem: GestureDetector(
-              onTap: () {},
-              child: const Text(
-                'Add New',
-                style: TextStyle(
-                  color: ColorManager.kButtonTextNavyBlue,
-                  fontSize: AppSize.s14,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
-          ),
+          // const SizedBox(height: AppSize.s12),
+          // InputField(
+          //   label: AppString.posNameText,
+          //   hintText: AppString.numOfBranchPlaceholder,
+          //   border: InputBorder.none,
+          //   onChanged: (value) {
+          //     setState(() {
+          //       widget.data!['posName'] = value;
+          //     });
+          //   },
+          //   initialValue: widget.data?['posName'] ?? '',
+          //   labelRightItem: GestureDetector(
+          //     onTap: () {},
+          //     child: const Text(
+          //       'Add New POS',
+          //       style: TextStyle(
+          //         color: ColorManager.kButtonTextNavyBlue,
+          //         fontSize: AppSize.s14,
+          //         fontWeight: FontWeight.w400,
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // // Alert.primary(text: AppString.posNameUsedInBranchText),
+          // const SizedBox(height: AppSize.s12),
+          // InputField(
+          //   label: AppString.bankAccountDetailText,
+          //   hintText: AppString.bankAccountDetailPlaceholderText,
+          //   border: InputBorder.none,
+          //   onChanged: (value) {
+          //     setState(() {
+          //       widget.data!['bankAccountDetail'] = value;
+          //     });
+          //   },
+          //   initialValue: widget.data?['bankAccountDetail'] ?? '',
+          //   labelRightItem: GestureDetector(
+          //     onTap: () {},
+          //     child: const Text(
+          //       'Add New',
+          //       style: TextStyle(
+          //         color: ColorManager.kButtonTextNavyBlue,
+          //         fontSize: AppSize.s14,
+          //         fontWeight: FontWeight.w400,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           // Alert.primary(text: AppString.bankAccountRecommendedForPosText),
           const SizedBox(height: AppSize.s12),
         ],

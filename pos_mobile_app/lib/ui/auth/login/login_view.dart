@@ -149,7 +149,8 @@ class LoginFormView extends ViewModelWidget<LoginViewModel> {
               Alert.primary(text: '${model.error(LOGIN_TASK_OBJECT)}'),
             const SizedBox(height: AppSize.s20),
             PosButton(
-              onPressed: !model.isFormValid ? () => model.login() : () {},
+              // onPressed: !model.isFormValid ? model.login : (){ },
+              onPressed: model.login,
               title: AppString.login,
               // buttonBgColor: ColorManager.kLightGreen1,
               // buttonTextColor: ColorManager.kDarkCharcoal,

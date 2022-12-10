@@ -8,4 +8,6 @@ class CreateAccountSuccessViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
 
   navigateToHome() => _navigationService.navigateTo(Routes.adminHomeView);
+
+  navigateToAddBranch() => _navigationService.navigateTo(Routes.addBranchView);
 }

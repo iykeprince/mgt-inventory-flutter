@@ -13,13 +13,18 @@ import 'package:stacked/stacked.dart';
 import 'verify_admin_view_model.dart';
 
 class VerifyAdminView extends StatelessWidget {
-  const VerifyAdminView({Key? key, required this.email}) : super(key: key);
+  const VerifyAdminView({
+    Key? key,
+    required this.email,
+  }) : super(key: key);
   final String email;
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<VerifyAdminViewModel>.nonReactive(
       viewModelBuilder: () => VerifyAdminViewModel(),
-      onModelReady: (model) => model.setEmail(email),
+      onModelReady: (model) {
+        model.setEmail(email);
+      },
       builder: (context, model, child) => Scaffold(
         body: GestureDetector(
           onTap: () {

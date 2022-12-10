@@ -65,6 +65,7 @@ class AppString {
   static var deleteBranchText = "Delete Branch";
 
   static var editBranchDetail = 'Edit Branch Details';
+  static String updateBranchDetailText = "Update Branch Detail";
 
   static String deleteAccountInstructionText =
       "This action is immediate and cannot be undone. By clicking the “Delete My Account” button, you confirm that all your data and transactions should be deleted permanently from our database.";

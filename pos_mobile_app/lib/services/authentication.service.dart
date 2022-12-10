@@ -20,7 +20,7 @@ class AuthenticationService with ReactiveServiceMixin {
       _currentBaseUser,
       _currentMerchantUser,
       _currentAdminUser,
-      // _currentSuperAdminUser,
+      _initialNumberOfBranches
     ]);
   }
 
@@ -28,10 +28,16 @@ class AuthenticationService with ReactiveServiceMixin {
   final ReactiveValue<Merchant?> _currentMerchantUser =
       ReactiveValue<Merchant?>(null);
   final ReactiveValue<Admin?> _currentAdminUser = ReactiveValue<Admin?>(null);
+  final ReactiveValue<int> _initialNumberOfBranches = ReactiveValue<int>(0);
 
   User? get currentUser => _currentBaseUser.value;
   Merchant? get currentMerchantUser => _currentMerchantUser.value;
   Admin? get currentAdminUser => _currentAdminUser.value;
+  int get initialNumberOfBranches => _initialNumberOfBranches.value;
+
+  void setInitialNumberOfBranches(int value) {
+    _initialNumberOfBranches.value = value;
+  }
 
   Future<Auth> login(Map<String, dynamic> formData) async {
     final preferences = await SharedPreferences.getInstance();
@@ -52,6 +58,7 @@ class AuthenticationService with ReactiveServiceMixin {
       '/auth/signup-with-email',
       data: formData,
     );
+
     return response.data;
   }
 

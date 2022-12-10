@@ -88,13 +88,16 @@ class CreateAdminBusinessViewModel extends FormViewModel {
     setBusy(true);
 
     var formData = {
-      "email": emailValue!,
+      "email": emailAddressValue,
       "businessName": businessNameValue,
       "numOfBranches": int.parse(numberOfBranchesValue!),
-      "password": passwordValue!
+      "password": userPasswordValue
     };
+
     try {
       var response = await _authenticationService.register(formData);
+      _authenticationService
+          .setInitialNumberOfBranches(int.parse(numberOfBranchesValue!));
       _navigationService.navigateTo(
         Routes.verifyAdminView,
         arguments: VerifyAdminViewArguments(email: emailAddressValue!),

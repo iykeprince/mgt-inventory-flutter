@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:pos_mobile_app/models/account.model.dart';
 import 'package:pos_mobile_app/models/admin-stat.model.dart';
 import 'package:pos_mobile_app/models/admin.model.dart';
 import 'package:stacked/stacked.dart';
 
 import '../app/app.locator.dart';
 import '../client/dio_client.dart';
-import '../models/account.model.dart';
+import '../models/balance.model.dart';
 import '../models/branch.model.dart';
 import '../models/merchant.model.dart';
 
@@ -13,19 +14,28 @@ class AdminService with ReactiveServiceMixin {
   Dio dioClient = locator<DioClient>().dio;
 
   AdminService() {
-    listenToReactiveValues([_branches, _merchants, _stat, _accountBalances]);
+    listenToReactiveValues([
+      _branches,
+      _merchants,
+      _stat,
+      _accountBalances,
+      _accounts,
+    ]);
   }
   final ReactiveValue<List<Branch>?> _branches =
       ReactiveValue<List<Branch>?>([]);
   final ReactiveValue<List<Merchant>> _merchants =
       ReactiveValue<List<Merchant>>([]);
-  final ReactiveValue<List<Account>> _accountBalances =
+  final ReactiveValue<List<Balance>> _accountBalances =
+      ReactiveValue<List<Balance>>([]);
+  final ReactiveValue<List<Account>> _accounts =
       ReactiveValue<List<Account>>([]);
   final ReactiveValue<AdminStat?> _stat = ReactiveValue<AdminStat?>(null);
 
   List<Branch>? get branches => _branches.value;
   List<Merchant> get merchants => _merchants.value;
-  List<Account> get accountBalances => _accountBalances.value;
+  List<Balance> get accountBalances => _accountBalances.value;
+  List<Account> get accounts => _accounts.value;
   AdminStat? get stat => _stat.value;
 
   Future<AdminStat> getStat(String? id) async {
@@ -94,10 +104,27 @@ class AdminService with ReactiveServiceMixin {
     return merchant;
   }
 
-  Future<List<Account>> getAccountBalances() async {
-    var response = await dioClient.get('/admin/balances');
+  Future<List<Account>> getAccounts() async {
+    var response = await dioClient.get('/admin/accounts');
     List<Account> accounts = (response.data as List<dynamic>)
         .map((x) => Account.fromJson(x))
+        .toList();
+    _accounts.value = accounts;
+    return accounts;
+  }
+
+  Future<Account> createAccount(Map formData) async {
+    var response = await dioClient.post('/admin/add-account', data: formData);
+
+    Account account = Account.fromJson(response.data);
+    _accounts.value = [..._accounts.value, account];
+    return account;
+  }
+
+  Future<List<Balance>> getAccountBalances() async {
+    var response = await dioClient.get('/admin/balances');
+    List<Balance> accounts = (response.data as List<dynamic>)
+        .map((x) => Balance.fromJson(x))
         .toList();
     _accountBalances.value = accounts;
     return accounts;

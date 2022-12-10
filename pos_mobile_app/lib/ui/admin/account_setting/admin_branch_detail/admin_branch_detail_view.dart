@@ -4,6 +4,7 @@ import 'package:pos_mobile_app/ui/admin/account_setting/admin_branch_detail/admi
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_merchant_account/admin_manage_merchant_account_view_model.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 
 import '../../../../../models/merchant.model.dart';
 import '../../../../models/branch.model.dart';
@@ -17,8 +18,12 @@ class AdminBranchDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<AdminBranchDetailViewModel>.nonReactive(
+    return ViewModelBuilder<AdminBranchDetailViewModel>.reactive(
       viewModelBuilder: () => AdminBranchDetailViewModel(),
+      onModelReady: (model) {
+        model.fetchAccounts();
+        model.locationController.text = branch.name!;
+      },
       builder: (context, model, child) => Scaffold(
         backgroundColor: ColorManager.kWhiteColor,
         appBar: Navbar(
@@ -36,100 +41,179 @@ class AdminBranchDetailView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: AppSize.s20),
+                  const SizedBox(height: AppSize.s20),
                   BranchDetailItem(
                     label: 'Location',
-                    content: Text(
-                      branch.name!,
-                      style: TextStyle(
-                        color: ColorManager.kTurquoiseDarkColor,
-                        fontSize: FontSize.s16,
-                        fontWeight: FontWeightManager.regular,
-                      ),
-                    ),
+                    content: model.isEditMode
+                        ? InputField(
+                            hintText: 'Location',
+                            controller: model.locationController,
+                          )
+                        : Text(
+                            branch.name!,
+                            style: const TextStyle(
+                              color: ColorManager.kTurquoiseDarkColor,
+                              fontSize: FontSize.s16,
+                              fontWeight: FontWeightManager.regular,
+                            ),
+                          ),
                   ),
-                  SizedBox(height: AppSize.s48),
+                  const SizedBox(height: AppSize.s20),
+                  const Divider(),
+                  const SizedBox(height: AppSize.s20),
                   BranchDetailItem(
                     label: "Merchants",
-                    content: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Taiwo Kehinde',
-                          style: TextStyle(
-                            color: ColorManager.kTurquoiseDarkColor,
-                            fontSize: FontSize.s16,
-                            fontWeight: FontWeightManager.regular,
+                    content: model.isEditMode
+                        ? MultiselectDropdown(
+                            hintText: 'Merchant',
+                            items:
+                                model.merchants!.map((e) => e.name!).toList(),
+                            onSelectItem: (value) {
+                              print(value);
+                              // model.setSelectedMerchantItem(value);
+                            },
+                          )
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: model.merchants!
+                                .map(
+                                  (e) => Container(
+                                    margin: const EdgeInsets.only(
+                                        bottom: AppSize.s8),
+                                    child: Text(
+                                      e.name!,
+                                      style: const TextStyle(
+                                        color: ColorManager.kTurquoiseDarkColor,
+                                        fontSize: FontSize.s16,
+                                        fontWeight: FontWeightManager.regular,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
                           ),
-                        ),
-                        SizedBox(height: AppSize.s8),
-                        Text(
-                          'Kehinde Taiwo',
-                          style: TextStyle(
-                            color: ColorManager.kTurquoiseDarkColor,
-                            fontSize: FontSize.s16,
-                            fontWeight: FontWeightManager.regular,
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
-                  SizedBox(height: AppSize.s48),
+                  const SizedBox(height: AppSize.s20),
+                  const Divider(),
+                  const SizedBox(height: AppSize.s20),
                   BranchDetailItem(
                     label: 'POS Name',
-                    content: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'PaySure POS',
-                          style: TextStyle(
-                            color: ColorManager.kTurquoiseDarkColor,
-                            fontSize: FontSize.s16,
-                            fontWeight: FontWeightManager.regular,
+                    trailing: model.isEditMode
+                        ? GestureDetector(
+                            onTap: () {
+                              model.showDialogCreatePOSAccount();
+                            },
+                            child: const Text(
+                              'Add New',
+                              style: TextStyle(
+                                  color: ColorManager.kPrimaryColor,
+                                  fontSize: FontSize.s14,
+                                  fontWeight: FontWeightManager.medium),
+                            ),
+                          )
+                        : Container(),
+                    content: model.isEditMode
+                        ? MultiselectDropdown(
+                            hintText: 'POS Accounts',
+                            items: model.accounts!
+                                .where(
+                                    (element) => element.accountType == "POS")
+                                .map((e) => e.accountDetail!.accountName!)
+                                .toList(),
+                            onSelectItem: (value) {
+                              print(value);
+                              // model.setSelectedMerchantItem(value);
+                            },
+                          )
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: model.accounts!
+                                .where(
+                                    (element) => element.accountType == "POS")
+                                .map(
+                                  (e) => Container(
+                                    margin: const EdgeInsets.only(
+                                        bottom: AppSize.s8),
+                                    child: Text(
+                                      '${e.accountDetail!.accountName} ',
+                                      style: const TextStyle(
+                                        color: ColorManager.kTurquoiseDarkColor,
+                                        fontSize: FontSize.s16,
+                                        fontWeight: FontWeightManager.regular,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
                           ),
-                        ),
-                        SizedBox(height: AppSize.s8),
-                        Text(
-                          'Calculator-Like POS',
-                          style: TextStyle(
-                            color: ColorManager.kTurquoiseDarkColor,
-                            fontSize: FontSize.s16,
-                            fontWeight: FontWeightManager.regular,
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
-                  SizedBox(height: AppSize.s48),
+                  const SizedBox(height: AppSize.s20),
+                  const Divider(),
+                  const SizedBox(height: AppSize.s20),
                   BranchDetailItem(
                     label: 'Bank Account Details',
-                    content: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Wema ALAT - Lolade Rosemary Agbabiaka - 100017475',
-                          style: TextStyle(
-                            color: ColorManager.kTurquoiseDarkColor,
-                            fontSize: FontSize.s16,
-                            fontWeight: FontWeightManager.regular,
+                    trailing: model.isEditMode
+                        ? GestureDetector(
+                            onTap: () {
+                              model.showDialogCreateBankAccount();
+                            },
+                            child: const Text(
+                              'Add New',
+                              style: TextStyle(
+                                  color: ColorManager.kPrimaryColor,
+                                  fontSize: FontSize.s14,
+                                  fontWeight: FontWeightManager.medium),
+                            ),
+                          )
+                        : Container(),
+                    content: model.isEditMode
+                        ? MultiselectDropdown(
+                            hintText: 'Bank Accounts',
+                            items: model.accounts!
+                                .where(
+                                    (element) => element.accountType == "BANK")
+                                .map((e) =>
+                                    '${e.accountDetail!.accountName!} - ${e.accountDetail!.serviceProviderName}')
+                                .toList(),
+                            onSelectItem: (value) {
+                              print(value);
+                              // model.setSelectedMerchantItem(value);
+                            },
+                          )
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: model.accounts!
+                                .where(
+                                    (element) => element.accountType == "BANK")
+                                .map(
+                                  (e) => Container(
+                                    margin: const EdgeInsets.only(
+                                        bottom: AppSize.s8),
+                                    child: Text(
+                                      '${e.accountDetail!.serviceProviderName} - ${e.accountDetail!.accountName!} - ${e.accountDetail!.accountNo!}',
+                                      style: const TextStyle(
+                                        color: ColorManager.kTurquoiseDarkColor,
+                                        fontSize: FontSize.s16,
+                                        fontWeight: FontWeightManager.regular,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
                           ),
-                        ),
-                        SizedBox(height: AppSize.s48),
-                        Text(
-                          'Wema ALAT - Lolade Rosemary Agbabiaka - 100017475',
-                          style: TextStyle(
-                            color: ColorManager.kTurquoiseDarkColor,
-                            fontSize: FontSize.s16,
-                            fontWeight: FontWeightManager.regular,
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
-                  SizedBox(height: AppSize.s40),
+                  const SizedBox(height: AppSize.s40),
                   PosButton(
-                    onPressed: () {},
-                    title: AppString.editBranchDetail,
+                    onPressed: () {
+                      if (!model.isEditMode) {
+                        model.editForm();
+                      } else {
+                        model.updateForm();
+                      }
+                    },
+                    title: !model.isEditMode
+                        ? AppString.editBranchDetail
+                        : AppString.updateBranchDetailText,
                     buttonBgColor: ColorManager.kLightGreen1,
                     buttonTextColor: ColorManager.kPrimaryColor,
                     fontSize: FontSize.s16,
@@ -138,6 +222,8 @@ class AdminBranchDetailView extends StatelessWidget {
                       color: ColorManager.kBorderLightGreen,
                       width: 1,
                     ),
+                    leadingIcon: Icons.edit,
+                    leadingIconSpace: AppSize.s12,
                     borderRadius: AppSize.s8,
                     busy: model.isBusy,
                   ),
@@ -162,10 +248,15 @@ class AdminBranchDetailView extends StatelessWidget {
 }
 
 class BranchDetailItem extends StatelessWidget {
-  const BranchDetailItem({Key? key, required this.label, required this.content})
-      : super(key: key);
+  const BranchDetailItem({
+    Key? key,
+    required this.label,
+    required this.content,
+    this.trailing,
+  }) : super(key: key);
   final String label;
   final Widget content;
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
@@ -175,12 +266,19 @@ class BranchDetailItem extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              label,
-              style: const TextStyle(
-                  color: ColorManager.kDarkCharcoal,
-                  fontSize: FontSize.s14,
-                  fontWeight: FontWeightManager.medium),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  label,
+                  style: const TextStyle(
+                      color: ColorManager.kDarkCharcoal,
+                      fontSize: FontSize.s14,
+                      fontWeight: FontWeightManager.medium),
+                ),
+                if (trailing != null) trailing ?? Container(),
+              ],
             ),
             SizedBox(height: AppSize.s8),
             content,

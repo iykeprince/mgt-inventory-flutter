@@ -27,6 +27,7 @@ class LoginViewModel extends FormViewModel {
   bool get isFormValid => _isFormValid;
 
   login() async {
+    print('login');
     runBusyFuture(runLogin(), busyObject: LOGIN_TASK_OBJECT);
   }
 

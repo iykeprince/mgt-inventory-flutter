@@ -5,6 +5,7 @@ export './components/onboarding/onboard_view_one.dart';
 export './components/onboarding/onboard_view_two.dart';
 export './components/onboarding/onboard_view_three.dart';
 export './components/profileitem/profile_item.dart';
+export './components/multiselect_dropdown.dart';
 
 //export the widgets
 export 'widgets/buttons/button.dart';

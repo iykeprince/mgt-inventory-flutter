@@ -1,13 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:pos_mobile_app/app/app.locator.dart';
+import 'package:pos_mobile_app/app/app.router.dart';
 import 'package:pos_mobile_app/services/admin.service.dart';
+import 'package:pos_mobile_app/services/authentication.service.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 import '../../../../models/branch.model.dart';
 import '../../../../utils/http_exception.dart';
 
 class AddBranchViewModel extends BaseViewModel {
   final _adminService = locator<AdminService>();
+  final _authenticationService = locator<AuthenticationService>();
+  final _navigationService = locator<NavigationService>();
 
   List<Branch>? get branches => _adminService.branches;
   List<Map<String, dynamic>> _createBranchForm = [];
@@ -21,10 +26,13 @@ class AddBranchViewModel extends BaseViewModel {
       "name": "",
       "location": "",
       "numOfMerchants": 0,
-      "posName": "",
-      "bankAccountDetail": ""
     };
     _createBranchForm = [...createBranchForm, newFormData];
+    notifyListeners();
+  }
+
+  removeBranch(int index) {
+    _createBranchForm.removeAt(index);
     notifyListeners();
   }
 
@@ -32,13 +40,13 @@ class AddBranchViewModel extends BaseViewModel {
     await runBusyFuture(runSaveBranchDetail());
   }
 
-  Future runSaveBranchDetail() async {
+  Future<void> runSaveBranchDetail() async {
     var formDataList = _createBranchForm
         .map(
           (x) => ({
             "name": x['name'],
             "location": x['location'],
-            "numberOfMerchants": int.parse(x['numOfMerchants'] ?? '0'),
+            "numberOfMerchants": int.parse(x['numOfMerchants']),
             "isInit": branches!.isEmpty ? true : false
           }),
         )
@@ -50,7 +58,7 @@ class AddBranchViewModel extends BaseViewModel {
           .map((formData) async => await _adminService.createBranch(formData));
       var results = await Future.wait(futures);
       print('results: ${results.map((e) => e.toJson()).toList()}');
-      return results;
+      _navigationService.navigateTo(Routes.adminHomeView);
     } on DioError catch (error) {
       throw HttpException(error.response?.data['message']);
     } finally {
@@ -60,8 +68,10 @@ class AddBranchViewModel extends BaseViewModel {
 
   void initialiseForm() {
     _createBranchForm = [];
-    for (var i = 0; i < branches!.length; i++) {
-      Map<String, dynamic> formData = {'idx': 1 + i, ...branches![i].toJson()};
+    for (var i = 0; i < _authenticationService.initialNumberOfBranches; i++) {
+      Map<String, dynamic> formData = {
+        'idx': 1 + i,
+      };
       _createBranchForm = [..._createBranchForm, formData];
     }
     notifyListeners();
