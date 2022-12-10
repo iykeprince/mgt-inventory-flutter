@@ -15,6 +15,12 @@ import '../../../../utils/http_exception.dart';
 
 const String CREATE_ACCOUNT_REQUEST = 'CREATE_ACCOUNT_REQUEST';
 const String UPDATE_FORM_REQUEST = 'UPDATE_FORM_REQUEST';
+const String ASSIGN_BANK_ACCOUNT_TO_BRANCH_REQUEST =
+    'ASSIGN_BANK_ACCOUNT_TO_BRANCH_REQUEST';
+const String ASSIGN_POS_ACCOUNT_TO_BRANCH_REQUEST =
+    'ASSIGN_POS_ACCOUNT_TO_BRANCH_REQUEST';
+const String ASSIGN_MERCHANT_TO_BRANCH_REQUEST =
+    'ASSIGN_MERCHANT_TO_BRANCH_REQUEST';
 
 class AdminBranchDetailViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
@@ -29,15 +35,11 @@ class AdminBranchDetailViewModel extends BaseViewModel {
   List<Merchant>? get merchants => _adminService.merchants;
   List<Account>? get accounts => _adminService.accounts;
 
+  List<Account?> _selectedBankAccounts = [];
+  List<Account?> _selectedPosAccounts = [];
+
   bool _isEditMode = false;
   bool get isEditMode => _isEditMode;
-
-  setSelectedMerchantItem(String? value) {
-    Merchant foundMerchant =
-        merchants!.firstWhere((element) => element.name!.contains(value!));
-
-    _selectedMerchants = [..._selectedMerchants, foundMerchant];
-  }
 
   void navigateBack() => _navigationService.back();
 
@@ -111,6 +113,7 @@ class AdminBranchDetailViewModel extends BaseViewModel {
     // await _adminService.updateBranch()
     _isEditMode = false;
     print('update');
+    // await _adminService.getMerchants();
     notifyListeners();
   }
 
@@ -197,6 +200,104 @@ class AdminBranchDetailViewModel extends BaseViewModel {
     } finally {
       setBusyForObject(CREATE_ACCOUNT_REQUEST, false);
       completer(DialogResponse(confirmed: true));
+    }
+  }
+
+  setSelectedPosAccount(List<String> accountList) {
+    _selectedPosAccounts = accountList
+        .map((e) => accounts
+            ?.firstWhere((element) => element.accountDetail!.accountName! == e))
+        .toList();
+  }
+
+  setSelectedBankAccount(List<String> accountList) {
+    _selectedBankAccounts = accountList
+        .map((e) => accounts?.firstWhere((element) =>
+            '${element.accountDetail!.accountName!} - ${element.accountDetail!.serviceProviderName}' ==
+            e))
+        .toList();
+  }
+
+  setSelectedMerchantItem(List<String>? merchantList) {
+    _selectedMerchants = merchantList!
+        .map((e) =>
+            merchants!.firstWhere((element) => element.name!.contains(e)))
+        .toList();
+  }
+
+  Future<void> assignMerchantToBranch(String branchId) async {
+    if (_selectedMerchants.isEmpty) return;
+    setBusyForObject(ASSIGN_MERCHANT_TO_BRANCH_REQUEST, true);
+    try {
+      await Future.wait(_selectedMerchants.map((e) async {
+        return await _adminService.updateMerchantToBranch(e.id!, branchId);
+      }));
+      Fluttertoast.showToast(
+        msg: "Merchant to branch updated!",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: ColorManager.kDarkCharcoal,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+    } on DioError catch (e) {
+      throw Exception(e.response!.data["message"]);
+    } finally {
+      setBusyForObject(ASSIGN_MERCHANT_TO_BRANCH_REQUEST, false);
+    }
+  }
+
+  Future<void> assignPosAccountToBranch(String branchId) async {
+    print(
+        'banach id $branchId selected pos account ${_selectedPosAccounts!.map((e) => e!.toJson()).toList()}');
+    if (_selectedPosAccounts == null) return;
+    if (_selectedPosAccounts!.isEmpty) return;
+    setBusyForObject(ASSIGN_POS_ACCOUNT_TO_BRANCH_REQUEST, true);
+    try {
+      await Future.wait(_selectedPosAccounts.map((e) async {
+        return await _adminService.updateAccountToBranch(e!.id!, branchId);
+      }));
+      Fluttertoast.showToast(
+        msg: "Account to branch updated!",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: ColorManager.kDarkCharcoal,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+    } on DioError catch (e) {
+      throw Exception(e.response!.data["message"]);
+    } finally {
+      setBusyForObject(ASSIGN_POS_ACCOUNT_TO_BRANCH_REQUEST, false);
+    }
+  }
+
+  Future<void> assignBankAccountToBranch(String branchId) async {
+    if (_selectedBankAccounts.isEmpty) return;
+    print(
+        '_selectedPosAccounts : ${_selectedPosAccounts!.map((e) => e!.toJson()).toList()}');
+    setBusyForObject(ASSIGN_BANK_ACCOUNT_TO_BRANCH_REQUEST, true);
+    notifyListeners();
+    try {
+      await Future.wait(_selectedBankAccounts.map((e) async {
+        return await _adminService.updateAccountToBranch(e!.id!, branchId);
+      }));
+      Fluttertoast.showToast(
+        msg: "Account to branch updated!",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: ColorManager.kDarkCharcoal,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+    } on DioError catch (e) {
+      throw Exception(e.response!.data["message"]);
+    } finally {
+      setBusyForObject(ASSIGN_BANK_ACCOUNT_TO_BRANCH_REQUEST, false);
+      notifyListeners();
     }
   }
 }

@@ -64,18 +64,43 @@ class AdminBranchDetailView extends StatelessWidget {
                   BranchDetailItem(
                     label: "Merchants",
                     content: model.isEditMode
-                        ? MultiselectDropdown(
-                            hintText: 'Merchant',
-                            items:
-                                model.merchants!.map((e) => e.name!).toList(),
-                            onSelectItem: (value) {
-                              print(value);
-                              // model.setSelectedMerchantItem(value);
-                            },
+                        ? Row(
+                            children: [
+                              Expanded(
+                                child: MultiselectDropdown(
+                                  hintText: 'Merchant',
+                                  items: model.merchants!
+                                      .map((e) => e.name!)
+                                      .toList(),
+                                  onSelectItem: (value) {
+                                    model.setSelectedMerchantItem(value);
+                                  },
+                                ),
+                              ),
+                              const SizedBox(width: AppSize.s12),
+                              PosButton(
+                                onPressed: () =>
+                                    model.assignMerchantToBranch(branch.id!),
+                                title: '',
+                                leadingIcon: model
+                                        .busy(ASSIGN_MERCHANT_TO_BRANCH_REQUEST)
+                                    ? Icons.more_horiz
+                                    : Icons.check,
+                                paddingHorizontal: 0,
+                                paddingVertical: 0,
+                                buttonType: ButtonType.text,
+                                buttonTextColor: ColorManager.kDarkColor,
+                                busy: model
+                                    .busy(ASSIGN_MERCHANT_TO_BRANCH_REQUEST),
+                                busyColor: ColorManager.kDarkCharcoal,
+                              )
+                            ],
                           )
                         : Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: model.merchants!
+                                .where(
+                                    (element) => element.branchId == branch.id)
                                 .map(
                                   (e) => Container(
                                     margin: const EdgeInsets.only(
@@ -93,6 +118,9 @@ class AdminBranchDetailView extends StatelessWidget {
                                 .toList(),
                           ),
                   ),
+                  model.hasErrorForKey(ASSIGN_MERCHANT_TO_BRANCH_REQUEST)
+                      ? Text(model.error(ASSIGN_MERCHANT_TO_BRANCH_REQUEST))
+                      : Container(),
                   const SizedBox(height: AppSize.s20),
                   const Divider(),
                   const SizedBox(height: AppSize.s20),
@@ -113,23 +141,46 @@ class AdminBranchDetailView extends StatelessWidget {
                           )
                         : Container(),
                     content: model.isEditMode
-                        ? MultiselectDropdown(
-                            hintText: 'POS Accounts',
-                            items: model.accounts!
-                                .where(
-                                    (element) => element.accountType == "POS")
-                                .map((e) => e.accountDetail!.accountName!)
-                                .toList(),
-                            onSelectItem: (value) {
-                              print(value);
-                              // model.setSelectedMerchantItem(value);
-                            },
+                        ? Row(
+                            children: [
+                              Expanded(
+                                child: MultiselectDropdown(
+                                  hintText: 'POS Accounts',
+                                  items: model.accounts!
+                                      .where((element) =>
+                                          element.accountType == "POS")
+                                      .map((e) => e.accountDetail!.accountName!)
+                                      .toList(),
+                                  onSelectItem: (value) {
+                                    model.setSelectedPosAccount(value);
+                                  },
+                                ),
+                              ),
+                              const SizedBox(width: AppSize.s12),
+                              PosButton(
+                                onPressed: () =>
+                                    model.assignPosAccountToBranch(branch.id!),
+                                title: '',
+                                leadingIcon: model.busy(
+                                        ASSIGN_POS_ACCOUNT_TO_BRANCH_REQUEST)
+                                    ? Icons.more_horiz
+                                    : Icons.check,
+                                paddingHorizontal: 0,
+                                paddingVertical: 0,
+                                buttonType: ButtonType.text,
+                                buttonTextColor: ColorManager.kDarkColor,
+                                busy: model
+                                    .busy(ASSIGN_POS_ACCOUNT_TO_BRANCH_REQUEST),
+                                busyColor: ColorManager.kDarkCharcoal,
+                              )
+                            ],
                           )
                         : Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: model.accounts!
-                                .where(
-                                    (element) => element.accountType == "POS")
+                                .where((element) =>
+                                    element.accountType == "POS" &&
+                                    element.branchId!.contains(branch.id))
                                 .map(
                                   (e) => Container(
                                     margin: const EdgeInsets.only(
@@ -147,6 +198,9 @@ class AdminBranchDetailView extends StatelessWidget {
                                 .toList(),
                           ),
                   ),
+                  model.hasErrorForKey(ASSIGN_POS_ACCOUNT_TO_BRANCH_REQUEST)
+                      ? Text(model.error(ASSIGN_POS_ACCOUNT_TO_BRANCH_REQUEST))
+                      : Container(),
                   const SizedBox(height: AppSize.s20),
                   const Divider(),
                   const SizedBox(height: AppSize.s20),
@@ -167,24 +221,46 @@ class AdminBranchDetailView extends StatelessWidget {
                           )
                         : Container(),
                     content: model.isEditMode
-                        ? MultiselectDropdown(
-                            hintText: 'Bank Accounts',
-                            items: model.accounts!
-                                .where(
-                                    (element) => element.accountType == "BANK")
-                                .map((e) =>
-                                    '${e.accountDetail!.accountName!} - ${e.accountDetail!.serviceProviderName}')
-                                .toList(),
-                            onSelectItem: (value) {
-                              print(value);
-                              // model.setSelectedMerchantItem(value);
-                            },
+                        ? Row(
+                            children: [
+                              Expanded(
+                                child: MultiselectDropdown(
+                                  hintText: 'Bank Accounts',
+                                  items: model.accounts!
+                                      .where((element) =>
+                                          element.accountType == "BANK")
+                                      .map((e) =>
+                                          '${e.accountDetail!.accountName!} - ${e.accountDetail!.serviceProviderName}')
+                                      .toList(),
+                                  onSelectItem: (value) {
+                                    model.setSelectedBankAccount(value);
+                                  },
+                                ),
+                              ),
+                              PosButton(
+                                onPressed: () =>
+                                    model.assignBankAccountToBranch(branch.id!),
+                                title: '',
+                                leadingIcon: model.busy(
+                                        ASSIGN_BANK_ACCOUNT_TO_BRANCH_REQUEST)
+                                    ? Icons.more_horiz
+                                    : Icons.check,
+                                paddingHorizontal: 0,
+                                paddingVertical: 0,
+                                buttonType: ButtonType.text,
+                                buttonTextColor: ColorManager.kDarkColor,
+                                busy: model.busy(
+                                    ASSIGN_BANK_ACCOUNT_TO_BRANCH_REQUEST),
+                                busyColor: ColorManager.kDarkCharcoal,
+                              )
+                            ],
                           )
                         : Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: model.accounts!
-                                .where(
-                                    (element) => element.accountType == "BANK")
+                                .where((element) =>
+                                    element.accountType == "BANK" &&
+                                    element.branchId!.contains(branch.id))
                                 .map(
                                   (e) => Container(
                                     margin: const EdgeInsets.only(
@@ -202,6 +278,9 @@ class AdminBranchDetailView extends StatelessWidget {
                                 .toList(),
                           ),
                   ),
+                  model.hasErrorForKey(ASSIGN_BANK_ACCOUNT_TO_BRANCH_REQUEST)
+                      ? Text(model.error(ASSIGN_BANK_ACCOUNT_TO_BRANCH_REQUEST))
+                      : Container(),
                   const SizedBox(height: AppSize.s40),
                   PosButton(
                     onPressed: () {

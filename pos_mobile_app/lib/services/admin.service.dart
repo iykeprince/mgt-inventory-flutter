@@ -121,6 +121,18 @@ class AdminService with ReactiveServiceMixin {
     return account;
   }
 
+  Future<Merchant> updateMerchantToBranch(
+      String merchantId, String branchId) async {
+    var response = await dioClient.put('/admin/set/m/b/$merchantId/$branchId');
+    return Merchant.fromJson(response.data);
+  }
+
+  Future<Account> updateAccountToBranch(
+      String accountId, String branchId) async {
+    var response = await dioClient.put('/admin/set/a/b/$accountId/$branchId');
+    return Account.fromJson(response.data);
+  }
+
   Future<List<Balance>> getAccountBalances() async {
     var response = await dioClient.get('/admin/balances');
     List<Balance> accounts = (response.data as List<dynamic>)
