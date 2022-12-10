@@ -29,6 +29,8 @@ class PosButton extends StatelessWidget {
 
   final bool? disabled;
   final Color? busyColor;
+  final double? paddingHorizontal;
+  final double? paddingVertical;
 
   PosButton({
     Key? key,
@@ -51,6 +53,8 @@ class PosButton extends StatelessWidget {
     this.borderRadiusType = BorderRadiusType.none,
     this.disabled = false,
     this.busyColor,
+    this.paddingHorizontal,
+    this.paddingVertical,
   });
 
   Color getBackgroundColor() {
@@ -122,9 +126,9 @@ class PosButton extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 24.0,
-          vertical: 23.0,
+        padding: EdgeInsets.symmetric(
+          horizontal: paddingHorizontal ?? 24.0,
+          vertical: paddingVertical ?? 23.0,
         ),
         decoration: BoxDecoration(
           borderRadius: _constructBorderRadius(borderRadiusType),
