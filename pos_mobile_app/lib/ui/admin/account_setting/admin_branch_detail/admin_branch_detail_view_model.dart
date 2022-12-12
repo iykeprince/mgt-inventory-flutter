@@ -249,10 +249,7 @@ class AdminBranchDetailViewModel extends BaseViewModel {
   }
 
   Future<void> assignPosAccountToBranch(String branchId) async {
-    print(
-        'banach id $branchId selected pos account ${_selectedPosAccounts!.map((e) => e!.toJson()).toList()}');
-    if (_selectedPosAccounts == null) return;
-    if (_selectedPosAccounts!.isEmpty) return;
+    if (_selectedPosAccounts.isEmpty) return;
     setBusyForObject(ASSIGN_POS_ACCOUNT_TO_BRANCH_REQUEST, true);
     try {
       await Future.wait(_selectedPosAccounts.map((e) async {
@@ -277,7 +274,7 @@ class AdminBranchDetailViewModel extends BaseViewModel {
   Future<void> assignBankAccountToBranch(String branchId) async {
     if (_selectedBankAccounts.isEmpty) return;
     print(
-        '_selectedPosAccounts : ${_selectedPosAccounts!.map((e) => e!.toJson()).toList()}');
+        '_selectedPosAccounts : ${_selectedPosAccounts.map((e) => e!.toJson()).toList()}');
     setBusyForObject(ASSIGN_BANK_ACCOUNT_TO_BRANCH_REQUEST, true);
     notifyListeners();
     try {
