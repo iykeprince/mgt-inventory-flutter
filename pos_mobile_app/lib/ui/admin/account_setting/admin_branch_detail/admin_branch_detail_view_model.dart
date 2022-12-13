@@ -2,14 +2,17 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pos_mobile_app/models/merchant.model.dart';
+import 'package:pos_mobile_app/services/location.service.dart';
 import 'package:pos_mobile_ui_package/utils/colors.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../../app/app.locator.dart';
 import '../../../../enums/dialog_type.dart';
 import '../../../../models/account.model.dart';
 import '../../../../models/branch.model.dart';
+import '../../../../models/suggestion.model.dart';
 import '../../../../services/admin.service.dart';
 import '../../../../utils/http_exception.dart';
 
@@ -21,15 +24,20 @@ const String ASSIGN_POS_ACCOUNT_TO_BRANCH_REQUEST =
     'ASSIGN_POS_ACCOUNT_TO_BRANCH_REQUEST';
 const String ASSIGN_MERCHANT_TO_BRANCH_REQUEST =
     'ASSIGN_MERCHANT_TO_BRANCH_REQUEST';
+const String LOCATION_SUGGESTION_REQUEST = 'LOCATION_SUGGESTION_REQUEST';
 
 class AdminBranchDetailViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _adminService = locator<AdminService>();
   final _dialogService = locator<DialogService>();
+  final _locationService = locator<LocationService>(param1: Uuid().v4());
 
   final TextEditingController locationController = TextEditingController();
 
   List<Merchant> _selectedMerchants = [];
+
+  List<Suggestion> _suggestions = [];
+  List<Suggestion> get suggestions => _suggestions;
   List<Merchant> get selectedMerchants => _selectedMerchants;
 
   List<Merchant>? get merchants => _adminService.merchants;
@@ -110,7 +118,7 @@ class AdminBranchDetailViewModel extends BaseViewModel {
       );
     }
 //continue here
-    // await _adminService.updateBranch()
+    // await _adminService.updateBranch();
     _isEditMode = false;
     print('update');
     // await _adminService.getMerchants();
@@ -296,5 +304,31 @@ class AdminBranchDetailViewModel extends BaseViewModel {
       setBusyForObject(ASSIGN_BANK_ACCOUNT_TO_BRANCH_REQUEST, false);
       notifyListeners();
     }
+  }
+
+  Future<void> handleSuggestion(String text) async => runBusyFuture(
+        fetchSuggestionRequest(text),
+        busyObject: LOCATION_SUGGESTION_REQUEST,
+      );
+
+  Future<List<Suggestion>> fetchSuggestionRequest(String text) async {
+    notifyListeners();
+    setBusyForObject(LOCATION_SUGGESTION_REQUEST, true);
+
+    try {
+      _suggestions = await _locationService.fetchSuggestions(text, 'en');
+      print(
+          'json suggestions: ${_suggestions.map((e) => e.toJson()).toList()}');
+      return _suggestions;
+    } on DioError catch (e) {
+      throw HttpException(e.response!.data);
+    } finally {
+      notifyListeners();
+      setBusyForObject(LOCATION_SUGGESTION_REQUEST, false);
+    }
+  }
+
+  void updateLocation(String location) {
+    locationController.text = location;
   }
 }
