@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:pos_mobile_app/models/suggestion.model.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_branch_detail/admin_branch_detail_view_model.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_manage_merchant_account/admin_manage_merchant_account_view_model.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
@@ -15,6 +16,9 @@ class AdminBranchDetailView extends StatelessWidget {
     required this.branch,
   }) : super(key: key);
   final Branch branch;
+
+  static String _displayStringForOption(Suggestion option) =>
+      option.description;
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +49,37 @@ class AdminBranchDetailView extends StatelessWidget {
                   BranchDetailItem(
                     label: 'Location',
                     content: model.isEditMode
-                        ? InputField(
-                            hintText: 'Location',
-                            controller: model.locationController,
+                        ? Autocomplete<Suggestion>(
+                            displayStringForOption: _displayStringForOption,
+                            optionsBuilder:
+                                (TextEditingValue textEditingValue) async {
+                              if (textEditingValue.text == '') {
+                                return const Iterable<Suggestion>.empty();
+                              }
+                              await model
+                                  .handleSuggestion(textEditingValue.text);
+
+                              return model.suggestions
+                                  .where((Suggestion option) {
+                                return option.description
+                                    .toLowerCase()
+                                    .contains(
+                                        textEditingValue.text.toLowerCase());
+                              });
+                            },
+                            onSelected: (Suggestion selection) {
+                              debugPrint(
+                                  'You just selected ${_displayStringForOption(selection)}');
+                              model.updateLocation(
+                                  _displayStringForOption(selection));
+                            },
+                            fieldViewBuilder: (context, textEditingController,
+                                    focusNode, onFieldSubmitted) =>
+                                InputField(
+                              controller: textEditingController,
+                              focusnode: focusNode,
+                              onTap: onFieldSubmitted,
+                            ),
                           )
                         : Text(
                             branch.name!,
@@ -58,6 +90,12 @@ class AdminBranchDetailView extends StatelessWidget {
                             ),
                           ),
                   ),
+                  if (model.busy(LOCATION_SUGGESTION_REQUEST))
+                    const LinearProgressIndicator(),
+                  if (model.hasErrorForKey(LOCATION_SUGGESTION_REQUEST))
+                    Alert.primary(
+                      text: model.error(LOCATION_SUGGESTION_REQUEST).toString(),
+                    ),
                   const SizedBox(height: AppSize.s20),
                   const Divider(),
                   const SizedBox(height: AppSize.s20),

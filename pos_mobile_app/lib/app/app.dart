@@ -1,6 +1,7 @@
 import 'package:pos_mobile_app/client/dio_client.dart';
 import 'package:pos_mobile_app/services/admin.service.dart';
 import 'package:pos_mobile_app/services/authentication.service.dart';
+import 'package:pos_mobile_app/services/location.service.dart';
 import 'package:pos_mobile_app/services/transaction.service.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/account_setting_view.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_branch_detail/admin_branch_detail_view.dart';
@@ -90,6 +91,7 @@ import '../ui/admin/account_setting/admin_manage_report_setting/admin_manage_rep
     LazySingleton(classType: AdminService),
     LazySingleton(classType: UserService),
     LazySingleton(classType: TransactionService),
+    FactoryWithParam(classType: LocationService),
   ],
   logger: StackedLogger(),
 )
