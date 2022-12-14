@@ -27,6 +27,8 @@ class AdminBranchDetailView extends StatelessWidget {
       onModelReady: (model) {
         model.fetchAccounts();
         model.locationController.text = branch.name!;
+        model.updateBranchId(branch.id);
+        model.updateBranchName(branch.name);
       },
       builder: (context, model, child) => Scaffold(
         backgroundColor: ColorManager.kWhiteColor,
@@ -82,7 +84,7 @@ class AdminBranchDetailView extends StatelessWidget {
                             ),
                           )
                         : Text(
-                            branch.name!,
+                            branch.location!,
                             style: const TextStyle(
                               color: ColorManager.kTurquoiseDarkColor,
                               fontSize: FontSize.s16,
@@ -320,6 +322,9 @@ class AdminBranchDetailView extends StatelessWidget {
                       ? Text(model.error(ASSIGN_BANK_ACCOUNT_TO_BRANCH_REQUEST))
                       : Container(),
                   const SizedBox(height: AppSize.s40),
+                  if (model.hasErrorForKey(UPDATE_FORM_REQUEST))
+                    Alert.primary(
+                        text: model.error(UPDATE_FORM_REQUEST).toString()),
                   PosButton(
                     onPressed: () {
                       if (!model.isEditMode) {
@@ -342,7 +347,7 @@ class AdminBranchDetailView extends StatelessWidget {
                     leadingIcon: Icons.edit,
                     leadingIconSpace: AppSize.s12,
                     borderRadius: AppSize.s8,
-                    busy: model.isBusy,
+                    busy: model.busy(UPDATE_FORM_REQUEST),
                   ),
                   const SizedBox(height: AppSize.s24),
                   PosButton(

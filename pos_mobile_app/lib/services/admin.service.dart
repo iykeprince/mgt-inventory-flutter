@@ -74,6 +74,11 @@ class AdminService with ReactiveServiceMixin {
     return branch;
   }
 
+  Future<Branch> updateBranch(String id, Map<String, dynamic> formData) async {
+    var response = await dioClient.put('/admin/branches/$id', data: formData);
+    return Branch.fromJson(response.data);
+  }
+
   Future<Branch> deleteBranch(String id) async {
     var response = await dioClient.delete('/admin/branches/$id');
     return Branch.fromJson(response.data);
@@ -140,5 +145,10 @@ class AdminService with ReactiveServiceMixin {
         .toList();
     _accountBalances.value = accounts;
     return accounts;
+  }
+
+  Future<Admin> deleteAdminAccount(String id) async {
+    var response = await dioClient.delete('/admin/remove/$id');
+    return Admin.fromJson(response.data);
   }
 }
