@@ -17,6 +17,7 @@ import '../services/admin.service.dart';
 import '../services/authentication.service.dart';
 import '../services/location.service.dart';
 import '../services/merchant.service.dart';
+import '../services/support.service.dart';
 import '../services/transaction.service.dart';
 import '../services/user.service.dart';
 
@@ -41,4 +42,5 @@ Future<void> setupLocator(
   locator.registerLazySingleton(() => TransactionService());
   locator.registerFactoryParam<LocationService, String?, dynamic>(
       (param1, param2) => LocationService(param1));
+  locator.registerLazySingleton(() => SupportService());
 }

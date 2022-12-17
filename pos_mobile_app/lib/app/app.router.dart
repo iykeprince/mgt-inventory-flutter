@@ -5,16 +5,18 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i34;
+import 'package:flutter/material.dart' as _i35;
 import 'package:flutter/material.dart';
-import 'package:pos_mobile_app/models/branch.model.dart' as _i36;
-import 'package:pos_mobile_app/models/merchant.model.dart' as _i35;
+import 'package:pos_mobile_app/models/branch.model.dart' as _i37;
+import 'package:pos_mobile_app/models/merchant.model.dart' as _i36;
 import 'package:pos_mobile_app/ui/admin/account_setting/account_setting_view.dart'
     as _i15;
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_branch_detail/admin_branch_detail_view.dart'
     as _i24;
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_change_password/admin_change_password_view.dart'
     as _i19;
+import 'package:pos_mobile_app/ui/admin/account_setting/admin_contact_support/admin_contact_support_view.dart'
+    as _i28;
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_delete_account/admin_delete_account_view.dart'
     as _i26;
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_edit_profile/admin_edit_profile_view.dart'
@@ -55,20 +57,20 @@ import 'package:pos_mobile_app/ui/auth/verifyMerchant/verify_merchant_view.dart'
 import 'package:pos_mobile_app/ui/auth/verifyMerchantSuccess/verify_merchant_success_view.dart'
     as _i12;
 import 'package:pos_mobile_app/ui/merchant/dashboard/create_logs/new_expense/log_new_expense_view.dart'
-    as _i32;
-import 'package:pos_mobile_app/ui/merchant/dashboard/create_logs/new_transactions/log_new_transaction_view.dart'
     as _i33;
-import 'package:pos_mobile_app/ui/merchant/merchant_home_view.dart' as _i28;
+import 'package:pos_mobile_app/ui/merchant/dashboard/create_logs/new_transactions/log_new_transaction_view.dart'
+    as _i34;
+import 'package:pos_mobile_app/ui/merchant/merchant_home_view.dart' as _i29;
 import 'package:pos_mobile_app/ui/merchant/profile/changepassword/change_password_view.dart'
-    as _i31;
+    as _i32;
 import 'package:pos_mobile_app/ui/merchant/profile/editprofile/edit_profile_view.dart'
-    as _i29;
-import 'package:pos_mobile_app/ui/merchant/profile/howItWorks/how_it_works_view.dart'
     as _i30;
+import 'package:pos_mobile_app/ui/merchant/profile/howItWorks/how_it_works_view.dart'
+    as _i31;
 import 'package:pos_mobile_app/ui/onboarding/onboarding_view.dart' as _i3;
 import 'package:pos_mobile_app/ui/splash/splash_view.dart' as _i2;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i37;
+import 'package:stacked_services/stacked_services.dart' as _i38;
 
 class Routes {
   static const splashView = '/';
@@ -125,6 +127,8 @@ class Routes {
 
   static const adminTransactionView = '/admin-transaction-view';
 
+  static const adminContactSupportView = '/admin-contact-support-view';
+
   static const merchantHomeView = '/merchant-home-view';
 
   static const editProfileView = '/edit-profile-view';
@@ -164,6 +168,7 @@ class Routes {
     adminManageReportSettingView,
     adminDeleteAccountView,
     adminTransactionView,
+    adminContactSupportView,
     merchantHomeView,
     editProfileView,
     howItWorksView,
@@ -280,28 +285,32 @@ class StackedRouter extends _i1.RouterBase {
       page: _i27.AdminTransactionView,
     ),
     _i1.RouteDef(
+      Routes.adminContactSupportView,
+      page: _i28.AdminContactSupportView,
+    ),
+    _i1.RouteDef(
       Routes.merchantHomeView,
-      page: _i28.MerchantHomeView,
+      page: _i29.MerchantHomeView,
     ),
     _i1.RouteDef(
       Routes.editProfileView,
-      page: _i29.EditProfileView,
+      page: _i30.EditProfileView,
     ),
     _i1.RouteDef(
       Routes.howItWorksView,
-      page: _i30.HowItWorksView,
+      page: _i31.HowItWorksView,
     ),
     _i1.RouteDef(
       Routes.changePasswordView,
-      page: _i31.ChangePasswordView,
+      page: _i32.ChangePasswordView,
     ),
     _i1.RouteDef(
       Routes.logNewExpenseView,
-      page: _i32.LogNewExpenseView,
+      page: _i33.LogNewExpenseView,
     ),
     _i1.RouteDef(
       Routes.logNewTransactionView,
-      page: _i33.LogNewTransactionView,
+      page: _i34.LogNewTransactionView,
     ),
   ];
 
@@ -489,45 +498,51 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
-    _i28.MerchantHomeView: (data) {
+    _i28.AdminContactSupportView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i28.MerchantHomeView(),
+        builder: (context) => const _i28.AdminContactSupportView(),
         settings: data,
       );
     },
-    _i29.EditProfileView: (data) {
+    _i29.MerchantHomeView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i29.EditProfileView(),
+        builder: (context) => const _i29.MerchantHomeView(),
         settings: data,
       );
     },
-    _i30.HowItWorksView: (data) {
+    _i30.EditProfileView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i30.HowItWorksView(),
+        builder: (context) => const _i30.EditProfileView(),
         settings: data,
       );
     },
-    _i31.ChangePasswordView: (data) {
+    _i31.HowItWorksView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i31.ChangePasswordView(),
+        builder: (context) => const _i31.HowItWorksView(),
         settings: data,
       );
     },
-    _i32.LogNewExpenseView: (data) {
+    _i32.ChangePasswordView: (data) {
+      return _i1.buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const _i32.ChangePasswordView(),
+        settings: data,
+      );
+    },
+    _i33.LogNewExpenseView: (data) {
       final args = data.getArgs<LogNewExpenseViewArguments>(
         orElse: () => const LogNewExpenseViewArguments(),
       );
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => _i32.LogNewExpenseView(key: args.key),
+        builder: (context) => _i33.LogNewExpenseView(key: args.key),
         settings: data,
       );
     },
-    _i33.LogNewTransactionView: (data) {
+    _i34.LogNewTransactionView: (data) {
       final args = data.getArgs<LogNewTransactionViewArguments>(
         orElse: () => const LogNewTransactionViewArguments(),
       );
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => _i33.LogNewTransactionView(key: args.key),
+        builder: (context) => _i34.LogNewTransactionView(key: args.key),
         settings: data,
       );
     },
@@ -542,13 +557,13 @@ class StackedRouter extends _i1.RouterBase {
 class OnboardViewArguments {
   const OnboardViewArguments({this.key});
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 }
 
 class LoginViewArguments {
   const LoginViewArguments({this.key});
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 }
 
 class VerifyAdminViewArguments {
@@ -557,7 +572,7 @@ class VerifyAdminViewArguments {
     required this.email,
   });
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
   final String email;
 }
@@ -565,7 +580,7 @@ class VerifyAdminViewArguments {
 class CreateAdminBusinessViewArguments {
   const CreateAdminBusinessViewArguments({this.key});
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 }
 
 class VerifyMerchantViewArguments {
@@ -574,7 +589,7 @@ class VerifyMerchantViewArguments {
     required this.emailAddress,
   });
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
   final String emailAddress;
 }
@@ -585,7 +600,7 @@ class VerifyMerchantSuccessViewArguments {
     required this.emailAddress,
   });
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
   final String emailAddress;
 }
@@ -596,7 +611,7 @@ class CompeleteMerchantRegisterArguments {
     required this.emailAddress,
   });
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
   final String emailAddress;
 }
@@ -607,15 +622,15 @@ class AdminMerchantDetailViewArguments {
     required this.merchant,
   });
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
-  final _i35.Merchant merchant;
+  final _i36.Merchant merchant;
 }
 
 class AdminChangePasswordViewArguments {
   const AdminChangePasswordViewArguments({this.key});
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 }
 
 class AdminBranchDetailViewArguments {
@@ -624,24 +639,24 @@ class AdminBranchDetailViewArguments {
     required this.branch,
   });
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 
-  final _i36.Branch branch;
+  final _i37.Branch branch;
 }
 
 class LogNewExpenseViewArguments {
   const LogNewExpenseViewArguments({this.key});
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 }
 
 class LogNewTransactionViewArguments {
   const LogNewTransactionViewArguments({this.key});
 
-  final _i34.Key? key;
+  final _i35.Key? key;
 }
 
-extension NavigatorStateExtension on _i37.NavigationService {
+extension NavigatorStateExtension on _i38.NavigationService {
   Future<dynamic> navigateToSplashView([
     int? routerId,
     bool preventDuplicates = true,
@@ -657,7 +672,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToOnboardView({
-    _i34.Key? key,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -687,7 +702,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToLoginView({
-    _i34.Key? key,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -717,7 +732,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToVerifyAdminView({
-    _i34.Key? key,
+    _i35.Key? key,
     required String email,
     int? routerId,
     bool preventDuplicates = true,
@@ -748,7 +763,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToCreateAdminBusinessView({
-    _i34.Key? key,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -778,7 +793,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToVerifyMerchantView({
-    _i34.Key? key,
+    _i35.Key? key,
     required String emailAddress,
     int? routerId,
     bool preventDuplicates = true,
@@ -796,7 +811,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToVerifyMerchantSuccessView({
-    _i34.Key? key,
+    _i35.Key? key,
     required String emailAddress,
     int? routerId,
     bool preventDuplicates = true,
@@ -814,7 +829,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToCompeleteMerchantRegister({
-    _i34.Key? key,
+    _i35.Key? key,
     required String emailAddress,
     int? routerId,
     bool preventDuplicates = true,
@@ -888,8 +903,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToAdminMerchantDetailView({
-    _i34.Key? key,
-    required _i35.Merchant merchant,
+    _i35.Key? key,
+    required _i36.Merchant merchant,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -906,7 +921,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToAdminChangePasswordView({
-    _i34.Key? key,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -978,8 +993,8 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToAdminBranchDetailView({
-    _i34.Key? key,
-    required _i36.Branch branch,
+    _i35.Key? key,
+    required _i37.Branch branch,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1030,6 +1045,20 @@ extension NavigatorStateExtension on _i37.NavigationService {
         transition,
   ]) async {
     return navigateTo<dynamic>(Routes.adminTransactionView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToAdminContactSupportView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.adminContactSupportView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -1093,7 +1122,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToLogNewExpenseView({
-    _i34.Key? key,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1109,7 +1138,7 @@ extension NavigatorStateExtension on _i37.NavigationService {
   }
 
   Future<dynamic> navigateToLogNewTransactionView({
-    _i34.Key? key,
+    _i35.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,

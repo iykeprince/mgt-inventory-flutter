@@ -95,22 +95,36 @@ class AdminDeleteAccountView extends StatelessWidget {
                     fontSize: FontSize.s14,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppPadding.p24,
-                    vertical: AppPadding.p24,
-                  ),
-                  child: PosButton(
-                    title: 'Delete My Account',
-                    buttonTextColor: ColorManager.kWhiteColor,
-                    buttonBgColor: ColorManager.kRed,
-                    onPressed: model.showFeedbackSurveySheet,
-                  ),
-                ),
+                const AdminDeleteButtonAction()
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class AdminDeleteButtonAction
+    extends ViewModelWidget<AdminDeleteAccountViewModel> {
+  const AdminDeleteButtonAction({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, AdminDeleteAccountViewModel model) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppPadding.p24,
+        vertical: AppPadding.p24,
+      ),
+      child: PosButton(
+        title: 'Delete My Account',
+        buttonTextColor: ColorManager.kWhiteColor,
+        buttonBgColor: ColorManager.kRed,
+        onPressed: model.busy(REMOVE_ADMIN_ACCOUNT_REQUEST)
+            ? () {}
+            : model.showFeedbackSurveySheet,
+        busy: model.busy(REMOVE_ADMIN_ACCOUNT_REQUEST),
+        disabled: model.busy(REMOVE_ADMIN_ACCOUNT_REQUEST),
       ),
     );
   }

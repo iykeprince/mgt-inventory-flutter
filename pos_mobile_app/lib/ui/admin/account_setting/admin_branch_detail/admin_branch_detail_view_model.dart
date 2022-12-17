@@ -34,19 +34,20 @@ class AdminBranchDetailViewModel extends BaseViewModel {
 
   final TextEditingController locationController = TextEditingController();
 
+  bool _isEditMode = false;
+  String? _branchId;
+  String? _branchName;
   List<Merchant> _selectedMerchants = [];
-
   List<Suggestion> _suggestions = [];
-  List<Suggestion> get suggestions => _suggestions;
-  List<Merchant> get selectedMerchants => _selectedMerchants;
-
-  List<Merchant>? get merchants => _adminService.merchants;
-  List<Account>? get accounts => _adminService.accounts;
-
   List<Account?> _selectedBankAccounts = [];
   List<Account?> _selectedPosAccounts = [];
 
-  bool _isEditMode = false;
+  String? get branchId => _branchId;
+  String? get branchName => _branchName;
+  List<Suggestion> get suggestions => _suggestions;
+  List<Merchant> get selectedMerchants => _selectedMerchants;
+  List<Merchant>? get merchants => _adminService.merchants;
+  List<Account>? get accounts => _adminService.accounts;
   bool get isEditMode => _isEditMode;
 
   void navigateBack() => _navigationService.back();
@@ -117,12 +118,20 @@ class AdminBranchDetailViewModel extends BaseViewModel {
         fontSize: 16.0,
       );
     }
-//continue here
-    // await _adminService.updateBranch();
-    _isEditMode = false;
-    print('update');
-    // await _adminService.getMerchants();
-    notifyListeners();
+
+    setBusyForObject(UPDATE_FORM_REQUEST, true);
+    try {
+      var formData = {"name": branchName, "location": locationController.text};
+      await _adminService.updateBranch(branchId!, formData);
+      _isEditMode = false;
+      print('update');
+      await _adminService.getBranches();
+    } on DioError catch (e) {
+      throw HttpException(e.response!.data['message']);
+    } finally {
+      setBusyForObject(UPDATE_FORM_REQUEST, false);
+      notifyListeners();
+    }
   }
 
   Future<void> fetchAccounts() async {
@@ -330,5 +339,13 @@ class AdminBranchDetailViewModel extends BaseViewModel {
 
   void updateLocation(String location) {
     locationController.text = location;
+  }
+
+  void updateBranchId(String? id) {
+    _branchId = id;
+  }
+
+  void updateBranchName(String? name) {
+    _branchName = name;
   }
 }

@@ -39,7 +39,9 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../services/merchant.service.dart';
+import '../services/support.service.dart';
 import '../services/user.service.dart';
+import '../ui/admin/account_setting/admin_contact_support/admin_contact_support_view.dart';
 import '../ui/admin/account_setting/admin_manage_report_setting/admin_manage_report_setting_view.dart';
 
 @StackedApp(
@@ -71,6 +73,7 @@ import '../ui/admin/account_setting/admin_manage_report_setting/admin_manage_rep
     AdaptiveRoute(page: AdminManageReportSettingView),
     AdaptiveRoute(page: AdminDeleteAccountView),
     AdaptiveRoute(page: AdminTransactionView),
+    AdaptiveRoute(page: AdminContactSupportView),
 
 /**Merchant Journey to be refactored */
     AdaptiveRoute(page: MerchantHomeView),
@@ -92,6 +95,7 @@ import '../ui/admin/account_setting/admin_manage_report_setting/admin_manage_rep
     LazySingleton(classType: UserService),
     LazySingleton(classType: TransactionService),
     FactoryWithParam(classType: LocationService),
+    LazySingleton(classType: SupportService),
   ],
   logger: StackedLogger(),
 )
