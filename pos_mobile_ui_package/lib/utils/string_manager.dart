@@ -93,6 +93,15 @@ class AppString {
   static String submitFeedback = "Submit Feedback";
 
   static String transactions = "Transactions";
+
+  static String contactSupportTeamText = "Contact Support Team";
+
+  static String titleText = "Title";
+  static String titlePlaceholderText = "Enter a title here...";
+  static String submitText = "Submit";
+
+  static String messageText = "Message";
+  static String messagePlaceholderText = "Enter message here...";
   static String verifyEmailSubText(String email) =>
       "We sent a six-digit code to your email address ($email) for verification.";
   static const String otpCodeText = "OTP Code";

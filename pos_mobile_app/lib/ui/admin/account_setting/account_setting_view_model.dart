@@ -49,6 +49,9 @@ class AccountSettingViewModel extends BaseViewModel {
   navigateToHowItWorks() =>
       _navigationService.navigateTo(Routes.adminHowItWorksView);
 
+  navigateToContactSupport() =>
+      _navigationService.navigateTo(Routes.adminContactSupportView);
+
   navigateToChangePassword() =>
       _navigationService.navigateTo(Routes.adminChangePasswordView);
 

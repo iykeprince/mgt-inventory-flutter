@@ -65,7 +65,7 @@ class AccountSettingView extends StatelessWidget {
                       ),
                       ProfileItem(
                         title: AppString.needHelpText,
-                        onTap: () {},
+                        onTap: model.navigateToContactSupport,
                       ),
                       ProfileItem(
                         title: AppString.termsOfUseAndPrivacyPolicy,
