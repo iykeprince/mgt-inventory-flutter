@@ -15,11 +15,12 @@ class AdminService with ReactiveServiceMixin {
 
   AdminService() {
     listenToReactiveValues([
-      _branches,
-      _merchants,
-      _stat,
-      _accountBalances,
-      _accounts,
+      branches,
+      merchants,
+      stat,
+      accountBalances,
+      accounts,
+      selectedBranch,
     ]);
   }
   final ReactiveValue<List<Branch>?> _branches =
@@ -31,12 +32,14 @@ class AdminService with ReactiveServiceMixin {
   final ReactiveValue<List<Account>> _accounts =
       ReactiveValue<List<Account>>([]);
   final ReactiveValue<AdminStat?> _stat = ReactiveValue<AdminStat?>(null);
+  final ReactiveValue<Branch?> _selectedBranch = ReactiveValue<Branch?>(null);
 
   List<Branch>? get branches => _branches.value;
   List<Merchant> get merchants => _merchants.value;
   List<Balance> get accountBalances => _accountBalances.value;
   List<Account> get accounts => _accounts.value;
   AdminStat? get stat => _stat.value;
+  Branch? get selectedBranch => _selectedBranch.value;
 
   Future<AdminStat> getStat(String? id) async {
     String url;
@@ -150,5 +153,9 @@ class AdminService with ReactiveServiceMixin {
   Future<Admin> deleteAdminAccount(String id) async {
     var response = await dioClient.delete('/admin/remove/$id');
     return Admin.fromJson(response.data);
+  }
+
+  void setSelectedBranch(Branch? selectedBranch) {
+    _selectedBranch.value = selectedBranch;
   }
 }

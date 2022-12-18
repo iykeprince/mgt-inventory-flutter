@@ -10,3 +10,6 @@ const DASBHOARD_VIEW_INDEX = 0;
 const HISTORY_VIEW_INDEX = 1;
 const REPORT_VIEW_INDEX = 3;
 const PROFILE_VIEW_INDEX = 4;
+
+const String BRANCHES = 'branches';
+const String SELECTED_BRANCH = 'selectedBranch';

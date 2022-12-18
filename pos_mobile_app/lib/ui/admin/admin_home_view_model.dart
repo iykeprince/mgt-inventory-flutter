@@ -13,6 +13,7 @@ import '../../models/merchant.model.dart';
 import '../../models/user.model.dart';
 import '../../services/admin.service.dart';
 import '../../services/authentication.service.dart';
+import '../../utils/pos_contants.dart';
 
 const String ADMIN_FETCH_BRANCH = "ADMIN_FETCH_BRANCH";
 const String ADMIN_FETCH_MERCHANT = "ADMIN_FETCH_MERCHANT";
@@ -95,12 +96,10 @@ class AdminHomeViewModel extends IndexTrackingViewModel {
             'You haven’t added branch details to your account yet.\n You need to add branch details in order to be able to register your merchants accounts.',
         mainButtonTitle: "Add Branch Details",
         secondaryButtonTitle: "Log New Transaction",
-        data: branches
-        // description:
-        //     'This sheet is a custom built bottom sheet UI that allows you to show it from any service or viewmodel.',
-        // mainButtonTitle: 'Awesome!',
-        // secondaryButtonTitle: 'This is cool',
-        );
+        data: {
+          BRANCHES: branches,
+          SELECTED_BRANCH: _adminService.selectedBranch,
+        });
     if (confirmationResponse?.data is bool && confirmationResponse?.data) {
       _showBranches = false;
 
@@ -108,16 +107,19 @@ class AdminHomeViewModel extends IndexTrackingViewModel {
     }
     if (confirmationResponse?.data is Branch) {
       //selected branch do something with
-
+      _showBranches = false;
+      print(
+          'confirm fresponse: ${(confirmationResponse?.data as Branch).toJson()}');
+      notifyListeners();
     }
     if (confirmationResponse?.data is String &&
         confirmationResponse?.data == "ADD_NEW_BRANCH") {
       print('add new branch');
       _navigationService.navigateTo(Routes.addBranchView);
       _showBranches = false;
-      notifyListeners();
     }
-    print('confirm fresponse: ${confirmationResponse?.data}');
+
+    notifyListeners();
     /**
      * 
      */

@@ -8,26 +8,23 @@ import 'package:pos_mobile_app/enums/transaction_status.dart';
 import 'package:pos_mobile_app/services/admin.service.dart';
 import 'package:pos_mobile_app/services/transaction.service.dart';
 import 'package:pos_mobile_app/ui/admin/history/history_view.dart';
+import 'package:pos_mobile_app/ui/shared/components/transaction_filter/transaction_filter_view.dart';
 import 'package:pos_mobile_ui_package/utils/colors.dart';
 import 'package:pos_mobile_ui_package/utils/font_styles.dart';
 import 'package:pos_mobile_ui_package/utils/text_styles.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../models/branch.model.dart';
+import '../../../models/date-filter.model.dart';
 import '../../../models/transaction.model.dart';
 
 class AdminHistoryViewModel extends BaseViewModel {
-  final _adminService = locator<AdminService>();
   final _transactionService = locator<TransactionService>();
-  String? _selectedValue;
-  DateFilter? _selectedFilter;
+  DateFilter? _selectedFilter = DATE_FILTER_LIST[0];
 
   String? _selectedTransactionType;
   String? get selectedTransactionType => _selectedTransactionType;
-  String? get selectedValue => _selectedValue;
   DateFilter? get selectedFilter => _selectedFilter;
-
-  List<Branch>? get branches => _adminService.branches;
 
   List<Transaction>? get transactions => _transactionService.transactions;
 
@@ -42,28 +39,6 @@ class AdminHistoryViewModel extends BaseViewModel {
     _selectedTransactionType = value;
     filterTransaction(df: selectedFilter!, type: value);
     notifyListeners();
-  }
-
-  handleSelectedValue(String? value) {
-    _selectedValue = value;
-    print('selected value: $value');
-    Branch branch = branches!.firstWhere(
-        (element) => element.name!.toLowerCase() == value!.toLowerCase());
-    filterTransaction(
-      df: selectedFilter!,
-      branchId: branch.id,
-    );
-    notifyListeners();
-  }
-
-  setSelectedFilter(DateFilter filter) {
-    _selectedFilter = filter;
-    filterTransaction(df: filter);
-    notifyListeners();
-  }
-
-  List<ListTileWidget> cardLists(BuildContext context) {
-    return [];
   }
 
   void filterTransaction(
@@ -95,5 +70,10 @@ class AdminHistoryViewModel extends BaseViewModel {
       setBusy(false);
       notifyListeners();
     }
+  }
+
+  void setSelectedFilter(DateFilter? df) {
+    _selectedFilter = df;
+    notifyListeners();
   }
 }

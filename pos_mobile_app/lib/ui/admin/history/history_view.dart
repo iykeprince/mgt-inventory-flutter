@@ -5,6 +5,8 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pos_mobile_app/dummy.widget/listtile_widget.dart';
+import 'package:pos_mobile_app/ui/shared/components/branch_dropdown/branch_dropdown_view.dart';
+import 'package:pos_mobile_app/ui/shared/components/transaction_filter/transaction_filter_view.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 
@@ -27,7 +29,7 @@ class AdminHistoryView extends StatelessWidget {
                 color: ColorManager.kDarkColor,
                 fontSize: FontSize.s20,
               ),
-              trailing: const HistoryBranchDropdown(),
+              trailing: const BranchDropdownView(),
               automaticallyImplyLeading: false,
               statusBarBrightness: Brightness.light,
               statusBarColor: ColorManager.kDarkBlue,
@@ -42,7 +44,7 @@ class AdminHistoryView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: AppSize.s12),
-                      FilterBoxWidget(),
+                      TransactionFilterView(),
                       HistoryAnalyticWidget(),
                       HistoryTransactionWidget(),
                     ]),
@@ -50,82 +52,6 @@ class AdminHistoryView extends StatelessWidget {
             ),
           ));
         });
-  }
-}
-
-class HistoryBranchDropdown extends ViewModelWidget<AdminHistoryViewModel> {
-  const HistoryBranchDropdown({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, AdminHistoryViewModel model) {
-    return PosDropDownField(
-      hint: 'All',
-      dropdownItems: [
-        'All',
-        ...model.branches!.map((e) => e.name!).toList(),
-      ],
-      value: model.selectedValue,
-      valueStyle: getBoldStyle(
-        color: ColorManager.kPrimaryColor,
-      ),
-      onChanged: model.handleSelectedValue,
-    );
-  }
-}
-
-class DateFilter {
-  int? day;
-  int? hour;
-  int? minute;
-  int? seconds;
-  String text;
-
-  DateFilter({
-    this.day,
-    this.hour,
-    this.minute,
-    this.seconds,
-    required this.text,
-  });
-}
-
-class FilterBoxWidget extends ViewModelWidget<AdminHistoryViewModel> {
-  FilterBoxWidget({Key? key}) : super(key: key);
-
-  // final List<String> filterList = ['30 days', '3 month', '1 year'];
-  final List<DateFilter> dateFilterList = [
-    DateFilter(day: 30, text: '30 days'),
-    DateFilter(day: 90, text: '3 months'),
-    DateFilter(day: 365, text: '1 year')
-  ];
-
-  @override
-  Widget build(BuildContext context, AdminHistoryViewModel model) {
-    return Container(
-      height: 36,
-      margin: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
-      child: ListView.builder(
-        itemCount: dateFilterList.length + 1,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (BuildContext context, int index) {
-          if (index == dateFilterList.length) {
-            return GestureDetector(
-              onTap: () {
-                print('hello tapped');
-              },
-              child: SvgPicture.asset(
-                'assets/images/filter_icon.svg',
-                fit: BoxFit.cover,
-              ),
-            );
-          }
-          DateFilter item = dateFilterList[index];
-          return HistoryFilterItem(
-            item: item,
-          );
-        },
-      ),
-    );
   }
 }
 
@@ -246,50 +172,6 @@ class HistoryAnalyticWidget extends ViewModelWidget<AdminHistoryViewModel> {
             ]),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class HistoryFilterItem extends ViewModelWidget<AdminHistoryViewModel> {
-  const HistoryFilterItem({
-    Key? key,
-    required this.item,
-  }) : super(key: key);
-  final DateFilter item;
-
-  @override
-  Widget build(BuildContext context, AdminHistoryViewModel model) {
-    return GestureDetector(
-      onTap: () {
-        model.setSelectedFilter(item);
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          vertical: AppPadding.p8,
-          horizontal: AppPadding.p12,
-        ),
-        margin: const EdgeInsets.only(right: AppSize.s12),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppSize.s100),
-          color: model.selectedFilter == item
-              ? ColorManager.kLightIndigo
-              : Colors.transparent,
-        ),
-        child: Center(
-          child: Text(
-            item.text,
-            style: TextStyle(
-              color: model.selectedFilter == item
-                  ? ColorManager.kPrimaryColor
-                  : ColorManager.kTurquoiseDarkColor,
-              fontSize: FontSize.s14,
-              fontWeight: model.selectedFilter == item
-                  ? FontWeight.bold
-                  : FontWeight.w400,
-            ),
-          ),
-        ),
       ),
     );
   }
