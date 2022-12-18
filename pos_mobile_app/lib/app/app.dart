@@ -32,17 +32,16 @@ import 'package:pos_mobile_app/ui/merchant/merchant_home_view.dart';
 import 'package:pos_mobile_app/ui/merchant/profile/changepassword/change_password_view.dart';
 import 'package:pos_mobile_app/ui/merchant/profile/editprofile/edit_profile_view.dart';
 import 'package:pos_mobile_app/ui/merchant/profile/howItWorks/how_it_works_view.dart';
-import 'package:pos_mobile_app/ui/onboarding/onboarding_view.dart';
 import 'package:pos_mobile_app/ui/splash/splash_view.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../services/merchant.service.dart';
 import '../services/support.service.dart';
 import '../services/user.service.dart';
-import '../ui/admin/account_setting/admin_contact_support/admin_contact_support_view.dart';
 import '../ui/admin/account_setting/admin_manage_report_setting/admin_manage_report_setting_view.dart';
+import '../ui/shared/contact_support/contact_support_view.dart';
+import '../ui/shared/onboarding/onboarding_view.dart';
 
 @StackedApp(
   routes: [
@@ -58,7 +57,8 @@ import '../ui/admin/account_setting/admin_manage_report_setting/admin_manage_rep
     AdaptiveRoute(page: VerifyMerchantView),
     AdaptiveRoute(page: VerifyMerchantSuccessView),
     AdaptiveRoute(page: CompeleteMerchantRegister),
-/**Admin journey to be refactored */
+
+    /**Admin journey to be refactored */
     AdaptiveRoute(page: AdminHomeView),
     AdaptiveRoute(page: AccountSettingView),
     AdaptiveRoute(page: AdminEditProfileView),
@@ -73,9 +73,9 @@ import '../ui/admin/account_setting/admin_manage_report_setting/admin_manage_rep
     AdaptiveRoute(page: AdminManageReportSettingView),
     AdaptiveRoute(page: AdminDeleteAccountView),
     AdaptiveRoute(page: AdminTransactionView),
-    AdaptiveRoute(page: AdminContactSupportView),
+    AdaptiveRoute(page: ContactSupportView),
 
-/**Merchant Journey to be refactored */
+    /**Merchant Journey to be refactored */
     AdaptiveRoute(page: MerchantHomeView),
     AdaptiveRoute(page: EditProfileView),
     AdaptiveRoute(page: HowItWorksView),

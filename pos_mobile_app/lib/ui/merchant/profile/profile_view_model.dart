@@ -23,6 +23,9 @@ class ProfileViewModel extends BaseViewModel {
   navigateToChangePassword() =>
       _navigationService.navigateTo(Routes.changePasswordView);
 
+  navigateToContactSupport() =>
+      _navigationService.navigateTo(Routes.contactSupportView);
+
   logout() async {
     await _authService.logout();
     _navigationService.pushNamedAndRemoveUntil(Routes.authView);

@@ -92,7 +92,7 @@ class ProfileView extends StatelessWidget {
                       ),
                       ProfileItem(
                           title: AppString.needHelpText,
-                          onTap: () {},
+                          onTap: model.navigateToContactSupport,
                           showBottomBorder: false),
                       const SizedBox(
                         height: AppSize.s32,

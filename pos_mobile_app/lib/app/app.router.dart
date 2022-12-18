@@ -15,8 +15,6 @@ import 'package:pos_mobile_app/ui/admin/account_setting/admin_branch_detail/admi
     as _i24;
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_change_password/admin_change_password_view.dart'
     as _i19;
-import 'package:pos_mobile_app/ui/admin/account_setting/admin_contact_support/admin_contact_support_view.dart'
-    as _i28;
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_delete_account/admin_delete_account_view.dart'
     as _i26;
 import 'package:pos_mobile_app/ui/admin/account_setting/admin_edit_profile/admin_edit_profile_view.dart'
@@ -67,7 +65,10 @@ import 'package:pos_mobile_app/ui/merchant/profile/editprofile/edit_profile_view
     as _i30;
 import 'package:pos_mobile_app/ui/merchant/profile/howItWorks/how_it_works_view.dart'
     as _i31;
-import 'package:pos_mobile_app/ui/onboarding/onboarding_view.dart' as _i3;
+import 'package:pos_mobile_app/ui/shared/contact_support/contact_support_view.dart'
+    as _i28;
+import 'package:pos_mobile_app/ui/shared/onboarding/onboarding_view.dart'
+    as _i3;
 import 'package:pos_mobile_app/ui/splash/splash_view.dart' as _i2;
 import 'package:stacked/stacked.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i38;
@@ -127,7 +128,7 @@ class Routes {
 
   static const adminTransactionView = '/admin-transaction-view';
 
-  static const adminContactSupportView = '/admin-contact-support-view';
+  static const contactSupportView = '/contact-support-view';
 
   static const merchantHomeView = '/merchant-home-view';
 
@@ -168,7 +169,7 @@ class Routes {
     adminManageReportSettingView,
     adminDeleteAccountView,
     adminTransactionView,
-    adminContactSupportView,
+    contactSupportView,
     merchantHomeView,
     editProfileView,
     howItWorksView,
@@ -285,8 +286,8 @@ class StackedRouter extends _i1.RouterBase {
       page: _i27.AdminTransactionView,
     ),
     _i1.RouteDef(
-      Routes.adminContactSupportView,
-      page: _i28.AdminContactSupportView,
+      Routes.contactSupportView,
+      page: _i28.ContactSupportView,
     ),
     _i1.RouteDef(
       Routes.merchantHomeView,
@@ -498,9 +499,9 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
-    _i28.AdminContactSupportView: (data) {
+    _i28.ContactSupportView: (data) {
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i28.AdminContactSupportView(),
+        builder: (context) => const _i28.ContactSupportView(),
         settings: data,
       );
     },
@@ -1051,14 +1052,14 @@ extension NavigatorStateExtension on _i38.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToAdminContactSupportView([
+  Future<dynamic> navigateToContactSupportView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return navigateTo<dynamic>(Routes.adminContactSupportView,
+    return navigateTo<dynamic>(Routes.contactSupportView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:pos_mobile_app/ui/onboarding/onboarding_view_model.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
+
+import 'onboarding_view_model.dart';
 
 class OnboardView extends StatefulWidget {
   OnboardView({Key? key}) : super(key: key);
