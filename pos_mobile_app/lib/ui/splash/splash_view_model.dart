@@ -4,7 +4,6 @@ import 'package:pos_mobile_app/app/app.logger.dart';
 import 'package:pos_mobile_app/app/app.router.dart';
 import 'package:pos_mobile_app/models/user.model.dart';
 import 'package:pos_mobile_app/services/authentication.service.dart';
-import 'package:pos_mobile_app/ui/onboarding/onboarding_view.dart';
 import 'package:pos_mobile_app/utils/pos_contants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';

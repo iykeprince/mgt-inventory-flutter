@@ -4,15 +4,15 @@ import 'package:pos_mobile_app/utils/helpers.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 
-import 'admin_contact_support_view_model.dart';
+import 'contact_support_view_model.dart';
 
-class AdminContactSupportView extends StatelessWidget {
-  const AdminContactSupportView({Key? key}) : super(key: key);
+class ContactSupportView extends StatelessWidget {
+  const ContactSupportView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<AdminContactSupportViewModel>.nonReactive(
-      viewModelBuilder: () => AdminContactSupportViewModel(),
+    return ViewModelBuilder<ContactSupportViewModel>.nonReactive(
+      viewModelBuilder: () => ContactSupportViewModel(),
       onModelReady: (model) {},
       builder: (context, model, child) => Scaffold(
         backgroundColor: ColorManager.kWhiteColor,
@@ -25,11 +25,11 @@ class AdminContactSupportView extends StatelessWidget {
         body: KeyboardAware(
           child: SingleChildScrollView(
               child: Column(
-            children: [
-              const SizedBox(
+            children: const [
+              SizedBox(
                 height: AppSize.s24,
               ),
-              const AdminContactSupportFormView()
+              AdminContactSupportFormView()
             ],
           )),
         ),
@@ -39,11 +39,11 @@ class AdminContactSupportView extends StatelessWidget {
 }
 
 class AdminContactSupportFormView
-    extends ViewModelWidget<AdminContactSupportViewModel> {
+    extends ViewModelWidget<ContactSupportViewModel> {
   const AdminContactSupportFormView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, AdminContactSupportViewModel model) {
+  Widget build(BuildContext context, ContactSupportViewModel model) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppPadding.p12),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

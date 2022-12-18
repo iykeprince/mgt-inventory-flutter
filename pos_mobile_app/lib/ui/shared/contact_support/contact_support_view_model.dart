@@ -18,7 +18,7 @@ const String SUPPORT_CATEGORY_VALIDATOR = 'SUPPORT_CATEGORY_VALIDATOR';
 const String SUPPORT_TITLE_VALIDATOR = 'SUPPORT_TITLE_VALIDATOR';
 const String SUPPORT_MESSAGE_VALIDATOR = 'SUPPORT_MESSAGE_VALIDATOR';
 
-class AdminContactSupportViewModel extends BaseViewModel {
+class ContactSupportViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _supportService = locator<SupportService>();
   ImagePicker _picker = ImagePicker();
