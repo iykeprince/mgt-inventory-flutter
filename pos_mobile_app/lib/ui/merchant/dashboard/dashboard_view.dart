@@ -36,6 +36,7 @@ class DashboardView extends StatelessWidget {
                   Column(
                     // mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
+                      const SizedBox(height: AppSize.s20),
                       SizedBox(
                         height: AppSize.s184,
                         child: PageView.builder(

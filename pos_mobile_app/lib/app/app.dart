@@ -1,6 +1,7 @@
 import 'package:pos_mobile_app/client/dio_client.dart';
 import 'package:pos_mobile_app/services/admin.service.dart';
 import 'package:pos_mobile_app/services/authentication.service.dart';
+import 'package:pos_mobile_app/services/expense.service.dart';
 import 'package:pos_mobile_app/services/location.service.dart';
 import 'package:pos_mobile_app/services/transaction.service.dart';
 import 'package:pos_mobile_app/ui/admin/account_setting/account_setting_view.dart';
@@ -100,6 +101,7 @@ import '../ui/shared/onboarding/onboarding_view.dart';
     FactoryWithParam(classType: LocationService),
     LazySingleton(classType: SupportService),
     LazySingleton(classType: SharedService),
+    LazySingleton(classType: ExpenseService),
   ],
   logger: StackedLogger(),
 )
