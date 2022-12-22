@@ -61,6 +61,9 @@ class LoginViewModel extends FormViewModel {
 
   navigateToRegisterNow() => _navigationService.back();
 
+  navigateToForgotPassword() =>
+      _navigationService.navigateTo(Routes.forgotPasswordView);
+
   @override
   void setFormStatus() {
     // TODO: implement setFormStatus

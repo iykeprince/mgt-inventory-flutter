@@ -15,6 +15,7 @@ class DatePicker extends StatefulWidget {
   final DateTime? initialDate;
   final DateTime? firstDate;
   final DateTime? lastDate;
+  final IconData? suffixIcon;
 
   DatePicker({
     Key? key,
@@ -29,6 +30,7 @@ class DatePicker extends StatefulWidget {
     this.initialDate,
     this.firstDate,
     this.lastDate,
+    this.suffixIcon,
   });
 
   @override
@@ -82,9 +84,10 @@ class _DatePickerState extends State<DatePicker> {
           Util.removeFocus(context);
           showCalender(context);
         },
-        child: const Icon(
-          Icons.calendar_today_outlined,
-          size: 16,
+        child: Icon(
+          widget.suffixIcon ?? Icons.calendar_month_sharp,
+          size: AppSize.s24,
+          color: ColorManager.kDarkColor,
         ),
       ),
       label: widget.label ?? '',

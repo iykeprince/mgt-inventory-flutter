@@ -1,6 +1,7 @@
 enum BottomSheetType {
   normal,
   openBalance,
+  closeBalance,
   createLogs,
   createMerchant,
   feedbackSurvey,

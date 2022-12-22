@@ -20,6 +20,7 @@ import 'package:pos_mobile_app/ui/auth/auth_view.dart';
 import 'package:pos_mobile_app/ui/auth/compeleteMerchantRegistration/compelete_merchant_register.dart';
 import 'package:pos_mobile_app/ui/auth/createAccountSuccess/create_account_success_view.dart';
 import 'package:pos_mobile_app/ui/auth/createAdminBusiness/create_admin_business.dart';
+import 'package:pos_mobile_app/ui/auth/forgotPassword/forgot_password_view.dart';
 import 'package:pos_mobile_app/ui/auth/login/login_view.dart';
 import 'package:pos_mobile_app/ui/auth/registerMerchant/register_merchant_view.dart';
 import 'package:pos_mobile_app/ui/auth/verifyAdmin/verify_admin_view.dart';
@@ -37,6 +38,7 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../services/merchant.service.dart';
+import '../services/shared.service.dart';
 import '../services/support.service.dart';
 import '../services/user.service.dart';
 import '../ui/admin/account_setting/admin_manage_report_setting/admin_manage_report_setting_view.dart';
@@ -49,6 +51,7 @@ import '../ui/shared/onboarding/onboarding_view.dart';
     AdaptiveRoute(page: OnboardView),
     AdaptiveRoute(page: AuthView),
     AdaptiveRoute(page: LoginView),
+    AdaptiveRoute(page: ForgotPasswordView),
     AdaptiveRoute(page: RegisterMerchantView),
     AdaptiveRoute(page: VerifyAdminView),
     AdaptiveRoute(page: VerifyAdminSuccessView),
@@ -96,6 +99,7 @@ import '../ui/shared/onboarding/onboarding_view.dart';
     LazySingleton(classType: TransactionService),
     FactoryWithParam(classType: LocationService),
     LazySingleton(classType: SupportService),
+    LazySingleton(classType: SharedService),
   ],
   logger: StackedLogger(),
 )

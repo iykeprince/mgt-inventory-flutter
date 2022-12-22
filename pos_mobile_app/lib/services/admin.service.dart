@@ -31,6 +31,8 @@ class AdminService with ReactiveServiceMixin {
       ReactiveValue<List<Balance>>([]);
   final ReactiveValue<List<Account>> _accounts =
       ReactiveValue<List<Account>>([]);
+  final ReactiveValue<List<Account>> _branchAccounts =
+      ReactiveValue<List<Account>>([]);
   final ReactiveValue<AdminStat?> _stat = ReactiveValue<AdminStat?>(null);
   final ReactiveValue<Branch?> _selectedBranch = ReactiveValue<Branch?>(null);
 
@@ -38,6 +40,7 @@ class AdminService with ReactiveServiceMixin {
   List<Merchant> get merchants => _merchants.value;
   List<Balance> get accountBalances => _accountBalances.value;
   List<Account> get accounts => _accounts.value;
+
   AdminStat? get stat => _stat.value;
   Branch? get selectedBranch => _selectedBranch.value;
 

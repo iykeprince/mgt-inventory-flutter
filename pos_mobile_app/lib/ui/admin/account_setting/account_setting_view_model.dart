@@ -9,10 +9,13 @@ import 'package:pos_mobile_app/models/admin.model.dart';
 import 'package:pos_mobile_app/services/admin.service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../app/app.locator.dart';
 import '../../../models/user.model.dart';
 import '../../../services/authentication.service.dart';
+
+Uri url = Uri.parse("https://flutter.dev");
 
 class AccountSettingViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
@@ -57,6 +60,12 @@ class AccountSettingViewModel extends BaseViewModel {
 
   navigateToDeleteAccount() =>
       _navigationService.navigateTo(Routes.adminDeleteAccountView);
+
+  openTermsOfUseAndPrivacyPolicy() async {
+    if (!await launchUrl(url)) {
+      throw HttpException("Could not launch $url");
+    }
+  }
 
   logout() async {
     await _authService.logout();
