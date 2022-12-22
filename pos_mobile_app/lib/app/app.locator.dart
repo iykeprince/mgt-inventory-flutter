@@ -15,6 +15,7 @@ import 'package:stacked_services/src/snackbar/snackbar_service.dart';
 import '../client/dio_client.dart';
 import '../services/admin.service.dart';
 import '../services/authentication.service.dart';
+import '../services/expense.service.dart';
 import '../services/location.service.dart';
 import '../services/merchant.service.dart';
 import '../services/shared.service.dart';
@@ -45,4 +46,5 @@ Future<void> setupLocator(
       (param1, param2) => LocationService(param1));
   locator.registerLazySingleton(() => SupportService());
   locator.registerLazySingleton(() => SharedService());
+  locator.registerLazySingleton(() => ExpenseService());
 }
