@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pos_mobile_app/app/app.locator.dart';
+import 'package:pos_mobile_app/services/admin.service.dart';
+import 'package:pos_mobile_app/utils/pos_contants.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
+import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../models/branch.model.dart';
@@ -17,45 +21,54 @@ class SwitchBranchDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ShowDialogContainer(
-      title: '${dialogRequest!.title}',
-      child: Column(
-        children: [
-          SizedBox(
-            height: 342,
-            child: ListView.builder(
-              itemCount: (dialogRequest!.data as List<Branch>).length,
-              itemBuilder: (BuildContext context, int index) {
-                Branch branch = (dialogRequest!.data as List<Branch>)[index];
-                return BranchCardItem(
-                  item: branch,
-                  // selectedItem: ,
-                  onItemSelected: (branch) {
-                    DialogResponse(data: branch);
-                  },
-                );
-              },
+    return ViewModelBuilder<SwitchBranchViewModel>.reactive(
+        viewModelBuilder: () => SwitchBranchViewModel(),
+        builder: (context, model, child) {
+          return ShowDialogContainer(
+            title: '${dialogRequest!.title}',
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 342,
+                  child: ListView.builder(
+                    itemCount:
+                        (dialogRequest!.data[BRANCHES] as List<Branch>).length,
+                    itemBuilder: (BuildContext context, int index) {
+                      Branch branch = (dialogRequest!.data[BRANCHES]
+                          as List<Branch>)[index];
+                      return BranchCardItem(
+                        item: branch,
+                        selectedItem: model.selectedBranch ??
+                            dialogRequest?.data[SELECTED_BRANCH],
+                        onItemSelected: (branch) {
+                          model.setSelectedBranch(branch);
+                          onDialogTap!(
+                              DialogResponse(data: branch, confirmed: true));
+                        },
+                      );
+                    },
+                  ),
+                ),
+                PosButton(
+                  onPressed: () => onDialogTap!(
+                    DialogResponse(confirmed: true, data: "ADD_NEW_BRANCH"),
+                  ),
+                  title: AppString.addNewBranch,
+                  borderRadius: 0,
+                  leadingIcon: Icons.add,
+                  leadingIconColor: ColorManager.kPrimaryColor,
+                  buttonTextColor: ColorManager.kPrimaryColor,
+                  fontWeight: FontWeightManager.extraBold,
+                  buttonBgColor: ColorManager.kLightGreen1,
+                  leadingIconSpace: AppSize.s24,
+                )
+              ],
             ),
-          ),
-          PosButton(
             onPressed: () => onDialogTap!(
-              DialogResponse(confirmed: true, data: "ADD_NEW_BRANCH"),
+              DialogResponse(confirmed: true, data: true),
             ),
-            title: AppString.addNewBranch,
-            borderRadius: 0,
-            leadingIcon: Icons.add,
-            leadingIconColor: ColorManager.kPrimaryColor,
-            buttonTextColor: ColorManager.kPrimaryColor,
-            fontWeight: FontWeightManager.extraBold,
-            buttonBgColor: ColorManager.kLightGreen1,
-            leadingIconSpace: AppSize.s24,
-          )
-        ],
-      ),
-      onPressed: () => onDialogTap!(
-        DialogResponse(confirmed: true, data: true),
-      ),
-    );
+          );
+        });
   }
 
   // Widget BranchCardItem(BuildContext context,
@@ -142,44 +155,15 @@ class _BranchCardItemState extends State<BranchCardItem> {
     );
   }
 }
-/**
- * Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          branchCard(context, bgColor: ColorManager.kMidnightBlue, children: [
-            SvgPicture.asset('assets/images/whiteAvatar.svg'),
-            const SizedBox(
-              height: AppSize.s20,
-            ),
-            Text('Iyana-Itire Branch',
-                style: getBoldStyle(
-                    color: ColorManager.kWhiteColor, fontSize: FontSize.s20)),
-            const SizedBox(
-              height: AppSize.s8,
-            ),
-            Text(
-              'Managed by Taiwo Kehinde',
-              style: getRegularStyle(
-                  color: ColorManager.kWhiteColor, fontSize: FontSize.s14),
-            ),
-          ]),
-          branchCard(context, bgColor: ColorManager.kWhiteColor, children: [
-            SvgPicture.asset('assets/images/greyAvatar.svg'),
-            const SizedBox(
-              height: AppSize.s20,
-            ),
-            Text('Iyana-Itire Branch',
-                style: getMediumStyle(
-                    color: ColorManager.kGrey1, fontSize: FontSize.s20)),
-            const SizedBox(
-              height: AppSize.s8,
-            ),
-            Text(
-              'Managed by Taiwo Kehinde',
-              style: getRegularStyle(
-                  color: ColorManager.kGrey1, fontSize: FontSize.s14),
-            ),
-          ]),
-        ],
-      ),
- */
+
+class SwitchBranchViewModel extends BaseViewModel {
+  final _adminService = locator<AdminService>();
+  Branch? _selectedBranch;
+  Branch? get selectedBranch => _selectedBranch;
+
+  void setSelectedBranch(Branch branch) {
+    _selectedBranch = branch;
+    _adminService.setSelectedBranch(branch);
+    notifyListeners();
+  }
+}

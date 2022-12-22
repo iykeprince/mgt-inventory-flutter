@@ -4,6 +4,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pos_mobile_app/dummy.widget/listtile_widget.dart';
+import 'package:pos_mobile_app/ui/shared/components/branch_dropdown/branch_dropdown_view.dart';
 import 'package:pos_mobile_app/utils/helpers.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
@@ -37,7 +38,7 @@ class AnalyticHomeView extends StatelessWidget {
               leadingBottomStyle: getBoldStyle(
                   color: ColorManager.kDarkCharcoal, fontSize: FontSize.s20),
               bottomLeadingText: model.admin?.businessName ?? "",
-              trailing: const BranchDropdownWidget(),
+              trailing: const BranchDropdownView(),
               automaticallyImplyLeading: false,
               statusBarBrightness: Brightness.light,
               statusBarColor: ColorManager.kDarkBlue,
@@ -85,25 +86,6 @@ class AnalyticHomeView extends StatelessWidget {
             ),
           );
         });
-  }
-}
-
-class BranchDropdownWidget extends ViewModelWidget<AnalyticHomeViewModel> {
-  const BranchDropdownWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, AnalyticHomeViewModel model) {
-    return PosDropDownField(
-      hint: 'Select item',
-      dropdownItems: [
-        'All',
-        ...model.branches!.map((e) => e.name!).toList(),
-      ],
-      value: model.selectedValue!,
-      onChanged: model.handleSelectedValue,
-    );
   }
 }
 

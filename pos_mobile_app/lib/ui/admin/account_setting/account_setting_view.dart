@@ -69,7 +69,7 @@ class AccountSettingView extends StatelessWidget {
                       ),
                       ProfileItem(
                         title: AppString.termsOfUseAndPrivacyPolicy,
-                        onTap: () {},
+                        onTap: model.openTermsOfUseAndPrivacyPolicy,
                         showBottomBorder: false,
                       ),
                       ProfileItem(

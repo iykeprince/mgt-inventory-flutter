@@ -133,7 +133,7 @@ class LoginFormView extends ViewModelWidget<LoginViewModel> {
               border: InputBorder.none,
               obscureText: true,
               labelRightItem: TextButton(
-                onPressed: () {},
+                onPressed: model.navigateToForgotPassword,
                 child: Text(AppString.forgotPassword,
                     style: getRegularStyle(
                         color: ColorManager.kSecondaryColor,

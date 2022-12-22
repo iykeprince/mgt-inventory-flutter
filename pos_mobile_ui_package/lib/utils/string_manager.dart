@@ -102,6 +102,15 @@ class AppString {
 
   static String messageText = "Message";
   static String messagePlaceholderText = "Enter message here...";
+  static String forgotYourPasswordText = "Forgot your password?";
+  static String forgotYourPasswordSubText =
+      "Enter your email address below to receive your password reset link.";
+  static String sendResetLinkText = "Send Reset Link";
+  static String returnToLoginText = "Return to Log In";
+  static String resetPassword = "Reset Password";
+
+  static String transactionLogHistoryText = "Transaction Log History";
+  static String noEntryHasBeenMadeToday = "No entry has been made today.";
   static String verifyEmailSubText(String email) =>
       "We sent a six-digit code to your email address ($email) for verification.";
   static const String otpCodeText = "OTP Code";

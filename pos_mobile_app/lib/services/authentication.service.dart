@@ -17,8 +17,8 @@ class AuthenticationService with ReactiveServiceMixin {
 
   AuthenticationService() {
     listenToReactiveValues([
-      _currentBaseUser,
-      _currentMerchantUser,
+      currentUser,
+      currentMerchantUser,
       _currentAdminUser,
       _initialNumberOfBranches
     ]);
@@ -91,6 +91,7 @@ class AuthenticationService with ReactiveServiceMixin {
     Merchant merchant = Merchant.fromJson(response.data);
     _currentMerchantUser.value = merchant;
     //Todo: shared preferences..
+    // print('merchant profile: ${merchant.toJson()}');
     return merchant;
   }
 
@@ -103,13 +104,13 @@ class AuthenticationService with ReactiveServiceMixin {
     return authUser;
   }
 
-  Future<Map> forgotPassword(Map<String, dynamic> formData) async {
+  Future<DefaultResponse> forgotPassword(Map<String, dynamic> formData) async {
     final preferences = await SharedPreferences.getInstance();
     var response = await dioClient.post(
       '/auth/forgot-password',
       data: formData,
     );
-    return response.data;
+    return DefaultResponse.fromJson(response.data);
   }
 
   Future<Auth> updateMerchantProfile(Map<String, dynamic> formData) async {

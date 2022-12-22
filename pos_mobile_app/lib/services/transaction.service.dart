@@ -19,7 +19,7 @@ class TransactionService with ReactiveServiceMixin {
 
   Future<Transaction> createTransaction(Map formData) async {
     var response = await dioClient.post(
-      '/transaction',
+      '/transaction/create',
       data: formData,
     );
     return Transaction.fromJson(response.data);

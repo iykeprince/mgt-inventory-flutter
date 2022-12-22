@@ -28,8 +28,7 @@ class AnalyticHomeViewModel extends BaseViewModel {
   final _transactionService = locator<TransactionService>();
 
   Admin? get admin => _authenticationService.currentAdminUser;
-  String? _selectedValue = 'All';
-  String? get selectedValue => _selectedValue;
+
   AdminStat? _stat;
   AdminStat? get stat => _stat;
   List<Transaction>? get transactions => _transactionService.transactions;
@@ -41,22 +40,12 @@ class AnalyticHomeViewModel extends BaseViewModel {
   navigateToTransactionPage() =>
       _navigationService.navigateTo(Routes.adminTransactionView);
 
-  handleSelectedValue(String? value) async {
-    print('value: $value');
-    _selectedValue = value;
-    notifyListeners();
-    _selectedBranch = branches?.firstWhere(
-      (element) => element.name?.toLowerCase() == value?.toLowerCase(),
-    );
-    await getStat();
+  getTransactions() async {
+    runBusyFuture(getTransactionsRequest(), busyObject: TRANSACTION_REQUEST);
   }
 
   getStat() async {
     runBusyFuture(getStatTask());
-  }
-
-  getTransactions() async {
-    runBusyFuture(getTransactionsRequest(), busyObject: TRANSACTION_REQUEST);
   }
 
   Future<AdminStat?> getStatTask() async {

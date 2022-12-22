@@ -7,11 +7,13 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pos_mobile_app/dummy.widget/listtile_widget.dart';
 import 'package:pos_mobile_app/ui/admin/report/report_view_model.dart';
+import 'package:pos_mobile_app/ui/shared/components/branch_dropdown/branch_dropdown_view.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../models/transaction.model.dart';
 import '../../../utils/helpers.dart';
+import '../../shared/components/transaction_filter/transaction_filter_view.dart';
 import '../dashboard/dasboard_view.dart';
 
 class AdminReportView extends StatelessWidget {
@@ -29,7 +31,7 @@ class AdminReportView extends StatelessWidget {
                 color: ColorManager.kDarkColor,
                 fontSize: FontSize.s20,
               ),
-              trailing: const ReportBranchDropdown(),
+              trailing: const BranchDropdownView(),
               automaticallyImplyLeading: false,
               statusBarBrightness: Brightness.light,
               statusBarColor: ColorManager.kDarkBlue,
@@ -44,7 +46,7 @@ class AdminReportView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: AppSize.s12),
-                      ReportFilterBoxWidget(),
+                      TransactionFilterView(),
                       ReportAnalyticWidget(),
                       ReportTransactionSummaryView(),
                       ReportTransactionGraphView()
@@ -56,65 +58,45 @@ class AdminReportView extends StatelessWidget {
   }
 }
 
-class ReportBranchDropdown extends ViewModelWidget<AdminReportViewModel> {
-  const ReportBranchDropdown({Key? key}) : super(key: key);
+// class ReportFilterBoxWidget extends ViewModelWidget<AdminReportViewModel> {
+//   ReportFilterBoxWidget({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context, AdminReportViewModel model) {
-    return PosDropDownField(
-      hint: 'All',
-      dropdownItems: [
-        'All',
-        ...model.branches!.map((e) => e.name!).toList(),
-      ],
-      value: model.selectedValue,
-      valueStyle: getBoldStyle(
-        color: ColorManager.kPrimaryColor,
-      ),
-      onChanged: model.handleSelectedValue,
-    );
-  }
-}
+//   final List<String> filterList = ['30 days', '3 month', '1 year'];
 
-class ReportFilterBoxWidget extends ViewModelWidget<AdminReportViewModel> {
-  ReportFilterBoxWidget({Key? key}) : super(key: key);
-
-  final List<String> filterList = ['30 days', '3 month', '1 year'];
-
-  @override
-  Widget build(BuildContext context, AdminReportViewModel model) {
-    return Container(
-      height: 36,
-      margin: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
-      child: ListView.builder(
-        itemCount: filterList.length + 1,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (BuildContext context, int index) {
-          if (index == filterList.length) {
-            return GestureDetector(
-              onTap: () {
-                print('hello tapped');
-              },
-              child: SvgPicture.asset(
-                'assets/images/filter_icon.svg',
-                fit: BoxFit.cover,
-              ),
-            );
-          }
-          String item = filterList[index];
-          return HistoryFilterItem(
-            item: item,
-            onFilterSelected: (value) {
-              print('selected: $value');
-              model.setSelectedFilter(value!);
-            },
-            selectedValue: model.selectedFilter,
-          );
-        },
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context, AdminReportViewModel model) {
+//     return Container(
+//       height: 36,
+//       margin: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+//       child: ListView.builder(
+//         itemCount: filterList.length + 1,
+//         scrollDirection: Axis.horizontal,
+//         itemBuilder: (BuildContext context, int index) {
+//           if (index == filterList.length) {
+//             return GestureDetector(
+//               onTap: () {
+//                 print('hello tapped');
+//               },
+//               child: SvgPicture.asset(
+//                 'assets/images/filter_icon.svg',
+//                 fit: BoxFit.cover,
+//               ),
+//             );
+//           }
+//           String item = filterList[index];
+//           return HistoryFilterItem(
+//             item: item,
+//             onFilterSelected: (value) {
+//               print('selected: $value');
+//               model.setSelectedFilter(value!);
+//             },
+//             selectedValue: model.selectedFilter,
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
 
 class ReportAnalyticWidget extends ViewModelWidget<AdminReportViewModel> {
   const ReportAnalyticWidget({Key? key}) : super(key: key);

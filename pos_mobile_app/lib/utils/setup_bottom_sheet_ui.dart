@@ -1,9 +1,10 @@
 import 'package:pos_mobile_app/app/app.locator.dart';
 import 'package:pos_mobile_app/enums/bottom_sheet_type.dart';
+import 'package:pos_mobile_app/sheets/balance_sheet/close_balance.sheet.dart';
 import 'package:pos_mobile_app/sheets/create_logs.dart';
 import 'package:pos_mobile_app/sheets/create_merchant.sheet.dart';
 import 'package:pos_mobile_app/sheets/feedback_survey_sheet.dart';
-import 'package:pos_mobile_app/sheets/open_balance.sheet.dart';
+import 'package:pos_mobile_app/sheets/balance_sheet/open_balance.sheet.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,8 @@ void setupBottomSheetUi() {
         PosBottomSheet(request: sheetRequest, completer: completer),
     BottomSheetType.openBalance: (context, sheetRequest, completer) =>
         OpenBalanceBottomSheet(request: sheetRequest, completer: completer),
+    BottomSheetType.closeBalance: (context, sheetRequest, completer) =>
+        CloseBalanceBottomSheet(request: sheetRequest, completer: completer),
     BottomSheetType.createLogs: (context, sheetRequest, completer) =>
         CreateLogsBottomSheet(request: sheetRequest, completer: completer),
     BottomSheetType.createMerchant: (context, sheetRequest, completer) =>

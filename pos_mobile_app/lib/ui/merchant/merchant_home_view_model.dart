@@ -4,17 +4,24 @@ import 'package:pos_mobile_app/app/app.locator.dart';
 import 'package:pos_mobile_app/app/app.router.dart';
 import 'package:pos_mobile_app/enums/bottom_sheet_type.dart';
 import 'package:pos_mobile_app/models/user.model.dart';
+import 'package:pos_mobile_app/services/merchant.service.dart';
 import 'package:pos_mobile_app/utils/pos_contants.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../../models/merchant.model.dart';
 import '../../services/authentication.service.dart';
+import '../../services/shared.service.dart';
 import '../../utils/http_exception.dart';
+
+const String ADMIN_FETCH_ACCOUNTS = "ADMIN_FETCH_ACCOUNTS";
 
 class MerchantHomeViewModel extends IndexTrackingViewModel {
   final _authService = locator<AuthenticationService>();
+  final _sharedService = locator<SharedService>();
   final _navigationService = locator<NavigationService>();
+  final _merchantService = locator<MerchantService>();
+
   User? get user => _authService.currentUser;
   Merchant? get merchant => _authService.currentMerchantUser;
 
@@ -55,6 +62,11 @@ class MerchantHomeViewModel extends IndexTrackingViewModel {
     try {
       await _authService.getCurrentBaseUser();
       await _authService.getCurrentMerchantUser();
+      if (merchant?.branch?.id != null) {
+        await _merchantService.getCurrentOpeningBalance(merchant!.branch!.id!);
+      } else {
+        //a situtaiton where the merchant is not assigned to a branch...
+      }
     } on DioError catch (exception) {
       throw HttpException(exception.response!.data['message']);
     } finally {
@@ -79,5 +91,12 @@ class MerchantHomeViewModel extends IndexTrackingViewModel {
       default:
         print('profile thing');
     }
+  }
+
+  Future<void> fetchAccounts() async {
+    runBusyFuture(
+      _sharedService.getBranchAccounts(merchant!.branch!.id!),
+      busyObject: ADMIN_FETCH_ACCOUNTS,
+    );
   }
 }
