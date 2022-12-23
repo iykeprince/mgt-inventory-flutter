@@ -15,7 +15,7 @@ import '../../../app/app.locator.dart';
 import '../../../models/user.model.dart';
 import '../../../services/authentication.service.dart';
 
-Uri url = Uri.parse("https://flutter.dev");
+Uri url = Uri.parse("https://pos-app-fe.netlify.app/");
 
 class AccountSettingViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
@@ -29,6 +29,8 @@ class AccountSettingViewModel extends BaseViewModel {
   bool _isUploaded = false;
   double _uploadProgress = 0;
   bool _isUploading = false;
+
+  var selectedMenu;
 
   bool get isUploading => _isUploading;
   bool get isUploaded => _isUploaded;
@@ -72,9 +74,11 @@ class AccountSettingViewModel extends BaseViewModel {
     _navigationService.pushNamedAndRemoveUntil(Routes.authView);
   }
 
+  XFile? _selectedImage;
+  XFile? get selectedImage => _selectedImage;
+
   handleImageSelect() async {
-    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image == null) return;
+    if (selectedImage == null) return;
 
     var response = await _dialogService.showConfirmationDialog(
       // Which builder you'd like to call that was assigned in the builders function above.
@@ -88,7 +92,7 @@ class AccountSettingViewModel extends BaseViewModel {
       setBusy(true);
       notifyListeners();
       print('confirmed response');
-      File file = File(image.path);
+      File file = File(selectedImage!.path);
       String ext = file.path.split('.').last;
       String filename = '${user!.id}.$ext';
       print('filename: $filename');
@@ -123,5 +127,20 @@ class AccountSettingViewModel extends BaseViewModel {
         notifyListeners();
       }
     }
+  }
+
+  Future<void> handleBrowseFileSelect() async {
+    _selectedImage = await _picker.pickImage(source: ImageSource.gallery);
+    handleImageSelect();
+  }
+
+  Future<void> handleGallerySelect() async {
+    _selectedImage = await _picker.pickImage(source: ImageSource.gallery);
+    handleImageSelect();
+  }
+
+  Future<void> handleCameraSelect() async {
+    _selectedImage = await _picker.pickImage(source: ImageSource.camera);
+    handleImageSelect();
   }
 }

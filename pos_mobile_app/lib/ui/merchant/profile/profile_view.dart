@@ -43,7 +43,9 @@ class ProfileView extends StatelessWidget {
                               text: getInitials(model.merchant?.name ?? ''),
                               isEdit: false,
                               color: ColorManager.kPrimaryColor,
-                              onClicked: () {},
+                              onGalleryClicked: model.handleGallerySelect,
+                              onCameraClicked: model.handleCameraSelect,
+                              onBrowseFileClicked: model.handleBrowseFileSelect,
                             ),
                             const SizedBox(
                               height: AppSize.s12,

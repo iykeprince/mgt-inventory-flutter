@@ -110,9 +110,11 @@ class AdminEditProfileViewModel extends BaseViewModel {
     }
   }
 
+  XFile? _selectedImage;
+  XFile? get selectedImage => _selectedImage;
+
   handleImageSelect() async {
-    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image == null) return;
+    if (selectedImage == null) return;
 
     var response = await _dialogService.showConfirmationDialog(
       // Which builder you'd like to call that was assigned in the builders function above.
@@ -123,8 +125,23 @@ class AdminEditProfileViewModel extends BaseViewModel {
       cancelTitle: 'No',
     );
     if (response!.confirmed) {
-      _selectedFile = File(image.path);
+      _selectedFile = File(selectedImage!.path);
     }
+  }
+
+  Future<void> handleBrowseFileSelect() async {
+    _selectedImage = await _picker.pickImage(source: ImageSource.gallery);
+    handleImageSelect();
+  }
+
+  Future<void> handleGallerySelect() async {
+    _selectedImage = await _picker.pickImage(source: ImageSource.gallery);
+    handleImageSelect();
+  }
+
+  Future<void> handleCameraSelect() async {
+    _selectedImage = await _picker.pickImage(source: ImageSource.camera);
+    handleImageSelect();
   }
 
 // ignore: prefer_final_fields

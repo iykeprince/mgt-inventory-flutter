@@ -13,3 +13,7 @@ const PROFILE_VIEW_INDEX = 4;
 
 const String BRANCHES = 'branches';
 const String SELECTED_BRANCH = 'selectedBranch';
+
+const String CAMERA = 'CAMERA';
+const String GALLERY = 'GALLERY';
+const String BROWSE_FILE = 'BROWSE_FILE';

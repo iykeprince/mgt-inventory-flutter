@@ -5,12 +5,18 @@ import 'package:pos_mobile_ui_package/utils/text_styles.dart';
 import 'package:pos_mobile_ui_package/utils/values_manager.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+const String CAMERA = 'CAMERA';
+const String GALLERY = 'GALLERY';
+const String BROWSE_FILE = 'BROWSE_FILE';
+
 class AvatarWidget extends StatelessWidget {
   final String text;
   final String? imgUrl;
   final bool isEdit;
   final Color? color;
-  final VoidCallback onClicked;
+  final VoidCallback? onGalleryClicked;
+  final VoidCallback? onCameraClicked;
+  final VoidCallback? onBrowseFileClicked;
 
   const AvatarWidget({
     Key? key,
@@ -18,7 +24,9 @@ class AvatarWidget extends StatelessWidget {
     this.imgUrl,
     this.isEdit = false,
     this.color,
-    required this.onClicked,
+    required this.onGalleryClicked,
+    required this.onBrowseFileClicked,
+    required this.onCameraClicked,
   }) : super(key: key);
 
   @override
@@ -32,9 +40,33 @@ class AvatarWidget extends StatelessWidget {
           Positioned(
             bottom: 0,
             right: 4,
-            child: GestureDetector(
-              onTap: onClicked,
+            child: PopupMenuButton<String>(
+              initialValue: null,
+              // Callback that sets the selected popup menu item.
               child: buildEditIcon(color!),
+              onSelected: (String item) {
+                if (item == GALLERY) {
+                  onGalleryClicked!();
+                } else if (item == CAMERA) {
+                  onCameraClicked!();
+                } else {
+                  onBrowseFileClicked!();
+                }
+              },
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                const PopupMenuItem<String>(
+                  value: CAMERA,
+                  child: Text('Take a Photo'),
+                ),
+                const PopupMenuItem<String>(
+                  value: GALLERY,
+                  child: Text('Select from Photo Library'),
+                ),
+                const PopupMenuItem<String>(
+                  value: BROWSE_FILE,
+                  child: Text('Browse File'),
+                ),
+              ],
             ),
           ),
         ],

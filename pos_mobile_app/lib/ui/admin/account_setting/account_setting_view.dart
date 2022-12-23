@@ -121,7 +121,10 @@ class ProfileAvatarWidget extends ViewModelWidget<AccountSettingViewModel> {
             children: [
               AvatarWidget(
                 imgUrl: model.admin?.imgUrl,
-                onClicked: model.handleImageSelect,
+                // onClicked: model.handleImageSelect,
+                onGalleryClicked: model.handleGallerySelect,
+                onCameraClicked: model.handleCameraSelect,
+                onBrowseFileClicked: model.handleBrowseFileSelect,
                 text: getInitials(model.admin?.businessName ?? ''),
                 isEdit: false,
                 color: ColorManager.kPrimaryColor,

@@ -38,7 +38,9 @@ class EditProfileView extends StatelessWidget {
                 text: getInitials(model.merchant?.name ?? ''),
                 isEdit: true,
                 color: ColorManager.kPrimaryColor,
-                onClicked: () {},
+                onGalleryClicked: model.handleGallerySelect,
+                onCameraClicked: model.handleCameraSelect,
+                onBrowseFileClicked: model.handleBrowseFileSelect,
               ),
               const SizedBox(
                 height: AppSize.s12,
