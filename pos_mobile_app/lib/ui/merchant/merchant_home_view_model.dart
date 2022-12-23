@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:pos_mobile_app/app/app.locator.dart';
@@ -68,7 +70,8 @@ class MerchantHomeViewModel extends IndexTrackingViewModel {
         //a situtaiton where the merchant is not assigned to a branch...
       }
     } on DioError catch (exception) {
-      throw HttpException(exception.response!.data['message']);
+      // throw HttpException(exception.response!.data['message']);
+      log('${exception.response!.data['message']}');
     } finally {
       notifyListeners();
     }

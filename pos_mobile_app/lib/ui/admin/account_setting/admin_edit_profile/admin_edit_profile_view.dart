@@ -41,7 +41,9 @@ class AdminEditProfileView extends StatelessWidget {
                 isEdit: true,
                 color: ColorManager.kPrimaryColor,
                 imgUrl: model.admin?.imgUrl,
-                onClicked: model.handleImageSelect,
+                onGalleryClicked: model.handleGallerySelect,
+                onCameraClicked: model.handleCameraSelect,
+                onBrowseFileClicked: model.handleBrowseFileSelect,
               ),
               const SizedBox(
                 height: AppSize.s12,
