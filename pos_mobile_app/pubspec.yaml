@@ -39,7 +39,6 @@ dependencies:
   logger:
   pos_mobile_ui_package:
     path: ../pos_mobile_ui_package
-  storybook_flutter: ^0.11.1
   flutter_svg: ^1.1.0
   fluttertoast: ^8.1.1
   timelines: ^0.1.0
@@ -52,15 +51,6 @@ dependencies:
   firebase_core: ^2.4.0
   firebase_storage: ^11.0.7
   url_launcher: ^6.1.7
-  # firebase_core: ^1.12.0
-  # firebase_crashlytics:
-  # firebase_storage:
-
-# dependency_overrides:
-#   firebase_core_platform_interface: 4.5.1
-# dependency_overrides:
-#   firebase_crashlytics_platform_interface: 3.1.13
-#   firebase_storage_platform_interface: 4.0.14
 
 dev_dependencies:
   flutter_launcher_icons: ^0.11.0
@@ -70,8 +60,6 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   build_runner:
   stacked_generator:
-  widgetbook:
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 flutter_icons:

@@ -11,7 +11,8 @@ class BranchDropdownViewModel extends BaseViewModel {
   final _adminService = locator<AdminService>();
 
   String? _selectedValue = 'All';
-  String? get selectedValue => _selectedValue;
+  String? get selectedValue =>
+      _adminService.selectedBranch?.name ?? _selectedValue;
 
   Branch? _selectedBranch;
   Branch? get selectedBranch => _selectedBranch;

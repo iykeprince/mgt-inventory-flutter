@@ -63,8 +63,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '982984562092',
     projectId: 'pos-app-e85e4',
     storageBucket: 'pos-app-e85e4.appspot.com',
-    androidClientId: '982984562092-7bhsklbmipfggqk8v9k9q2eln9euoeso.apps.googleusercontent.com',
-    iosClientId: '982984562092-t2v6f702fhstau64m11r2087ab4po3df.apps.googleusercontent.com',
+    androidClientId:
+        '982984562092-7bhsklbmipfggqk8v9k9q2eln9euoeso.apps.googleusercontent.com',
+    iosClientId:
+        '982984562092-t2v6f702fhstau64m11r2087ab4po3df.apps.googleusercontent.com',
     iosBundleId: 'com.spartanmedia.pos.posMobileApp',
   );
 }
