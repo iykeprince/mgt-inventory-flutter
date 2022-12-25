@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+// import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
@@ -30,7 +30,7 @@ class AdminEditProfileViewModel extends BaseViewModel {
   final _adminService = locator<AdminService>();
   final _dialogService = locator<DialogService>();
 
-  final storageRef = FirebaseStorage.instance.ref();
+  // final storageRef = FirebaseStorage.instance.ref();
   final ImagePicker _picker = ImagePicker();
   File? _selectedFile;
   File? get selectedFile => _selectedFile;
@@ -73,11 +73,11 @@ class AdminEditProfileViewModel extends BaseViewModel {
     print('filename: $filename');
 
     String? imgUrl;
-    final ref = storageRef.child("profiles/$filename");
-    var task = await ref.putFile(_selectedFile!);
-    if (task.state == TaskState.success) {
-      imgUrl = await ref.getDownloadURL();
-    }
+    // final ref = storageRef.child("profiles/$filename");
+    // var task = await ref.putFile(_selectedFile!);
+    // if (task.state == TaskState.success) {
+    //   imgUrl = await ref.getDownloadURL();
+    // }
 
     var formData = {
       "businessName": businessName ?? admin?.businessName,

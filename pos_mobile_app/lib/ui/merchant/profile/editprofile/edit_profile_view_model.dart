@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+// import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pos_mobile_app/app/app.locator.dart';
@@ -23,7 +23,7 @@ class EditProfileViewModel extends BaseViewModel {
   final _merchantService = locator<MerchantService>();
   final _dialogService = locator<DialogService>();
 
-  final storageRef = FirebaseStorage.instance.ref();
+  // final storageRef = FirebaseStorage.instance.ref();
   final ImagePicker _picker = ImagePicker();
 
   User? get user => _authService.currentUser;
@@ -94,36 +94,36 @@ class EditProfileViewModel extends BaseViewModel {
       String ext = file.path.split('.').last;
       String filename = '${user!.id}.$ext';
       print('filename: $filename');
-      try {
-        final ref = storageRef.child("profiles/$filename");
-        var task = await ref.putFile(file);
-        if (task.state == TaskState.success) {
-          String url = await ref.getDownloadURL();
+      // try {
+      //   final ref = storageRef.child("profiles/$filename");
+      //   var task = await ref.putFile(file);
+      //   if (task.state == TaskState.success) {
+      //     String url = await ref.getDownloadURL();
 
-          // var formData = {
-          //   "email": user!.email,
-          //   "businessName": admin!.businessName,
-          //   "homeAddress": admin!.address,
-          //   "contactPhone": admin!.contactPhone,
-          //   'imgUrl': url,
-          // };
-          // print(formData);
-          // await _adminService.updateAdmin(formData);
-          await _authService.getCurrentAdminUser();
-          setMessage("Image uploaded and updated");
-        }
-        // var snapshot = await task.whenComplete(() => {});
+      //     // var formData = {
+      //     //   "email": user!.email,
+      //     //   "businessName": admin!.businessName,
+      //     //   "homeAddress": admin!.address,
+      //     //   "contactPhone": admin!.contactPhone,
+      //     //   'imgUrl': url,
+      //     // };
+      //     // print(formData);
+      //     // await _adminService.updateAdmin(formData);
+      //     await _authService.getCurrentAdminUser();
+      //     setMessage("Image uploaded and updated");
+      //   }
+      //   // var snapshot = await task.whenComplete(() => {});
 
-        // String url = await snapshot.ref.getDownloadURL();
-        // print('download url: $url');
-        //update the admin profile
+      //   // String url = await snapshot.ref.getDownloadURL();
+      //   // print('download url: $url');
+      //   //update the admin profile
 
-      } on FirebaseException catch (e) {
-        throw HttpException('Error: ${e.message}');
-      } finally {
-        setBusy(false);
-        notifyListeners();
-      }
+      // } on FirebaseException catch (e) {
+      //   throw HttpException('Error: ${e.message}');
+      // } finally {
+      //   setBusy(false);
+      //   notifyListeners();
+      // }
     }
   }
 
