@@ -69,8 +69,8 @@ mixin $AdminChangePasswordView on StatelessWidget {
     return model.isFormValid;
   }
 
-  /// Updates the formData on the dynamic
-  void _updateFormData(dynamic model, {bool forceValidate = false}) {
+  /// Updates the formData on the FormViewModel
+  void _updateFormData(FormViewModel model, {bool forceValidate = false}) {
     model.setData(
       model.formValueMap
         ..addAll({
@@ -84,8 +84,9 @@ mixin $AdminChangePasswordView on StatelessWidget {
     }
   }
 
-  /// Updates the fieldsValidationMessages on the dynamic
-  void _updateValidationData(dynamic model) => model.setValidationMessages({
+  /// Updates the fieldsValidationMessages on the FormViewModel
+  void _updateValidationData(FormViewModel model) =>
+      model.setValidationMessages({
         OldPasswordValueKey: _getValidationMessage(OldPasswordValueKey),
         NewPasswordValueKey: _getValidationMessage(NewPasswordValueKey),
         ConfirmPasswordValueKey: _getValidationMessage(ConfirmPasswordValueKey),
@@ -127,10 +128,15 @@ extension ValueProperties on FormViewModel {
   String? get confirmPasswordValue =>
       this.formValueMap[ConfirmPasswordValueKey] as String?;
 
-  bool get hasOldPassword => this.formValueMap.containsKey(OldPasswordValueKey);
-  bool get hasNewPassword => this.formValueMap.containsKey(NewPasswordValueKey);
+  bool get hasOldPassword =>
+      this.formValueMap.containsKey(OldPasswordValueKey) &&
+      (oldPasswordValue?.isNotEmpty ?? false);
+  bool get hasNewPassword =>
+      this.formValueMap.containsKey(NewPasswordValueKey) &&
+      (newPasswordValue?.isNotEmpty ?? false);
   bool get hasConfirmPassword =>
-      this.formValueMap.containsKey(ConfirmPasswordValueKey);
+      this.formValueMap.containsKey(ConfirmPasswordValueKey) &&
+      (confirmPasswordValue?.isNotEmpty ?? false);
 
   bool get hasOldPasswordValidationMessage =>
       this.fieldsValidationMessages[OldPasswordValueKey]?.isNotEmpty ?? false;

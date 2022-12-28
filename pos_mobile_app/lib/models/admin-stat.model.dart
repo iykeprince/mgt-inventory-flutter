@@ -9,6 +9,8 @@ class AdminStat {
   double? serviceCharge;
   double? cardWithdrawal;
   double? transferWithdrawal;
+  double? openingBalance;
+  double? balance;
 
   AdminStat({
     this.deposits,
@@ -16,6 +18,8 @@ class AdminStat {
     this.serviceCharge,
     this.cardWithdrawal,
     this.transferWithdrawal,
+    this.balance,
+    this.openingBalance,
   });
 
   factory AdminStat.fromJson(Map<String, dynamic> json) =>

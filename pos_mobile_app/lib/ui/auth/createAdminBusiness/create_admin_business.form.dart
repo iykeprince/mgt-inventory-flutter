@@ -78,8 +78,8 @@ mixin $CreateAdminBusinessView on StatelessWidget {
     return model.isFormValid;
   }
 
-  /// Updates the formData on the dynamic
-  void _updateFormData(dynamic model, {bool forceValidate = false}) {
+  /// Updates the formData on the FormViewModel
+  void _updateFormData(FormViewModel model, {bool forceValidate = false}) {
     model.setData(
       model.formValueMap
         ..addAll({
@@ -94,8 +94,9 @@ mixin $CreateAdminBusinessView on StatelessWidget {
     }
   }
 
-  /// Updates the fieldsValidationMessages on the dynamic
-  void _updateValidationData(dynamic model) => model.setValidationMessages({
+  /// Updates the fieldsValidationMessages on the FormViewModel
+  void _updateValidationData(FormViewModel model) =>
+      model.setValidationMessages({
         BusinessNameValueKey: _getValidationMessage(BusinessNameValueKey),
         EmailAddressValueKey: _getValidationMessage(EmailAddressValueKey),
         NumberOfBranchesValueKey:
@@ -142,13 +143,17 @@ extension ValueProperties on FormViewModel {
       this.formValueMap[UserPasswordValueKey] as String?;
 
   bool get hasBusinessName =>
-      this.formValueMap.containsKey(BusinessNameValueKey);
+      this.formValueMap.containsKey(BusinessNameValueKey) &&
+      (businessNameValue?.isNotEmpty ?? false);
   bool get hasEmailAddress =>
-      this.formValueMap.containsKey(EmailAddressValueKey);
+      this.formValueMap.containsKey(EmailAddressValueKey) &&
+      (emailAddressValue?.isNotEmpty ?? false);
   bool get hasNumberOfBranches =>
-      this.formValueMap.containsKey(NumberOfBranchesValueKey);
+      this.formValueMap.containsKey(NumberOfBranchesValueKey) &&
+      (numberOfBranchesValue?.isNotEmpty ?? false);
   bool get hasUserPassword =>
-      this.formValueMap.containsKey(UserPasswordValueKey);
+      this.formValueMap.containsKey(UserPasswordValueKey) &&
+      (userPasswordValue?.isNotEmpty ?? false);
 
   bool get hasBusinessNameValidationMessage =>
       this.fieldsValidationMessages[BusinessNameValueKey]?.isNotEmpty ?? false;

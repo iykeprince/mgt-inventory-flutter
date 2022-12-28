@@ -1,11 +1,11 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
-import 'package:pos_mobile_app/enums/transaction_status.dart';
 import 'package:stacked/stacked.dart';
 
 import '../app/app.locator.dart';
 import '../client/dio_client.dart';
 import '../models/expense.model.dart';
-import '../models/transaction.model.dart';
 
 class ExpenseService with ReactiveServiceMixin {
   Dio dioClient = locator<DioClient>().dio;
@@ -57,7 +57,7 @@ class ExpenseService with ReactiveServiceMixin {
       url += '&branchId=$branchId';
     }
 
-    print('new url: $url');
+    log('new url: $url');
 
     try {
       var response = await dioClient.get(url);
@@ -68,7 +68,7 @@ class ExpenseService with ReactiveServiceMixin {
       _expenses.value = expenses;
       return expenses;
     } on DioError catch (err) {
-      print(err.response!.data);
+      // ignore: use_rethrow_when_possible
       throw err;
     }
   }

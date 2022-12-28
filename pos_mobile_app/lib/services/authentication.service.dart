@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:pos_mobile_app/app/app.locator.dart';
 import 'package:pos_mobile_app/client/dio_client.dart';
@@ -53,7 +51,6 @@ class AuthenticationService with ReactiveServiceMixin {
   }
 
   Future<Map<String, dynamic>> register(Map<String, dynamic> formData) async {
-    final preferences = await SharedPreferences.getInstance();
     var response = await dioClient.post(
       '/auth/signup-with-email',
       data: formData,
@@ -105,7 +102,6 @@ class AuthenticationService with ReactiveServiceMixin {
   }
 
   Future<DefaultResponse> forgotPassword(Map<String, dynamic> formData) async {
-    final preferences = await SharedPreferences.getInstance();
     var response = await dioClient.post(
       '/auth/forgot-password',
       data: formData,
@@ -148,7 +144,6 @@ class AuthenticationService with ReactiveServiceMixin {
       '/user/change-password',
       data: formData,
     );
-    print('Default Resposne: ${response.data}');
     return DefaultResponse.fromJson(response.data);
   }
 

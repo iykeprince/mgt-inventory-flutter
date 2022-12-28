@@ -42,7 +42,7 @@ class CreatePosAccountDialog extends StatelessWidget {
                     hintText: "Account no.",
                     onChanged: model.handleAccountNumber,
                   ),
-                  SizedBox(height: AppSize.s16),
+                  const SizedBox(height: AppSize.s16),
                   Row(
                     children: [
                       Expanded(

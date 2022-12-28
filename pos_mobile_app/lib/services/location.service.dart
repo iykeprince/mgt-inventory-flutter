@@ -57,7 +57,7 @@ class LocationService {
             result['result']['address_components'] as List<dynamic>;
         // build result
         final place = Place();
-        components.forEach((c) {
+        for (var c in components) {
           final List type = c['types'];
           if (type.contains('street_number')) {
             place.streetNumber = c['long_name'];
@@ -71,7 +71,7 @@ class LocationService {
           if (type.contains('postal_code')) {
             place.zipCode = c['long_name'];
           }
-        });
+        }
         return place;
       }
       throw Exception(result['error_message']);

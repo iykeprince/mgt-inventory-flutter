@@ -65,7 +65,7 @@ class DeleteMerchantDialog extends StatelessWidget {
     //   ),
     // );
     return Dialog(
-        child: Container(
+        child: SizedBox(
       height: 290,
       child: Stack(
         children: [
@@ -83,15 +83,13 @@ class DeleteMerchantDialog extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: AppSize.s20),
-                Container(
-                  child: const Center(
-                    child: Text(
-                      'Delete Merchant Account',
-                      style: TextStyle(
-                        color: ColorManager.kRed,
-                        fontSize: AppSize.s20,
-                        fontWeight: FontWeight.w500,
-                      ),
+                const Center(
+                  child: Text(
+                    'Delete Merchant Account',
+                    style: TextStyle(
+                      color: ColorManager.kRed,
+                      fontSize: AppSize.s20,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),

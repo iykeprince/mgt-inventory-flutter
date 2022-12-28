@@ -24,14 +24,9 @@ class OpeningClosingBalanceSheetViewModel extends BaseViewModel {
 
   List<Account>? get accounts => _sharedService.branchAccounts;
 
-  Future createOpeningBalance(Function(SheetResponse p1)? completer) async {
+  Future createOpeningBalance() async {
     await runBusyFuture(createOpeningBalanceRequest(),
         busyObject: OPENING_BALANCE);
-    completer!(
-      SheetResponse(
-        confirmed: true,
-      ),
-    );
   }
 
   Future createClosingBalance(Function(SheetResponse p1)? completer) async {

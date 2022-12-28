@@ -26,11 +26,9 @@ class AccountSettingViewModel extends BaseViewModel {
   // final storageRef = FirebaseStorage.instance.ref();
   final ImagePicker _picker = ImagePicker();
 
-  bool _isUploaded = false;
-  double _uploadProgress = 0;
-  bool _isUploading = false;
-
-  var selectedMenu;
+  final bool _isUploaded = false;
+  final double _uploadProgress = 0;
+  final bool _isUploading = false;
 
   bool get isUploading => _isUploading;
   bool get isUploaded => _isUploaded;

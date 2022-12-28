@@ -27,7 +27,7 @@ class SplashViewViewModel extends FutureViewModel<void> {
     try {
       User response = await _authenticationService.getCurrentBaseUser();
 
-      log.i('Success Profile ${response.role}');
+      log.i('Success Profile ${response.id}');
       switch (response.role) {
         case "MERCHANT":
           routeName = Routes.merchantHomeView;

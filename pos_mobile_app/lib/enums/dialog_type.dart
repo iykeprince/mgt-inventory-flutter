@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 enum DialogType {
   DELETE_MERCHANT_ACCOUNT,
   DELETE_BRANCH_ACCOUNT,

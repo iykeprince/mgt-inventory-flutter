@@ -13,6 +13,7 @@ import 'package:stacked/stacked.dart';
 
 import '../../../models/transaction.model.dart';
 import '../../../utils/helpers.dart';
+import '../../shared/components/history_analytic/history_analytic_widget_view.dart';
 import '../../shared/components/transaction_filter/transaction_filter_view.dart';
 import '../dashboard/dasboard_view.dart';
 
@@ -46,8 +47,13 @@ class AdminReportView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: AppSize.s12),
-                      TransactionFilterView(),
-                      ReportAnalyticWidget(),
+                      TransactionFilterView(
+                        showDownload: true,
+                        onDownloadClick: () {
+                          print('download click');
+                        },
+                      ),
+                      HistoryAnalyticWidgetView(),
                       ReportTransactionSummaryView(),
                       ReportTransactionGraphView()
                     ]),
@@ -98,127 +104,127 @@ class AdminReportView extends StatelessWidget {
 //   }
 // }
 
-class ReportAnalyticWidget extends ViewModelWidget<AdminReportViewModel> {
-  const ReportAnalyticWidget({Key? key}) : super(key: key);
+// class ReportAnalyticWidget extends ViewModelWidget<AdminReportViewModel> {
+//   const ReportAnalyticWidget({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context, AdminReportViewModel model) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p24),
-      child: GridView.count(
-        primary: false,
-        padding:
-            const EdgeInsets.only(bottom: AppPadding.p40, top: AppPadding.p16),
-        crossAxisCount: 2,
-        crossAxisSpacing: AppSize.s8,
-        mainAxisSpacing: AppSize.s8,
-        shrinkWrap: true,
-        childAspectRatio: (1 / 0.9),
-        children: [
-          ListTileWidget(
-            color: ColorManager.kWhiteColor,
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SvgPicture.asset('assets/images/Frame_3891.svg'),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Expanded(
-                    child: Text(
-                      '0',
-                      maxLines: 1,
-                      style: getThickStyle(
-                          color: ColorManager.kPrimaryColor,
-                          fontSize: FontSize.s28),
-                    ),
-                  ),
-                  Text(
-                    'Expenses',
-                    style: getRegularStyle(
-                        color: ColorManager.kNavNonActiveColor,
-                        fontSize: FontSize.s12),
-                  )
-                ]),
-          ),
-          ListTileWidget(
-            color: ColorManager.kWhiteColor,
-            child: Column(children: [
-              SvgPicture.asset('assets/images/servicechargeicon.svg'),
-              const SizedBox(
-                height: 8,
-              ),
-              Expanded(
-                child: Text(
-                  '0',
-                  maxLines: 1,
-                  style: getThickStyle(
-                      color: ColorManager.kPrimaryColor,
-                      fontSize: FontSize.s28),
-                ),
-              ),
-              Text(
-                'Amount Deposits',
-                style: getRegularStyle(
-                    color: ColorManager.kNavNonActiveColor,
-                    fontSize: FontSize.s12),
-              )
-            ]),
-          ),
-          ListTileWidget(
-            color: ColorManager.kWhiteColor,
-            child: Column(children: [
-              SvgPicture.asset('assets/images/expenseicon.svg'),
-              const SizedBox(
-                height: 8,
-              ),
-              Expanded(
-                child: Text(
-                  '0',
-                  maxLines: 1,
-                  style: getThickStyle(
-                      color: ColorManager.kPrimaryColor,
-                      fontSize: FontSize.s28),
-                ),
-              ),
-              Text(
-                'Transfer Withdrawal',
-                style: getRegularStyle(
-                    color: ColorManager.kNavNonActiveColor,
-                    fontSize: FontSize.s12),
-              )
-            ]),
-          ),
-          ListTileWidget(
-            color: ColorManager.kWhiteColor,
-            child: Column(children: [
-              SvgPicture.asset('assets/images/Frame 6.svg'),
-              const SizedBox(
-                height: 8,
-              ),
-              Expanded(
-                child: Text(
-                  '0',
-                  maxLines: 1,
-                  style: getThickStyle(
-                      color: ColorManager.kPrimaryColor,
-                      fontSize: FontSize.s28),
-                ),
-              ),
-              Text(
-                'Cash Withdrawal',
-                style: getRegularStyle(
-                    color: ColorManager.kNavNonActiveColor,
-                    fontSize: FontSize.s12),
-              )
-            ]),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context, AdminReportViewModel model) {
+//     return Padding(
+//       padding: const EdgeInsets.symmetric(horizontal: AppPadding.p24),
+//       child: GridView.count(
+//         primary: false,
+//         padding:
+//             const EdgeInsets.only(bottom: AppPadding.p40, top: AppPadding.p16),
+//         crossAxisCount: 2,
+//         crossAxisSpacing: AppSize.s8,
+//         mainAxisSpacing: AppSize.s8,
+//         shrinkWrap: true,
+//         childAspectRatio: (1 / 0.9),
+//         children: [
+//           ListTileWidget(
+//             color: ColorManager.kWhiteColor,
+//             child: Column(
+//                 mainAxisAlignment: MainAxisAlignment.center,
+//                 crossAxisAlignment: CrossAxisAlignment.center,
+//                 children: [
+//                   SvgPicture.asset('assets/images/Frame_3891.svg'),
+//                   const SizedBox(
+//                     height: 8,
+//                   ),
+//                   Expanded(
+//                     child: Text(
+//                       '0',
+//                       maxLines: 1,
+//                       style: getThickStyle(
+//                           color: ColorManager.kPrimaryColor,
+//                           fontSize: FontSize.s28),
+//                     ),
+//                   ),
+//                   Text(
+//                     'Expenses',
+//                     style: getRegularStyle(
+//                         color: ColorManager.kNavNonActiveColor,
+//                         fontSize: FontSize.s12),
+//                   )
+//                 ]),
+//           ),
+//           ListTileWidget(
+//             color: ColorManager.kWhiteColor,
+//             child: Column(children: [
+//               SvgPicture.asset('assets/images/servicechargeicon.svg'),
+//               const SizedBox(
+//                 height: 8,
+//               ),
+//               Expanded(
+//                 child: Text(
+//                   '0',
+//                   maxLines: 1,
+//                   style: getThickStyle(
+//                       color: ColorManager.kPrimaryColor,
+//                       fontSize: FontSize.s28),
+//                 ),
+//               ),
+//               Text(
+//                 'Amount Deposits',
+//                 style: getRegularStyle(
+//                     color: ColorManager.kNavNonActiveColor,
+//                     fontSize: FontSize.s12),
+//               )
+//             ]),
+//           ),
+//           ListTileWidget(
+//             color: ColorManager.kWhiteColor,
+//             child: Column(children: [
+//               SvgPicture.asset('assets/images/expenseicon.svg'),
+//               const SizedBox(
+//                 height: 8,
+//               ),
+//               Expanded(
+//                 child: Text(
+//                   '0',
+//                   maxLines: 1,
+//                   style: getThickStyle(
+//                       color: ColorManager.kPrimaryColor,
+//                       fontSize: FontSize.s28),
+//                 ),
+//               ),
+//               Text(
+//                 'Transfer Withdrawal',
+//                 style: getRegularStyle(
+//                     color: ColorManager.kNavNonActiveColor,
+//                     fontSize: FontSize.s12),
+//               )
+//             ]),
+//           ),
+//           ListTileWidget(
+//             color: ColorManager.kWhiteColor,
+//             child: Column(children: [
+//               SvgPicture.asset('assets/images/Frame 6.svg'),
+//               const SizedBox(
+//                 height: 8,
+//               ),
+//               Expanded(
+//                 child: Text(
+//                   '0',
+//                   maxLines: 1,
+//                   style: getThickStyle(
+//                       color: ColorManager.kPrimaryColor,
+//                       fontSize: FontSize.s28),
+//                 ),
+//               ),
+//               Text(
+//                 'Cash Withdrawal',
+//                 style: getRegularStyle(
+//                     color: ColorManager.kNavNonActiveColor,
+//                     fontSize: FontSize.s12),
+//               )
+//             ]),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 class HistoryFilterItem extends StatefulWidget {
   const HistoryFilterItem({

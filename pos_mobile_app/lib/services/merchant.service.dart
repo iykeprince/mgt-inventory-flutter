@@ -13,9 +13,9 @@ class MerchantService with ReactiveServiceMixin {
     listenToReactiveValues([openingBalance, closingBalance]);
   }
 
-  ReactiveValue<OpeningClosingBalance?> _openingBalance =
+  final ReactiveValue<OpeningClosingBalance?> _openingBalance =
       ReactiveValue<OpeningClosingBalance?>(null);
-  ReactiveValue<OpeningClosingBalance?> _closingBalance =
+  final ReactiveValue<OpeningClosingBalance?> _closingBalance =
       ReactiveValue<OpeningClosingBalance?>(null);
 
   OpeningClosingBalance? get openingBalance => _openingBalance.value;

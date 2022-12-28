@@ -15,7 +15,7 @@ class CreateLogsBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomSheetContainer(
-        color: Color.fromRGBO(0, 0, 0, 0.01),
+        color: const Color.fromRGBO(0, 0, 0, 0.01),
         borderRadius: BorderRadius.circular(0),
         child: Column(
           mainAxisSize: MainAxisSize.min,

@@ -60,8 +60,8 @@ mixin $LoginView on StatelessWidget {
     return model.isFormValid;
   }
 
-  /// Updates the formData on the dynamic
-  void _updateFormData(dynamic model, {bool forceValidate = false}) {
+  /// Updates the formData on the FormViewModel
+  void _updateFormData(FormViewModel model, {bool forceValidate = false}) {
     model.setData(
       model.formValueMap
         ..addAll({
@@ -74,8 +74,9 @@ mixin $LoginView on StatelessWidget {
     }
   }
 
-  /// Updates the fieldsValidationMessages on the dynamic
-  void _updateValidationData(dynamic model) => model.setValidationMessages({
+  /// Updates the fieldsValidationMessages on the FormViewModel
+  void _updateValidationData(FormViewModel model) =>
+      model.setValidationMessages({
         EmailValueKey: _getValidationMessage(EmailValueKey),
         PasswordValueKey: _getValidationMessage(PasswordValueKey),
       });
@@ -111,8 +112,12 @@ extension ValueProperties on FormViewModel {
   String? get emailValue => this.formValueMap[EmailValueKey] as String?;
   String? get passwordValue => this.formValueMap[PasswordValueKey] as String?;
 
-  bool get hasEmail => this.formValueMap.containsKey(EmailValueKey);
-  bool get hasPassword => this.formValueMap.containsKey(PasswordValueKey);
+  bool get hasEmail =>
+      this.formValueMap.containsKey(EmailValueKey) &&
+      (emailValue?.isNotEmpty ?? false);
+  bool get hasPassword =>
+      this.formValueMap.containsKey(PasswordValueKey) &&
+      (passwordValue?.isNotEmpty ?? false);
 
   bool get hasEmailValidationMessage =>
       this.fieldsValidationMessages[EmailValueKey]?.isNotEmpty ?? false;
