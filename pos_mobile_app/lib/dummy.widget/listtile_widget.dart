@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:pos_mobile_ui_package/utils/colors.dart';
 import 'package:pos_mobile_ui_package/utils/values_manager.dart';
 

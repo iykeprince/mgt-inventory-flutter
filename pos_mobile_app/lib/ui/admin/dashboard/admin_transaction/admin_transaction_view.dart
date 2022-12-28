@@ -39,9 +39,9 @@ class AdminTransactionView extends StatelessWidget {
               actions: [
                 IconButton(
                   onPressed: () {
-                    print('search');
+                    model.toggleSearch();
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.search,
                     color: ColorManager.kDarkCharcoal,
                     size: AppSize.s32,
@@ -50,15 +50,43 @@ class AdminTransactionView extends StatelessWidget {
               ],
             ),
             backgroundColor: ColorManager.kWhiteColor,
-            body: ListView.builder(
-              itemCount: model.transactions!.length,
-              itemBuilder: (BuildContext context, int index) {
-                Transaction transaction = model.transactions![index];
-                return TransactionSummaryListItem(
-                  transaction: transaction,
-                  isContentPadding: false,
-                );
-              },
+            body: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                if (model.showSearch)
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: AppPadding.p10),
+                    child: Column(
+                      children: [
+                        InputField(
+                          hintText: "Search",
+                          onChanged: model.handleSearchTransaction,
+                          keyBoardType: TextInputType.text,
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            size: AppSize.s24,
+                            color: ColorManager.kGrey1,
+                          ),
+                        ),
+                        const Divider(),
+                      ],
+                    ),
+                  ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: model.transactions!.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      Transaction transaction = model.transactions![index];
+                      return TransactionSummaryListItem(
+                        transaction: transaction,
+                        isContentPadding: false,
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           );
         });

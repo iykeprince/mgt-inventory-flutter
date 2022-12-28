@@ -43,7 +43,7 @@ class CreateBankAccountDialog extends StatelessWidget {
                     onChanged: model.handleAccountNumber,
                     keyBoardType: TextInputType.number,
                   ),
-                  SizedBox(height: AppSize.s16),
+                  const SizedBox(height: AppSize.s16),
                   Row(
                     children: [
                       Expanded(

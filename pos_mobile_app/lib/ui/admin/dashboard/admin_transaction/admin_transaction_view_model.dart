@@ -7,13 +7,17 @@ import 'package:stacked_services/stacked_services.dart';
 import '../../../../services/transaction.service.dart';
 import '../../../../utils/http_exception.dart';
 
-class AdminTransactionViewModel extends BaseViewModel {
+class AdminTransactionViewModel extends ReactiveViewModel {
   final _navigationService = locator<NavigationService>();
   final _transactionService = locator<TransactionService>();
 
   String? _branchId;
   String? get branchId => _branchId;
-  List<Transaction>? get transactions => _transactionService.transactions;
+  List<Transaction>? get transactions =>
+      _transactionService.filteredTransaction ??
+      _transactionService.transactions;
+  bool _showSearch = false;
+  bool get showSearch => _showSearch;
 
   getTransactions() async {
     runBusyFuture(getTransactionsTask());
@@ -39,4 +43,17 @@ class AdminTransactionViewModel extends BaseViewModel {
   }
 
   void navigateBack() => _navigationService.back();
+
+  void toggleSearch() {
+    _showSearch = !_showSearch;
+    notifyListeners();
+  }
+
+  handleSearchTransaction(String value) async {
+    notifyListeners();
+    await _transactionService.search(value);
+  }
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_transactionService];
 }

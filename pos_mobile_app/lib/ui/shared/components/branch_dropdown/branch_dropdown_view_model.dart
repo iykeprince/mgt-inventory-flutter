@@ -37,8 +37,7 @@ class BranchDropdownViewModel extends BaseViewModel {
   Future<AdminStat?> getStatTask() async {
     try {
       setBusy(true);
-      AdminStat stat = await _adminService.getStat(selectedBranch?.id);
-      return stat;
+      await _adminService.getStat(selectedBranch?.id);
     } on DioError catch (error) {
       throw HttpException(error.response!.data['message']);
     } finally {

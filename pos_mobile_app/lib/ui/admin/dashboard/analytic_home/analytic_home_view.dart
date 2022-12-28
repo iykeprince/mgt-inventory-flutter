@@ -46,42 +46,48 @@ class AnalyticHomeView extends StatelessWidget {
               color: ColorManager.kWhiteColor,
               elevation: .5,
             ),
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(
-                      top: 40.0,
-                      left: 24.0,
-                      right: 24.0,
-                      bottom: 0,
+            body: RefreshIndicator(
+              onRefresh: () async {
+                await model.getStat();
+                await model.getTransactions();
+              },
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(
+                        top: 40.0,
+                        left: 24.0,
+                        right: 24.0,
+                        bottom: 0,
+                      ),
+                      decoration: const BoxDecoration(
+                        color: ColorManager.kWhiteColor,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              model.navigateToTransactionPage();
+                            },
+                            child: Text('Today',
+                                style: getSemiBoldStyle(
+                                    color: ColorManager.kOuterSpaceColor,
+                                    fontSize: FontSize.s20)),
+                          ),
+                          const SizedBox(
+                            height: AppSize.s12,
+                          ),
+                          const OpeningBalanceWidget(),
+                          const AnalyticStatWidget(),
+                        ],
+                      ),
                     ),
-                    decoration: const BoxDecoration(
-                      color: ColorManager.kWhiteColor,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            model.navigateToTransactionPage();
-                          },
-                          child: Text('Today',
-                              style: getSemiBoldStyle(
-                                  color: ColorManager.kOuterSpaceColor,
-                                  fontSize: FontSize.s20)),
-                        ),
-                        const SizedBox(
-                          height: AppSize.s12,
-                        ),
-                        const OpeningBalanceWidget(),
-                        const AnalyticStatWidget(),
-                      ],
-                    ),
-                  ),
-                  const TransactionSummaryView(),
-                  const TransactionSummaryList()
-                ],
+                    const TransactionSummaryView(),
+                    const TransactionSummaryList()
+                  ],
+                ),
               ),
             ),
           );
@@ -107,7 +113,7 @@ class OpeningBalanceWidget extends ViewModelWidget<AnalyticHomeViewModel> {
               color: ColorManager.kWhiteColor, fontSize: FontSize.s12),
           children: <TextSpan>[
             TextSpan(
-                text: 'NGN 0',
+                text: 'NGN ${formatCurrency(model.stat?.openingBalance ?? 0)}',
                 style: getBoldStyle(
                     color: ColorManager.kWhiteColor, fontSize: FontSize.s16)),
           ],
@@ -122,7 +128,6 @@ class AnalyticStatWidget extends ViewModelWidget<AnalyticHomeViewModel> {
 
   @override
   Widget build(BuildContext context, AnalyticHomeViewModel model) {
-    print('stat json from response vm: ${model.stat?.toJson()}');
     return GridView.count(
         primary: false,
         padding:
@@ -217,7 +222,7 @@ class AnalyticStatWidget extends ViewModelWidget<AnalyticHomeViewModel> {
               ),
               Expanded(
                 child: Text(
-                  '0',
+                  '${model.stat?.balance ?? 0}',
                   maxLines: 1,
                   style: getThickStyle(
                       color: ColorManager.kDarkCharcoal,

@@ -21,7 +21,7 @@ import '../../../../utils/http_exception.dart';
 
 const String TRANSACTION_REQUEST = 'TRANSACTION_REQUEST';
 
-class AnalyticHomeViewModel extends BaseViewModel {
+class AnalyticHomeViewModel extends ReactiveViewModel {
   final _navigationService = locator<NavigationService>();
   final _adminService = locator<AdminService>();
   final _authenticationService = locator<AuthenticationService>();
@@ -29,13 +29,10 @@ class AnalyticHomeViewModel extends BaseViewModel {
 
   Admin? get admin => _authenticationService.currentAdminUser;
 
-  AdminStat? _stat;
-  AdminStat? get stat => _stat;
+  AdminStat? get stat => _adminService.stat;
   List<Transaction>? get transactions => _transactionService.transactions;
   List<Branch>? get branches => _adminService.branches;
-  Branch? _selectedBranch;
-  Branch? get selectedBranch => _selectedBranch;
-  // Branch? get selectedBranch => _adminService.branches![0];
+  Branch? get selectedBranch => _adminService.selectedBranch;
 
   navigateToTransactionPage() =>
       _navigationService.navigateTo(Routes.adminTransactionView);
@@ -48,11 +45,10 @@ class AnalyticHomeViewModel extends BaseViewModel {
     runBusyFuture(getStatTask());
   }
 
-  Future<AdminStat?> getStatTask() async {
+  Future<void> getStatTask() async {
     try {
       setBusy(true);
-      _stat = await _adminService.getStat(selectedBranch?.id);
-      return stat;
+      await _adminService.getStat(selectedBranch?.id);
     } on DioError catch (error) {
       throw HttpException(error.response!.data['message']);
     } finally {
@@ -78,4 +74,7 @@ class AnalyticHomeViewModel extends BaseViewModel {
   List<ListTileWidget> cardLists(BuildContext context) {
     return [];
   }
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_adminService];
 }

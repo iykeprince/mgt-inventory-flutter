@@ -15,7 +15,7 @@ class DeleteBranchDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-        child: Container(
+        child: SizedBox(
       height: 290,
       child: Stack(
         children: [
@@ -38,15 +38,13 @@ class DeleteBranchDialog extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: AppSize.s20),
-                Container(
-                  child: const Center(
-                    child: Text(
-                      'Delete Branch',
-                      style: TextStyle(
-                        color: ColorManager.kRed,
-                        fontSize: AppSize.s20,
-                        fontWeight: FontWeightManager.medium,
-                      ),
+                const Center(
+                  child: Text(
+                    'Delete Branch',
+                    style: TextStyle(
+                      color: ColorManager.kRed,
+                      fontSize: AppSize.s20,
+                      fontWeight: FontWeightManager.medium,
                     ),
                   ),
                 ),

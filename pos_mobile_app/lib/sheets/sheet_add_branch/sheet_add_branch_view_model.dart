@@ -4,7 +4,7 @@ import 'package:pos_mobile_app/services/admin.service.dart';
 import 'package:pos_mobile_app/sheets/sheet_add_branch/sheet_add_branch_view.form.dart';
 import 'package:pos_mobile_app/utils/http_exception.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/src/models/overlay_response.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 import '../../models/branch.model.dart';
 
@@ -18,7 +18,6 @@ class SheetAddBranchViewModel extends FormViewModel {
   @override
   void setFormStatus() {
     _isFormValid = true;
-    // TODO: implement setFormStatus
     if (branchNameValue == null ||
         locationValue == null ||
         numberOfMerchantsValue == null) {

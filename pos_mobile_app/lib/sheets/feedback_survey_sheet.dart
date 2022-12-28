@@ -1,7 +1,9 @@
+// ignore_for_file: avoid_renaming_method_parameters, constant_identifier_names
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:pos_mobile_app/app/app.locator.dart';
-import 'package:pos_mobile_app/enums/bottom_sheet_type.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -42,7 +44,7 @@ class FeedbackSurveyWidget
   @override
   Widget build(BuildContext context, FeedbackSurveySheetViewModel model) {
     return SingleChildScrollView(
-      child: Container(
+      child: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
@@ -174,7 +176,7 @@ class FeedbackSurveyWidget
                 )
               ],
             ),
-            Divider(),
+            const Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: AppPadding.p16,
@@ -215,7 +217,7 @@ class AccountDataWidget extends ViewModelWidget<FeedbackSurveySheetViewModel> {
   @override
   Widget build(BuildContext context, FeedbackSurveySheetViewModel model) {
     return SingleChildScrollView(
-      child: Container(
+      child: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Column(
           children: [
@@ -232,15 +234,13 @@ class AccountDataWidget extends ViewModelWidget<FeedbackSurveySheetViewModel> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    child: GestureDetector(
-                      onTap: () {
-                        model.setFeedView(FeedbackView.SURVEY);
-                      },
-                      child: const Icon(
-                        Icons.arrow_back_ios,
-                        size: AppSize.s24,
-                      ),
+                  GestureDetector(
+                    onTap: () {
+                      model.setFeedView(FeedbackView.SURVEY);
+                    },
+                    child: const Icon(
+                      Icons.arrow_back_ios,
+                      size: AppSize.s24,
                     ),
                   ),
                   Center(
@@ -336,7 +336,7 @@ enum FeedbackView { SURVEY, ACCOUNT_DATA }
 const String DELETE_ACCOUNT = "DELETE_ACCOUNT";
 
 class FeedbackSurveySheetViewModel extends BaseViewModel {
-  final _bottomSheetService = locator<BottomSheetService>();
+  final logger = locator<Logger>();
   TextEditingController textController = TextEditingController();
   Map<String, dynamic> feedbackData = {
     "isServiceNotNeeded": false,
@@ -357,8 +357,8 @@ class FeedbackSurveySheetViewModel extends BaseViewModel {
   submitFeedback(Function(SheetResponse)? completer) {
     var formData = {...feedbackData, "text": textController.text};
     setBusy(true);
-    Future.delayed(Duration(seconds: 2), () async {
-      print(formData);
+    Future.delayed(const Duration(seconds: 2), () async {
+      logger.i(formData);
       // completer!(
       //   SheetResponse(
       //     confirmed: true,

@@ -31,9 +31,7 @@ class AdminService with ReactiveServiceMixin {
       ReactiveValue<List<Balance>>([]);
   final ReactiveValue<List<Account>> _accounts =
       ReactiveValue<List<Account>>([]);
-  final ReactiveValue<List<Account>> _branchAccounts =
-      ReactiveValue<List<Account>>([]);
-  final ReactiveValue<AdminStat?> _stat = ReactiveValue<AdminStat?>(null);
+  AdminStat? _stat;
   final ReactiveValue<Branch?> _selectedBranch = ReactiveValue<Branch?>(null);
 
   List<Branch>? get branches => _branches.value;
@@ -41,10 +39,10 @@ class AdminService with ReactiveServiceMixin {
   List<Balance> get accountBalances => _accountBalances.value;
   List<Account> get accounts => _accounts.value;
 
-  AdminStat? get stat => _stat.value;
+  AdminStat? get stat => _stat;
   Branch? get selectedBranch => _selectedBranch.value;
 
-  Future<AdminStat> getStat(String? id) async {
+  Future<void> getStat(String? id) async {
     String url;
     if (id == null) {
       url = '/admin/stat';
@@ -52,9 +50,11 @@ class AdminService with ReactiveServiceMixin {
       url = '/admin/stat?branchId=$id';
     }
     var response = await dioClient.get(url);
+    print('stat response data ${response.data}');
     AdminStat statResponse = AdminStat.fromJson(response.data);
-    _stat.value = statResponse;
-    return statResponse;
+    _stat = statResponse;
+    notifyListeners();
+    // return statResponse;
   }
 
   Future<Admin> updateAdmin(Map formData) async {
@@ -96,7 +96,6 @@ class AdminService with ReactiveServiceMixin {
         .map((x) => Merchant.fromJson(x))
         .toList();
     _merchants.value = merchants;
-    print('merchants: ${_merchants.value}');
     return merchants;
   }
 

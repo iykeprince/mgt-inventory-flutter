@@ -80,6 +80,7 @@ class SwitchBranchDialog extends StatelessWidget {
   // }
 }
 
+// ignore: must_be_immutable
 class BranchCardItem extends StatefulWidget {
   BranchCardItem(
       {Key? key,

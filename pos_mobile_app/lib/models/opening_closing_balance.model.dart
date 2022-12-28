@@ -1,7 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'branch.model.dart';
-
 part 'opening_closing_balance.model.g.dart';
 
 @JsonSerializable()

@@ -1,5 +1,6 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
-import 'package:pos_mobile_app/enums/transaction_status.dart';
 import 'package:stacked/stacked.dart';
 
 import '../app/app.locator.dart';
@@ -10,12 +11,14 @@ class TransactionService with ReactiveServiceMixin {
   Dio dioClient = locator<DioClient>().dio;
 
   TransactionService() {
-    listenToReactiveValues([_transactions]);
+    listenToReactiveValues([transactions]);
   }
+  List<Transaction>? _filteredTransactions;
   final ReactiveValue<List<Transaction>?> _transactions =
       ReactiveValue<List<Transaction>?>([]);
 
   List<Transaction>? get transactions => _transactions.value;
+  List<Transaction>? get filteredTransaction => _filteredTransactions;
 
   Future<Transaction> createTransaction(Map formData) async {
     var response = await dioClient.post(
@@ -56,7 +59,7 @@ class TransactionService with ReactiveServiceMixin {
       url += '&branchId=$branchId';
     }
 
-    print('new url: $url');
+    log('new url: $url');
 
     try {
       var response = await dioClient.get(url);
@@ -67,8 +70,10 @@ class TransactionService with ReactiveServiceMixin {
       _transactions.value = transactions;
       return transactions;
     } on DioError catch (err) {
-      print(err.response!.data);
+      // ignore: use_rethrow_when_possible
       throw err;
+    } finally {
+      notifyListeners();
     }
   }
 
@@ -84,5 +89,12 @@ class TransactionService with ReactiveServiceMixin {
   Future<Transaction> deleteTransaction(String id) async {
     var response = await dioClient.delete('transaction/$id');
     return Transaction.fromJson(response.data);
+  }
+
+  Future<void> search(String value) async {
+    _filteredTransactions = _transactions.value
+        ?.where((element) => element.type!.contains(value))
+        .toList();
+    notifyListeners();
   }
 }

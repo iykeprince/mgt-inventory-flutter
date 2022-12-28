@@ -1,17 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:pos_mobile_app/app/app.locator.dart';
-import 'package:pos_mobile_app/models/opening_closing_balance.model.dart';
-import 'package:pos_mobile_app/services/authentication.service.dart';
-import 'package:pos_mobile_app/services/merchant.service.dart';
-import 'package:pos_mobile_app/services/shared.service.dart';
-import 'package:pos_mobile_app/ui/merchant/dashboard/dashboard_view_model.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-
-import '../../models/account.model.dart';
-import '../../models/merchant.model.dart';
 import 'open_close_balance_sheet_view_model.dart';
 
 class OpenBalanceBottomSheet extends StatelessWidget {
@@ -29,7 +19,6 @@ class OpenBalanceBottomSheet extends StatelessWidget {
     return ViewModelBuilder<OpeningClosingBalanceSheetViewModel>.reactive(
       viewModelBuilder: () => OpeningClosingBalanceSheetViewModel(),
       onModelReady: (model) {
-        print('request daata: ${request!.data}');
         if (request?.data != null) {
           model.cashController.text = '${request!.data["amount"]}';
         }
@@ -82,10 +71,15 @@ class OpenBalanceBottomSheet extends StatelessWidget {
                     ),
                   PosButton(
                     onPressed: () async {
-                      await model.createOpeningBalance(completer);
+                      await model.createOpeningBalance();
+                      completer!(
+                        SheetResponse(
+                          confirmed: true,
+                        ),
+                      );
                     },
                     title: 'Submit',
-                    busy: false,
+                    busy: model.isBusy,
                   ),
                   const SizedBox(height: AppSize.s24),
                   PosButton(

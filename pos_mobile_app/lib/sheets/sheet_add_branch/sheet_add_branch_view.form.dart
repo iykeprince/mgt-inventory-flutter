@@ -69,8 +69,8 @@ mixin $SheetAddBranchBottomSheet on StatelessWidget {
     return model.isFormValid;
   }
 
-  /// Updates the formData on the dynamic
-  void _updateFormData(dynamic model, {bool forceValidate = false}) {
+  /// Updates the formData on the FormViewModel
+  void _updateFormData(FormViewModel model, {bool forceValidate = false}) {
     model.setData(
       model.formValueMap
         ..addAll({
@@ -84,8 +84,9 @@ mixin $SheetAddBranchBottomSheet on StatelessWidget {
     }
   }
 
-  /// Updates the fieldsValidationMessages on the dynamic
-  void _updateValidationData(dynamic model) => model.setValidationMessages({
+  /// Updates the fieldsValidationMessages on the FormViewModel
+  void _updateValidationData(FormViewModel model) =>
+      model.setValidationMessages({
         BranchNameValueKey: _getValidationMessage(BranchNameValueKey),
         LocationValueKey: _getValidationMessage(LocationValueKey),
         NumberOfMerchantsValueKey:
@@ -127,10 +128,15 @@ extension ValueProperties on FormViewModel {
   String? get numberOfMerchantsValue =>
       this.formValueMap[NumberOfMerchantsValueKey] as String?;
 
-  bool get hasBranchName => this.formValueMap.containsKey(BranchNameValueKey);
-  bool get hasLocation => this.formValueMap.containsKey(LocationValueKey);
+  bool get hasBranchName =>
+      this.formValueMap.containsKey(BranchNameValueKey) &&
+      (branchNameValue?.isNotEmpty ?? false);
+  bool get hasLocation =>
+      this.formValueMap.containsKey(LocationValueKey) &&
+      (locationValue?.isNotEmpty ?? false);
   bool get hasNumberOfMerchants =>
-      this.formValueMap.containsKey(NumberOfMerchantsValueKey);
+      this.formValueMap.containsKey(NumberOfMerchantsValueKey) &&
+      (numberOfMerchantsValue?.isNotEmpty ?? false);
 
   bool get hasBranchNameValidationMessage =>
       this.fieldsValidationMessages[BranchNameValueKey]?.isNotEmpty ?? false;

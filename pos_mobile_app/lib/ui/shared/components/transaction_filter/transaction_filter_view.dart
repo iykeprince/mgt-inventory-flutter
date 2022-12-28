@@ -13,7 +13,13 @@ final List<DateFilter> DATE_FILTER_LIST = [
 ];
 
 class TransactionFilterView extends StatelessWidget {
-  const TransactionFilterView({Key? key}) : super(key: key);
+  const TransactionFilterView({
+    Key? key,
+    this.showDownload = false,
+    this.onDownloadClick,
+  }) : super(key: key);
+  final bool? showDownload;
+  final Function()? onDownloadClick;
 
   @override
   Widget build(BuildContext context) {
@@ -23,28 +29,43 @@ class TransactionFilterView extends StatelessWidget {
         return Container(
           height: 36,
           margin: const EdgeInsets.symmetric(
-            horizontal: AppPadding.p16,
+            horizontal: AppPadding.p24,
           ),
-          child: ListView.builder(
-            itemCount: DATE_FILTER_LIST.length + 1,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (BuildContext context, int index) {
-              if (index == DATE_FILTER_LIST.length) {
-                return GestureDetector(
-                  onTap: () {
-                    print('hello tapped');
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: DATE_FILTER_LIST.length + 1,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index) {
+                    if (index == DATE_FILTER_LIST.length) {
+                      return GestureDetector(
+                        onTap: () {
+                          print('hello tapped');
+                        },
+                        child: SvgPicture.asset(
+                          'assets/images/filter_icon.svg',
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    }
+                    DateFilter item = DATE_FILTER_LIST[index];
+                    return HistoryFilterItem(
+                      item: item,
+                    );
                   },
-                  child: SvgPicture.asset(
-                    'assets/images/filter_icon.svg',
-                    fit: BoxFit.cover,
-                  ),
-                );
-              }
-              DateFilter item = DATE_FILTER_LIST[index];
-              return HistoryFilterItem(
-                item: item,
-              );
-            },
+                ),
+              ),
+              GestureDetector(
+                onTap: onDownloadClick,
+                child: const Icon(
+                  Icons.download,
+                  color: ColorManager.kPrimaryColor,
+                  size: AppSize.s24,
+                ),
+              ),
+            ],
           ),
         );
       },

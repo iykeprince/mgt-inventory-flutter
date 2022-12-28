@@ -33,24 +33,25 @@ class CreateMerchantBottomSheet extends StatelessWidget {
                 Container(),
                 IconButton(
                     onPressed: () => completer!(SheetResponse(confirmed: true)),
-                    icon: Icon(Icons.cancel, color: ColorManager.kPinkSwan)),
+                    icon: const Icon(Icons.cancel,
+                        color: ColorManager.kPinkSwan)),
               ],
             ),
             Text('${request!.title}',
                 style: getSemiBoldStyle(
                     color: ColorManager.kDarkCharcoal, fontSize: FontSize.s18)),
-            SizedBox(
+            const SizedBox(
               height: AppSize.s20,
             ),
             Container(
-              padding: EdgeInsets.all(AppPadding.p24),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.all(AppPadding.p24),
+              decoration: const BoxDecoration(
                 color: ColorManager.kLightGrayishOrange,
               ),
               child: Column(
                 children: [
                   SvgPicture.asset('assets/images/bulb.svg'),
-                  SizedBox(
+                  const SizedBox(
                     height: AppSize.s12,
                   ),
                   Text(
@@ -61,7 +62,7 @@ class CreateMerchantBottomSheet extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: AppSize.s32,
                   ),
                   Text(

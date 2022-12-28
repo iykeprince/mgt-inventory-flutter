@@ -14,19 +14,25 @@ import 'package:pos_mobile_ui_package/utils/font_styles.dart';
 import 'package:pos_mobile_ui_package/utils/text_styles.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../models/admin-stat.model.dart';
 import '../../../models/branch.model.dart';
 import '../../../models/date-filter.model.dart';
 import '../../../models/transaction.model.dart';
 
-class AdminHistoryViewModel extends BaseViewModel {
+class AdminHistoryViewModel extends ReactiveViewModel {
   final _transactionService = locator<TransactionService>();
+
   DateFilter? _selectedFilter = DATE_FILTER_LIST[0];
 
   String? _selectedTransactionType;
   String? get selectedTransactionType => _selectedTransactionType;
   DateFilter? get selectedFilter => _selectedFilter;
 
-  List<Transaction>? get transactions => _transactionService.transactions;
+  // List<Transaction>? get transactions => _transactionService.transactions;
+  List<Transaction>? get transactions => _transactionService.filteredTransaction
+          ?? _transactionService.transactions;
+  bool _showSearch = false;
+  bool get showSearch => _showSearch;
 
   List<String> get transactionTypes => [
         'ALL',
@@ -76,4 +82,19 @@ class AdminHistoryViewModel extends BaseViewModel {
     _selectedFilter = df;
     notifyListeners();
   }
+
+  //search
+  void toggleSearch() {
+    _showSearch = !_showSearch;
+    notifyListeners();
+  }
+
+  handleSearchTransaction(String value) async {
+    print('value: $value');
+    notifyListeners();
+    await _transactionService.search(value);
+  }
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_transactionService];
 }
