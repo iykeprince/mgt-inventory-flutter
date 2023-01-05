@@ -6,12 +6,16 @@ part 'default_response.model.g.dart';
 class DefaultResponse {
   String message;
   dynamic status;
-  String? token;
+  @JsonKey(name: "access_token")
+  String? accessToken;
+  @JsonKey(name: "refresh_token")
+  String? refreshToken;
 
   DefaultResponse({
     required this.message,
     required this.status,
-    this.token,
+    this.accessToken,
+    this.refreshToken,
   });
 
   factory DefaultResponse.fromJson(Map<String, dynamic> json) =>

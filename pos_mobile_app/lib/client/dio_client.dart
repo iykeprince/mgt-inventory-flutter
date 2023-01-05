@@ -8,8 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class DioClient {
   final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: 'https://pos-app-wvhxx.ondigitalocean.app',
-      connectTimeout: 15000,
+      baseUrl: 'https://lobster-app-u8m74.ondigitalocean.app',
+      // connectTimeout: 15000,
       // receiveTimeout: 3000,
     ),
   )..interceptors.add(BearerTokenInterceptor());
@@ -23,10 +23,15 @@ class BearerTokenInterceptor extends Interceptor {
       RequestOptions options, RequestInterceptorHandler handler) async {
     log('REQUEST[${options.method}] => PATH: ${options.path}');
     final sharedPreferences = await SharedPreferences.getInstance();
-    if (sharedPreferences.getString(AUTH_TOKEN_KEY) != null) {
+    if (sharedPreferences.getString(AUTH_TOKEN_KEY) != null &&
+        !options.path.contains("/auth/token/refresh")) {
       options.headers['Authorization'] =
           'Bearer ${sharedPreferences.getString(AUTH_TOKEN_KEY)}';
       log('OPTIONS: ${options.toString()}');
+    } else {
+      options.headers['Authorization'] =
+          'Bearer ${sharedPreferences.getString(AUTH_REFRESH_KEY)}';
+      log('REFRESH TOKEN OPTIONS: ${options.toString()}');
     }
     return super.onRequest(options, handler);
   }

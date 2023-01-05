@@ -23,61 +23,64 @@ class AdminManageMerchantAccountView extends StatelessWidget {
           onTap: model.navigateBack,
           iconColor: ColorManager.kDarkCharcoal,
         ),
-        body: KeyboardAware(
-          child: Column(
-            children: [
-              if (model.isBusy) const LinearProgressIndicator(),
-              const SizedBox(
-                height: AppSize.s12,
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: model.merchants.length + 1,
-                  itemBuilder: (BuildContext context, int index) {
-                    if (index == model.merchants.length) {
-                      return Padding(
-                        padding: const EdgeInsets.all(AppSize.s24),
-                        child: PosButton(
-                          onPressed: model.navigateToCreateMerchant,
-                          title: AppString.addNewMerchantAccount,
-                          borderRadius: 0,
-                          leadingIcon: Icons.add,
-                          leadingIconColor: ColorManager.kPrimaryColor,
-                          buttonTextColor: ColorManager.kPrimaryColor,
-                          fontWeight: FontWeightManager.extraBold,
-                          buttonBgColor: ColorManager.kLightGreen1,
-                          leadingIconSpace: AppSize.s24,
-                        ),
-                      );
-                    } else {
-                      Merchant merchantItem = model.merchants[index];
+        body: RefreshIndicator(
+          onRefresh: model.refreshMerchants,
+          child: KeyboardAware(
+            child: Column(
+              children: [
+                if (model.isBusy) const LinearProgressIndicator(),
+                const SizedBox(
+                  height: AppSize.s12,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: model.merchants.length + 1,
+                    itemBuilder: (BuildContext context, int index) {
+                      if (index == model.merchants.length) {
+                        return Padding(
+                          padding: const EdgeInsets.all(AppSize.s24),
+                          child: PosButton(
+                            onPressed: model.navigateToCreateMerchant,
+                            title: AppString.addNewMerchantAccount,
+                            borderRadius: 0,
+                            leadingIcon: Icons.add,
+                            leadingIconColor: ColorManager.kPrimaryColor,
+                            buttonTextColor: ColorManager.kPrimaryColor,
+                            fontWeight: FontWeightManager.extraBold,
+                            buttonBgColor: ColorManager.kLightGreen1,
+                            leadingIconSpace: AppSize.s24,
+                          ),
+                        );
+                      } else {
+                        Merchant merchantItem = model.merchants[index];
 
-                      if (!merchantItem.user!.isVerified!) {
-                        return PendingMerchantAccountItem(
+                        if (!merchantItem.user!.isVerified!) {
+                          return PendingMerchantAccountItem(
+                            merchant: merchantItem,
+                            onDelete: (merchant) {
+                              model.showDeleteMerchantDialog(merchant);
+                            },
+                          );
+                        }
+                        return MerchantAccountItem(
                           merchant: merchantItem,
                           onDelete: (merchant) {
                             model.showDeleteMerchantDialog(merchant);
                           },
+                          onTap: () {
+                            model.navigateToMerchantDetails(merchantItem);
+                          },
                         );
                       }
-                      return MerchantAccountItem(
-                        merchant: merchantItem,
-                        onDelete: (merchant) {
-                          model.showDeleteMerchantDialog(merchant);
-                        },
-                        onTap: () {
-                          model.navigateToMerchantDetails(merchantItem);
-                        },
-                      );
-                    }
-                  },
+                    },
+                  ),
                 ),
-              ),
-              const BottomStickyNote(
-                text:
-                    "Merchants within your organization can register their merchant account a merchant account with their email has been added here.\n\nYour list will be automatically updated once they’ve registered and verified their email.",
-              ),
-            ],
+                const BottomStickyNote(
+                  text:
+                      "Merchants within your organization can register their merchant account a merchant account with their email has been added here.\n\nYour list will be automatically updated once they’ve registered and verified their email.",
+                ),
+              ],
+            ),
           ),
         ),
       ),

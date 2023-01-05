@@ -33,6 +33,11 @@ class AdminManageMerchantAccountViewModel extends BaseViewModel {
 
   void navigateBack() => _navigationService.back();
 
+  Future<void> refreshMerchants() async {
+    await _adminService.getMerchants();
+    notifyListeners();
+  }
+
   Future<void> navigateToCreateMerchant() async {
     if (branches!.isEmpty) {
       Fluttertoast.showToast(

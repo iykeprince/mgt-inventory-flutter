@@ -6,9 +6,12 @@ part 'auth.model.g.dart';
 class Auth {
   @JsonKey(name: "access_token")
   final String accessToken;
+  @JsonKey(name: "refresh_token")
+  final String refreshToken;
 
   Auth({
     required this.accessToken,
+    required this.refreshToken,
   });
 
   factory Auth.fromJson(Map<String, dynamic> json) => _$AuthFromJson(json);

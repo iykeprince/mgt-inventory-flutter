@@ -95,7 +95,7 @@ class PosDropDownField extends StatelessWidget {
             child: Text(
               hint,
               overflow: TextOverflow.ellipsis,
-              maxLines: 1,
+              maxLines: 2,
               style: valueStyle ??
                   TextStyle(
                     fontSize: 14,

@@ -11,6 +11,7 @@ class SplashView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SplashViewViewModel>.reactive(
       viewModelBuilder: () => SplashViewViewModel(),
+      onModelReady: (model) => model.runStartupLogic(),
       builder: (context, viewModel, child) {
         print('SPLASH [isBusy]: ${viewModel.isBusy}');
         return Scaffold(

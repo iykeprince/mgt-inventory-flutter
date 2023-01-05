@@ -37,6 +37,7 @@ class CreateMerchantAccountViewModel extends BaseViewModel {
     Branch foundBranch = branches!.firstWhere(
         (element) => element.name!.toLowerCase() == value.toLowerCase());
     branchController.text = foundBranch.id!;
+    // print('selected branch id: ${branchController.text}');
     notifyListeners();
   }
 

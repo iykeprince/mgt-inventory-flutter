@@ -9,26 +9,28 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class SplashViewViewModel extends FutureViewModel<void> {
+class SplashViewViewModel extends BaseViewModel {
   final log = getLogger('MyViewModel');
   final AuthenticationService _authenticationService =
       locator<AuthenticationService>();
   final NavigationService _navigationService = locator<NavigationService>();
 
-  Future<void> getCurrentUser() async {
+  Future runStartupLogic() async {
     log.i('');
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    final bool? isFirstTimeUser = preferences.getBool(IS_FIRST_TIME_USER);
-    if (isFirstTimeUser != null && isFirstTimeUser) {
-      return _navigationService.replaceWith(Routes.onboardView);
-    }
 
     String? routeName;
-    try {
-      User response = await _authenticationService.getCurrentBaseUser();
 
-      log.i('Success Profile ${response.id}');
-      switch (response.role) {
+    bool isAuthenticated = await _authenticationService.isAuthenticated();
+    print('isAuthenticated: $isAuthenticated');
+    if (!isAuthenticated) {
+      print('navigate to login');
+      _navigationService.replaceWith(Routes.loginView);
+    } else {
+      String authRole = await _authenticationService.getLocalAuthRole();
+      print('ROLE: $authRole');
+
+      log.i('Success Profile $authRole');
+      switch (authRole) {
         case "MERCHANT":
           routeName = Routes.merchantHomeView;
           break;
@@ -39,19 +41,13 @@ class SplashViewViewModel extends FutureViewModel<void> {
         default:
           break;
       }
-      _navigationService.replaceWith(routeName!);
-    } on DioError catch (error) {
-      _navigationService.replaceWith(Routes.authView);
+      _navigationService.clearStackAndShow(routeName!);
     }
-  }
 
-  @override
-  Future<void> futureToRun() => getCurrentUser();
-
-  @override
-  void onError(error) {
-    log.e(error);
-    //hello who are you
-    log.i('Error e');
+    // } on DioError catch (error) {
+    //   _navigationService.replaceWith(Routes.authView);
+    // } finally {
+    //   await _authenticationService.getCurrentBaseUser();
+    // }
   }
 }
