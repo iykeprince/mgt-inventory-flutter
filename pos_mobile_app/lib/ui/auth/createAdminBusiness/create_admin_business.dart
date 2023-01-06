@@ -51,7 +51,6 @@ class CreateAdminBusinessView extends StatelessWidget
                     onTap: model.navigateBack,
                     iconThemeColor: ColorManager.kWhiteColor,
                     textColor: ColorManager.kWhiteColor,
-                    automaticallyImplyLeading: false,
                   ),
                 ),
                 CreateBusinessFormView(

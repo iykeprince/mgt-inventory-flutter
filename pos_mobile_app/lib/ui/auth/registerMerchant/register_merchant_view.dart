@@ -100,43 +100,50 @@ class RegisterMerchantFormView
               ),
             const SizedBox(height: AppSize.s6),
             PosCheckBox(
-                value: model.tos ?? false,
-                onChanged: (value) => model.setTos(value),
+                value: model.tos,
+                onChanged: (value) {
+                  model.setTos(value);
+                },
                 richText: Expanded(
-                  child: RichText(
-                    textAlign: TextAlign.start,
-                    text: TextSpan(
-                        text: AppString.iAgreeText,
-                        style: getRegularStyle(
-                          color: ColorManager.kTurquoiseDarkColor,
-                          fontSize: FontSize.s14,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: AppString.termsAndUseText,
-                            style: getRegularStyle(
-                              color: ColorManager.kButtonTextNavyBlue,
-                              fontSize: FontSize.s14,
-                            ),
+                  child: GestureDetector(
+                    onTap: () {
+                      model.setTos(!model.tos);
+                    },
+                    child: RichText(
+                      textAlign: TextAlign.start,
+                      text: TextSpan(
+                          text: AppString.iAgreeText,
+                          style: getRegularStyle(
+                            color: ColorManager.kTurquoiseDarkColor,
+                            fontSize: FontSize.s14,
                           ),
-                          TextSpan(
-                            text: AppString.haveReadText,
-                            style: getRegularStyle(
-                              color: ColorManager.kTurquoiseDarkColor,
-                              fontSize: FontSize.s14,
-                            ),
-                          ),
-                          TextSpan(
-                              text: AppString.privacyPolicyText,
-                              style: getMediumStyle(
+                          children: [
+                            TextSpan(
+                              text: AppString.termsAndUseText,
+                              style: getRegularStyle(
                                 color: ColorManager.kButtonTextNavyBlue,
                                 fontSize: FontSize.s14,
                               ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = (() {
-                                  print('Hello barrest dev in');
-                                })),
-                        ]),
+                            ),
+                            TextSpan(
+                              text: AppString.haveReadText,
+                              style: getRegularStyle(
+                                color: ColorManager.kTurquoiseDarkColor,
+                                fontSize: FontSize.s14,
+                              ),
+                            ),
+                            TextSpan(
+                                text: AppString.privacyPolicyText,
+                                style: getMediumStyle(
+                                  color: ColorManager.kButtonTextNavyBlue,
+                                  fontSize: FontSize.s14,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = (() {
+                                    print('Hello barrest dev in');
+                                  })),
+                          ]),
+                    ),
                   ),
                 )),
             const SizedBox(height: AppSize.s12),

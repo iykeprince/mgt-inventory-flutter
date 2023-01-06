@@ -12,10 +12,10 @@ import '../../../utils/pos_contants.dart';
 class RegisterMerchantViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _authenticationService = locator<AuthenticationService>();
-  bool? _tos;
+  bool _tos = true;
   String? _emailAddress;
 
-  bool? get tos => _tos;
+  bool get tos => _tos;
   String? get emailAddress => _emailAddress;
 
   setEmailAddress(String email) {
@@ -24,6 +24,7 @@ class RegisterMerchantViewModel extends BaseViewModel {
 
   setTos(bool value) {
     _tos = value;
+    print('clicked vaue: $value');
     notifyListeners();
   }
 
@@ -39,7 +40,7 @@ class RegisterMerchantViewModel extends BaseViewModel {
           EMAIL_ADDRESS_VALIDATOR, "Email address is required");
     }
     setErrorForObject(EMAIL_ADDRESS_VALIDATOR, null);
-    if (_tos == null || !_tos!) {
+    if (!_tos) {
       return setErrorForObject(
           TOS_VALIDATOR, "You need to accept the terms of use");
     }

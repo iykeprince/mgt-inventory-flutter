@@ -60,7 +60,7 @@ class LoginViewModel extends FormViewModel {
 
   navigateBack() => _navigationService.back();
 
-  navigateToRegisterNow() => _navigationService.back();
+  navigateToRegisterNow() => _navigationService.navigateTo(Routes.authView);
 
   navigateToForgotPassword() =>
       _navigationService.navigateTo(Routes.forgotPasswordView);

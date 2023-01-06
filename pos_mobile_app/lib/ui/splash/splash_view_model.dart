@@ -23,7 +23,10 @@ class SplashViewViewModel extends BaseViewModel {
     bool isAuthenticated = await _authenticationService.isAuthenticated();
     print('isAuthenticated: $isAuthenticated');
     if (!isAuthenticated) {
-      print('navigate to login');
+      if (await getIsFirstTimeUser()) {
+        _navigationService.replaceWith(Routes.onboardView);
+        return;
+      }
       _navigationService.replaceWith(Routes.loginView);
     } else {
       String authRole = await _authenticationService.getLocalAuthRole();
@@ -49,5 +52,11 @@ class SplashViewViewModel extends BaseViewModel {
     // } finally {
     //   await _authenticationService.getCurrentBaseUser();
     // }
+  }
+
+  Future<bool> getIsFirstTimeUser() async {
+    final preferences = await SharedPreferences.getInstance();
+    bool? isFirstTime = preferences.getBool(IS_FIRST_TIME_USER);
+    return isFirstTime ?? true;
   }
 }
