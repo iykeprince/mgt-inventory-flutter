@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:982984562092:android:42241501588d447e9ed609",
+        "mobilesdk_app_id": "1:982984562092:android:49a3fb97bfc3035b9ed609",
         "android_client_info": {
-          "package_name": "com.spartanmedia.pos.pos_mobile_app"
+          "package_name": "com.spartanmedia.recordbeta.pos_mobile_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "982984562092-7bhsklbmipfggqk8v9k9q2eln9euoeso.apps.googleusercontent.com",
+          "client_id": "982984562092-hpgsmekdmk5jv62509s4ntfs3achmrbs.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.spartanmedia.pos.pos_mobile_app",
+            "package_name": "com.spartanmedia.recordbeta.pos_mobile_app",
             "certificate_hash": "382c8879a7d4b982565bdc5ee32fe23b75d3df58"
           }
         },

@@ -6,10 +6,12 @@ import 'package:pos_mobile_ui_package/utils/string_manager.dart';
 class OnboardingViewTwo extends StatelessWidget {
   OnboardingViewTwo({
     Key? key,
+    required this.imgUrl,
     required this.onSkipPressed,
     required this.onNextPressed,
   }) : super(key: key);
 
+  String imgUrl;
   Function() onSkipPressed;
   Function() onNextPressed;
 
@@ -41,14 +43,9 @@ class OnboardingViewTwo extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           Expanded(
-            child: Container(
-              height: 200,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  width: 1,
-                  color: ColorManager.kGrey,
-                ),
-              ),
+            child: Image.asset(
+              imgUrl,
+              fit: BoxFit.cover,
             ),
           ),
           const SizedBox(height: 24),

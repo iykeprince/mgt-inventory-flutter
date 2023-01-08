@@ -10,12 +10,14 @@ DefaultResponse _$DefaultResponseFromJson(Map<String, dynamic> json) =>
     DefaultResponse(
       message: json['message'] as String,
       status: json['status'],
-      token: json['token'] as String?,
+      accessToken: json['access_token'] as String?,
+      refreshToken: json['refresh_token'] as String?,
     );
 
 Map<String, dynamic> _$DefaultResponseToJson(DefaultResponse instance) =>
     <String, dynamic>{
       'message': instance.message,
       'status': instance.status,
-      'token': instance.token,
+      'access_token': instance.accessToken,
+      'refresh_token': instance.refreshToken,
     };

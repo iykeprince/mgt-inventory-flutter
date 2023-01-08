@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:pos_mobile_app/app/app.locator.dart';
 import 'package:pos_mobile_app/client/dio_client.dart';
 import 'package:pos_mobile_app/models/admin.model.dart';
@@ -37,6 +38,51 @@ class AuthenticationService with ReactiveServiceMixin {
     _initialNumberOfBranches.value = value;
   }
 
+  Future<bool> isAuthenticated() async {
+    final preferences = await SharedPreferences.getInstance();
+    String accessToken = preferences.getString(AUTH_TOKEN_KEY) ?? "";
+    String refreshToken = preferences.getString(AUTH_REFRESH_KEY) ?? "";
+
+    if (accessToken.isEmpty || refreshToken.isEmpty) {
+      return false;
+    } //to be removed
+
+    bool isRefreshTokenExpired = JwtDecoder.isExpired(refreshToken);
+    if (isRefreshTokenExpired) {
+      return false;
+    }
+
+    return true;
+  }
+
+  Future<String> getLocalAuthRole() async {
+    final preferences = await SharedPreferences.getInstance();
+    String? accessToken = preferences.getString(AUTH_TOKEN_KEY);
+    String? refreshToken = preferences.getString(AUTH_REFRESH_KEY);
+
+    bool isAccessTokenExpired = JwtDecoder.isExpired(accessToken!);
+
+    if (isAccessTokenExpired) {
+      // try and request for another access token
+      var response = await requestAccessTokenFromRefreshToken(refreshToken!);
+      accessToken = response.accessToken;
+    }
+    return JwtDecoder.decode(accessToken)["role"];
+  }
+
+  Future<Auth> requestAccessTokenFromRefreshToken(String refreshToken) async {
+    final preferences = await SharedPreferences.getInstance();
+    var response = await dioClient.get(
+      '/auth/token/refresh',
+    );
+    Auth auth = Auth.fromJson(response.data);
+
+    preferences.setString(AUTH_TOKEN_KEY, auth.accessToken);
+    preferences.setString(AUTH_REFRESH_KEY, auth.refreshToken);
+
+    return auth;
+  }
+
   Future<Auth> login(Map<String, dynamic> formData) async {
     final preferences = await SharedPreferences.getInstance();
 
@@ -47,6 +93,7 @@ class AuthenticationService with ReactiveServiceMixin {
     Auth auth = Auth.fromJson(response.data);
 
     preferences.setString(AUTH_TOKEN_KEY, auth.accessToken);
+    preferences.setString(AUTH_REFRESH_KEY, auth.refreshToken);
     return auth;
   }
 
@@ -67,7 +114,8 @@ class AuthenticationService with ReactiveServiceMixin {
     );
 
     DefaultResponse res = DefaultResponse.fromJson(response.data);
-    preferences.setString(AUTH_TOKEN_KEY, res.token!);
+    preferences.setString(AUTH_TOKEN_KEY, res.accessToken!);
+    preferences.setString(AUTH_REFRESH_KEY, res.refreshToken!);
     return res;
   }
 
@@ -92,13 +140,17 @@ class AuthenticationService with ReactiveServiceMixin {
     return merchant;
   }
 
-  Future<Admin> getCurrentAdminUser() async {
+  Future<Admin?> getCurrentAdminUser() async {
     var response = await dioClient.get(
       '/admin/profile',
     );
-    Admin authUser = Admin.fromJson(response.data);
-    _currentAdminUser.value = authUser;
-    return authUser;
+    if (response.data is Map) {
+      Admin? authUser = Admin.fromJson(response.data);
+      _currentAdminUser.value = authUser;
+      return authUser;
+    } else {
+      return null;
+    }
   }
 
   Future<DefaultResponse> forgotPassword(Map<String, dynamic> formData) async {

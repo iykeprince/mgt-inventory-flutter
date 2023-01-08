@@ -17,9 +17,11 @@ class TransactionFilterView extends StatelessWidget {
     Key? key,
     this.showDownload = false,
     this.onDownloadClick,
+    this.onFilterIconClick,
   }) : super(key: key);
-  final bool? showDownload;
+  final bool showDownload;
   final Function()? onDownloadClick;
+  final Function()? onFilterIconClick;
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +43,7 @@ class TransactionFilterView extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     if (index == DATE_FILTER_LIST.length) {
                       return GestureDetector(
-                        onTap: () {
-                          print('hello tapped');
-                        },
+                        onTap: onFilterIconClick,
                         child: SvgPicture.asset(
                           'assets/images/filter_icon.svg',
                           fit: BoxFit.cover,
@@ -57,14 +57,15 @@ class TransactionFilterView extends StatelessWidget {
                   },
                 ),
               ),
-              GestureDetector(
-                onTap: onDownloadClick,
-                child: const Icon(
-                  Icons.download,
-                  color: ColorManager.kPrimaryColor,
-                  size: AppSize.s24,
+              if (showDownload)
+                GestureDetector(
+                  onTap: onDownloadClick,
+                  child: const Icon(
+                    Icons.download,
+                    color: ColorManager.kPrimaryColor,
+                    size: AppSize.s24,
+                  ),
                 ),
-              ),
             ],
           ),
         );
@@ -89,7 +90,7 @@ class HistoryFilterItem extends ViewModelWidget<TransactionFilterViewModel> {
       child: Container(
         padding: const EdgeInsets.symmetric(
           vertical: AppPadding.p8,
-          horizontal: AppPadding.p12,
+          horizontal: AppPadding.p24,
         ),
         margin: const EdgeInsets.only(right: AppSize.s12),
         decoration: BoxDecoration(
