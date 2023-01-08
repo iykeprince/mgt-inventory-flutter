@@ -40,10 +40,10 @@ class AuthenticationService with ReactiveServiceMixin {
 
   Future<bool> isAuthenticated() async {
     final preferences = await SharedPreferences.getInstance();
-    String? accessToken = preferences.getString(AUTH_TOKEN_KEY);
-    String? refreshToken = preferences.getString(AUTH_REFRESH_KEY);
+    String accessToken = preferences.getString(AUTH_TOKEN_KEY) ?? "";
+    String refreshToken = preferences.getString(AUTH_REFRESH_KEY) ?? "";
 
-    if (accessToken!.isEmpty || refreshToken!.isEmpty) {
+    if (accessToken.isEmpty || refreshToken.isEmpty) {
       return false;
     } //to be removed
 

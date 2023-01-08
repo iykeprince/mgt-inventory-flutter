@@ -55,6 +55,7 @@ class _OnboardViewState extends State<OnboardView> {
               child: PageView(
                 children: [
                   OnboardingViewOne(
+                    imgUrl: "assets/images/record.png",
                     onNextPressed: () {
                       _pageController.animateToPage(
                         1,
@@ -68,6 +69,7 @@ class _OnboardViewState extends State<OnboardView> {
                     },
                   ),
                   OnboardingViewTwo(
+                    imgUrl: "assets/images/track.png",
                     onNextPressed: () {
                       _pageController.animateToPage(
                         2,
@@ -78,6 +80,7 @@ class _OnboardViewState extends State<OnboardView> {
                     onSkipPressed: () => model.navigateToAuth(),
                   ),
                   OnboardingViewThree(
+                    imgUrl: "assets/images/manage.png",
                     onFinishPressed: () => model.navigateToAuth(),
                     onSkipPressed: () => model.navigateToAuth(),
                   )
