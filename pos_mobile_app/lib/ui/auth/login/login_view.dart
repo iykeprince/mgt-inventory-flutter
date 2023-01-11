@@ -162,7 +162,7 @@ class LoginFormView extends ViewModelWidget<LoginViewModel> {
               ),
               borderRadius: AppSize.s8,
               busy: model.isBusy,
-              disabled: !model.isFormValid,
+              disabled: !model.isFormValid || model.isBusy,
             ),
             const SizedBox(height: AppSize.s20),
             PosButton(

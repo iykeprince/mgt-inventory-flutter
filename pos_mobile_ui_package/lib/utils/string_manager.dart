@@ -111,6 +111,10 @@ class AppString {
 
   static String transactionLogHistoryText = "Transaction Log History";
   static String noEntryHasBeenMadeToday = "No entry has been made today.";
+
+  static String otherTransactionType = "Enter transaction type";
+
+  static String addNew = "Add New";
   static String verifyEmailSubText(String email) =>
       "We sent a six-digit code to your email address ($email) for verification.";
   static const String otpCodeText = "OTP Code";

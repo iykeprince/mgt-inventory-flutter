@@ -19,3 +19,8 @@ const String SELECTED_BRANCH = 'selectedBranch';
 const String CAMERA = 'CAMERA';
 const String GALLERY = 'GALLERY';
 const String BROWSE_FILE = 'BROWSE_FILE';
+
+const String OTHER = "Other";
+const String CASH = "Cash";
+const String CREDIT_CARD = "Credit Card";
+const String TRANSFER = "Transfer";

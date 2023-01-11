@@ -51,8 +51,9 @@ class LoginViewModel extends FormViewModel {
       }
       return response;
     } on DioError catch (error) {
-      print('error: ${error.response?.data}');
-      throw HttpException(error.response?.data["message"]);
+      print('error: ${error.response?.data ?? error.message}');
+      throw HttpException(
+          error.response?.data["message"] ?? "An error occured");
     } finally {
       setBusy(false);
     }

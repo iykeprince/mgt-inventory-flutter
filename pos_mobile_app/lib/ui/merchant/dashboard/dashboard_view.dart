@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pos_mobile_app/sheets/merchant_transactions/merchant_transactions_sheet_view.dart';
 import 'package:pos_mobile_app/ui/merchant/dashboard/dashboard_view_model.dart';
 import 'package:pos_mobile_app/ui/shared/components/account_dropdown/account_dropdown_view.dart';
 import 'package:pos_mobile_app/utils/card_items.dart';
@@ -68,7 +69,8 @@ class DashboardView extends StatelessWidget {
                       BalanceWidget(),
                     ],
                   ),
-                  TransactionLogHistoryWidget(),
+                  // TransactionLogHistoryWidget(),
+                  MerchantTransactionsSheetView()
                 ],
               ),
             ),

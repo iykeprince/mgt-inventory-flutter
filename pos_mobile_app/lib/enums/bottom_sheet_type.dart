@@ -7,5 +7,7 @@ enum BottomSheetType {
   feedbackSurvey,
   accountData,
 
-  addBranch
+  addBranch,
+
+  merchantTransactions,
 }

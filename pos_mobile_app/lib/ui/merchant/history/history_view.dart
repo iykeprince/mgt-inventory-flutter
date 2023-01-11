@@ -86,14 +86,17 @@ class HistoryView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     PosDropDownField(
-                      hint: 'Access NG - Lolade Rosemary Agbabiaka - 100014732',
+                      hint: 'Select Account',
                       valueStyle: getMediumStyle(
                         color: ColorManager.kDarkColor,
                         fontSize: FontSize.s16,
                       ),
                       buttonHeight: 70,
                       value: null,
-                      dropdownItems: ['hello', 'wold'],
+                      dropdownItems: model.accounts!
+                          .map((e) =>
+                              '${e.accountDetail!.serviceProviderName!} - ${e.accountDetail!.accountName} - ${e.accountDetail!.accountNo}')
+                          .toList(),
                       onChanged: (value) {},
                       buttonWidth: MediaQuery.of(context).size.width,
                       buttonDecoration: const BoxDecoration(

@@ -5,17 +5,6 @@ import 'package:stacked/stacked.dart';
 
 class LogNewExpenseView extends StatelessWidget {
   LogNewExpenseView({Key? key}) : super(key: key);
-  final List<String> items = [
-    'Item1',
-    'Item2',
-    'Item3',
-    'Item4',
-    'Item5',
-    'Item6',
-    'Item7',
-    'Item8',
-  ];
-  String? selectedValue;
 
   @override
   Widget build(BuildContext context) {
@@ -55,35 +44,38 @@ class LogNewExpenseView extends StatelessWidget {
                       controller: model.expenseNameController),
                   const SizedBox(height: AppSize.s16),
                   PosDropDownField(
-                      label: AppString.expenseType,
-                      hint: AppString.selectExpenseType,
-                      dropdownItems: items,
-                      value: selectedValue,
-                      dropdownWidth: 350,
-                      buttonWidth: double.infinity,
-                      buttonHeight: 56.0,
-                      labelStyle: getRegularStyle(
-                          color: ColorManager.kDarkCharcoal,
-                          fontSize: FontSize.s14),
-                      buttonDecoration:
-                          BoxDecoration(color: ColorManager.kInputBgColor),
-                      onChanged: model.handleSelectedExpenseType),
+                    label: AppString.expenseType,
+                    hint: AppString.selectExpenseType,
+                    dropdownItems: model.expenseTypes,
+                    value: model.selectedExpenseType,
+                    dropdownWidth: 350,
+                    buttonWidth: double.infinity,
+                    buttonHeight: 56.0,
+                    dropdownPadding: EdgeInsets.zero,
+                    labelStyle: getRegularStyle(
+                        color: ColorManager.kDarkCharcoal,
+                        fontSize: FontSize.s14),
+                    buttonDecoration:
+                        const BoxDecoration(color: ColorManager.kInputBgColor),
+                    onChanged: model.handleSelectedExpenseType,
+                  ),
                   const SizedBox(height: AppSize.s16),
                   InputField(
                     label: AppString.amount,
-                    hintText: AppString.fullnamePlaceholderText,
+                    hintText: AppString.amount,
                     border: InputBorder.none,
                     labelStyle: getRegularStyle(
                         color: ColorManager.kDarkCharcoal,
                         fontSize: FontSize.s14),
                     controller: model.amountController,
+                    keyBoardType: TextInputType.number,
                   ),
                   const SizedBox(height: AppSize.s16),
                   PosDropDownField(
                     label: AppString.paymentMethod,
                     hint: AppString.selectPaymentMethod,
-                    dropdownItems: items,
-                    value: selectedValue,
+                    dropdownItems: model.paymentMethods,
+                    value: model.paymentMethod,
                     dropdownWidth: 350,
                     buttonWidth: double.infinity,
                     buttonHeight: 56.0,
