@@ -3,6 +3,7 @@ import 'package:pos_mobile_app/ui/merchant/history/history_view_model.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../sheets/merchant_transactions/merchant_transactions_sheet_view.dart';
 import '../../shared/components/branch_dropdown/branch_dropdown_view.dart';
 import '../../shared/components/history_analytic/history_analytic_widget_view.dart';
 import '../../shared/components/transaction_filter/transaction_filter_view.dart';
@@ -79,48 +80,50 @@ class HistoryView extends StatelessWidget {
               ]),
             ),
           ),
-          body: SingleChildScrollView(
-            child: Container(
-              decoration: BoxDecoration(color: ColorManager.kLightIndigoBg),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    PosDropDownField(
-                      hint: 'Select Account',
-                      valueStyle: getMediumStyle(
-                        color: ColorManager.kDarkColor,
-                        fontSize: FontSize.s16,
-                      ),
-                      buttonHeight: 70,
-                      value: null,
-                      dropdownItems: model.accounts!
-                          .map((e) =>
-                              '${e.accountDetail!.serviceProviderName!} - ${e.accountDetail!.accountName} - ${e.accountDetail!.accountNo}')
-                          .toList(),
-                      onChanged: (value) {},
-                      buttonWidth: MediaQuery.of(context).size.width,
-                      buttonDecoration: const BoxDecoration(
-                        color: ColorManager.kLightBlue,
-                      ),
-                      buttonPadding: const EdgeInsets.symmetric(
-                        horizontal: AppPadding.p24,
-                        vertical: AppPadding.p8,
-                      ),
-                      dropdownWidth: MediaQuery.of(context).size.width,
+          body: Container(
+            decoration: BoxDecoration(color: ColorManager.kLightIndigoBg),
+            child: Stack(
+              children: [
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  PosDropDownField(
+                    hint: 'Select Account',
+                    valueStyle: getMediumStyle(
+                      color: ColorManager.kDarkColor,
+                      fontSize: FontSize.s16,
                     ),
-                    SizedBox(height: AppSize.s12),
-                    TransactionFilterView(
-                      showDownload: false,
-                      onDownloadClick: () {
-                        print('download click');
-                      },
-                      onFilterIconClick: () {
-                        model.openEndDrawer(context);
-                        print('open end drawer');
-                      },
+                    buttonHeight: 70,
+                    value: null,
+                    dropdownItems: model.accounts!
+                        .map((e) =>
+                            '${e.accountDetail!.serviceProviderName!} - ${e.accountDetail!.accountName} - ${e.accountDetail!.accountNo}')
+                        .toList(),
+                    onChanged: (value) {},
+                    buttonWidth: MediaQuery.of(context).size.width,
+                    buttonDecoration: const BoxDecoration(
+                      color: ColorManager.kLightBlue,
                     ),
-                    HistoryAnalyticWidgetView(),
-                  ]),
+                    buttonPadding: const EdgeInsets.symmetric(
+                      horizontal: AppPadding.p24,
+                      vertical: AppPadding.p8,
+                    ),
+                    dropdownWidth: MediaQuery.of(context).size.width,
+                  ),
+                  SizedBox(height: AppSize.s12),
+                  TransactionFilterView(
+                    showDownload: false,
+                    onDownloadClick: () {
+                      print('download click');
+                    },
+                    onFilterIconClick: () {
+                      model.openEndDrawer(context);
+                      print('open end drawer');
+                    },
+                  ),
+                  HistoryAnalyticWidgetView(),
+                ]),
+                MerchantTransactionsSheetView(
+                    minChildSize: 0.3, initialChildSize: 0.3),
+              ],
             ),
           ),
         );

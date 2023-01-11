@@ -13,8 +13,11 @@ class MerchantTransactionsSheetView extends StatelessWidget {
     Key? key,
     this.request,
     this.completer,
+    this.minChildSize,
+    this.initialChildSize,
   }) : super(key: key);
-
+  final double? minChildSize;
+  final double? initialChildSize;
   final SheetRequest? request;
   final Function(SheetResponse)? completer;
 
@@ -24,8 +27,8 @@ class MerchantTransactionsSheetView extends StatelessWidget {
         viewModelBuilder: () => MerchantTransactionsSheetViewModel(),
         builder: (context, model, child) {
           return DraggableScrollableSheet(
-            initialChildSize: 0.52,
-            minChildSize: 0.40,
+            initialChildSize: initialChildSize ?? 0.52,
+            minChildSize: minChildSize ?? 0.40,
             builder: (BuildContext context, ScrollController scrollController) {
               return SingleChildScrollView(
                 controller: scrollController,
@@ -104,7 +107,9 @@ class MerchantTransactionsSheetView extends StatelessWidget {
                               itemCount: 20,
                               itemBuilder: (BuildContext context, int index) {
                                 // Transaction transaction = model.transactions![index];
-                                return MerchantTransactionItem();
+                                return MerchantTransactionItem(
+                                  onTap: model.showTransactionDetail,
+                                );
                               },
                             ),
                     ],
@@ -121,11 +126,14 @@ class MerchantTransactionItem extends StatelessWidget {
   const MerchantTransactionItem({
     Key? key,
     this.isDeduction = false,
+    required this.onTap,
   }) : super(key: key);
   final bool isDeduction;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: onTap,
       contentPadding: EdgeInsets.zero,
       leading: isDeduction == false
           ? SvgPicture.asset(
