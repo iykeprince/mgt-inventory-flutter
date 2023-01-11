@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pos_mobile_app/ui/merchant/dashboard/create_logs/new_transactions/log_new_transaction_view_model.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 
 class LogNewTransactionView extends StatelessWidget {
   LogNewTransactionView({Key? key}) : super(key: key);
@@ -37,19 +38,9 @@ class LogNewTransactionFormView
     extends ViewModelWidget<LogNewTransactionViewModel> {
   LogNewTransactionFormView({Key? key}) : super(key: key);
 
-  final List<String> items = [
-    'Item1',
-    'Item2',
-    'Item3',
-    'Item4',
-    'Item5',
-    'Item6',
-    'Item7',
-    'Item8',
-  ];
-  String? selectedValue;
   @override
   Widget build(BuildContext context, LogNewTransactionViewModel model) {
+    print('nice seleced: ${model.selectedAccountDetailValue}');
     return Padding(
       padding: const EdgeInsets.symmetric(
           horizontal: ScreenHorizontalSize, vertical: ScreenVerticalSize),
@@ -69,9 +60,10 @@ class LogNewTransactionFormView
           label: AppString.accountDetails,
           hint: AppString.selectAccountDetails,
           dropdownItems: model.accounts!
-              .map((e) => e.accountDetail!.serviceProviderName!)
+              .map((e) =>
+                  '${e.accountDetail!.serviceProviderName!} - ${e.accountDetail!.accountName} - ${e.accountDetail!.accountNo}')
               .toList(),
-          value: selectedValue,
+          dropdownWidth: double.infinity,
           buttonWidth: double.infinity,
           buttonHeight: 56.0,
           labelStyle: getRegularStyle(
@@ -79,6 +71,7 @@ class LogNewTransactionFormView
           buttonDecoration:
               const BoxDecoration(color: ColorManager.kInputBgColor),
           onChanged: model.handleSelectedAccountDetails,
+          value: model.selectedAccountDetailValue,
         ),
         const SizedBox(height: AppSize.s16),
         DatePicker(
@@ -93,7 +86,8 @@ class LogNewTransactionFormView
           label: AppString.transactionType,
           hint: AppString.selectTransactionType,
           dropdownItems: model.transactionTypes,
-          value: selectedValue,
+          value: model.selectedTransactionType,
+          dropdownWidth: double.infinity,
           buttonWidth: double.infinity,
           buttonHeight: 56.0,
           labelStyle: getRegularStyle(
@@ -102,6 +96,16 @@ class LogNewTransactionFormView
               const BoxDecoration(color: ColorManager.kInputBgColor),
           onChanged: model.handleSelectedTransactionType,
         ),
+        if (model.showOtherInput)
+          InputField(
+            label: AppString.otherTransactionType,
+            hintText: AppString.otherTransactionType,
+            border: InputBorder.none,
+            labelStyle: getRegularStyle(
+                color: ColorManager.kDarkCharcoal, fontSize: FontSize.s14),
+            keyBoardType: TextInputType.text,
+            controller: model.otherController,
+          ),
         const SizedBox(height: AppSize.s16),
         InputField(
           label: AppString.amount,
@@ -109,7 +113,10 @@ class LogNewTransactionFormView
           border: InputBorder.none,
           labelStyle: getRegularStyle(
               color: ColorManager.kDarkCharcoal, fontSize: FontSize.s14),
-          prefixIcon: SizedBox(
+          prefixIcon: Container(
+            decoration: BoxDecoration(
+              color: ColorManager.kLightBlue,
+            ),
             width: AppSize.s12,
             height: AppSize.s12,
             child: Image.asset('assets/images/naira.png'),
@@ -141,8 +148,9 @@ class LogNewTransactionFormView
         PosDropDownField(
           label: AppString.serviceChargePayment,
           hint: AppString.serviceChargePaymentMethod,
-          dropdownItems: items,
-          value: selectedValue,
+          dropdownItems: model.serviceChargePayments,
+          value: model.serviceChargePaymentMethod,
+          dropdownWidth: double.infinity,
           buttonWidth: double.infinity,
           buttonHeight: 56.0,
           labelStyle: getRegularStyle(
@@ -163,7 +171,12 @@ class LogNewTransactionFormView
           controller: model.commentController,
         ),
         const SizedBox(height: AppSize.s40),
-        PosButton(onPressed: () {}, title: AppString.logTransaction)
+        PosButton(
+          onPressed: model.createTransaction,
+          title: AppString.logTransaction,
+          busy: model.isBusy,
+          disabled: model.isBusy,
+        )
       ]),
     );
     ;

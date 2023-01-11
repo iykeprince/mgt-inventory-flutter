@@ -13,6 +13,9 @@ import '../../../../../services/authentication.service.dart';
 import '../../../../../services/expense.service.dart';
 import '../../../../../services/shared.service.dart';
 import '../../../../../services/transaction.service.dart';
+import '../../../../../utils/pos_contants.dart';
+
+const String ADD_NEW = "ADD NEW";
 
 class LogNewExpenseViewModel extends BaseViewModel {
   final _authenticationService = locator<AuthenticationService>();
@@ -24,6 +27,11 @@ class LogNewExpenseViewModel extends BaseViewModel {
   TextEditingController amountController = TextEditingController();
   TextEditingController serviceChargeController = TextEditingController();
   TextEditingController commentController = TextEditingController();
+
+  List<String> _expenseTypes = ["Paper Purchase", "Date Renewal", "ADD_NEW"];
+  List<String> get expenseTypes => _expenseTypes;
+
+  List<String> get paymentMethods => [CASH, CREDIT_CARD, TRANSFER];
 
   List<String> get transactionTypes =>
       ["ALL", "CARD_WITHDRAWAL", "TRANSFER_WITHDRAWAL", "DEPOSIT"];
@@ -88,7 +96,11 @@ class LogNewExpenseViewModel extends BaseViewModel {
   }
 
   void handleSelectedExpenseType(String? value) {
+    if (value == ADD_NEW) {
+      return;
+    }
     _selectedExpenseType = value;
+    notifyListeners();
   }
 
   void handleSelctedPaymentMethod(String? value) {

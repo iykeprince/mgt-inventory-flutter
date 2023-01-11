@@ -1,0 +1,65 @@
+import 'package:dio/dio.dart';
+import 'package:moment_dart/moment_dart.dart';
+import 'package:stacked/stacked.dart';
+
+import '../../app/app.locator.dart';
+import '../../models/date-filter.model.dart';
+import '../../services/transaction.service.dart';
+
+class MerchantTransactionsSheetViewModel extends BaseViewModel {
+  final _transactionService = locator<TransactionService>();
+
+  List<String> get transactionTypes => [
+        'ALL',
+        'DEPOSIT',
+        'CARD_WITHDRAWAL',
+        'TRANSFER_WITHDRAWAL',
+      ];
+
+  String? _selectedTransactionType;
+  String? get selectedTransactionType => _selectedTransactionType;
+
+  void handleSelectedTransactionType(String? value) {
+    _selectedTransactionType = value;
+    // filterTransaction(df: selectedFilter!, type: value);
+    notifyListeners();
+  }
+
+  void filterTransaction(
+      {DateFilter? df, String? type, String? branchId}) async {
+    DateTime startDate = df == null
+        ? Moment.now().startOf(DurationUnit.day).toMoment()
+        : Moment.now() -
+            Duration(
+                days: df.day ?? 0,
+                hours: df.hour ?? 0,
+                minutes: df.minute ?? 0,
+                seconds: df.seconds ?? 0);
+
+    DateTime endDate = DateTime.now();
+    setBusy(true);
+    notifyListeners();
+    try {
+      await _transactionService.getTransactions(
+        start: startDate,
+        end: endDate,
+        type: type ?? "ALL",
+        branchId: branchId,
+        page: 1,
+        pageSize: 20,
+      );
+    } on DioError catch (error) {
+      print('error: ${error.response!.data['message']}');
+    } finally {
+      setBusy(false);
+      notifyListeners();
+    }
+  }
+
+  bool _showSearch = false;
+  bool get showSearch => _showSearch;
+  void toggleSearch() {
+    _showSearch = !_showSearch;
+    notifyListeners();
+  }
+}

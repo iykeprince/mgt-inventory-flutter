@@ -78,23 +78,25 @@ class InputField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              label,
-              style: labelStyle ??
-                  getRegularStyle(
-                    color: ColorManager.kDarkCharcoal,
-                    fontSize: FontSize.s14,
-                  ),
-            ),
-            if (labelRightItem != null) labelRightItem!
-          ],
-        ),
-        const SizedBox(
-          height: AppSize.s4,
-        ),
+        if (label != '')
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                label,
+                style: labelStyle ??
+                    getRegularStyle(
+                      color: ColorManager.kDarkCharcoal,
+                      fontSize: FontSize.s14,
+                    ),
+              ),
+              if (labelRightItem != null) labelRightItem!
+            ],
+          ),
+        if (label != '')
+          const SizedBox(
+            height: AppSize.s4,
+          ),
         TextFormField(
           initialValue: initialValue,
           showCursor: showCursor,
