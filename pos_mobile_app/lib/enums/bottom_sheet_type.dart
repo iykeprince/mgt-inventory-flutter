@@ -10,4 +10,5 @@ enum BottomSheetType {
   addBranch,
 
   merchantTransactions,
+  merchantTransactionDetail,
 }

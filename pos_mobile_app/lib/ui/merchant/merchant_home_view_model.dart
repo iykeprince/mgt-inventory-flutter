@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:pos_mobile_app/app/app.locator.dart';
 import 'package:pos_mobile_app/app/app.router.dart';
 import 'package:pos_mobile_app/enums/bottom_sheet_type.dart';
+import 'package:pos_mobile_app/models/admin-stat.model.dart';
 import 'package:pos_mobile_app/models/user.model.dart';
+import 'package:pos_mobile_app/services/admin.service.dart';
 import 'package:pos_mobile_app/services/merchant.service.dart';
 import 'package:pos_mobile_app/utils/pos_contants.dart';
 import 'package:stacked/stacked.dart';
@@ -17,6 +19,7 @@ import '../../services/shared.service.dart';
 import '../../utils/http_exception.dart';
 
 const String ADMIN_FETCH_ACCOUNTS = "ADMIN_FETCH_ACCOUNTS";
+const String MERCHANT_FETCH_STAT = "MERCHANT_FETCH_STAT";
 
 class MerchantHomeViewModel extends IndexTrackingViewModel {
   final _authService = locator<AuthenticationService>();
@@ -100,6 +103,13 @@ class MerchantHomeViewModel extends IndexTrackingViewModel {
     runBusyFuture(
       _sharedService.getBranchAccounts(merchant!.branch!.id!),
       busyObject: ADMIN_FETCH_ACCOUNTS,
+    );
+  }
+
+  Future<void> fetchStat() async {
+    runBusyFuture(
+      _merchantService.getStat(),
+      busyObject: MERCHANT_FETCH_STAT,
     );
   }
 }

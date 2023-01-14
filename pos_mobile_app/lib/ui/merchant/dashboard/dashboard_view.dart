@@ -4,9 +4,35 @@ import 'package:pos_mobile_app/sheets/merchant_transactions/merchant_transaction
 import 'package:pos_mobile_app/ui/merchant/dashboard/dashboard_view_model.dart';
 import 'package:pos_mobile_app/ui/shared/components/account_dropdown/account_dropdown_view.dart';
 import 'package:pos_mobile_app/utils/card_items.dart';
+import 'package:pos_mobile_app/utils/helpers.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 
+//  return [
+//       CardItem(
+//         imgUrl: 'assets/images/MerchantDashboard/transaction.png',
+//         amount: '0',
+//         color: ColorManager.kPrimaryColor,
+//         title: AppString.balCashAtHandText,
+//         titleColor: ColorManager.kWhiteColor,
+//         amountColor: ColorManager.kWhiteColor,
+//       ),
+//       CardItem(
+//         imgUrl: 'assets/images/MerchantDashboard/transaction.png',
+//         amount: '0',
+//         title: AppString.totalWithdrawalText,
+//       ),
+//       CardItem(
+//         imgUrl: 'assets/images/MerchantDashboard/transaction.png',
+//         amount: '0',
+//         title: AppString.totalProfitMadeText,
+//       ),
+//       CardItem(
+//         imgUrl: 'assets/images/MerchantDashboard/transaction.png',
+//         amount: '0',
+//         title: AppString.openingBalanceText,
+//       ),
+//     ];
 class DashboardView extends StatelessWidget {
   DashboardView({Key? key}) : super(key: key);
 
@@ -40,23 +66,24 @@ class DashboardView extends StatelessWidget {
                       const SizedBox(height: AppSize.s20),
                       SizedBox(
                         height: AppSize.s184,
-                        child: PageView.builder(
-                          controller: PageController(viewportFraction: 0.86),
-                          physics: const ClampingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemCount: cardItem.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final item = cardItem[index];
-                            return CardWidget(
-                                amount: item.amount,
-                                bgColor: item.color,
-                                imgUrl: item.imgUrl,
-                                title: item.title,
-                                amountColor: item.amountColor,
-                                titleColor: item.titleColor,
-                                noRightMargin: cardItem.length - 1 == index);
-                          },
-                        ),
+                        child: DashboardHeader(),
+                        // child: PageView.builder(
+                        //   controller: PageController(viewportFraction: 0.86),
+                        //   physics: const ClampingScrollPhysics(),
+                        //   scrollDirection: Axis.horizontal,
+                        //   itemCount: cardItem.length,
+                        //   itemBuilder: (BuildContext context, int index) {
+                        //     final item = cardItem[index];
+                        //     return CardWidget(
+                        //         amount: item.amount,
+                        //         bgColor: item.color,
+                        //         imgUrl: item.imgUrl,
+                        //         title: item.title,
+                        //         amountColor: item.amountColor,
+                        //         titleColor: item.titleColor,
+                        //         noRightMargin: cardItem.length - 1 == index);
+                        //   },
+                        // ),
                       ),
                       const SizedBox(height: AppSize.s12),
                       if (model.hasErrorForKey(OPENING_BALANCE))
@@ -76,6 +103,48 @@ class DashboardView extends StatelessWidget {
             ),
           );
         });
+  }
+}
+
+class DashboardHeader extends ViewModelWidget<DashboardViewModel> {
+  const DashboardHeader({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, DashboardViewModel model) {
+    return PageView(
+      controller: PageController(viewportFraction: 0.86),
+      physics: const ClampingScrollPhysics(),
+      scrollDirection: Axis.horizontal,
+      children: [
+        CardWidget(
+          amount: formatCurrency(model.stat?.cashAtHand ?? 0),
+          bgColor: ColorManager.kPrimaryColor,
+          imgUrl: "assets/images/MerchantDashboard/transaction.png",
+          title: AppString.balCashAtHandText,
+          amountColor: ColorManager.kWhiteColor,
+          titleColor: ColorManager.kWhiteColor,
+          noRightMargin: false,
+        ),
+        CardWidget(
+          amount: formatCurrency(model.stat?.totalWithdrawals ?? 0),
+          imgUrl: "assets/images/MerchantDashboard/transaction.png",
+          title: AppString.totalWithdrawalText,
+          noRightMargin: false,
+        ),
+        CardWidget(
+          amount: formatCurrency(model.stat?.totalProfit ?? 0),
+          imgUrl: "assets/images/MerchantDashboard/transaction.png",
+          title: AppString.totalProfitMadeText,
+          noRightMargin: false,
+        ),
+        CardWidget(
+          amount: formatCurrency(model.stat?.openingBalance ?? 0),
+          imgUrl: "assets/images/MerchantDashboard/transaction.png",
+          title: AppString.openingBalanceText,
+          noRightMargin: false,
+        ),
+      ],
+    );
   }
 }
 

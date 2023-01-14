@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:pos_mobile_app/app/app.locator.dart';
 import 'package:pos_mobile_app/enums/bottom_sheet_type.dart';
+import 'package:pos_mobile_app/models/merchant-stat.model.dart';
 import 'package:pos_mobile_app/models/merchant.model.dart';
 import 'package:pos_mobile_app/models/opening_closing_balance.model.dart';
 import 'package:pos_mobile_app/services/authentication.service.dart';
@@ -22,6 +23,7 @@ class DashboardViewModel extends ReactiveViewModel {
   Merchant? get merchant => _authenticationService.currentMerchantUser;
   OpeningClosingBalance? get openingBalance => _merchantService.openingBalance;
   OpeningClosingBalance? get closingBalance => _merchantService.closingBalance;
+  MerchantStat? get stat => _merchantService.stat;
 
   String? _selectedValue;
   String? get selectedValue => _selectedValue;

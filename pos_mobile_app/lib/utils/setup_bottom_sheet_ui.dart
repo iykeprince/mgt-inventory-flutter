@@ -5,6 +5,7 @@ import 'package:pos_mobile_app/sheets/create_logs.dart';
 import 'package:pos_mobile_app/sheets/create_merchant.sheet.dart';
 import 'package:pos_mobile_app/sheets/feedback_survey_sheet.dart';
 import 'package:pos_mobile_app/sheets/balance_sheet/open_balance.sheet.dart';
+import 'package:pos_mobile_app/sheets/merchant_transaction_detail/merchant_transaction_detail_view.sheet.dart';
 import 'package:pos_mobile_app/sheets/merchant_transactions/merchant_transactions_sheet_view.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,15 @@ void setupBottomSheetUi() {
         SheetAddBranchBottomSheet(request: sheetRequest, completer: completer),
     BottomSheetType.merchantTransactions: (context, sheetRequest, completer) =>
         MerchantTransactionsSheetView(
-            request: sheetRequest, completer: completer),
+          request: sheetRequest,
+          completer: completer,
+        ),
+    BottomSheetType.merchantTransactionDetail:
+        (context, sheetRequest, completer) =>
+            MerchantTransactionDetailSheetView(
+              request: sheetRequest,
+              completer: completer,
+            ),
   };
 
   bottomSheetService.setCustomSheetBuilders(builders);

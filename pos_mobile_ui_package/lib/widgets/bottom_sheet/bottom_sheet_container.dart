@@ -3,6 +3,7 @@ import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 
 class BottomSheetContainer extends StatelessWidget {
   final Widget child;
+  final double? height;
   final EdgeInsets? margin;
   final EdgeInsets? padding;
   final Color? color;
@@ -14,6 +15,7 @@ class BottomSheetContainer extends StatelessWidget {
     this.margin,
     this.padding,
     this.borderRadius,
+    this.height,
   }) : super(key: key);
 
   @override
@@ -25,6 +27,7 @@ class BottomSheetContainer extends StatelessWidget {
         color: color ?? Colors.white,
         borderRadius: borderRadius ?? BorderRadius.circular(15),
       ),
+      height: height,
       child: child,
     );
   }
