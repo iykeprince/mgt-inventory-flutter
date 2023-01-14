@@ -15,6 +15,9 @@ class HistoryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HistoryViewModel>.reactive(
       viewModelBuilder: () => HistoryViewModel(),
+      onModelReady: (model) async {
+        await model.fetchAnalyticStat();
+      },
       builder: (_, model, child) {
         return Scaffold(
           appBar: Navbar(

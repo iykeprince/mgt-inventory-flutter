@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:pos_mobile_app/models/merchant-stat.model.dart';
 import 'package:stacked/stacked.dart';
 
 import '../app/app.locator.dart';
@@ -13,6 +14,7 @@ class MerchantService with ReactiveServiceMixin {
     listenToReactiveValues([openingBalance, closingBalance]);
   }
 
+  MerchantStat? _stat;
   final ReactiveValue<OpeningClosingBalance?> _openingBalance =
       ReactiveValue<OpeningClosingBalance?>(null);
   final ReactiveValue<OpeningClosingBalance?> _closingBalance =
@@ -20,6 +22,27 @@ class MerchantService with ReactiveServiceMixin {
 
   OpeningClosingBalance? get openingBalance => _openingBalance.value;
   OpeningClosingBalance? get closingBalance => _closingBalance.value;
+  MerchantStat? get stat => _stat;
+
+  Future<void> getStat({
+    DateTime? start,
+    DateTime? end,
+  }) async {
+    String url = '/merchant/stat';
+
+    if (start != null) {
+      url += '?start=${start.toIso8601String()}';
+    }
+    if (end != null) {
+      url += '&end=${end.toIso8601String()}';
+    }
+    var response = await dioClient.get(url);
+    print('stat response data ${response.data}');
+    MerchantStat statResponse = MerchantStat.fromJson(response.data);
+    _stat = statResponse;
+    notifyListeners();
+    // return statResponse;
+  }
 
   Future<Merchant> updateMerchant(Map formData) async {
     var response = await dioClient.put('/merchant/update', data: formData);

@@ -25,7 +25,12 @@ class MerchantTransactionsSheetView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<MerchantTransactionsSheetViewModel>.reactive(
         viewModelBuilder: () => MerchantTransactionsSheetViewModel(),
+        onModelReady: (model) async {
+          await model.getMerchantTransaction();
+        },
         builder: (context, model, child) {
+          print(
+              'transactions list: ${model.transactions?.map((e) => e).toList()}');
           return DraggableScrollableSheet(
             initialChildSize: initialChildSize ?? 0.52,
             minChildSize: minChildSize ?? 0.40,
