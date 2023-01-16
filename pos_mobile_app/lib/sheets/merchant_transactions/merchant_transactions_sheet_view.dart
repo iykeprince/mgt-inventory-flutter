@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:pos_mobile_app/models/transaction.model.dart';
 import 'package:pos_mobile_app/sheets/merchant_transactions/merchant_transactions_sheet_view_model.dart';
+import 'package:pos_mobile_app/utils/helpers.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -109,11 +111,11 @@ class MerchantTransactionsSheetView extends StatelessWidget {
                           ? Center(child: CircularProgressIndicator())
                           : ListView.builder(
                               shrinkWrap: true,
-                              itemCount: 20,
+                              itemCount: model.transactions?.length,
                               itemBuilder: (BuildContext context, int index) {
-                                // Transaction transaction = model.transactions![index];
                                 return MerchantTransactionItem(
                                   onTap: model.showTransactionDetail,
+                                  transaction: model.transactions![index],
                                 );
                               },
                             ),
@@ -132,15 +134,17 @@ class MerchantTransactionItem extends StatelessWidget {
     Key? key,
     this.isDeduction = false,
     required this.onTap,
+    required this.transaction,
   }) : super(key: key);
   final bool isDeduction;
   final VoidCallback onTap;
+  final Transaction transaction;
   @override
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onTap,
       contentPadding: EdgeInsets.zero,
-      leading: isDeduction == false
+      leading: transaction.isDeduction == false
           ? SvgPicture.asset(
               'assets/images/success_tranx_icon.svg',
               fit: BoxFit.cover,
@@ -150,7 +154,7 @@ class MerchantTransactionItem extends StatelessWidget {
               fit: BoxFit.cover,
             ),
       title: Text(
-        'Type',
+        '${transaction.type}',
         style: const TextStyle(
           fontSize: FontSize.s16,
           color: ColorManager.kTurquoiseDarkColor,
@@ -158,7 +162,7 @@ class MerchantTransactionItem extends StatelessWidget {
         ),
       ),
       subtitle: Text(
-        DateFormat("d/M/yyyy h:ma").format(DateTime.now()),
+        DateFormat("d/M/yyyy h:ma").format(transaction.createdAt!),
         style: const TextStyle(
           color: ColorManager.kNavNonActiveColor,
           fontSize: FontSize.s14,
@@ -166,7 +170,7 @@ class MerchantTransactionItem extends StatelessWidget {
         ),
       ),
       trailing: Text(
-        '2000',
+        formatCurrency(transaction.amount!.toDouble()),
         style: TextStyle(
           color: !isDeduction ? ColorManager.kGreen : ColorManager.kRed,
           fontSize: FontSize.s18,

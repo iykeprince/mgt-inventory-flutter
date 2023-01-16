@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pos_mobile_app/enums/role.enum.dart';
 import 'package:pos_mobile_app/ui/merchant/report/report_view_model.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
@@ -115,6 +116,7 @@ class ReportView extends StatelessWidget {
                       Scaffold.of(context).openEndDrawer();
                       print('open end drawer');
                     },
+                    role: Role.MERCHANT,
                   ),
                   HistoryAnalyticWidgetView(),
                 ]),

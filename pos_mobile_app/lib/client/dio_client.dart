@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class DioClient {
   final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: 'https://lobster-app-u8m74.ondigitalocean.app',
+      baseUrl: 'https://app.recordbeta.ng',
       // connectTimeout: 15000,
       // receiveTimeout: 3000,
     ),

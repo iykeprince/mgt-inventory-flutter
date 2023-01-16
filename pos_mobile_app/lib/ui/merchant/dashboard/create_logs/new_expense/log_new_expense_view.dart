@@ -4,7 +4,7 @@ import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 
 class LogNewExpenseView extends StatelessWidget {
-  LogNewExpenseView({Key? key}) : super(key: key);
+  const LogNewExpenseView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +25,24 @@ class LogNewExpenseView extends StatelessWidget {
                     horizontal: ScreenHorizontalSize,
                     vertical: ScreenVerticalSize),
                 child: Column(children: [
+                  PosDropDownField(
+                    label: AppString.accountDetails,
+                    hint: AppString.selectAccountDetails,
+                    dropdownItems: model.accounts!
+                        .map((e) =>
+                            '${e.accountDetail!.serviceProviderName!} - ${e.accountDetail!.accountName} - ${e.accountDetail!.accountNo}')
+                        .toList(),
+                    dropdownWidth: double.infinity,
+                    buttonWidth: double.infinity,
+                    buttonHeight: 56.0,
+                    labelStyle: getRegularStyle(
+                        color: ColorManager.kDarkCharcoal,
+                        fontSize: FontSize.s14),
+                    buttonDecoration:
+                        const BoxDecoration(color: ColorManager.kInputBgColor),
+                    onChanged: model.handleSelectedAccountDetails,
+                    value: model.selectedAccountDetailValue,
+                  ),
                   DatePicker(
                     label: AppString.date,
                     hintText: AppString.dateformat,

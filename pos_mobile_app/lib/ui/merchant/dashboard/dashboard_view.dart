@@ -34,20 +34,20 @@ import 'package:stacked/stacked.dart';
 //       ),
 //     ];
 class DashboardView extends StatelessWidget {
-  DashboardView({Key? key}) : super(key: key);
+  const DashboardView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final cardItem = CardItems.items(context);
     return ViewModelBuilder<DashboardViewModel>.nonReactive(
         viewModelBuilder: () => DashboardViewModel(),
         onModelReady: (model) async {
-          // await model.getCurrentOpeningBalance();
+          await model.getCurrentUser();
+          await model.getCurrentOpeningBalance();
           // await model.getCurrentClosingBalance();
         },
         builder: (context, model, child) {
           return Scaffold(
-            appBar: Navbar(
+            appBar: const Navbar(
               leadingText: AppString.overview,
               trailing: AccountDropdownView(),
               automaticallyImplyLeading: false,
@@ -57,49 +57,23 @@ class DashboardView extends StatelessWidget {
               color: ColorManager.kWhiteColor,
             ),
             backgroundColor: ColorManager.kGreyBtn,
-            body: Container(
-              child: Stack(
-                children: [
-                  Column(
-                    // mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      const SizedBox(height: AppSize.s20),
-                      SizedBox(
-                        height: AppSize.s184,
-                        child: DashboardHeader(),
-                        // child: PageView.builder(
-                        //   controller: PageController(viewportFraction: 0.86),
-                        //   physics: const ClampingScrollPhysics(),
-                        //   scrollDirection: Axis.horizontal,
-                        //   itemCount: cardItem.length,
-                        //   itemBuilder: (BuildContext context, int index) {
-                        //     final item = cardItem[index];
-                        //     return CardWidget(
-                        //         amount: item.amount,
-                        //         bgColor: item.color,
-                        //         imgUrl: item.imgUrl,
-                        //         title: item.title,
-                        //         amountColor: item.amountColor,
-                        //         titleColor: item.titleColor,
-                        //         noRightMargin: cardItem.length - 1 == index);
-                        //   },
-                        // ),
-                      ),
-                      const SizedBox(height: AppSize.s12),
-                      if (model.hasErrorForKey(OPENING_BALANCE))
-                        Text(
-                          '${model.error(OPENING_BALANCE)}',
-                          style: getMediumStyle(
-                            color: ColorManager.kDarkCharcoal,
-                          ),
-                        ),
-                      BalanceWidget(),
-                    ],
-                  ),
-                  // TransactionLogHistoryWidget(),
-                  MerchantTransactionsSheetView()
-                ],
-              ),
+            body: Stack(
+              children: [
+                Column(
+                  // mainAxisSize: MainAxisSize.max,
+                  children: const [
+                    SizedBox(height: AppSize.s20),
+                    SizedBox(
+                      height: AppSize.s184,
+                      child: DashboardHeader(),
+                    ),
+                    SizedBox(height: AppSize.s12),
+                    BalanceWidget(),
+                  ],
+                ),
+                // TransactionLogHistoryWidget(),
+                const MerchantTransactionsSheetView()
+              ],
             ),
           );
         });
@@ -153,9 +127,10 @@ class BalanceWidget extends ViewModelWidget<DashboardViewModel> {
 
   @override
   Widget build(BuildContext context, DashboardViewModel model) {
+    print('openng balance: ${model.openingBalance}');
     return model.openingBalance == null
-        ? OpeningBalanceWidget()
-        : OpeningAndClosingBalanceWidget();
+        ? const OpeningBalanceWidget()
+        : const OpeningAndClosingBalanceWidget();
   }
 }
 
@@ -197,11 +172,11 @@ class OpeningBalanceWidget extends ViewModelWidget<DashboardViewModel> {
                 )
               ],
             ),
-            Spacer(),
-            model.isBusy
-                ? SizedBox(
-                    height: 40, width: 40, child: CircularProgressIndicator())
-                : Icon(
+            const Spacer(),
+            model.busy(OPENING_BALANCE)
+                ? const SizedBox(
+                    height: 24, width: 24, child: CircularProgressIndicator())
+                : const Icon(
                     Icons.arrow_forward,
                     color: ColorManager.kPrimaryColor,
                   )

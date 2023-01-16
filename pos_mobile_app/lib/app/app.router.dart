@@ -545,11 +545,8 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i34.LogNewExpenseView: (data) {
-      final args = data.getArgs<LogNewExpenseViewArguments>(
-        orElse: () => const LogNewExpenseViewArguments(),
-      );
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => _i34.LogNewExpenseView(key: args.key),
+        builder: (context) => const _i34.LogNewExpenseView(),
         settings: data,
       );
     },
@@ -658,12 +655,6 @@ class AdminBranchDetailViewArguments {
   final _i36.Key? key;
 
   final _i38.Branch branch;
-}
-
-class LogNewExpenseViewArguments {
-  const LogNewExpenseViewArguments({this.key});
-
-  final _i36.Key? key;
 }
 
 class LogNewTransactionViewArguments {
@@ -1151,16 +1142,14 @@ extension NavigatorStateExtension on _i39.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToLogNewExpenseView({
-    _i36.Key? key,
+  Future<dynamic> navigateToLogNewExpenseView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
+  ]) async {
     return navigateTo<dynamic>(Routes.logNewExpenseView,
-        arguments: LogNewExpenseViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:pos_mobile_app/models/merchant-report-stat.model.dart';
 import 'package:pos_mobile_app/models/merchant-stat.model.dart';
 import 'package:stacked/stacked.dart';
 
@@ -15,6 +16,7 @@ class MerchantService with ReactiveServiceMixin {
   }
 
   MerchantStat? _stat;
+  MerchantReportStat? _reportStat;
   final ReactiveValue<OpeningClosingBalance?> _openingBalance =
       ReactiveValue<OpeningClosingBalance?>(null);
   final ReactiveValue<OpeningClosingBalance?> _closingBalance =
@@ -23,6 +25,7 @@ class MerchantService with ReactiveServiceMixin {
   OpeningClosingBalance? get openingBalance => _openingBalance.value;
   OpeningClosingBalance? get closingBalance => _closingBalance.value;
   MerchantStat? get stat => _stat;
+  MerchantReportStat? get reportStat => _reportStat;
 
   Future<void> getStat({
     DateTime? start,
@@ -40,6 +43,27 @@ class MerchantService with ReactiveServiceMixin {
     print('stat response data ${response.data}');
     MerchantStat statResponse = MerchantStat.fromJson(response.data);
     _stat = statResponse;
+    notifyListeners();
+    // return statResponse;
+  }
+
+  Future<void> getReportStat({
+    DateTime? start,
+    DateTime? end,
+  }) async {
+    String url = '/merchant/report-stat';
+
+    if (start != null) {
+      url += '?start=${start.toIso8601String()}';
+    }
+    if (end != null) {
+      url += '&end=${end.toIso8601String()}';
+    }
+    var response = await dioClient.get(url);
+    print('report stat response data ${response.data}');
+    MerchantReportStat statResponse =
+        MerchantReportStat.fromJson(response.data);
+    _reportStat = statResponse;
     notifyListeners();
     // return statResponse;
   }

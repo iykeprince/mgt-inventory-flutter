@@ -25,6 +25,7 @@ class MerchantHomeView extends StatelessWidget {
         await model.getCurrentUser();
         await model.fetchAccounts();
         await model.fetchStat();
+        await model.fetchReportStat();
       },
       builder: (context, model, child) => Scaffold(
         extendBody: true,

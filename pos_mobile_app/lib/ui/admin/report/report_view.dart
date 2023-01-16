@@ -6,6 +6,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pos_mobile_app/dummy.widget/listtile_widget.dart';
+import 'package:pos_mobile_app/enums/role.enum.dart';
 import 'package:pos_mobile_app/ui/admin/report/report_view_model.dart';
 import 'package:pos_mobile_app/ui/shared/components/branch_dropdown/branch_dropdown_view.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
@@ -52,6 +53,7 @@ class AdminReportView extends StatelessWidget {
                         onDownloadClick: () {
                           print('download click');
                         },
+                        role: Role.ADMIN,
                       ),
                       HistoryAnalyticWidgetView(),
                       ReportTransactionSummaryView(),

@@ -20,6 +20,7 @@ import '../../utils/http_exception.dart';
 
 const String ADMIN_FETCH_ACCOUNTS = "ADMIN_FETCH_ACCOUNTS";
 const String MERCHANT_FETCH_STAT = "MERCHANT_FETCH_STAT";
+const String MERCHANT_FETCH_REPORT_STAT = "MERCHANT_FETCH_REPORT_STAT";
 
 class MerchantHomeViewModel extends IndexTrackingViewModel {
   final _authService = locator<AuthenticationService>();
@@ -110,6 +111,13 @@ class MerchantHomeViewModel extends IndexTrackingViewModel {
     runBusyFuture(
       _merchantService.getStat(),
       busyObject: MERCHANT_FETCH_STAT,
+    );
+  }
+
+  Future<void> fetchReportStat() async {
+    runBusyFuture(
+      _merchantService.getReportStat(),
+      busyObject: MERCHANT_FETCH_REPORT_STAT,
     );
   }
 }
