@@ -39,7 +39,7 @@ class HistoryAnalyticWidgetView extends StatelessWidget {
                         ),
                         Expanded(
                           child: Text(
-                            formatCurrency(model.stat?.expenses ?? 0),
+                            formatCurrency(model.reportStat?.expenses ?? 0),
                             maxLines: 1,
                             style: getThickStyle(
                                 color: ColorManager.kPrimaryColor,
@@ -63,7 +63,7 @@ class HistoryAnalyticWidgetView extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        formatCurrency(model.stat?.deposits ?? 0),
+                        formatCurrency(model.reportStat?.deposits ?? 0),
                         maxLines: 1,
                         style: getThickStyle(
                             color: ColorManager.kPrimaryColor,
@@ -87,7 +87,8 @@ class HistoryAnalyticWidgetView extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        formatCurrency(model.stat?.transferWithdrawal ?? 0),
+                        formatCurrency(
+                            model.reportStat?.transferWithdrawal ?? 0),
                         maxLines: 1,
                         style: getThickStyle(
                             color: ColorManager.kPrimaryColor,
@@ -111,7 +112,7 @@ class HistoryAnalyticWidgetView extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        formatCurrency(model.stat?.cardWithdrawal ?? 0),
+                        formatCurrency(model.reportStat?.cardWithdrawal ?? 0),
                         maxLines: 1,
                         style: getThickStyle(
                             color: ColorManager.kPrimaryColor,

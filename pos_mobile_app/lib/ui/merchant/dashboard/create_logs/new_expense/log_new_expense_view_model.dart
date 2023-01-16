@@ -9,26 +9,28 @@ import 'package:stacked_services/stacked_services.dart';
 import '../../../../../app/app.locator.dart';
 import '../../../../../models/account.model.dart';
 import '../../../../../models/merchant.model.dart';
+import '../../../../../models/opening_closing_balance.model.dart';
 import '../../../../../services/authentication.service.dart';
 import '../../../../../services/expense.service.dart';
+import '../../../../../services/merchant.service.dart';
 import '../../../../../services/shared.service.dart';
 import '../../../../../services/transaction.service.dart';
 import '../../../../../utils/pos_contants.dart';
-
-const String ADD_NEW = "ADD NEW";
 
 class LogNewExpenseViewModel extends BaseViewModel {
   final _authenticationService = locator<AuthenticationService>();
   final _expenseService = locator<ExpenseService>();
   final _sharedService = locator<SharedService>();
   final _navigationService = locator<NavigationService>();
+  final _merchantService = locator<MerchantService>();
 
   TextEditingController expenseNameController = TextEditingController();
   TextEditingController amountController = TextEditingController();
   TextEditingController serviceChargeController = TextEditingController();
   TextEditingController commentController = TextEditingController();
+  TextEditingController otherController = TextEditingController();
 
-  List<String> _expenseTypes = ["Paper Purchase", "Date Renewal", "ADD_NEW"];
+  List<String> _expenseTypes = ["Paper Purchase", "Date Renewal"];
   List<String> get expenseTypes => _expenseTypes;
 
   List<String> get paymentMethods => [CASH, CREDIT_CARD, TRANSFER];
@@ -38,7 +40,8 @@ class LogNewExpenseViewModel extends BaseViewModel {
 
   Merchant? get merchant => _authenticationService.currentMerchantUser;
   List<Account>? get accounts => _sharedService.branchAccounts;
-
+  String? _selectedAccountDetailValue;
+  String? get selectedAccountDetailValue => _selectedAccountDetailValue;
   Account? _selectedAccountDetail;
   Account? get selectedAccountDetail => _selectedAccountDetail;
 
@@ -49,11 +52,26 @@ class LogNewExpenseViewModel extends BaseViewModel {
   String? _paymentMethod;
   String? get paymentMethod => _paymentMethod;
 
+  OpeningClosingBalance? get openingBalance => _merchantService.openingBalance;
+
   Future createExpense() async {
     runBusyFuture(createExpenseRequest());
   }
 
   Future createExpenseRequest() async {
+    if (openingBalance == null) {
+      Fluttertoast.showToast(
+        msg:
+            'Operation not allowed. Please enter your opening balance before proceeding with log!',
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.TOP,
+        backgroundColor: ColorManager.kDarkColor,
+        textColor: ColorManager.kWhiteColor,
+        fontSize: FontSize.s16,
+      );
+      return;
+    }
+
     var formData = {
       "name": expenseNameController.text,
       "type": selectedExpenseType,
@@ -61,10 +79,12 @@ class LogNewExpenseViewModel extends BaseViewModel {
       "paymentMethod": paymentMethod,
       "comment": commentController.text,
       "branchId": merchant!.branch!.id!,
-      "accountId": selectedAccountDetail!.id,
+      "accountId": selectedAccountDetail?.id,
       "isDeduction": true,
-      "other": "string"
+      "other": otherController.text
     };
+    print('form data: $formData');
+
     setBusy(true);
     try {
       await _expenseService.createExpense(formData);
@@ -78,6 +98,7 @@ class LogNewExpenseViewModel extends BaseViewModel {
       );
       _navigationService.back();
     } on DioError catch (error) {
+      print('${error.response?.data}');
       throw Exception(error.response!.data["message"]);
     } finally {
       setBusy(false);
@@ -86,9 +107,14 @@ class LogNewExpenseViewModel extends BaseViewModel {
   }
 
   void handleSelectedAccountDetails(String? value) {
+    print('selected account : $value');
+    _selectedAccountDetailValue = value;
+    notifyListeners();
+    String name = value!.split(' - ')[0];
+    print('name of the selected account provider: $name');
     _selectedAccountDetail = accounts!.firstWhere((element) =>
         element.accountDetail!.serviceProviderName!.toLowerCase() ==
-        value!.toLowerCase());
+        name.toLowerCase());
   }
 
   handleSelectedDate(String value) {
@@ -96,14 +122,12 @@ class LogNewExpenseViewModel extends BaseViewModel {
   }
 
   void handleSelectedExpenseType(String? value) {
-    if (value == ADD_NEW) {
-      return;
-    }
     _selectedExpenseType = value;
     notifyListeners();
   }
 
   void handleSelctedPaymentMethod(String? value) {
     _paymentMethod = value;
+    notifyListeners();
   }
 }

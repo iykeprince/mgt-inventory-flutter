@@ -1,6 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-void setupNotification(FirebaseMessaging messaging) async {
+Future<void> setupNotification(FirebaseMessaging messaging) async {
   NotificationSettings settings = await messaging.requestPermission(
     alert: true,
     announcement: false,
@@ -11,7 +11,13 @@ void setupNotification(FirebaseMessaging messaging) async {
     sound: true,
   );
 
-  print('User granted permission: ${settings.authorizationStatus}');
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    print('User granted permission');
+  } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+    print('User granted provisional permission');
+  } else {
+    print('permission not granted. requesting ...');
+  }
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     print('Got a message whilst in the foreground!');
     print('Message data: ${message.data}');

@@ -5,6 +5,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pos_mobile_app/dummy.widget/listtile_widget.dart';
+import 'package:pos_mobile_app/enums/role.enum.dart';
 import 'package:pos_mobile_app/ui/shared/components/branch_dropdown/branch_dropdown_view.dart';
 import 'package:pos_mobile_app/ui/shared/components/history_analytic/history_analytic_widget_view.dart';
 import 'package:pos_mobile_app/ui/shared/components/transaction_filter/transaction_filter_view.dart';
@@ -45,7 +46,9 @@ class AdminHistoryView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: AppSize.s12),
-                      TransactionFilterView(),
+                      TransactionFilterView(
+                        role: Role.ADMIN,
+                      ),
                       HistoryAnalyticWidgetView(),
                       HistoryTransactionWidget(),
                     ]),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pos_mobile_app/enums/role.enum.dart';
 import 'package:pos_mobile_app/ui/shared/components/transaction_filter/transaction_filter_view_model.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
@@ -18,15 +19,18 @@ class TransactionFilterView extends StatelessWidget {
     this.showDownload = false,
     this.onDownloadClick,
     this.onFilterIconClick,
+    required this.role,
   }) : super(key: key);
   final bool showDownload;
   final Function()? onDownloadClick;
   final Function()? onFilterIconClick;
+  final Role role;
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<TransactionFilterViewModel>.reactive(
       viewModelBuilder: () => TransactionFilterViewModel(),
+      onModelReady: (model) => model.setRole(role),
       builder: (context, model, child) {
         return Container(
           height: 36,

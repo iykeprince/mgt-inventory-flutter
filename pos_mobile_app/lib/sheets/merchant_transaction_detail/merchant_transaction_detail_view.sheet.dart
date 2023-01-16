@@ -22,123 +22,134 @@ class MerchantTransactionDetailSheetView extends StatelessWidget {
         builder: (context, model, child) {
           return BottomSheetContainer(
             padding: EdgeInsets.all(AppPadding.p24),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Text('Transaction Details'),
-                SizedBox(height: AppSize.s40),
-                Row(
-                  children: [
-                    SizedBox(width: 160, child: Text('ID')),
-                    Text('A525668')
-                  ],
-                ),
-                SizedBox(height: AppSize.s32),
-                Row(
-                  children: [
-                    SizedBox(width: 160, child: Text('Date')),
-                    Text('10 July, 2022')
-                  ],
-                ),
-                SizedBox(height: AppSize.s32),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 160,
-                      child: Text('Transaction Type'),
-                    ),
-                    Text('Card Withdrawal')
-                  ],
-                ),
-                SizedBox(height: AppSize.s32),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 160,
-                      child: Text('Amount'),
-                    ),
-                    Text('45,000')
-                  ],
-                ),
-                SizedBox(height: AppSize.s32),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 160,
-                      child: Text('Paid Into:'),
-                    ),
-                    Flexible(
-                        child:
-                            Text('Wema ALAT - Lolade Rosemary - 10000100112'))
-                  ],
-                ),
-                SizedBox(height: AppSize.s32),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 160,
-                      child: Text('Bank Charge'),
-                    ),
-                    Text('16.02')
-                  ],
-                ),
-                SizedBox(height: AppSize.s32),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 160,
-                      child: Text('Service Charge'),
-                    ),
-                    Text('400')
-                  ],
-                ),
-                SizedBox(height: AppSize.s32),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 160,
-                      child: Text('Service Charge Payment Type'),
-                    ),
-                    Text('Cash')
-                  ],
-                ),
-                SizedBox(height: AppSize.s32),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 160,
-                      child: Text('Comment'),
-                    ),
-                    Text('NIL')
-                  ],
-                ),
-                SizedBox(height: AppSize.s40),
-                Row(
-                  children: [
-                    Expanded(
-                      child: PosButton(
-                        onPressed: () {},
-                        title: 'Delete',
-                        leadingIcon: Icons.delete_sharp,
-                        leadingIconColor: ColorManager.kRed,
-                        buttonBgColor: ColorManager.kErrorBgColor,
-                        buttonTextColor: ColorManager.kErrorTextColor,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text('Transaction Details'),
+                  SizedBox(height: AppSize.s40),
+                  Row(
+                    children: [
+                      SizedBox(width: 150, child: Text('ID')),
+                      SizedBox(width: 16),
+                      Text('A525668')
+                    ],
+                  ),
+                  SizedBox(height: AppSize.s32),
+                  Row(
+                    children: [
+                      SizedBox(width: 150, child: Text('Date')),
+                      SizedBox(width: 16),
+                      Text('10 July, 2022')
+                    ],
+                  ),
+                  SizedBox(height: AppSize.s32),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 150,
+                        child: Text('Transaction Type'),
                       ),
-                    ),
-                    SizedBox(width: AppSize.s24),
-                    Expanded(
-                      child: PosButton(
-                        onPressed: () {},
-                        title: 'Edit',
-                        buttonBgColor: ColorManager.kPrimaryColor,
-                        buttonTextColor: ColorManager.kWhiteColor,
-                        leadingIcon: Icons.edit,
-                        leadingIconColor: ColorManager.kWhiteColor,
+                      SizedBox(width: 16),
+                      Text('Card Withdrawal')
+                    ],
+                  ),
+                  SizedBox(height: AppSize.s32),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 150,
+                        child: Text('Amount'),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      SizedBox(width: 16),
+                      Text('45,000')
+                    ],
+                  ),
+                  SizedBox(height: AppSize.s32),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 150,
+                        child: Text('Paid Into:'),
+                      ),
+                      SizedBox(width: 16),
+                      Flexible(
+                          child:
+                              Text('Wema ALAT - Lolade Rosemary - 10000100112'))
+                    ],
+                  ),
+                  SizedBox(height: AppSize.s32),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 150,
+                        child: Text('Bank Charge'),
+                      ),
+                      SizedBox(width: 16),
+                      Text('16.02')
+                    ],
+                  ),
+                  SizedBox(height: AppSize.s32),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 150,
+                        child: Text('Service Charge'),
+                      ),
+                      SizedBox(width: 16),
+                      Text('400')
+                    ],
+                  ),
+                  SizedBox(height: AppSize.s32),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 150,
+                        child: Text('Service Charge Payment Type'),
+                      ),
+                      SizedBox(width: 16),
+                      Text('Cash')
+                    ],
+                  ),
+                  SizedBox(height: AppSize.s32),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 150,
+                        child: Text('Comment'),
+                      ),
+                      SizedBox(width: 16),
+                      Text('NIL')
+                    ],
+                  ),
+                  SizedBox(height: AppSize.s40),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: PosButton(
+                          onPressed: () {},
+                          title: 'Delete',
+                          leadingIcon: Icons.delete_sharp,
+                          leadingIconColor: ColorManager.kRed,
+                          buttonBgColor: ColorManager.kErrorBgColor,
+                          buttonTextColor: ColorManager.kErrorTextColor,
+                        ),
+                      ),
+                      SizedBox(width: AppSize.s24),
+                      Expanded(
+                        child: PosButton(
+                          onPressed: () {},
+                          title: 'Edit',
+                          buttonBgColor: ColorManager.kPrimaryColor,
+                          buttonTextColor: ColorManager.kWhiteColor,
+                          leadingIcon: Icons.edit,
+                          leadingIconColor: ColorManager.kWhiteColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           );
         });

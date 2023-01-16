@@ -50,9 +50,20 @@ class DashboardViewModel extends ReactiveViewModel {
   }
   //  OpeningClosingBalance response = await   _merchantService.getCurrentOpeningBalance(merchant!.branch!.id!)
 
-  void getCurrentOpeningBalance() {
+  Future<void> getCurrentUser() async {
+    try {
+      await _authenticationService.getCurrentBaseUser();
+      await _authenticationService.getCurrentMerchantUser();
+    } on DioError catch (exception) {
+      throw HttpException(exception.response!.data['message']);
+    } finally {
+      notifyListeners();
+    }
+  }
+
+  Future<void> getCurrentOpeningBalance() async {
     runBusyFuture(
-      _merchantService.getCurrentOpeningBalance(merchant!.branch!.id!),
+      getCurrentOpeningBalanceRequest(),
       busyObject: OPENING_BALANCE,
     );
   }
@@ -61,9 +72,9 @@ class DashboardViewModel extends ReactiveViewModel {
     try {
       await _merchantService.getCurrentOpeningBalance(merchant!.branch!.id!);
     } on DioError catch (error) {
-      print('eror: ${error.response?.data["message"]}');
-      // throw HttpException(error.response?.data["message"]);
+      // print('eror: ${error.response?.data["message"]}');
       log.i('Error of response: ${error.response?.data["message"]}');
+      throw HttpException(error.response?.data["message"]);
     } finally {
       notifyListeners();
     }

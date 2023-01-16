@@ -77,8 +77,35 @@ class TransactionService with ReactiveServiceMixin {
     }
   }
 
-  Future<List<Transaction>> getMerchantTransactions() async {
-    var response = await dioClient.get('/transaction/merchant');
+  Future<List<Transaction>> getMerchantTransactions({
+    int? page,
+    int? pageSize,
+    String? type,
+    DateTime? start,
+    DateTime? end,
+  }) async {
+    String url = "";
+
+    url += "/transaction/merchant?";
+
+    if (page != null) {
+      url += 'skip=$page';
+    }
+    if (pageSize != null) {
+      url += '&take=$pageSize';
+    }
+    if (type != null) {
+      url += '&type=$type';
+    }
+    if (start != null) {
+      url += '&start=${start.toIso8601String()}';
+    }
+    if (end != null) {
+      url += '&end=${end.toIso8601String()}';
+    }
+
+    print('new url: $url');
+    var response = await dioClient.get(url);
     List<Transaction> transactions = (response.data as List<dynamic>)
         .map((x) => Transaction.fromJson(x))
         .toList();

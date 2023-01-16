@@ -7,6 +7,8 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../../app/app.locator.dart';
 import '../../models/date-filter.model.dart';
+import '../../models/merchant-report-stat.model.dart';
+import '../../services/merchant.service.dart';
 import '../../services/transaction.service.dart';
 
 class MerchantTransactionsSheetViewModel extends ReactiveViewModel {
@@ -85,7 +87,8 @@ class MerchantTransactionsSheetViewModel extends ReactiveViewModel {
 
   getMerchantTransactionRequest() async {
     try {
-      var response = await _transactionService.getMerchantTransactions();
+      var response = await _transactionService.getMerchantTransactions(
+          page: 0, pageSize: 50);
       print('t Response: $response');
     } on DioError catch (e) {
       throw Exception(e.response!.data['message']);

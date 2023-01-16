@@ -5,6 +5,7 @@ import 'package:pos_mobile_app/app/app.locator.dart';
 import 'package:pos_mobile_app/services/authentication.service.dart';
 import 'package:pos_mobile_app/services/shared.service.dart';
 import 'package:pos_mobile_app/services/transaction.service.dart';
+import 'package:pos_mobile_app/ui/merchant/dashboard/create_logs/new_transactions/log_new_transaction_view.form.dart';
 import 'package:pos_mobile_ui_package/utils/colors.dart';
 import 'package:pos_mobile_ui_package/utils/font_styles.dart';
 import 'package:stacked/stacked.dart';
@@ -14,17 +15,20 @@ import '../../../../../models/account.model.dart';
 import '../../../../../models/merchant.model.dart';
 import '../../../../../utils/pos_contants.dart';
 
-class LogNewTransactionViewModel extends BaseViewModel {
+class LogNewTransactionViewModel extends FormViewModel {
   final _authenticationService = locator<AuthenticationService>();
   final _transactionService = locator<TransactionService>();
   final _sharedService = locator<SharedService>();
   final _navigationService = locator<NavigationService>();
 
-  TextEditingController amountController = TextEditingController();
-  TextEditingController bankChargeController = TextEditingController();
-  TextEditingController serviceChargeController = TextEditingController();
-  TextEditingController commentController = TextEditingController();
-  TextEditingController otherController = TextEditingController();
+  // TextEditingController amountController = TextEditingController();
+  // TextEditingController bankChargeController = TextEditingController();
+  // TextEditingController serviceChargeController = TextEditingController();
+  // TextEditingController commentController = TextEditingController();
+  // TextEditingController otherController = TextEditingController();
+
+  bool _isFormValid = false;
+  bool get isFormValid => _isFormValid;
 
   List<String> get transactionTypes => [
         "Transfer",
@@ -62,16 +66,18 @@ class LogNewTransactionViewModel extends BaseViewModel {
   }
 
   Future createTransactionRequest() async {
+    if (!isFormValid) return;
+
     var formData = {
       "adminId": merchant!.adminId,
       "accountId": selectedAccountDetail!.id,
       "transactionType": selectedTransactionType,
-      "other": otherController.text,
-      "amount": double.parse(amountController.text),
-      "bankCharge": double.parse(bankChargeController.text),
-      "serviceCharge": double.parse(serviceChargeController.text),
+      "other": otherValue,
+      "amount": double.parse(amountValue!),
+      "bankCharge": double.parse(bankChargeValue!),
+      "serviceCharge": double.parse(serviceChargeValue!),
       "serviceChargePaymentType": serviceChargePaymentMethod,
-      "comment": commentController.text,
+      "comment": commentValue!,
       "branchId": merchant!.branchId,
       "isDeduction": true,
       "isCardWithdrawal": isCardWithrawal(serviceChargePaymentMethod),
@@ -101,7 +107,6 @@ class LogNewTransactionViewModel extends BaseViewModel {
   }
 
   void handleSelectedAccountDetails(String? value) {
-    //'${model.selectedAccountDetail?.accountDetail?.serviceProviderName} - ${model.selectedAccountDetail?.accountDetail?.accountName} - ${model.selectedAccountDetail?.accountDetail?.accountNo}'
     print('selected account : $value');
     _selectedAccountDetailValue = value;
     notifyListeners();
@@ -140,5 +145,22 @@ class LogNewTransactionViewModel extends BaseViewModel {
   bool isTransferWithdrawal(String? serviceChargePaymentMethod) {
     if (serviceChargePaymentMethod == TRANSFER) return true;
     return false;
+  }
+
+  @override
+  void setFormStatus() {
+    print('form valid status: $_isFormValid');
+    if (selectedAccountDetailValue == null ||
+        _selectedTransactionDate == null ||
+        _selectedTransactionType == null ||
+        _serviceChargePaymentMethod == null ||
+        amountValue == "" ||
+        serviceChargeValue == "" ||
+        bankChargeValue == "" ||
+        commentValue == "") {
+      _isFormValid = false;
+      return;
+    }
+    _isFormValid = true;
   }
 }
