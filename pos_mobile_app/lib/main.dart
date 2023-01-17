@@ -30,6 +30,7 @@ void main() async {
   setupLocator();
   setupBottomSheetUi();
   setupDialogUi();
+
   setupNotification(messaging);
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 

@@ -24,3 +24,6 @@ const String OTHER = "Other";
 const String CASH = "Cash";
 const String CREDIT_CARD = "Credit Card";
 const String TRANSFER = "Transfer";
+
+const String RECORD_BETA_NOTIFICATION_CHANNEL_ID =
+    "RECORD_BETA_NOTIFICATION_CHANNEL_ID";

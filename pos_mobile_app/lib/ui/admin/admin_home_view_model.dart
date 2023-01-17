@@ -7,6 +7,7 @@ import 'package:stacked_services/stacked_services.dart';
 import '../../app/app.locator.dart';
 import '../../enums/bottom_sheet_type.dart';
 import '../../enums/dialog_type.dart';
+import '../../main.dart';
 import '../../models/admin.model.dart';
 import '../../models/branch.model.dart';
 import '../../models/merchant.model.dart';
@@ -37,6 +38,7 @@ class AdminHomeViewModel extends IndexTrackingViewModel {
     try {
       await _authService.getCurrentBaseUser();
       await _authService.getCurrentAdminUser();
+      await messaging.subscribeToTopic('RECORD_BETA_NOTIFICATION_${admin!.id}');
     } on DioError catch (exception) {
       throw HttpException(exception.response!.data['message']);
     } finally {

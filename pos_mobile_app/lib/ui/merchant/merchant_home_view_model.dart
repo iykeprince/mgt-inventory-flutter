@@ -13,6 +13,7 @@ import 'package:pos_mobile_app/utils/pos_contants.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../../main.dart';
 import '../../models/merchant.model.dart';
 import '../../services/authentication.service.dart';
 import '../../services/shared.service.dart';
@@ -68,6 +69,7 @@ class MerchantHomeViewModel extends IndexTrackingViewModel {
     try {
       await _authService.getCurrentBaseUser();
       await _authService.getCurrentMerchantUser();
+
       if (merchant?.branch?.id != null) {
         await _merchantService.getCurrentOpeningBalance(merchant!.branch!.id!);
       } else {

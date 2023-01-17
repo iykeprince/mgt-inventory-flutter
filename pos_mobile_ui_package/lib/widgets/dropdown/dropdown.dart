@@ -109,34 +109,6 @@ class PosDropDownField extends StatelessWidget {
                 color: ColorManager.kPrimaryColor,
               ),
           items: dropdownItems.map((item) {
-            if (item == "ADD_NEW") {
-              return DropdownMenuItem<String>(
-                value: "",
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: AppPadding.p8),
-                  decoration: BoxDecoration(
-                    color: ColorManager.kLightBlue1,
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.add,
-                        size: AppSize.s24,
-                        color: ColorManager.kPrimaryColor,
-                      ),
-                      SizedBox(width: AppSize.s16),
-                      Text(
-                        AppString.addNew,
-                        style: getMediumStyle(
-                          color: ColorManager.kPrimaryColor,
-                          fontSize: FontSize.s16,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }
             return DropdownMenuItem<String>(
               value: item,
               child: Container(
