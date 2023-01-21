@@ -14,7 +14,7 @@ class PosButton extends StatelessWidget {
   final bool busy;
   final Border? border;
   // final bool fullwidth;
-  Function() onPressed;
+  Function()? onPressed;
   final Color buttonBgColor;
   final Color? buttonTextColor;
   final Color? leadingIconColor;
@@ -22,6 +22,8 @@ class PosButton extends StatelessWidget {
   final FontWeight fontWeight;
   final ButtonType? buttonType;
   final IconData? leadingIcon;
+  final Widget? leadingSvg;
+  final double? leadingIconSize;
   final IconData? trailingIcon;
   final double trailingIconSpace;
   final double leadingIconSpace;
@@ -39,12 +41,14 @@ class PosButton extends StatelessWidget {
     this.fontSize = 16.0,
     this.trailingIconSpace = 4.0,
     this.leadingIconSpace = 4.0,
+    this.leadingIconSize = 24.0,
     this.fontWeight = FontWeight.w500,
     required this.onPressed,
     this.buttonBgColor = ColorManager.kPrimaryColor,
     this.buttonTextColor = ColorManager.kWhiteColor,
     required this.title,
     this.leadingIcon,
+    this.leadingSvg,
     this.trailingIcon,
     this.leadingIconColor = ColorManager.kPrimaryColor,
     this.trailingIconColor = ColorManager.kPrimaryColor,
@@ -135,24 +139,22 @@ class PosButton extends StatelessWidget {
           color: disabled! ? ColorManager.kLightGray : _bgColor,
           border: constructBorder(),
         ),
-        child:
-            // busy
-            //     ? const SizedBox(
-            //         width: AppSize.s16,
-            //         height: AppSize.s16,
-            //         child: PosCircularProgress(),
-            //       )
-            // :
-            Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            if (leadingIcon != null)
-              Icon(
-                leadingIcon,
-                color: leadingIconColor,
+            if (leadingSvg != null) Container(child: leadingSvg),
+            if (leadingIcon != null && leadingSvg == null)
+              Container(
+                margin: EdgeInsets.only(bottom: 4),
+                child: Icon(
+                  leadingIcon,
+                  size: leadingIconSize,
+                  color: leadingIconColor,
+                ),
               ),
-            if (leadingIcon != null) SizedBox(width: leadingIconSpace),
+            if (leadingIcon != null || leadingSvg != null)
+              SizedBox(width: leadingIconSpace),
             Text(
               title,
               style: TextStyle(

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:pos_mobile_app/app/app.router.dart';
 import 'package:pos_mobile_app/services/authentication.service.dart';
+import 'package:pos_mobile_app/ui/auth/login/login_view.form.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -9,7 +10,7 @@ import '../../../models/user.model.dart';
 import '../../../utils/http_exception.dart';
 import '../../../utils/pos_contants.dart';
 
-class RegisterMerchantViewModel extends BaseViewModel {
+class RegisterMerchantViewModel extends FormViewModel {
   final _navigationService = locator<NavigationService>();
   final _authenticationService = locator<AuthenticationService>();
   bool _tos = true;
@@ -24,7 +25,6 @@ class RegisterMerchantViewModel extends BaseViewModel {
 
   setTos(bool value) {
     _tos = value;
-    print('clicked vaue: $value');
     notifyListeners();
   }
 
@@ -64,5 +64,21 @@ class RegisterMerchantViewModel extends BaseViewModel {
     } finally {
       setBusy(false);
     }
+  }
+
+  bool _isFormValid = false;
+  bool get isFormValid => _isFormValid;
+
+  @override
+  void setFormStatus() {
+    if (emailValue == "") {
+      _isFormValid = false;
+      return;
+    }
+    if (tos == false) {
+      _isFormValid = false;
+      return;
+    }
+    _isFormValid = true;
   }
 }

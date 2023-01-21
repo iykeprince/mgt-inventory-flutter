@@ -8,31 +8,6 @@ import 'package:pos_mobile_app/utils/helpers.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
 
-//  return [
-//       CardItem(
-//         imgUrl: 'assets/images/MerchantDashboard/transaction.png',
-//         amount: '0',
-//         color: ColorManager.kPrimaryColor,
-//         title: AppString.balCashAtHandText,
-//         titleColor: ColorManager.kWhiteColor,
-//         amountColor: ColorManager.kWhiteColor,
-//       ),
-//       CardItem(
-//         imgUrl: 'assets/images/MerchantDashboard/transaction.png',
-//         amount: '0',
-//         title: AppString.totalWithdrawalText,
-//       ),
-//       CardItem(
-//         imgUrl: 'assets/images/MerchantDashboard/transaction.png',
-//         amount: '0',
-//         title: AppString.totalProfitMadeText,
-//       ),
-//       CardItem(
-//         imgUrl: 'assets/images/MerchantDashboard/transaction.png',
-//         amount: '0',
-//         title: AppString.openingBalanceText,
-//       ),
-//     ];
 class DashboardView extends StatelessWidget {
   const DashboardView({Key? key}) : super(key: key);
 

@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pos_mobile_app/app/app.router.dart';
 import 'package:pos_mobile_app/models/default_response.model.dart';
 import 'package:pos_mobile_app/services/authentication.service.dart';
+import 'package:pos_mobile_app/ui/auth/login/login_view.form.dart';
 import 'package:pos_mobile_ui_package/utils/colors.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -11,12 +12,15 @@ import 'package:stacked_services/stacked_services.dart';
 import '../../../app/app.locator.dart';
 import '../../../utils/http_exception.dart';
 
-class ForgotPasswordViewModel extends BaseViewModel {
+class ForgotPasswordViewModel extends FormViewModel {
   final _authenticationService = locator<AuthenticationService>();
   final _navigationService = locator<NavigationService>();
 
-  String _email = '';
-  String get email => _email;
+  // String _email = '';
+  String get email => emailValue ?? "";
+
+  bool _isFormValid = false;
+  bool get isFormValid => _isFormValid;
 
   goBack() => _navigationService.back();
 
@@ -48,7 +52,12 @@ class ForgotPasswordViewModel extends BaseViewModel {
     }
   }
 
-  setEmail(String email) {
-    _email = email;
+  @override
+  void setFormStatus() {
+    if (emailValue == "") {
+      _isFormValid = false;
+      return;
+    }
+    _isFormValid = true;
   }
 }

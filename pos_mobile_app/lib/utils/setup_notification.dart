@@ -1,4 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'pos_contants.dart';
@@ -36,11 +38,13 @@ Future<void> setupNotification(FirebaseMessaging messaging) async {
 
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
-
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()!
-      .createNotificationChannel(channel);
+  if (defaultTargetPlatform == TargetPlatform.android) {
+    print('This is an android device');
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()!
+        .createNotificationChannel(channel);
+  }
 
   flutterLocalNotificationsPlugin.initialize(
     initializationSettings,

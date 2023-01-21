@@ -1,19 +1,26 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:pos_mobile_app/ui/auth/registerMerchant/register_merchant_view.form.dart';
 import 'package:pos_mobile_app/utils/colors.dart';
 import 'package:pos_mobile_app/utils/helpers.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 import '../../../utils/pos_contants.dart';
 import 'register_merchant_view_model.dart';
 
-class RegisterMerchantView extends StatelessWidget {
-  const RegisterMerchantView({Key? key}) : super(key: key);
+@FormView(fields: [
+  FormTextField(name: 'email'),
+])
+class RegisterMerchantView extends StatelessWidget with $RegisterMerchantView {
+  RegisterMerchantView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<RegisterMerchantViewModel>.nonReactive(
       viewModelBuilder: () => RegisterMerchantViewModel(),
+      onModelReady: (model) => listenToFormUpdated(model),
+      onDispose: (_) => disposeForm(),
       builder: (context, model, child) => Scaffold(
         // resizeToAvoidBottomInset: false,
         body: KeyboardAware(
@@ -49,7 +56,10 @@ class RegisterMerchantView extends StatelessWidget {
                     ],
                   ),
                 ),
-                const RegisterMerchantFormView(),
+                RegisterMerchantFormView(
+                  emailController: emailController,
+                  emailFocusNode: emailFocusNode,
+                ),
               ],
             ),
           ),
@@ -61,7 +71,14 @@ class RegisterMerchantView extends StatelessWidget {
 
 class RegisterMerchantFormView
     extends ViewModelWidget<RegisterMerchantViewModel> {
-  const RegisterMerchantFormView({Key? key}) : super(key: key);
+  const RegisterMerchantFormView({
+    Key? key,
+    required this.emailController,
+    required this.emailFocusNode,
+  }) : super(key: key);
+
+  final TextEditingController emailController;
+  final FocusNode emailFocusNode;
 
   @override
   Widget build(BuildContext context, RegisterMerchantViewModel model) {
@@ -71,7 +88,7 @@ class RegisterMerchantFormView
       right: 0,
       child: SingleChildScrollView(
         reverse: true,
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: AppPadding.p24),
           decoration: const BoxDecoration(
@@ -92,7 +109,7 @@ class RegisterMerchantFormView
               label: AppString.emailAddress,
               hintText: AppString.emailAddressPlaceholder,
               border: InputBorder.none,
-              onChanged: model.setEmailAddress,
+              controller: emailController,
             ),
             if (model.hasErrorForKey(EMAIL_ADDRESS_VALIDATOR))
               Alert.primary(

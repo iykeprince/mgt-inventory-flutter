@@ -1,7 +1,7 @@
 library pos_mobile_ui_package;
 
 //export the components
-export './components/onboarding/onboard_view_one.dart';
+export 'components/onboarding/onboard_view_widget.dart';
 export './components/onboarding/onboard_view_two.dart';
 export './components/onboarding/onboard_view_three.dart';
 export './components/profileitem/profile_item.dart';
@@ -10,6 +10,7 @@ export './components/multiselect_dropdown.dart';
 //export the widgets
 export 'widgets/buttons/button.dart';
 export 'widgets/appbar/appbar.dart';
+export 'widgets/appbar/auth_appbar.dart';
 export 'widgets/input/input.dart';
 export 'widgets/buttons/progress_circular_button.dart';
 export 'widgets/checkbox/checkbox.dart';

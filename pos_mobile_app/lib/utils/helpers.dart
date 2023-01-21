@@ -22,6 +22,18 @@ String formatCurrency(double value) {
   return oCcy.format(value);
 }
 
+String formatDate(String value) {
+  DateFormat dtInputFormat = DateFormat('dd-MMM-yyyy');
+  DateTime input = dtInputFormat.parse(value);
+  return DateFormat.yMd().format(input);
+}
+
+DateTime parseDate(String value) {
+  DateFormat dtInputFormat = DateFormat('dd-MMM-yyyy');
+  DateTime input = dtInputFormat.parse(value);
+  return input;
+}
+
 double pieChartCalculate(double total, double value) {
   print('total: $total, value: $value');
   double result = value / total;

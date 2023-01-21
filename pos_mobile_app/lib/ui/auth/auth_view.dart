@@ -63,26 +63,27 @@ class AuthView extends StatelessWidget {
                           topLeft: Radius.circular(AppSize.s16),
                           topRight: Radius.circular(AppSize.s16))),
                   child: Column(children: [
-                    const SizedBox(height: AppSize.s32),
+                    const SizedBox(height: AppSize.s64),
                     Text(
                       AppString.registerQuestion,
-                      style: getMediumStyle(
-                          color: ColorManager.kDarkBlue,
-                          fontSize: FontSize.s20),
+                      style: getSemiBoldStyle(
+                        color: ColorManager.kDarkBlue,
+                        fontSize: FontSize.s20,
+                      ),
                     ),
-                    const SizedBox(height: AppSize.s32),
+                    const SizedBox(height: AppSize.s58),
                     PosButton(
                       onPressed: model.navigateToRegisterMerchant,
                       title: AppString.registerMerchant,
                       fontSize: FontSize.s16,
-                      fontWeight: FontWeightManager.medium,
+                      fontWeight: FontWeightManager.bold,
                       buttonBgColor: ColorManager.kLightGreen1,
                       buttonTextColor: ColorManager.kDarkCharcoal,
                       border: Border.all(
                           color: ColorManager.kBorderLightGreen, width: 1),
                       borderRadius: AppSize.s8,
                     ),
-                    const SizedBox(height: AppSize.s12),
+                    const SizedBox(height: AppSize.s24),
                     PosButton(
                       onPressed: model.navigateToCreateAdmin,
                       title: AppString.createAdminAccountText,
@@ -94,14 +95,15 @@ class AuthView extends StatelessWidget {
                           color: ColorManager.kBorderLightGreen, width: 1),
                       borderRadius: AppSize.s8,
                     ),
-                    const SizedBox(height: AppSize.s20),
+                    const SizedBox(height: AppSize.s52),
                     PosButton(
                       onPressed: model.navigateToLogin,
                       title: AppString.loginToExisting,
+                      fontWeight: FontWeight.bold,
                       buttonType: ButtonType.text,
                       buttonTextColor: ColorManager.kButtonTextNavyBlue,
                     ),
-                    const SizedBox(height: AppSize.s40),
+                    const SizedBox(height: AppSize.s58),
                   ]),
                 ),
               )

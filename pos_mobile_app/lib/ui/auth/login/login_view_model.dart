@@ -27,6 +27,14 @@ class LoginViewModel extends FormViewModel {
   bool _isFormValid = false;
   bool get isFormValid => _isFormValid;
 
+  bool _obscurePassword = true;
+  bool get obscurePassword => _obscurePassword;
+
+  void togglePasswordVisibility() {
+    _obscurePassword = !_obscurePassword;
+    notifyListeners();
+  }
+
   login() async {
     print('login');
     runBusyFuture(runLogin(), busyObject: LOGIN_TASK_OBJECT);
@@ -90,4 +98,8 @@ class LoginViewModel extends FormViewModel {
   }
 
   //  navigateToHome() => _navigationService.navigateTo(Routes.homeView);
+
+  continueWithApple() {}
+
+  continueWithGoogle() {}
 }

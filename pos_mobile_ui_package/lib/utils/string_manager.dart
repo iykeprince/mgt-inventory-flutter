@@ -115,9 +115,16 @@ class AppString {
   static String otherTransactionType = "Enter transaction type";
 
   static String addNew = "Add New";
+
+  static String continueWithApple = "Continue with Apple";
+  static String continueWithGoogle = "Continue Google";
+
+  static String determinesTheNumberOfMerchantAccount =
+      "Determines the number of your merchant accounts";
+
   static String verifyEmailSubText(String email) =>
       "We sent a six-digit code to your email address ($email) for verification.";
-  static const String otpCodeText = "OTP Code";
+  static const String otpCodeText = "012345";
   static const String otpCodeExpireText =
       "The code will expire in 5 minutes...";
   static const String iAgreeText = "I agree to the ";

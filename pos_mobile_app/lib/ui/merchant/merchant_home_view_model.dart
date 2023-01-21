@@ -75,6 +75,8 @@ class MerchantHomeViewModel extends IndexTrackingViewModel {
       } else {
         //a situtaiton where the merchant is not assigned to a branch...
       }
+      await messaging
+          .subscribeToTopic('RECORD_BETA_NOTIFICATION_${merchant?.adminId}');
     } on DioError catch (exception) {
       // throw HttpException(exception.response!.data['message']);
       log('${exception.response!.data['message']}');

@@ -114,7 +114,7 @@ class CreateBusinessFormView
             const SizedBox(height: AppSize.s40),
             Text(
               AppString.businessDetailsText,
-              style: getMediumStyle(
+              style: getSemiBoldStyle(
                   color: ColorManager.kDarkCharcoal, fontSize: FontSize.s20),
               textAlign: TextAlign.center,
             ),
@@ -147,6 +147,11 @@ class CreateBusinessFormView
               controller: numberOfBranchesController,
               focusnode: numberOfBranchesFocusNode,
               keyBoardType: TextInputType.number,
+            ),
+            Alert.primary(
+              text: AppString.determinesTheNumberOfMerchantAccount,
+              iconColor: ColorManager.kWhiteColor,
+              icon: Icons.warning_rounded,
             ),
             if (model.hasErrorForKey(NUM_OF_BRANCH_VALIDATOR))
               Alert.primary(text: AppString.numOfBranchValidatorText),
@@ -195,6 +200,27 @@ class CreateBusinessFormView
               disabled: !model.isFormValid,
             ),
             const SizedBox(height: AppSize.s32),
+            RichText(
+              text: TextSpan(
+                text: 'Already has an account? ',
+                children: [
+                  const TextSpan(text: " "),
+                  TextSpan(
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () => model.navigateToLogin(),
+                      text: 'Login',
+                      style: getSemiBoldStyle(
+                        color: ColorManager.kSecondaryColor,
+                        fontSize: FontSize.s16,
+                      )),
+                ],
+                style: getMediumStyle(
+                  color: ColorManager.kDarkColor,
+                  fontSize: FontSize.s16,
+                ),
+              ),
+            ),
+            const SizedBox(height: AppSize.s161),
           ]),
         ),
       ),

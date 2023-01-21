@@ -113,6 +113,5 @@ class DashboardViewModel extends ReactiveViewModel {
   }
 
   @override
-  // TODO: implement reactiveServices
   List<ReactiveServiceMixin> get reactiveServices => [_merchantService];
 }

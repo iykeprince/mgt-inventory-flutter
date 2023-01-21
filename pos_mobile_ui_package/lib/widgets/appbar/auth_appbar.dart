@@ -5,7 +5,7 @@ import 'package:pos_mobile_ui_package/utils/font_styles.dart';
 import 'package:pos_mobile_ui_package/utils/text_styles.dart';
 import 'package:pos_mobile_ui_package/utils/values_manager.dart';
 
-class Navbar extends StatelessWidget implements PreferredSizeWidget {
+class AuthNavbar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final String leadingText;
   final String bottomLeadingText;
@@ -27,7 +27,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
   final TextStyle? leadingBottomStyle;
   final TextStyle? titleStyle;
 
-  const Navbar({
+  const AuthNavbar({
     Key? key,
     this.title = '',
     this.titleStyle,
@@ -58,7 +58,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           // if (leadingText.isNotEmpty)
           Column(

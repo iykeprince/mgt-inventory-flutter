@@ -44,15 +44,16 @@ class LoginView extends StatelessWidget with $LoginView {
             child: Stack(
               children: [
                 Positioned(
-                    top: AppSize.s8,
-                    left: AppSize.s8,
-                    right: AppSize.s8,
-                    child: Navbar(
-                      title: AppString.login,
-                      onTap: model.navigateBack,
-                      iconThemeColor: ColorManager.kWhiteColor,
-                      textColor: ColorManager.kWhiteColor,
-                    )),
+                  top: AppSize.s8,
+                  left: AppSize.s8,
+                  right: AppSize.s8,
+                  child: AuthNavbar(
+                    title: AppString.login,
+                    onTap: model.navigateBack,
+                    iconThemeColor: ColorManager.kWhiteColor,
+                    textColor: ColorManager.kWhiteColor,
+                  ),
+                ),
                 Container(
                   margin: const EdgeInsets.only(top: AppMargin.m120),
                   child: Column(
@@ -113,12 +114,14 @@ class LoginFormView extends ViewModelWidget<LoginViewModel> {
             const SizedBox(height: AppSize.s40),
             Text(
               AppString.enterYourLoginDetails,
-              style: getMediumStyle(
-                  color: ColorManager.kDarkCharcoal, fontSize: FontSize.s20),
+              style: getSemiBoldStyle(
+                color: ColorManager.kDarkCharcoal,
+                fontSize: FontSize.s20,
+              ),
             ),
             const SizedBox(height: AppSize.s40),
             InputField(
-              label: AppString.usernameOrEmailAddress,
+              label: AppString.emailAddress,
               hintText: AppString.emailAddressPlaceholder,
               border: InputBorder.none,
               controller: emailController,
@@ -131,16 +134,29 @@ class LoginFormView extends ViewModelWidget<LoginViewModel> {
               label: AppString.password,
               hintText: AppString.password,
               border: InputBorder.none,
-              obscureText: true,
+              obscureText: model.obscurePassword,
               labelRightItem: TextButton(
                 onPressed: model.navigateToForgotPassword,
                 child: Text(AppString.forgotPassword,
-                    style: getRegularStyle(
+                    style: getSemiBoldStyle(
                         color: ColorManager.kSecondaryColor,
                         fontSize: FontSize.s14)),
               ),
               controller: passwordController,
               focusnode: passwordFocusNode,
+              suffixIcon: InkWell(
+                onTap: model.togglePasswordVisibility,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 18.0),
+                  child: Icon(
+                    model.obscurePassword
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                    size: 18,
+                    // color: ,
+                  ),
+                ),
+              ),
             ),
             if (model.hasErrorForKey(PASSWORD_VALIDATOR))
               Alert.primary(text: AppString.passwordValidatorText),
@@ -150,7 +166,8 @@ class LoginFormView extends ViewModelWidget<LoginViewModel> {
             const SizedBox(height: AppSize.s20),
             PosButton(
               // onPressed: !model.isFormValid ? model.login : (){ },
-              onPressed: model.login,
+              onPressed:
+                  !model.isFormValid || model.isBusy ? null : model.login,
               title: AppString.login,
               // buttonBgColor: ColorManager.kLightGreen1,
               // buttonTextColor: ColorManager.kDarkCharcoal,
@@ -163,6 +180,35 @@ class LoginFormView extends ViewModelWidget<LoginViewModel> {
               borderRadius: AppSize.s8,
               busy: model.isBusy,
               disabled: !model.isFormValid || model.isBusy,
+            ),
+            const SizedBox(height: AppSize.s24),
+            Divider(),
+            const SizedBox(height: AppSize.s24),
+            PosButton(
+              onPressed: model.continueWithApple,
+              title: AppString.continueWithApple,
+              buttonType: ButtonType.fill,
+              buttonBgColor: ColorManager.kBackgroundolor,
+              buttonTextColor: ColorManager.kDarkCharcoal,
+              fontSize: FontSize.s16,
+              fontWeight: FontWeightManager.semiBold,
+              leadingSvg: SvgPicture.asset('assets/images/apple_icon.svg'),
+              leadingIconColor: ColorManager.kDarkColor,
+              leadingIconSpace: AppSize.s12,
+              paddingVertical: AppPadding.p16,
+            ),
+            const SizedBox(height: AppSize.s20),
+            PosButton(
+              onPressed: model.continueWithGoogle,
+              title: AppString.continueWithGoogle,
+              buttonType: ButtonType.fill,
+              buttonBgColor: ColorManager.kBackgroundolor,
+              buttonTextColor: ColorManager.kDarkCharcoal,
+              fontSize: FontSize.s16,
+              fontWeight: FontWeightManager.semiBold,
+              leadingSvg: SvgPicture.asset('assets/images/google_icon.svg'),
+              leadingIconSpace: AppSize.s16,
+              paddingVertical: AppPadding.p16,
             ),
             const SizedBox(height: AppSize.s20),
             PosButton(

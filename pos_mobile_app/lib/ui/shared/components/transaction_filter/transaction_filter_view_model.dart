@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:moment_dart/moment_dart.dart';
 import 'package:pos_mobile_app/enums/role.enum.dart';
+import 'package:pos_mobile_app/services/merchant.service.dart';
 import 'package:pos_mobile_app/ui/shared/components/transaction_filter/transaction_filter_view.dart';
 import 'package:stacked/stacked.dart';
 
@@ -10,6 +11,7 @@ import '../../../../services/transaction.service.dart';
 
 class TransactionFilterViewModel extends BaseViewModel {
   final _transactionService = locator<TransactionService>();
+  final _merchantService = locator<MerchantService>();
 
   DateFilter? _selectedFilter = DATE_FILTER_LIST[0];
   DateFilter? get selectedFilter => _selectedFilter;
@@ -38,6 +40,7 @@ class TransactionFilterViewModel extends BaseViewModel {
     notifyListeners();
     try {
       if (role == Role.MERCHANT) {
+        await _merchantService.getReportStat(start: startDate, end: endDate);
         await _transactionService.getMerchantTransactions(
           start: startDate,
           end: endDate,

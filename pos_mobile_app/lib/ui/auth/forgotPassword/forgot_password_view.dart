@@ -4,16 +4,21 @@ import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_countdown_timer/index.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pos_mobile_app/ui/auth/auth_view_model.dart';
+import 'package:pos_mobile_app/ui/auth/forgotPassword/forgot_password_view.form.dart';
 import 'package:pos_mobile_app/ui/auth/login/login_view_model.dart';
 import 'package:pos_mobile_app/utils/colors.dart';
 import 'package:pos_mobile_app/utils/helpers.dart';
 import 'package:pos_mobile_ui_package/pos_mobile_ui_package.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 
 import 'forgot_password_view_model.dart';
 
-class ForgotPasswordView extends StatelessWidget {
-  const ForgotPasswordView({
+@FormView(fields: [
+  FormTextField(name: 'email'),
+])
+class ForgotPasswordView extends StatelessWidget with $ForgotPasswordView {
+  ForgotPasswordView({
     Key? key,
   }) : super(key: key);
 
@@ -21,6 +26,8 @@ class ForgotPasswordView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ForgotPasswordViewModel>.nonReactive(
       viewModelBuilder: () => ForgotPasswordViewModel(),
+      onModelReady: (model) => listenToFormUpdated(model),
+      onDispose: (_) => disposeForm(),
       builder: (context, model, child) => Scaffold(
         body: GestureDetector(
           onTap: () {
@@ -60,7 +67,10 @@ class ForgotPasswordView extends StatelessWidget {
                     ],
                   ),
                 ),
-                const VerifyAdminFormView()
+                VerifyAdminFormView(
+                  emailController: emailController,
+                  emailFocusNode: emailFocusNode,
+                )
               ],
             ),
           ),
@@ -71,7 +81,14 @@ class ForgotPasswordView extends StatelessWidget {
 }
 
 class VerifyAdminFormView extends ViewModelWidget<ForgotPasswordViewModel> {
-  const VerifyAdminFormView({Key? key}) : super(key: key);
+  const VerifyAdminFormView({
+    Key? key,
+    required this.emailController,
+    required this.emailFocusNode,
+  }) : super(key: key);
+
+  final TextEditingController emailController;
+  final FocusNode emailFocusNode;
 
   @override
   Widget build(BuildContext context, ForgotPasswordViewModel model) {
@@ -93,12 +110,12 @@ class VerifyAdminFormView extends ViewModelWidget<ForgotPasswordViewModel> {
             const SizedBox(height: AppSize.s40),
             Text(
               AppString.forgotYourPasswordText,
-              style: getMediumStyle(
+              style: getSemiBoldStyle(
                 color: ColorManager.kDarkCharcoal,
                 fontSize: FontSize.s20,
               ),
             ),
-            const SizedBox(height: AppSize.s4),
+            const SizedBox(height: AppSize.s8),
             Text(
               AppString.forgotYourPasswordSubText,
               style: getRegularStyle(
@@ -106,25 +123,29 @@ class VerifyAdminFormView extends ViewModelWidget<ForgotPasswordViewModel> {
                 fontSize: FontSize.s14,
               ),
             ),
-            const SizedBox(height: AppSize.s20),
+            const SizedBox(height: AppSize.s40),
             InputField(
               label: AppString.emailAddress,
               hintText: AppString.emailAddressPlaceholder,
               border: InputBorder.none,
-              onChanged: model.setEmail,
               keyBoardType: TextInputType.number,
+              controller: emailController,
+              focusnode: emailFocusNode,
             ),
             const SizedBox(height: AppSize.s40),
             PosButton(
-              onPressed: () {
-                dismissKeyboard(context);
-                model.forgotPassword();
-              },
+              onPressed: model.isFormValid || model.isBusy
+                  ? () {}
+                  : () {
+                      dismissKeyboard(context);
+                      model.forgotPassword();
+                    },
               title: AppString.sendResetLinkText,
               fontSize: FontSize.s16,
               fontWeight: FontWeightManager.bold,
               borderRadius: AppSize.s8,
               busy: model.isBusy,
+              disabled: !model.isFormValid || model.isBusy,
             ),
             const SizedBox(height: AppSize.s20),
             if (model.hasError) Alert.primary(text: '${model.modelError}'),
@@ -136,6 +157,7 @@ class VerifyAdminFormView extends ViewModelWidget<ForgotPasswordViewModel> {
                   title: AppString.returnToLoginText,
                   buttonType: ButtonType.text,
                   buttonTextColor: ColorManager.kButtonTextNavyBlue,
+                  fontWeight: FontWeightManager.semiBold,
                 ),
               ],
             ),

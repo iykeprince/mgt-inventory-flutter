@@ -356,14 +356,20 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i6.ForgotPasswordView: (data) {
+      final args = data.getArgs<ForgotPasswordViewArguments>(
+        orElse: () => const ForgotPasswordViewArguments(),
+      );
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i6.ForgotPasswordView(),
+        builder: (context) => _i6.ForgotPasswordView(key: args.key),
         settings: data,
       );
     },
     _i7.RegisterMerchantView: (data) {
+      final args = data.getArgs<RegisterMerchantViewArguments>(
+        orElse: () => const RegisterMerchantViewArguments(),
+      );
       return _i1.buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const _i7.RegisterMerchantView(),
+        builder: (context) => _i7.RegisterMerchantView(key: args.key),
         settings: data,
       );
     },
@@ -579,6 +585,18 @@ class LoginViewArguments {
   final _i36.Key? key;
 }
 
+class ForgotPasswordViewArguments {
+  const ForgotPasswordViewArguments({this.key});
+
+  final _i36.Key? key;
+}
+
+class RegisterMerchantViewArguments {
+  const RegisterMerchantViewArguments({this.key});
+
+  final _i36.Key? key;
+}
+
 class VerifyAdminViewArguments {
   const VerifyAdminViewArguments({
     this.key,
@@ -724,28 +742,32 @@ extension NavigatorStateExtension on _i39.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToForgotPasswordView([
+  Future<dynamic> navigateToForgotPasswordView({
+    _i36.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.forgotPasswordView,
+        arguments: ForgotPasswordViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
         transition: transition);
   }
 
-  Future<dynamic> navigateToRegisterMerchantView([
+  Future<dynamic> navigateToRegisterMerchantView({
+    _i36.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.registerMerchantView,
+        arguments: RegisterMerchantViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

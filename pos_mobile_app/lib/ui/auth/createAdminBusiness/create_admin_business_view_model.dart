@@ -19,10 +19,10 @@ const String PASSWORD_VALIDATOR = 'PASSWORD_VALIDATOR';
 class CreateAdminBusinessViewModel extends FormViewModel {
   final _navigationService = locator<NavigationService>();
   final _authenticationService = locator<AuthenticationService>();
-  bool _obscurePassword = true;
   bool _isFormValid = false;
   bool get isFormValid => _isFormValid;
 
+  bool _obscurePassword = true;
   bool get obscurePassword => _obscurePassword;
 
   // String? _businessName;
@@ -128,4 +128,6 @@ class CreateAdminBusinessViewModel extends FormViewModel {
       _isFormValid = false;
     }
   }
+
+  navigateToLogin() => _navigationService.replaceWith(Routes.loginView);
 }

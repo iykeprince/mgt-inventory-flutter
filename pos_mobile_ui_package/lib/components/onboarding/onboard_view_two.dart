@@ -20,8 +20,11 @@ class OnboardingViewTwo extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 8),
-      decoration: BoxDecoration(color: ColorManager.kWhiteColor),
+      padding: const EdgeInsets.symmetric(
+        vertical: AppSize.s65,
+        horizontal: AppPadding.p8,
+      ),
+      decoration: const BoxDecoration(color: ColorManager.kWhiteColor),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,40 +45,55 @@ class OnboardingViewTwo extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 24),
-          Expanded(
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(
+          //     vertical: AppPadding.p8,
+          //   ),
+          //   child: Image.asset(
+          //     imgUrl,
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 400,
             child: Image.asset(
               imgUrl,
               fit: BoxFit.cover,
             ),
           ),
-          const SizedBox(height: 24),
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  AppString.track,
-                  style: getBoldStyle(
-                      color: ColorManager.kPrimaryColor,
-                      fontSize: FontSize.s24),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  AppString.onBoardSub2,
-                  style: getMediumStyle(
-                      color: ColorManager.kGrey1, fontSize: FontSize.s16),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                ProgressCircularButton(
-                  progressValue: .7,
-                  onPressed: onNextPressed,
-                ),
-              ],
+          const SizedBox(height: AppSize.s65),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    AppString.track,
+                    style: getBoldStyle(
+                        color: ColorManager.kPrimaryColor,
+                        fontSize: FontSize.s24),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    AppString.onBoardSub2,
+                    style: getSemiBoldStyle(
+                      color: ColorManager.kGrey1,
+                      fontSize: FontSize.s16,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  // const SizedBox(
+                  //   height: 40,
+                  // ),
+                  // ProgressCircularButton(
+                  //   progressValue: .7,
+                  //   onPressed: onNextPressed,
+                  // ),
+                ],
+              ),
             ),
           )
         ],
