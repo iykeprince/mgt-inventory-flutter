@@ -27,6 +27,8 @@ class AuthView extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(top: AppMargin.m80),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
                       AppString.welcomeTo,
@@ -42,10 +44,17 @@ class AuthView extends StatelessWidget {
                           fontSize: FontSize.s24),
                     ),
                     // SvgPicture.asset(
-                    //   'assets/images/auth/phone_dash.svg',
+                    //   'assets/images/auth/recordbeta_phone_dash.svg',
+                    //   fit: BoxFit.cover,
                     // ),
-                    Image.asset(
-                      'assets/images/auth/phone_dash.png',
+                    const SizedBox(height: 56.0),
+                    Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 1, color: Colors.white)),
+                      child: Image.asset(
+                        'assets/images/auth/phone_dash4x.png',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ],
                 ),
